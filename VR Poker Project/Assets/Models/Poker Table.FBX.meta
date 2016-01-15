@@ -1,0 +1,243 @@
+fileFormatVersion: 2
+guid: 332c5336bb0149f43975e366d1184ef1
+timeCreated: 1452796346
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Poker Table_01
+    100004: Poker Table_02
+    100006: Poker Table_03
+    100008: Poker Table_04
+    100010: Poker Table_05
+    100012: Poker Table_06
+    100014: Poker Table_07
+    100016: Poker Table_08
+    100018: Poker Table_09
+    100020: Poker Table_10
+    100022: Poker Table_11
+    100024: Poker Table_12
+    100026: Poker Table_13
+    100028: Poker Table_14
+    100030: Poker Table_15
+    100032: Poker Table_16
+    100034: Poker Table_17
+    100036: Poker Table_18
+    100038: Poker Table_19
+    100040: Poker Table_20
+    100042: Poker Table_21
+    100044: Poker Table_22
+    100046: Poker Table_23
+    100048: Poker Table_24
+    100050: Poker Table_25
+    100052: Poker Table_26
+    100054: Poker Table_27
+    100056: Poker Table_28
+    100058: Poker Table_29
+    100060: Poker Table_30
+    100062: Poker Table_31
+    100064: Poker Table_32
+    100066: Poker Table_33
+    100068: Poker Table_34
+    400000: //RootNode
+    400002: Poker Table_01
+    400004: Poker Table_02
+    400006: Poker Table_03
+    400008: Poker Table_04
+    400010: Poker Table_05
+    400012: Poker Table_06
+    400014: Poker Table_07
+    400016: Poker Table_08
+    400018: Poker Table_09
+    400020: Poker Table_10
+    400022: Poker Table_11
+    400024: Poker Table_12
+    400026: Poker Table_13
+    400028: Poker Table_14
+    400030: Poker Table_15
+    400032: Poker Table_16
+    400034: Poker Table_17
+    400036: Poker Table_18
+    400038: Poker Table_19
+    400040: Poker Table_20
+    400042: Poker Table_21
+    400044: Poker Table_22
+    400046: Poker Table_23
+    400048: Poker Table_24
+    400050: Poker Table_25
+    400052: Poker Table_26
+    400054: Poker Table_27
+    400056: Poker Table_28
+    400058: Poker Table_29
+    400060: Poker Table_30
+    400062: Poker Table_31
+    400064: Poker Table_32
+    400066: Poker Table_33
+    400068: Poker Table_34
+    2300000: Poker Table_01
+    2300002: Poker Table_02
+    2300004: Poker Table_03
+    2300006: Poker Table_04
+    2300008: Poker Table_05
+    2300010: Poker Table_06
+    2300012: Poker Table_07
+    2300014: Poker Table_08
+    2300016: Poker Table_09
+    2300018: Poker Table_10
+    2300020: Poker Table_11
+    2300022: Poker Table_12
+    2300024: Poker Table_13
+    2300026: Poker Table_14
+    2300028: Poker Table_15
+    2300030: Poker Table_16
+    2300032: Poker Table_17
+    2300034: Poker Table_18
+    2300036: Poker Table_19
+    2300038: Poker Table_20
+    2300040: Poker Table_21
+    2300042: Poker Table_22
+    2300044: Poker Table_23
+    2300046: Poker Table_24
+    2300048: Poker Table_25
+    2300050: Poker Table_26
+    2300052: Poker Table_27
+    2300054: Poker Table_28
+    2300056: Poker Table_29
+    2300058: Poker Table_30
+    2300060: Poker Table_31
+    2300062: Poker Table_32
+    2300064: Poker Table_33
+    2300066: Poker Table_34
+    3300000: Poker Table_01
+    3300002: Poker Table_02
+    3300004: Poker Table_03
+    3300006: Poker Table_04
+    3300008: Poker Table_05
+    3300010: Poker Table_06
+    3300012: Poker Table_07
+    3300014: Poker Table_08
+    3300016: Poker Table_09
+    3300018: Poker Table_10
+    3300020: Poker Table_11
+    3300022: Poker Table_12
+    3300024: Poker Table_13
+    3300026: Poker Table_14
+    3300028: Poker Table_15
+    3300030: Poker Table_16
+    3300032: Poker Table_17
+    3300034: Poker Table_18
+    3300036: Poker Table_19
+    3300038: Poker Table_20
+    3300040: Poker Table_21
+    3300042: Poker Table_22
+    3300044: Poker Table_23
+    3300046: Poker Table_24
+    3300048: Poker Table_25
+    3300050: Poker Table_26
+    3300052: Poker Table_27
+    3300054: Poker Table_28
+    3300056: Poker Table_29
+    3300058: Poker Table_30
+    3300060: Poker Table_31
+    3300062: Poker Table_32
+    3300064: Poker Table_33
+    3300066: Poker Table_34
+    4300000: Poker Table_02
+    4300002: Poker Table_03
+    4300004: Poker Table_04
+    4300006: Poker Table_05
+    4300008: Poker Table_06
+    4300010: Poker Table_07
+    4300012: Poker Table_08
+    4300014: Poker Table_09
+    4300016: Poker Table_10
+    4300018: Poker Table_11
+    4300020: Poker Table_12
+    4300022: Poker Table_13
+    4300024: Poker Table_14
+    4300026: Poker Table_15
+    4300028: Poker Table_16
+    4300030: Poker Table_17
+    4300032: Poker Table_18
+    4300034: Poker Table_19
+    4300036: Poker Table_20
+    4300038: Poker Table_21
+    4300040: Poker Table_22
+    4300042: Poker Table_23
+    4300044: Poker Table_24
+    4300046: Poker Table_25
+    4300048: Poker Table_26
+    4300050: Poker Table_27
+    4300052: Poker Table_28
+    4300054: Poker Table_29
+    4300056: Poker Table_30
+    4300058: Poker Table_31
+    4300060: Poker Table_32
+    4300062: Poker Table_33
+    4300064: Poker Table_01
+    4300066: Poker Table_34
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
