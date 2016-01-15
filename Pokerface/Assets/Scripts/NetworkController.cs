@@ -1,43 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NetworkController : MonoBehaviour {
+public class NetworkController : Photon.MonoBehaviour {
 
     private const string roomName = "RoomName";
     private TypedLobby lobbyName = new TypedLobby("New_Lobby", LobbyType.Default);
-    private RoomInfo[] roomsList;
+    private RoomInfo room;
     public GameObject player;
-    
-	void Start () {
+
+    void Start () {
         
         PhotonNetwork.ConnectUsingSettings("v4.2");	
 	}
-	void OnGUI()
+	void Update ()
     {
+
+    }
+
+        void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinLobby(lobbyName);
         if (!PhotonNetwork.connected)
         {
-            GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+            PhotonNetwork.connectionStateDetailed.ToString();
+            //server = true;
+
         }
+       
         else if (PhotonNetwork.room == null)
         {
-            //create room
-            if (GUI.Button(new Rect(100, 100, 250, 100), "Start Server"))
-            {
-                 
-                PhotonNetwork.CreateRoom(roomName, new RoomOptions() { maxPlayers = 3, isOpen = true, isVisible = true }, lobbyName);
-            }
-            // Join Room
-            if (roomsList != null)
-            {
-                for (int i = 0; i < roomsList.Length; i++)
-                {
-                    if (GUI.Button(new Rect(100, 250 + (110 * i), 250, 100), "Join " + roomsList[i].name))
-                        PhotonNetwork.JoinRoom(roomsList[i].name);
-                }
-            }
+
+            ////create room
+            //if (room == null)
+            //{
+            //    Debug.Log("created " + roomName);
+            //    PhotonNetwork.CreateRoom(roomName, new RoomOptions() { maxPlayers = 3, isOpen = true, isVisible = true }, lobbyName);
+            //    server = false;
+            //}
+            //// Join Room
+            //if (room != null)
+            //{
+            //    //for (int i = 0; i < roomsList.Length; i++)
+            //    //{
+            //        Debug.Log("joined " + room.name);
+            //        PhotonNetwork.JoinRoom(room.name);
+                
+            //}
+
         }
     }
-    
     void OnJoinedLobby(){
         
         Debug.Log("Joined Lobby!");

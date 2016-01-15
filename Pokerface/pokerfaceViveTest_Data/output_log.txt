@@ -1,0 +1,65 @@
+Initialize engine version: 5.3.1p1 (7d3d8e90548b)
+[VRDevice] Initialization of device oculus failed.
+
+ 
+(Filename:  Line: 87)
+
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 980 (ID=0x13c0)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.033 seconds
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\projects\pokerface\Pokerface\pokerfaceViveTest_Data\Managed\System.dll (this message is harmless)
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 4080x1200 at 0,0
+<RI> Initialized touch support.
+UnloadTime: 0.477691 ms
+[VRDevice] Initialization of device oculus failed.
+
+ 
+(Filename:  Line: 87)
+
+Connected to lighthouse:LHR-11F06724
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 39a8 -> priority: 1 
+  Thread -> id: 3834 -> priority: 1 
+Joined Lobby!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Connected to Room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+I'm instantiated!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+I'm instantiated!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
