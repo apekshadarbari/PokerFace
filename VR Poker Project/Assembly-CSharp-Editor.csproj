@@ -6,10 +6,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4CF59E58-DAA3-4015-AB9B-241B73CEA725}</ProjectGuid>
+    <ProjectGuid>{247C00EA-1A97-BC66-5207-609D61885832}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -45,35 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DemoScript.cs" />
-     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
-     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
-     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
-     <Compile Include="Assets\SteamVR\Extras\SteamVR_TestThrow.cs" />
-     <Compile Include="Assets\SteamVR\Extras\SteamVR_TrackedController.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Camera.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_CameraFlip.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_CameraMask.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Controller.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_ControllerManager.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Fade.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Frustum.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_GameView.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_IK.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_LoadLevel.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Menu.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Overlay.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_PlayArea.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Render.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_RenderModel.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Skybox.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Stats.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Status.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_StatusText.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TestController.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
-     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
+     <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+     <Compile Include="Assets\SteamVR\Editor\SteamVR_Editor.cs" />
+     <Compile Include="Assets\SteamVR\Editor\SteamVR_RenderModelEditor.cs" />
+     <Compile Include="Assets\SteamVR\Editor\SteamVR_Settings.cs" />
+     <Compile Include="Assets\SteamVR\Editor\SteamVR_SkyboxEditor.cs" />
+     <Compile Include="Assets\SteamVR\Editor\SteamVR_Update.cs" />
      <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
      <None Include="Assets\SteamVR\Resources\SteamVR_BlitFlip.shader" />
      <None Include="Assets\SteamVR\Resources\SteamVR_HiddenArea.shader" />
@@ -87,13 +64,39 @@
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Advertisements">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/EditorTestsRunner/Editor/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.EditorTestsRunner">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/EditorTestsRunner/Editor/UnityEditor.EditorTestsRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.TreeEditor">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.OSXStandalone.Extensions">
+ <HintPath>/Applications/Unity/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{426DE97B-A8FE-2F62-0EC2-26B819D02214}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{4CF59E58-DAA3-4015-AB9B-241B73CEA725}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
