@@ -31,8 +31,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //seat tranform = desired transform for player
             Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
 
-            playerGlobal = GameObject.Find("Camera01 (origin)").transform;
-            playerLocal = GameObject.Find("Camera01 (origin)/Camera01 (head)/Camera01 (eye)").transform;
+            playerGlobal = GameObject.Find("[CameraRig]").transform;
+            playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
 
             this.transform.position = (playerGlobal).transform.position;
             this.transform.rotation = (playerLocal).transform.rotation;
@@ -41,8 +41,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //stream.SendNext(GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats);
             
             //moves the camera to your seat
-            GameObject.Find("Camera01 (origin)").transform.position = seatTrans.position;
-            GameObject.Find("Camera01 (origin)/Camera01 (head)").transform.position = seatTrans.position;
+            GameObject.Find("[CameraRig]").transform.position = seatTrans.position;
+            GameObject.Find("[CameraRig]/Camera (head)").transform.position = seatTrans.position;
 
             //we dont want to see ourselves
             avatar.SetActive(false);
