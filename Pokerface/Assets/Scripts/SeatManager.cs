@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,3 +50,56 @@ public class SeatManager : MonoBehaviour
         return -1;
     }
 }
+=======
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+public class SeatManager : MonoBehaviour
+{
+    
+    
+    private static SeatManager instance;
+
+    private Occupied[] seats;
+
+    private bool[] isOccupied;
+
+    public static SeatManager Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    private void Start()
+    {
+        instance = this;
+        seats = transform.GetComponentsInChildren<Occupied>();
+        isOccupied = new bool[seats.Length];
+        for (int i = 0; i < isOccupied.Length; i++)
+        {
+            isOccupied[i] = true;
+        }
+    }
+
+    public bool IsSeatAvailable()
+    {
+        return isOccupied.Any(b => !b); 
+    }
+
+    public int GetFirstAvailableSeat()
+    {
+        for (int i = 0; i < isOccupied.Length; i++)
+        {
+            if (!isOccupied[i])
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+>>>>>>> da1a6e2190ac886a62af1e2b273e58d39b9f820d
