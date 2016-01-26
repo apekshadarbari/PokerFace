@@ -41,8 +41,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //stream.SendNext(GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats);
             
             //moves the camera to your seat
-            GameObject.Find("[CameraRig]").transform.position = seatTrans.position;
-            GameObject.Find("[CameraRig]/Camera (head)").transform.position = seatTrans.position;
+            playerGlobal.position = seatTrans.position;
+            //GameObject.Find("[CameraRig]/Camera (head)").transform.position = seatTrans.position;
 
             //we dont want to see ourselves
             avatar.SetActive(false);
