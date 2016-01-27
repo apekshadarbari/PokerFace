@@ -1,6 +1,5 @@
 fileFormatVersion: 2
 guid: 3b5a0a7dce46a13459199d174ad3db3f
-DefaultImporter:
 PluginImporter:
   serializedVersion: 1
   iconMap: {}
@@ -63,3 +62,5 @@ PluginImporter:
         CompileFlags: 
         FrameworkDependencies: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

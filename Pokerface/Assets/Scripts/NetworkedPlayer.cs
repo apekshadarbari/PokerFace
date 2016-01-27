@@ -9,21 +9,42 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     // Use this for initialization
 
+    private int turnInt;
+
     public GameObject card;
 
     public GameObject avatar;
     public Transform playerGlobal;
     public Transform playerLocal;
-    //public List<NetworkedPlayer> avatars = new List<NetworkedPlayer>();
 
+    public int TurnInt
+    {
+        get
+        {
+            return turnInt;
+        }
+
+        set
+        {
+            turnInt = value;
+        }
+    }
+
+    //public List<NetworkedPlayer> avatars = new List<NetworkedPlayer>();
+    [SerializeField]
+    GameObject turnTrigger;
+    void Awake()
+    {
+
+        //PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 1);
+    }
 
     void Start()
     {
-
         Debug.Log("I'm instantiated!");
 
     }
-    // 
+
     void Update()
     {
         if (photonView.isMine)
@@ -39,38 +60,50 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
             //this.transform.localPosition = Vector3.zero;
             //stream.SendNext(GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats);
-            
+
             //moves the camera to your seat
             playerGlobal.position = seatTrans.position;
             //GameObject.Find("[CameraRig]/Camera (head)").transform.position = seatTrans.position;
 
             //we dont want to see ourselves
             avatar.SetActive(false);
-            if (Input.GetKeyDown("e"))
-            {
-                Debug.Log("pik lort");
-                
-                card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0);
-            }
-            if (Input.GetKeyDown("space"))
-            {
-                Debug.Log("i pushed the button and i liked it");
-
-                card.transform.Rotate(0, +180, 0);
-            }
-
-            //card.GetComponent<Rigidbody>().rotation.y
-
-            //GameObject.Find("Camera01 (origin)").SetActive(true);
 
 
             //this.transform.localRotation = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID -1].rotation;
             //NetworkController.Seats[PhotonNetwork.player.ID - 1].transform.position;
         }
+        if (PhotonNetwork.isMasterClient && photonView.isMine)
+        {
+
+            if (Input.GetKeyDown("e"))
+            {
+            //    Debug.Log("pik lort");
+
+            //    card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0);
+                    turnTrigger = PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
+
+            }
+            if (Input.GetKeyDown("space"))
+            {
+                //TurnInt = turnSwitch.;
+                Debug.Log("i pushed the button and i liked it");
+
+                card.transform.Rotate(0, +180, 0);
+                //PhotonNetwork.SetMasterClient();
+                //if player id >= max players, dealer, then reset
+                //PhotonNetwork.isMasterClient = false;
+                //turnSwitch.GetComponent<PhotonView>().RPC("SwitchTurns", PhotonTargets.All, TurnInt);
+            }
+
+
+
+            //}
+        }
     }
 
     // Update is called once per frame
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+
     {
 
         if (stream.isWriting)
@@ -93,7 +126,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             avatar.transform.localPosition = (Vector3)stream.ReceiveNext();
             avatar.transform.localRotation = (Quaternion)stream.ReceiveNext();
 
-            
+
         }
     }
 }

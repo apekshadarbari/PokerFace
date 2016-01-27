@@ -360,6 +360,20 @@ public enum PhotonNetworkingMessage
     OnCustomAuthenticationFailed,
 
     /// <summary>
+    /// Called when your Custom Authentication service responds with additional data.
+    /// </summary>
+    /// <remarks>
+    /// Custom Authentication services can include some custom data in their response. 
+    /// When present, that data is made available in this callback as Dictionary.
+    /// While the keys of your data have to be strings, the values can be either string or a number (in Json).
+    /// You need to make extra sure, that the value type is the one you expect. Numbers become (currently) int64.
+    /// 
+    /// Example: void OnCustomAuthenticationResponse(Dictionary&lt;string, object&gt; data) { ... } 
+    /// </remarks>
+    /// <see cref="https://doc.photonengine.com/en/realtime/current/reference/custom-authentication"/>
+    OnCustomAuthenticationResponse,
+
+    /// <summary>
     /// Called by PUN when the response to a WebRPC is available. See PhotonNetwork.WebRPC.
     /// </summary>
     /// <remarks>

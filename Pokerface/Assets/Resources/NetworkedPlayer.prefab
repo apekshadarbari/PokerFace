@@ -181,10 +181,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d619872bb034522b2505ddbeccdd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSwitch: {fileID: 141228, guid: 7b230857ecfc4224eace2b4efee6dd19, type: 2}
   card: {fileID: 188742, guid: de622987224284148a9efca378f9bb70, type: 2}
   avatar: {fileID: 199776}
   playerGlobal: {fileID: 0}
   playerLocal: {fileID: 0}
+  turnTrigger: {fileID: 179448, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
 --- !u!114 &11445326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,6 +262,14 @@ Prefab:
       propertyPath: card
       value: 
       objectReference: {fileID: 188742, guid: de622987224284148a9efca378f9bb70, type: 2}
+    - target: {fileID: 0}
+      propertyPath: turnSwitch
+      value: 
+      objectReference: {fileID: 141228, guid: 7b230857ecfc4224eace2b4efee6dd19, type: 2}
+    - target: {fileID: 0}
+      propertyPath: turnTrigger
+      value: 
+      objectReference: {fileID: 179448, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 109782}

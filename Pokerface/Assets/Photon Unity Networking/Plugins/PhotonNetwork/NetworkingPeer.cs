@@ -687,12 +687,6 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             }
         }
 
-        string debug = "";
-        foreach (PhotonPlayer player in mPlayerListCopy)
-        {
-            debug += player != null ? player.name : "null";
-        }
-
         this.mOtherPlayerListCopy = otherP.ToArray();
     }
 
@@ -1223,6 +1217,8 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
                     }
                     else
                     {
+                        // successful connect/auth. depending on the used server, do next steps:
+
                         if (this.server == ServerConnection.NameServer)
                         {
                             // on the NameServer, authenticate returns the MasterServer address for a region and we hop off to there
@@ -1257,8 +1253,12 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
                             {
                                 this.OpCreateGame(this.enterRoomParamsCache);
                             }
+                        }
 
-                            break;
+                        if (operationResponse.Parameters.ContainsKey(ParameterCode.Data))
+                        {
+                            Dictionary<string, object> data = (Dictionary<string, object>)operationResponse.Parameters[ParameterCode.Data];
+                            SendMonoMessage(PhotonNetworkingMessage.OnCustomAuthenticationResponse, data);
                         }
                     }
                     break;
@@ -1943,7 +1943,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             case PunEvent.RPC:
                 //ts: each event now contains a single RPC. execute this
                 // Debug.Log("Ev RPC from: " + originatingPlayer);
-                this.ExecuteRpc(photonEvent[ParameterCode.Data] as Hashtable, originatingPlayer);
+                this.ExecuteRpc(photonEvent[ParameterCode.Data] as object[], originatingPlayer);
                 break;
 
             case PunEvent.SendSerialize:
@@ -1962,7 +1962,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
                 for (short s = initialDataIndex; s < serializeData.Count; s++)
                 {
-                    this.OnSerializeRead(serializeData[s] as Hashtable, originatingPlayer, remoteUpdateServerTimestamp, remoteLevelPrefix);
+                    this.OnSerializeRead(serializeData[s] as object[], originatingPlayer, remoteUpdateServerTimestamp, remoteLevelPrefix);
                 }
                 break;
 
@@ -2119,26 +2119,27 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
     /// <summary>
     /// Executes a received RPC event
     /// </summary>
-    protected internal void ExecuteRpc(Hashtable rpcData, PhotonPlayer sender)
+    protected internal void ExecuteRpc(object[] rpcData, PhotonPlayer sender)
     {
-        if (rpcData == null || !rpcData.ContainsKey((byte)0))
+        if (rpcData == null)
         {
-            Debug.LogError("Malformed RPC; this should never occur. Content: " + SupportClass.DictionaryToString(rpcData));
+            Debug.LogError("Malformed RPC; this should never occur. Content: " + LogObjectArray(rpcData));
             return;
         }
 
         // ts: updated with "flat" event data
         int netViewID = (int)rpcData[(byte)0]; // LIMITS PHOTONVIEWS&PLAYERS
         int otherSidePrefix = 0;    // by default, the prefix is 0 (and this is not being sent)
-        if (rpcData.ContainsKey((byte)1))
+        if (rpcData[1] != null)
         {
             otherSidePrefix = (short)rpcData[(byte)1];
         }
 
+
         string inMethodName;
-        if (rpcData.ContainsKey((byte)5))
+        if (rpcData[5] != null)
         {
-            int rpcIndex = (byte)rpcData[(byte)5];  // LIMITS RPC COUNT
+            int rpcIndex = (byte)rpcData[5];  // LIMITS RPC COUNT
             if (rpcIndex > PhotonNetwork.PhotonServerSettings.RpcList.Count - 1)
             {
                 Debug.LogError("Could not find RPC with index: " + rpcIndex + ". Going to ignore! Check PhotonServerSettings.RpcList");
@@ -2151,15 +2152,10 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
         }
         else
         {
-            inMethodName = (string)rpcData[(byte)3];
+            inMethodName = (string)rpcData[3];
         }
 
-        object[] inMethodParameters = null;
-        if (rpcData.ContainsKey((byte)4))
-        {
-            inMethodParameters = (object[])rpcData[(byte)4];
-        }
-
+        object[] inMethodParameters = (object[])rpcData[4];
         if (inMethodParameters == null)
         {
             inMethodParameters = new object[0];
@@ -2185,16 +2181,14 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
         if (photonNetview.prefix != otherSidePrefix)
         {
-            Debug.LogError(
-                "Received RPC \"" + inMethodName + "\" on viewID " + netViewID + " with a prefix of " + otherSidePrefix
-                + ", our prefix is " + photonNetview.prefix + ". The RPC has been ignored.");
+            Debug.LogError("Received RPC \"" + inMethodName + "\" on viewID " + netViewID + " with a prefix of " + otherSidePrefix + ", our prefix is " + photonNetview.prefix + ". The RPC has been ignored.");
             return;
         }
 
         // Get method name
-        if (inMethodName == string.Empty)
+        if (string.IsNullOrEmpty(inMethodName))
         {
-            Debug.LogError("Malformed RPC; this should never occur. Content: " + SupportClass.DictionaryToString(rpcData));
+            Debug.LogError("Malformed RPC; this should never occur. Content: " + LogObjectArray(rpcData));
             return;
         }
 
@@ -2249,12 +2243,9 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
             // Get [PunRPC] methods from cache
             List<MethodInfo> cachedRPCMethods = null;
-            if (this.monoRPCMethodsCache.ContainsKey(type))
-            {
-                cachedRPCMethods = this.monoRPCMethodsCache[type];
-            }
+            bool methodsOfTypeInCache = this.monoRPCMethodsCache.TryGetValue(type, out cachedRPCMethods);
 
-            if (cachedRPCMethods == null)
+            if (!methodsOfTypeInCache)
             {
                 List<MethodInfo> entries = SupportClass.GetMethods(type, typeof(PunRPC));
 
@@ -2274,7 +2265,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
                 if (mInfo.Name.Equals(inMethodName))
                 {
                     foundMethods++;
-                    ParameterInfo[] pArray = mInfo.GetParameters();
+                    ParameterInfo[] pArray = mInfo.GetParameters(); // TODO: this should be cached, too, in best case
                     if (pArray.Length == argTypes.Length)
                     {
                         // Normal, PhotonNetworkMessage left out
@@ -2378,12 +2369,21 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
         for (int index = 0; index < callParameterTypes.Length; index++)
         {
-            Type type = methodParameters[index].ParameterType;
-            //todo: check metro type usage
-            if (callParameterTypes[index] != null && !type.Equals(callParameterTypes[index]))
+            #if NETFX_CORE
+            TypeInfo methodParamTI = methodParameters[index].ParameterType.GetTypeInfo();
+            TypeInfo callParamTI = callParameterTypes[index].GetTypeInfo();
+
+            if (callParameterTypes[index] != null && !methodParamTI.IsAssignableFrom(callParamTI) && !(callParamTI.IsEnum && System.Enum.GetUnderlyingType(methodParamTI.AsType()).GetTypeInfo().IsAssignableFrom(callParamTI)))
             {
                 return false;
             }
+            #else
+            Type type = methodParameters[index].ParameterType;
+            if (callParameterTypes[index] != null && !type.IsAssignableFrom(callParameterTypes[index]) && !(type.IsEnum && System.Enum.GetUnderlyingType(type).IsAssignableFrom(callParameterTypes[index])))
+            {
+                return false;
+            }
+            #endif
         }
 
         return true;
@@ -2909,19 +2909,21 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             return;
         }
 
-        if (this.photonViewList.ContainsKey(netView.viewID))
+        PhotonView listedView = null;
+        bool isViewListed = this.photonViewList.TryGetValue(netView.viewID, out listedView);
+        if (isViewListed)
         {
             // if some other view is in the list already, we got a problem. it might be undestructible. print out error
-            if (netView != photonViewList[netView.viewID])
+            if (netView != listedView)
             {
-                Debug.LogError(string.Format("PhotonView ID duplicate found: {0}. New: {1} old: {2}. Maybe one wasn't destroyed on scene load?! Check for 'DontDestroyOnLoad'. Destroying old entry, adding new.", netView.viewID, netView, photonViewList[netView.viewID]));
+                Debug.LogError(string.Format("PhotonView ID duplicate found: {0}. New: {1} old: {2}. Maybe one wasn't destroyed on scene load?! Check for 'DontDestroyOnLoad'. Destroying old entry, adding new.", netView.viewID, netView, listedView));
             }
             else
             {
                 return;
             }
 
-            this.RemoveInstantiatedGO(photonViewList[netView.viewID].gameObject, true);
+            this.RemoveInstantiatedGO(listedView.gameObject, true);
         }
 
         // Debug.Log("adding view to known list: " + netView);
@@ -3065,7 +3067,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
 
         //ts: changed RPCs to a one-level hashtable as described in internal.txt
-        Hashtable rpcEvent = new Hashtable();
+        object[] rpcEvent = new object[6];
         rpcEvent[(byte)0] = (int)view.viewID; // LIMITS PHOTONVIEWS&PLAYERS
         if (view.prefix > 0)
         {
@@ -3089,7 +3091,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             rpcEvent[(byte) 4] = (object[]) parameters;
         }
 
-        if (this.mLocalActor == player)
+        if (this.mLocalActor.ID == player.ID)
         {
             this.ExecuteRpc(rpcEvent, player);
         }
@@ -3100,7 +3102,10 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
         }
     }
 
-    /// RPC Hashtable Structure
+    /// RPC Definition
+    /// RPCs are sent as object[] (PUN v1.66 and up)
+    /// Values that are not used, are null
+    ///
     /// (byte)0 -> (int) ViewId (combined from actorNr and actor-unique-id)
     /// (byte)1 -> (short) prefix (level)
     /// (byte)2 -> (int) server timestamp
@@ -3126,8 +3131,8 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             Debug.Log("Sending RPC \"" + methodName + "\" to " + target);
 
 
-        //ts: changed RPCs to a one-level hashtable as described in internal.txt
-        Hashtable rpcEvent = new Hashtable();
+        // in v1.66 this was changed to a object[]
+        object[] rpcEvent = new object[6];
         rpcEvent[(byte)0] = (int)view.viewID; // LIMITS NETWORKVIEWS&PLAYERS
         if (view.prefix > 0)
         {
@@ -3411,7 +3416,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
                     }
 
                     // Run it trough its OnSerialize
-                    Hashtable evData = this.OnSerializeWrite(view);
+                    object[] evData = this.OnSerializeWrite(view);
                     if (evData == null)
                     {
                         continue;
@@ -3419,37 +3424,38 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
                     if (view.synchronization == ViewSynchronization.ReliableDeltaCompressed || view.mixedModeIsReliable)
                     {
-                        if (!evData.ContainsKey((byte)1) && !evData.ContainsKey((byte)2))
+                        Hashtable groupHashtable = null;
+                        bool found = dataPerGroupReliable.TryGetValue(view.group, out groupHashtable);
+                        if (!found)
                         {
-                            // Everything has been removed by compression, nothing to send
-                        }
-                        else
-                        {
-                            if (!dataPerGroupReliable.ContainsKey(view.group))
+                            groupHashtable = new Hashtable(4);
+                            groupHashtable[(byte)0] = this.ServerTimeInMilliSeconds;
+                            if (currentLevelPrefix >= 0)
                             {
-                                dataPerGroupReliable[view.group] = new Hashtable();
-                                dataPerGroupReliable[view.group][(byte)0] = this.ServerTimeInMilliSeconds;
-                                if (currentLevelPrefix >= 0)
-                                {
-                                    dataPerGroupReliable[view.group][(byte)1] = this.currentLevelPrefix;
-                                }
+                                groupHashtable[(byte)1] = this.currentLevelPrefix;
                             }
-                            Hashtable groupHashtable = dataPerGroupReliable[view.group];
-                            groupHashtable.Add((short)groupHashtable.Count, evData);
+
+                            dataPerGroupReliable[view.group] = groupHashtable;
                         }
+
+                        groupHashtable.Add((short)groupHashtable.Count, evData);
                     }
                     else
                     {
-                        if (!dataPerGroupUnreliable.ContainsKey(view.group))
+                        Hashtable groupHashtable = null;
+                        bool found = dataPerGroupUnreliable.TryGetValue(view.group, out groupHashtable);
+                        if (!found)
                         {
-                            dataPerGroupUnreliable[view.group] = new Hashtable();
-                            dataPerGroupUnreliable[view.group][(byte)0] = this.ServerTimeInMilliSeconds;
+                            groupHashtable = new Hashtable(4);
+                            groupHashtable[(byte)0] = this.ServerTimeInMilliSeconds;
                             if (currentLevelPrefix >= 0)
                             {
-                                dataPerGroupUnreliable[view.group][(byte)1] = this.currentLevelPrefix;
+                                groupHashtable[(byte)1] = this.currentLevelPrefix;
                             }
+
+                            dataPerGroupUnreliable[view.group] = groupHashtable;
                         }
-                        Hashtable groupHashtable = dataPerGroupUnreliable[view.group];
+
                         groupHashtable.Add((short)groupHashtable.Count, evData);
                     }
                 }
@@ -3484,24 +3490,41 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
     // calls OnPhotonSerializeView (through ExecuteOnSerialize)
     // the content created here is consumed by receivers in: ReadOnSerialize
-    private Hashtable OnSerializeWrite(PhotonView view)
+    private object[] OnSerializeWrite(PhotonView view)
     {
-        PhotonStream pStream = new PhotonStream( true, null );
-        PhotonMessageInfo info = new PhotonMessageInfo( this.mLocalActor, this.ServerTimeInMilliSeconds, view );
-
-        // each view creates a list of values that should be sent
-        view.SerializeView( pStream, info );
-
-        if( pStream.Count == 0 )
+        if (view.synchronization == ViewSynchronization.Off)
         {
             return null;
         }
 
-        object[] dataArray = pStream.data.ToArray();
 
+        // each view creates a list of values that should be sent
+        PhotonMessageInfo info = new PhotonMessageInfo(this.mLocalActor, this.ServerTimeInMilliSeconds, view);
+        PhotonStream pStream = new PhotonStream(true, null);
+        pStream.SendNext((int)view.viewID);
+        pStream.SendNext(false);
+        pStream.SendNext(null);
+        view.SerializeView(pStream, info);
+
+
+        // check if there are actual values to be sent (after the "header" of viewId, (bool)compressed and (int[])nullValues)
+        if(pStream.Count <= SyncFirstValue)
+        {
+            return null;
+        }
+        if (view.synchronization == ViewSynchronization.Unreliable)
+        {
+            return pStream.ToArray();
+        }
+
+
+        // ViewSynchronization: Off, Unreliable, UnreliableOnChange, ReliableDeltaCompressed
+
+
+        object[] currentValues = pStream.ToArray();
         if (view.synchronization == ViewSynchronization.UnreliableOnChange)
         {
-            if (AlmostEquals(dataArray, view.lastOnSerializeDataSent))
+            if (AlmostEquals(currentValues, view.lastOnSerializeDataSent))
             {
                 if (view.mixedModeIsReliable)
                 {
@@ -3509,52 +3532,57 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
                 }
 
                 view.mixedModeIsReliable = true;
-                view.lastOnSerializeDataSent = dataArray;
+                view.lastOnSerializeDataSent = currentValues;
             }
             else
             {
                 view.mixedModeIsReliable = false;
-                view.lastOnSerializeDataSent = dataArray;
+                view.lastOnSerializeDataSent = currentValues;
             }
+
+            return currentValues;
         }
-
-        // EVDATA:
-        // 0=View ID (an int, never compressed cause it's not in the data)
-        // 1=data of observed type (different per type of observed object)
-        // 2=compressed data (in this case, key 1 is empty)
-        // 3=list of values that are actually null (if something was changed but actually IS null)
-        Hashtable evData = new Hashtable();
-        evData[(byte)0] = (int)view.viewID;
-        evData[(byte)1] = dataArray;    // this is the actual data (script or observed object)
-
 
         if (view.synchronization == ViewSynchronization.ReliableDeltaCompressed)
         {
             // compress content of data set (by comparing to view.lastOnSerializeDataSent)
             // the "original" dataArray is NOT modified by DeltaCompressionWrite
-            // if something was compressed, the evData key 2 and 3 are used (see above)
-            bool somethingLeftToSend = this.DeltaCompressionWrite(view, evData);
+            object[] dataToSend = this.DeltaCompressionWrite(view.lastOnSerializeDataSent, currentValues);
 
-            // buffer the full data set (for next compression)
-            view.lastOnSerializeDataSent = dataArray;
+            // cache the values that were written this time (not the compressed values)
+            view.lastOnSerializeDataSent = currentValues;
 
-            if (!somethingLeftToSend)
-            {
-                return null;
-            }
+            return dataToSend;
         }
 
-        return evData;
+        return null;
     }
+
+
+	string LogObjectArray(object[] data)
+    {
+        string[] sb = new string[data.Length];
+        for (int i = 0; i < data.Length; i++)
+        {
+            object o = data[i];
+            sb[i] = (o != null) ? o.ToString() : "null";
+        }
+
+        return string.Join(", ",sb);
+    }
+
 
     /// <summary>
     /// Reads updates created by OnSerializeWrite
     /// </summary>
-    private void OnSerializeRead(Hashtable data, PhotonPlayer sender, int networkTime, short correctPrefix)
+    private void OnSerializeRead(object[] data, PhotonPlayer sender, int networkTime, short correctPrefix)
     {
         // read view ID from key (byte)0: a int-array (PUN 1.17++)
-        int viewID = (int)data[(byte)0];
+        int viewID = (int)data[SyncViewId];
 
+
+        // debug:
+        //LogObjectArray(data);
 
         PhotonView view = this.GetPhotonView(viewID);
         if (view == null)
@@ -3578,18 +3606,25 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
         if (view.synchronization == ViewSynchronization.ReliableDeltaCompressed)
         {
-            if (!this.DeltaCompressionRead(view, data))
+            object[] uncompressed = this.DeltaCompressionRead(view.lastOnSerializeDataReceived, data);
+            //LogObjectArray(uncompressed,"uncompressed ");
+            if (uncompressed == null)
             {
                 // Skip this packet as we haven't got received complete-copy of this view yet.
                 if (PhotonNetwork.logLevel >= PhotonLogLevel.Informational)
+                {
                     Debug.Log("Skipping packet for " + view.name + " [" + view.viewID + "] as we haven't received a full packet for delta compression yet. This is OK if it happens for the first few frames after joining a game.");
+                }
                 return;
             }
 
-            // store last received for delta-compression usage
-            view.lastOnSerializeDataReceived = data[(byte)1] as object[];
+            // store last received values (uncompressed) for delta-compression usage
+            view.lastOnSerializeDataReceived = uncompressed;
+            data = uncompressed;
         }
 
+        // TODO: check if we really want to set the owner of a GO, based on who sends something about it.
+        // this has nothing to do with reading the actual synchronization update.
         if (sender.ID != view.ownerId)
         {
             if (!view.isSceneView || !sender.isMasterClient)
@@ -3600,11 +3635,11 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             }
         }
 
-        object[] contents = data[(byte)1] as object[];
-        PhotonStream pStream = new PhotonStream(false, contents);
+        PhotonStream pStream = new PhotonStream(false, data);
+        pStream.currentItem = 3;
         PhotonMessageInfo info = new PhotonMessageInfo(sender, networkTime, view);
 
-        view.DeserializeView( pStream, info );
+        view.DeserializeView(pStream, info);
     }
 
     private bool AlmostEquals(object[] lastData, object[] currentContent)
@@ -3632,41 +3667,33 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
         return true;
     }
 
-    /// <summary>
-    /// Compares the new data with previously sent data and skips values that didn't change.
-    /// </summary>
-    /// <returns>True if anything has to be sent, false if nothing new or no data</returns>
-    private bool DeltaCompressionWrite(PhotonView view, Hashtable data)
+
+    // compresses currentContent array into containing NULL, where currentContent equals previousContent
+    // skips initial indexes, as defined by startIndex
+    // returns null, if nothing must be sent (current content might be null, which also returns null)
+    // startIndex should be the index of the first actual data-value (3 in PUN's case, as 0=viewId, 1=(bool)compressed, 2=(int[])values that are now null)
+    private object[] DeltaCompressionWrite(object[] previousContent, object[] currentContent)
     {
-        if (view.lastOnSerializeDataSent == null)
+        if (currentContent == null || previousContent == null || previousContent.Length != currentContent.Length)
         {
-            return true; // all has to be sent
+            return currentContent;  // the current data needs to be sent (which might be null)
         }
 
-        // We can compress as we sent a full update previously (readers can re-use previous values)
-        object[] lastData = view.lastOnSerializeDataSent;
-        object[] currentContent = data[(byte)1] as object[];
-
-        if (currentContent == null)
+        if (currentContent.Length <= SyncFirstValue)
         {
-            // no data to be sent
-            return false;
+            return null;  // this send doesn't contain values (except the "headers"), so it's not being sent
         }
 
-        if (lastData.Length != currentContent.Length)
-        {
-            // if new data isn't same length as before, we send the complete data-set uncompressed
-            return true;
-        }
 
         object[] compressedContent = new object[currentContent.Length];
+        compressedContent[SyncCompressed] = false;
         int compressedValues = 0;
 
-        List<int> valuesThatAreChangedToNull = new List<int>();
-        for (int index = 0; index < compressedContent.Length; index++)
+        HashSet<int> valuesThatAreChangedToNull = new HashSet<int>();
+        for (int index = SyncFirstValue; index < currentContent.Length; index++)
         {
             object newObj = currentContent[index];
-            object oldObj = lastData[index];
+            object oldObj = previousContent[index];
             if (this.ObjectIsSameWithInprecision(newObj, oldObj))
             {
                 // compress (by using null, instead of value, which is same as before)
@@ -3675,7 +3702,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             }
             else
             {
-                compressedContent[index] = currentContent[index];
+                compressedContent[index] = newObj;
 
                 // value changed, we don't replace it with null
                 // new value is null (like a compressed value): we have to mark it so it STAYS null instead of being replaced with previous value
@@ -3689,69 +3716,65 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
         // Only send the list of compressed fields if we actually compressed 1 or more fields.
         if (compressedValues > 0)
         {
-            data.Remove((byte)1); // remove the original data (we only send compressed data)
-
-            if (compressedValues == currentContent.Length)
+            if (compressedValues == currentContent.Length - SyncFirstValue)
             {
                 // all values are compressed to null, we have nothing to send
-                return false;
+                return null;
             }
 
-            data[(byte)2] = compressedContent; // current, compressted data is moved to key 2 to mark it as compressed
+            compressedContent[SyncCompressed] = true;
             if (valuesThatAreChangedToNull.Count > 0)
             {
-                data[(byte)3] = valuesThatAreChangedToNull.ToArray(); // data that is actually null (not just cause we didn't want to send it)
+                compressedContent[SyncNullValues] = valuesThatAreChangedToNull.ToArray(); // data that is actually null (not just cause we didn't want to send it)
             }
         }
 
-        return true;    // some data was compressed but we need to send something
+        compressedContent[SyncViewId] = currentContent[SyncViewId];
+        return compressedContent;    // some data was compressed but we need to send something
     }
 
-    /// <summary>
-    /// reads incoming messages created by "OnSerialize"
-    /// </summary>
-    private bool DeltaCompressionRead(PhotonView view, Hashtable data)
+    public const int SyncViewId     = 0;
+    public const int SyncCompressed = 1;
+    public const int SyncNullValues = 2;
+    public const int SyncFirstValue = 3;
+
+
+    // startIndex should be the index of the first actual data-value (3 in PUN's case, as 0=viewId, 1=(bool)compressed, 2=(int[])values that are now null)
+    // returns the incomingData with modified content. any object being null (means: value unchanged) gets replaced with a previously sent value. incomingData is being modified
+    private object[] DeltaCompressionRead(object[] lastOnSerializeDataReceived, object[] incomingData)
     {
-        if (data.ContainsKey((byte)1))
+        if ((bool)incomingData[SyncCompressed] == false)
         {
-            // we have a full list of data (cause key 1 is used), so return "we have uncompressed all"
-            return true;
+            // index 1 marks "compressed" as being true.
+            return incomingData;
         }
 
-        // Compression was applied as data[(byte)2] exists (this is the data with some fields being compressed to null)
-        // now we also need a previous "full" list of values to restore values that are null in this msg
-        if (view.lastOnSerializeDataReceived == null)
+        // Compression was applied (as data[1] == true)
+        // we need a previous "full" list of values to restore values that are null in this msg. else, ignore this
+        if (lastOnSerializeDataReceived == null)
         {
-            return false; // We dont have a full match yet, we cannot work with missing values: skip this message
+            return null;
         }
 
-        object[] compressedContents = data[(byte)2] as object[];
-        if (compressedContents == null)
-        {
-            // despite expectation, there is no compressed data in this msg. shouldn't happen. just a null check
-            return false;
-        }
 
-        int[] indexesThatAreChangedToNull = data[(byte)3] as int[];
-        if (indexesThatAreChangedToNull == null)
+        int[] indexesThatAreChangedToNull = incomingData[(byte)2] as int[];
+        for (int index = SyncFirstValue; index < incomingData.Length; index++)
         {
-            indexesThatAreChangedToNull = new int[0];
-        }
-
-        object[] lastReceivedData = view.lastOnSerializeDataReceived;
-        for (int index = 0; index < compressedContents.Length; index++)
-        {
-            if (compressedContents[index] == null && !indexesThatAreChangedToNull.Contains(index))
+            if (indexesThatAreChangedToNull != null && indexesThatAreChangedToNull.Contains(index))
+            {
+                continue;   // if a value was set to null in this update, we don't need to fetch it from an earlier update
+            }
+            if (incomingData[index] == null)
             {
                 // we replace null values in this received msg unless a index is in the "changed to null" list
-                object lastValue = lastReceivedData[index];
-                compressedContents[index] = lastValue;
+                object lastValue = lastOnSerializeDataReceived[index];
+                incomingData[index] = lastValue;
             }
         }
 
-        data[(byte)1] = compressedContents; // compressedContents are now uncompressed...
-        return true;
+        return incomingData;
     }
+
 
     /// <summary>
     /// Returns true if both objects are almost identical.

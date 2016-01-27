@@ -31,4 +31,12 @@ MonoBehaviour:
   - PunPickupSimple
   - PunRespawn
   - RequestForPickupTimes
+  - switchTurns
+  - ColorRpc
+  - DoJump
+  - Flash
+  - Marco
+  - Polo
+  - TaggedPlayer
+  - SwitchTurns
   DisableAutoOpenWizard: 1

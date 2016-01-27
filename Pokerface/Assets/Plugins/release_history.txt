@@ -1,6 +1,6 @@
 * release_history.txt
 * Release history for the DotNet Photon Client Library (DotNet / Unity / Windows Store / Windows Phone / Xamarin)
-(C) 2015 Exit Games GmbH, http://www.photonengine.com
+(C) 2016 Exit Games GmbH, http://www.photonengine.com
 
 Questions? Visit:
 https://www.photonengine.com
@@ -8,13 +8,33 @@ https://doc.photonengine.com
 http://forum.photonengine.com
 
 
+
+*** Version 4.0.5.1 (18. January 2016 - rev3187)
+    Fixed: EnetPeer.ExecuteCommand(). Fixed: Receiving a Disconnect-command didn't clear the receive-buffers. However, it has to be the last command executed.
+    Note: The bug related to the Disconnect-command happened, when an app paused, queued incoming commands and executed the Disconnect while incoming commands were queued.
+    Fixed: Setting of DisconnectTimeout for TCP connections (ReceiveTimeout and SendTimeout).
+    Changed: Our protocol serializes Enums implicitly as their underlying Type. This means you can easily send them but will lose the Type info (they don't arrive as your Enum type). This is now also working in Windows Store libraries (NETFX_CORE).
+LoadBalancing:
+    Added: OpSetCustomPropertiesOfActor() and OpSetCustomPropertiesOfRoom() now check locally, if the client is currently in a room. It must be, to be able to set these properties. An exception exists for setting properties for the local player's actorNumber, but those are better set via LoadBalancingClient.LocalPlayer.
+Unity SDK:
+    Changed: The Unity condition which defines "using Hashtable = ExitGames.Client.Photon.Hashtable;". All versions of Unity 4 and up now define that Photon's Hashtable is needed. This is only in the LoadBalancing API, not in the demos.
+    Added: WebGL support
+
+
+*** Version 4.0.5.0 (3. December 2015 - rev3144)
+    Changed: Signature of SetCustomProperties methods. All overloads now include a final, optional "webForward" parameter. This enables you to update a WebHook when properties change. This is intended for turnbased games, not for high-frequency updates - use with care.
+    Internal: Added more debug output to error messages from the socket usage. This should now always include the ServerAddress to make things easier to debug server-side, if needed.
+    Added: Serveral new ErrorCode values, which will be used by v4RC5 and newer servers. See ErrorCode.JoinFailed***, HttpLimitReached and ExternalHttpCallFailed.
+    Fixed: LoadBalancing API now reads the correct "NickName" key from the server's authentication response. So far, it was reading a key that is never used. Note: This means you can set a user's NickName server-side to override the client's nickname.
+Chat
+    Added: A MessageLimit field for ChatClient and ChatChannel to limit the number of messages the client keeps locally. It might be useful to limit memory usage in long running chats. Set ChatClient.MessageLimit to apply the limit to any channel subscribed afterwards or apply a limit individually.
+
 *** Version 4.0.0.12 (3. November 2015 - rev3112)
-    Added: Suppor for IPv6. Note: IPv6 does not work in Unity yet. It has issues with IPv6. (Case 740910) 
+    Added: Support for IPv6. Note: IPv6 does not work in Unity yet. It has issues with IPv6. (Case 740910) 
     Note: Host name resolution will prefer IPv4 over IPv6, if both IPs should be available. IPv6 Addresses must use brackets! Example: [::1]:5055. This separates the port from the address.
     Added: Error logging when Addresses can not be resolved to IPs.
     Changed: LoadBalancingClient OpJoinOrCreateRoom() no longer allows you to re-join a room. Simply remove the ActorNumber from the parameters. To re-join, use OpJoin with actorNumber (Player.ID that was assigned in the room).
     Added: Support for PS4 in Unity LoadBalancing SDK. Note: The demos are not all updated with controller support, as we use the old UI, still. To test export, use the Particle Demo.
-
 
 *** Version 4.0.0.11 (28. October 2015 - rev3093)
     Changed: Sending a generic Dictionary (with specific types) will now throw an Exception, if any key or value is null. This limitation does not include Dictionaries which use object as type. Those Exceptions are one of the few, which are not catched and turned into a debug message. Catch them by wrapping Operation calls, where needed (OpRaiseEvent()).

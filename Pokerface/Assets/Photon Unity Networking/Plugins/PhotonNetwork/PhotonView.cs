@@ -505,23 +505,24 @@ public class PhotonView : Photon.MonoBehaviour
     {
         if (component != null)
         {
-            if (this.m_OnSerializeMethodInfos.ContainsKey(component) == false)
+            MethodInfo method = null;
+            bool found = this.m_OnSerializeMethodInfos.TryGetValue(component, out method);
+            if (!found)
             {
-                MethodInfo newMethod = null;
-                bool foundMethod = NetworkingPeer.GetMethod(component as MonoBehaviour, PhotonNetworkingMessage.OnPhotonSerializeView.ToString(), out newMethod);
+                bool foundMethod = NetworkingPeer.GetMethod(component as MonoBehaviour, PhotonNetworkingMessage.OnPhotonSerializeView.ToString(), out method);
 
                 if (foundMethod == false)
                 {
                     Debug.LogError("The observed monobehaviour (" + component.name + ") of this PhotonView does not implement OnPhotonSerializeView()!");
-                    newMethod = null;
+                    method = null;
                 }
 
-                this.m_OnSerializeMethodInfos.Add(component, newMethod);
+                this.m_OnSerializeMethodInfos.Add(component, method);
             }
 
-            if (this.m_OnSerializeMethodInfos[component] != null)
+            if (method != null)
             {
-                this.m_OnSerializeMethodInfos[component].Invoke(component, new object[] {stream, info});
+                method.Invoke(component, new object[] {stream, info});
             }
         }
     }

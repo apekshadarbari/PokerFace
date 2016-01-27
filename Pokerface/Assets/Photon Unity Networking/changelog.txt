@@ -1,3 +1,19 @@
+v1.66 (21. January 2016)
+Important: This might affect your import! The folder "ChatApi" is now renamed to "PhotonChatApi". This way, the folder uses the same name as in our other packages. Remove the "ChatApi" folder, if the import didn't do that for you!
+Added: Callback OnCustomAuthenticationResponse to make the data available, that could be sent by a custom authentication server. See description in PunBehaviour.
+Fixed: Usage of "networkView" (old Unity Networking) to using photonView (PUN naming) in a script of the Boxes Demo.
+Changed: The photonView in Photon.MonoBehaviour is now cached. If you intend to remove a PhotonView from a GameObject without destroying that object, you should modify this accordingly.
+Changed: Internally, the PhotonStream now has a object[] for read values. This avoids wrapping them in a List<object>, which saves memory and time.
+Added: Support for Enum types in RPC methods. Enums that are based of byte, short or int can now be used as parameters in RPCs. The underlying type has to be serializable by PUN for that.
+Internal: CheckTypeMatch() to match "assignable" types to enum values. This is what enables the support for using Enum types in RPCs as parameter.
+Fixed: Several scripts in the Demo Synchronization. They now work more like you'd expect. The whole demo is refreshed to a more useful state.
+Internal: Refactored RPCs and "Synchronization" updates to waste far less memory and perform better. For that, Hashtables were replaced with simpler object[]. This means, that this client version is completely incompatible with older ones.
+Internal: The PhotonStream now has 3 values pre-set. Those are needed in the stream to be sent along with your custom values. This doesn't change anything usage-wise. It also has a object[] which is used for readin values and a List<object> which is used when you write. This is leaner.
+Internal: PhotonView.ExecuteComponentOnSerialize() now makes better use of its cache Dictionary. It fetches cached methods with TryFetchValue(), instead of checking for content, then accessing it.
+Fixed: PhotonTransformView interpolation for "estimated speed". It was way too slow, because it didn't factor in that there are 10 updates per second. So speed as a value per second is 10 times higher. 10 being the default send rate here. Note that the object can overshoot (the actual position due to this and extrapolation).
+Fixed: PhotonTransformView interpolation for "estimated speed" now avoids jitter when joining a game. The initial received position simply defines where the object is (after being instantiated at the position of it's Instantiate message). With the next update, it can begin to move.
+
+
 v1.65 (16. December 2015)
 Fixed: Potential NullReference Exception when transfering ownership. The PhotonView which gets transfered might get destroyed before the transfer is complete and that case is now handled.
 Fixed: PUN Wizard for Unity 5, which incorrectly pointed out that you need PUN+ to export to iOS or Android. This was the case in Unity 4 but it's no longer true. Removed this note.
@@ -6,7 +22,6 @@ Fixed: Compatibility with Unity 5.3. The new SceneManager class is re-implemente
 Added: Useful component to select a color per player (out of a configurable list of available colors). Check out: ColorPerPlayer.
 Updated: Boxes Demo. This demo now uses the ColorPerPlayer and ColorPerPlayerApply scripts to colorize each player's cubes. Also, it shows more clearly how RPCs work. There are more tips at runtime, too.
 Fixed: Friends And Custom Authentication Demo. A script was waiting for the client to join the lobby, which isn't done anymore by default. Now the UI is fixed to show when connected to the Master Server, where FindFriend() can be called.
-
 
 v1.64.2 (6. November 2015)
 Fixed: SetCustomProperties in PhotonPlayer and Room classes. It applies set properties locally, unless you do a server-side Check and Swap with expected properties. It also does the callbacks as before (CAS delays the callback by one roundtrip, as the server sets it). In OfflineMode, CAS gets ignored but props stored.

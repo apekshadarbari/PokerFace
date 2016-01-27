@@ -336,6 +336,20 @@ public interface IPunCallbacks
     void OnCustomAuthenticationFailed(string debugMessage);
 
     /// <summary>
+    /// Called when your Custom Authentication service responds with additional data.
+    /// </summary>
+    /// <remarks>
+    /// Custom Authentication services can include some custom data in their response.
+    /// When present, that data is made available in this callback as Dictionary.
+    /// While the keys of your data have to be strings, the values can be either string or a number (in Json).
+    /// You need to make extra sure, that the value type is the one you expect. Numbers become (currently) int64.
+    ///
+    /// Example: void OnCustomAuthenticationResponse(Dictionary&lt;string, object&gt; data) { ... }
+    /// </remarks>
+    /// <see cref="https://doc.photonengine.com/en/realtime/current/reference/custom-authentication"/>
+    void OnCustomAuthenticationResponse(Dictionary<string, object> data);
+
+    /// <summary>
     /// Called by PUN when the response to a WebRPC is available. See PhotonNetwork.WebRPC.
     /// </summary>
     /// <remarks>
@@ -426,13 +440,28 @@ namespace Photon
     /// </summary>
     public class MonoBehaviour : UnityEngine.MonoBehaviour
     {
+        /// <summary>Cache field for the PhotonView on this GameObject.</summary>
+        private PhotonView pvCache = null;
+        
+        /// <summary>A cached reference to a PhotonView on this GameObject.</summary>
+        /// <remarks>
+        /// If you intend to work with a PhotonView in a script, it's usually easier to write this.photonView.
+        ///
+        /// If you intend to remove the PhotonView component from the GameObject but keep this Photon.MonoBehaviour, 
+        /// avoid this reference or modify this code to use PhotonView.Get(obj) instead.
+        /// </remarks>
         public PhotonView photonView
         {
             get
             {
-                return PhotonView.Get(this);
+                if (pvCache == null)
+                {
+                    pvCache = PhotonView.Get(this);
+                }
+                return pvCache;
             }
         }
+
 
         /// <summary>
         /// This property is only here to notify developers when they use the outdated value.
@@ -447,6 +476,7 @@ namespace Photon
         /// #endif
         /// public PhotonView networkView
         /// </remarks>
+        [Obsolete("Use a photonView")]
         new public PhotonView networkView
         {
             get
@@ -774,6 +804,22 @@ namespace Photon
         }
 
         /// <summary>
+        /// Called when your Custom Authentication service responds with additional data.
+        /// </summary>
+        /// <remarks>
+        /// Custom Authentication services can include some custom data in their response.
+        /// When present, that data is made available in this callback as Dictionary.
+        /// While the keys of your data have to be strings, the values can be either string or a number (in Json).
+        /// You need to make extra sure, that the value type is the one you expect. Numbers become (currently) int64.
+        ///
+        /// Example: void OnCustomAuthenticationResponse(Dictionary&lt;string, object&gt; data) { ... }
+        /// </remarks>
+        /// <see cref="https://doc.photonengine.com/en/realtime/current/reference/custom-authentication"/>
+        public virtual void OnCustomAuthenticationResponse(Dictionary<string, object> data)
+        {
+        }
+
+        /// <summary>
         /// Called by PUN when the response to a WebRPC is available. See PhotonNetwork.WebRPC.
         /// </summary>
         /// <remarks>
@@ -1083,8 +1129,9 @@ internal class PunEvent
 public class PhotonStream
 {
     bool write = false;
-    internal List<object> data;
-    byte currentItem = 0; //Used to track the next item to receive.
+    private List<object> writeData;
+    private object[] readData;
+    internal byte currentItem = 0; //Used to track the next item to receive.
 
     /// <summary>
     /// Creates a stream and initializes it. Used by PUN internally.
@@ -1094,11 +1141,11 @@ public class PhotonStream
         this.write = write;
         if (incomingData == null)
         {
-            this.data = new List<object>();
+            this.writeData = new List<object>(10);
         }
         else
         {
-            this.data = new List<object>(incomingData);
+            this.readData = incomingData;
         }
     }
 
@@ -1119,7 +1166,7 @@ public class PhotonStream
     {
         get
         {
-            return data.Count;
+            return (this.isWriting) ? this.writeData.Count : this.readData.Length;
         }
     }
 
@@ -1132,7 +1179,7 @@ public class PhotonStream
             return null;
         }
 
-        object obj = this.data[this.currentItem];
+        object obj = this.readData[this.currentItem];
         this.currentItem++;
         return obj;
     }
@@ -1146,7 +1193,7 @@ public class PhotonStream
             return null;
         }
 
-        object obj = this.data[this.currentItem];
+        object obj = this.readData[this.currentItem];
         //this.currentItem++;
         return obj;
     }
@@ -1160,13 +1207,13 @@ public class PhotonStream
             return;
         }
 
-        this.data.Add(obj);
+        this.writeData.Add(obj);
     }
 
     /// <summary>Turns the stream into a new object[].</summary>
     public object[] ToArray()
     {
-        return this.data.ToArray();
+        return this.isWriting ? this.writeData.ToArray() : this.readData;
     }
 
     /// <summary>
@@ -1176,13 +1223,13 @@ public class PhotonStream
     {
         if (this.write)
         {
-            this.data.Add(myBool);
+            this.writeData.Add(myBool);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                myBool = (bool)data[currentItem];
+                myBool = (bool)this.readData[currentItem];
                 this.currentItem++;
             }
         }
@@ -1195,13 +1242,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(myInt);
+            this.writeData.Add(myInt);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                myInt = (int)data[currentItem];
+                myInt = (int)this.readData[currentItem];
                 currentItem++;
             }
         }
@@ -1214,13 +1261,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(value);
+            this.writeData.Add(value);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                value = (string)data[currentItem];
+                value = (string)this.readData[currentItem];
                 currentItem++;
             }
         }
@@ -1233,13 +1280,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(value);
+            this.writeData.Add(value);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                value = (char)data[currentItem];
+                value = (char)this.readData[currentItem];
                 currentItem++;
             }
         }
@@ -1252,13 +1299,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(value);
+            this.writeData.Add(value);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                value = (short)data[currentItem];
+                value = (short)this.readData[currentItem];
                 currentItem++;
             }
         }
@@ -1271,13 +1318,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(obj);
+            this.writeData.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                obj = (float)data[currentItem];
+                obj = (float)this.readData[currentItem];
                 currentItem++;
             }
         }
@@ -1290,13 +1337,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(obj);
+            this.writeData.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                obj = (PhotonPlayer)data[currentItem];
+                obj = (PhotonPlayer)this.readData[currentItem];
                 currentItem++;
             }
         }
@@ -1309,13 +1356,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(obj);
+            this.writeData.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                obj = (Vector3)data[currentItem];
+                obj = (Vector3)this.readData[currentItem];
                 currentItem++;
             }
         }
@@ -1328,13 +1375,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(obj);
+            this.writeData.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                obj = (Vector2)data[currentItem];
+                obj = (Vector2)this.readData[currentItem];
                 currentItem++;
             }
         }
@@ -1347,13 +1394,13 @@ public class PhotonStream
     {
         if (write)
         {
-            this.data.Add(obj);
+            this.writeData.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.readData.Length > currentItem)
             {
-                obj = (Quaternion)data[currentItem];
+                obj = (Quaternion)this.readData[currentItem];
                 currentItem++;
             }
         }

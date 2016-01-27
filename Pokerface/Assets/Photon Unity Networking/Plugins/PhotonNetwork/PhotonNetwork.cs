@@ -28,7 +28,7 @@ using System.IO;
 public static class PhotonNetwork
 {
     /// <summary>Version number of PUN. Also used in GameVersion to separate client version from each other.</summary>
-    public const string versionPUN = "1.65";
+    public const string versionPUN = "1.66";
 
     /// <summary>Version string for your this build. Can be used to separate incompatible clients. Sent during connect.</summary>
     /// <remarks>This is only sent when you connect so that is also the place you set it usually (e.g. in ConnectUsingSettings).</remarks>
@@ -838,6 +838,10 @@ public static class PhotonNetwork
         }
     }
 
+	/// <summary>If true, PUN will use a Stopwatch to measure time since start/connect. This is more precise than the Environment.TickCount used by default.</summary>
+    private static bool UsePreciseTimer = false;
+    static Stopwatch startupStopwatch;
+
     /// <summary>
     /// Defines after how many seconds PUN will close a connection, after Unity's OnApplicationPause(true) call.
     /// </summary>
@@ -1106,9 +1110,18 @@ public static class PhotonNetwork
 	        protocol = ConnectionProtocol.WebSocketSecure;
 		}
 #endif
+
         networkingPeer = new NetworkingPeer(string.Empty, protocol);
         networkingPeer.QuickResendAttempts = 2;
         networkingPeer.SentCountAllowance = 7;
+
+        if (UsePreciseTimer)
+        {
+            Debug.Log("Using Stopwatch as precision timer for PUN.");
+            startupStopwatch = new Stopwatch();
+            startupStopwatch.Start();
+            networkingPeer.LocalMsTimestampDelegate = () => (int)startupStopwatch.ElapsedMilliseconds;
+        }
 
         // Local player
         CustomTypes.Register();
