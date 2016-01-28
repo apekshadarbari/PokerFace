@@ -13,6 +13,9 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     public GameObject card;
 
+    [SerializeField]
+    GameObject betControl;
+
     public GameObject avatar;
     public Transform playerGlobal;
     public Transform playerLocal;
@@ -43,6 +46,10 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     {
         Debug.Log("I'm instantiated!");
 
+        if (this.photonView.isMine)
+        {
+            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
+        }
     }
 
     void Update()
@@ -66,7 +73,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //GameObject.Find("[CameraRig]/Camera (head)").transform.position = seatTrans.position;
 
             //we dont want to see ourselves
-            avatar.SetActive(false);
+            //avatar.SetActive(false);
 
 
             //this.transform.localRotation = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID -1].rotation;
