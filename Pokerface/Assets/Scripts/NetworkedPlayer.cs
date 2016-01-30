@@ -20,6 +20,9 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     public Transform playerGlobal;
     public Transform playerLocal;
 
+    [SerializeField]
+    GameObject steamVR;
+
     public int TurnInt
     {
         get
@@ -36,6 +39,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     //public List<NetworkedPlayer> avatars = new List<NetworkedPlayer>();
     [SerializeField]
     GameObject turnTrigger;
+
     void Awake()
     {
 
@@ -54,10 +58,14 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     void Update()
     {
+
         if (photonView.isMine)
         {
             //seat tranform = desired transform for player
             Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
+            steamVR.transform.position = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1].transform.position;
+            //change steamVR position to change 'cage for players to move in'
+
 
             playerGlobal = GameObject.Find("[CameraRig]").transform;
             playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
@@ -71,9 +79,21 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //moves the camera to your seat
             playerGlobal.position = seatTrans.position;
             //GameObject.Find("[CameraRig]/Camera (head)").transform.position = seatTrans.position;
+            //GameObject.Find("[CameraRig]/Camera (head)").transform.position = new Vector3(0,0,0);
 
             //we dont want to see ourselves
-            //avatar.SetActive(false);
+            avatar.SetActive(false);
+
+            //RaycastHit hit;
+            //if (Physics.Raycast(transform.position, transform.forward, out hit))
+            //{
+            //    Debug.DrawLine(transform.position, hit.point, Color.cyan);
+            //}
+            //else
+            //{
+            //    Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
+            //}
+
 
 
             //this.transform.localRotation = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID -1].rotation;
@@ -84,10 +104,10 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
             if (Input.GetKeyDown("e"))
             {
-            //    Debug.Log("pik lort");
+                //    Debug.Log("pik lort");
 
-            //    card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0);
-                    turnTrigger = PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
+                //    card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0);
+                turnTrigger = PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
 
             }
             if (Input.GetKeyDown("space"))
@@ -110,7 +130,6 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     // Update is called once per frame
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-
     {
 
         if (stream.isWriting)

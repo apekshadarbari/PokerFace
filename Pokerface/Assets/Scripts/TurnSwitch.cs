@@ -48,10 +48,10 @@ public class TurnSwitch : Photon.MonoBehaviour
         switch (this.photonView.ownerId)
         {
             case 1:
-                TurnTrigger.transform.position = new Vector3(4.32f, 0f, -0.54f);
+                TurnTrigger.transform.position = new Vector3(4.32f, 1f, -0.54f);
                 break;
             case 2:
-                TurnTrigger.transform.position = new Vector3(-2.2f, 0f, 4.57f);
+                TurnTrigger.transform.position = new Vector3(-2.2f, 1f, 4.57f);
                 break;
             default:
                 break;
@@ -66,16 +66,16 @@ public class TurnSwitch : Photon.MonoBehaviour
     public void OnClick()
     {
 
-        if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
-        {
-            this.photonView.TransferOwnership(1);
-            return;
-        }
-        else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
-        {
-            this.photonView.TransferOwnership(2);
-            return;
-        }
+        //if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+        //{
+        //    this.photonView.TransferOwnership(1);
+        //    return;
+        //}
+        //else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
+        //{
+        //    this.photonView.TransferOwnership(2);
+        //    return;
+        //}
 
         turn++;
         Debug.Log("Turn: " + turn.ToString());

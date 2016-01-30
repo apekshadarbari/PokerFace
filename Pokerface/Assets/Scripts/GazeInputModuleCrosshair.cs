@@ -50,7 +50,9 @@ public class GazeInputModuleCrosshair : MonoBehaviour
 			{
 				distance = gazeInputModule.CurrentRaycast.distance * 0.8f - 0.5f;
 			}
-			SetCrossHairAtDistance (distance);
+            Debug.DrawLine(transform.position, gazeInputModule.CurrentRaycast.worldPosition, Color.cyan);
+            
+            SetCrossHairAtDistance (distance);
 		}
 	}
 
