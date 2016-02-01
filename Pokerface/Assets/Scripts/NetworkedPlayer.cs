@@ -4,71 +4,41 @@ using System.Collections.Generic;
 
 public class NetworkedPlayer : Photon.MonoBehaviour
 {
-    //private Vector3 correctPlayerPos = Vector3.zero; // We lerp towards this
-    //private Quaternion correctPlayerRot = Quaternion.identity; // We lerp towards this
-
     // Use this for initialization
-
-    private int turnInt;
-
-    public GameObject card;
-
-    [SerializeField]
-    GameObject betControl;
-
+    bool gameIsStarted;
     public GameObject avatar;
     public Transform playerGlobal;
     public Transform playerLocal;
 
     [SerializeField]
-    GameObject steamVR;
+    public GameObject turnTrigger;
 
-    public int TurnInt
-    {
-        get
-        {
-            return turnInt;
-        }
-
-        set
-        {
-            turnInt = value;
-        }
-    }
-
-    //public List<NetworkedPlayer> avatars = new List<NetworkedPlayer>();
     [SerializeField]
-    GameObject turnTrigger;
+    GameObject betControl;
 
-    void Awake()
-    {
-
-        //PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 1);
-    }
+    [SerializeField]
+    GameObject pot;
 
     void Start()
     {
-        Debug.Log("I'm instantiated!");
-
-        if (this.photonView.isMine)
+        if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
-            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
+            GameObject.Find("UI").SetActive(true);
         }
-    }
-
-    void Update()
-    {
 
         if (photonView.isMine)
         {
+            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
+            
+            //create a betcontroller for each player
+            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
+
             //seat tranform = desired transform for player
             Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
-            steamVR.transform.position = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1].transform.position;
-            //change steamVR position to change 'cage for players to move in'
-
 
             playerGlobal = GameObject.Find("[CameraRig]").transform;
             playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
+            GameObject.Find("[SteamVR]").transform.position = playerLocal.transform.position;
 
             this.transform.position = (playerGlobal).transform.position;
             this.transform.rotation = (playerLocal).transform.rotation;
@@ -79,63 +49,42 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //moves the camera to your seat
             playerGlobal.position = seatTrans.position;
             //GameObject.Find("[CameraRig]/Camera (head)").transform.position = seatTrans.position;
-            //GameObject.Find("[CameraRig]/Camera (head)").transform.position = new Vector3(0,0,0);
 
             //we dont want to see ourselves
             avatar.SetActive(false);
 
-            //RaycastHit hit;
-            //if (Physics.Raycast(transform.position, transform.forward, out hit))
-            //{
-            //    Debug.DrawLine(transform.position, hit.point, Color.cyan);
-            //}
-            //else
-            //{
-            //    Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
-            //}
-
-
-
             //this.transform.localRotation = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID -1].rotation;
             //NetworkController.Seats[PhotonNetwork.player.ID - 1].transform.position;
         }
+    }
+
+    void Update()
+    {
+        if (gameIsStarted)
+        {
+            turnTrigger.SetActive(true);
+        }
+    }
+
+    public void StartGame()
+    {
         if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
+            //temporary start game button
+            Debug.Log("pik lort");
 
-            if (Input.GetKeyDown("e"))
-            {
-                //    Debug.Log("pik lort");
+            GameObject.Find("UI").SetActive(false);
 
-                //    card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0);
-                turnTrigger = PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
-
-            }
-            if (Input.GetKeyDown("space"))
-            {
-                //TurnInt = turnSwitch.;
-                Debug.Log("i pushed the button and i liked it");
-
-                card.transform.Rotate(0, +180, 0);
-                //PhotonNetwork.SetMasterClient();
-                //if player id >= max players, dealer, then reset
-                //PhotonNetwork.isMasterClient = false;
-                //turnSwitch.GetComponent<PhotonView>().RPC("SwitchTurns", PhotonTargets.All, TurnInt);
-            }
-
-
-
-            //}
+            //next turn button
+            PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
         }
     }
 
     // Update is called once per frame
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-
         if (stream.isWriting)
         {
-            stream.SendNext(card.transform.rotation);
-
             stream.SendNext(playerGlobal.position);
             stream.SendNext(playerGlobal.rotation);
             stream.SendNext(playerLocal.localPosition);
@@ -144,15 +93,10 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         }
         else
         {
-            //GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats = (List<GameObject>)stream.ReceiveNext();
-            card.transform.rotation = (Quaternion)stream.ReceiveNext();
-
             this.transform.position = (Vector3)stream.ReceiveNext();
             this.transform.rotation = (Quaternion)stream.ReceiveNext();
             avatar.transform.localPosition = (Vector3)stream.ReceiveNext();
             avatar.transform.localRotation = (Quaternion)stream.ReceiveNext();
-
-
         }
     }
 }

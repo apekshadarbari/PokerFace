@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: f3d619872bb034522b2505ddbeccdd4c
-timeCreated: 1452714537
+timeCreated: 1454304703
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - avatar: {instanceID: 0}
+  - playerGlobal: {instanceID: 0}
+  - playerLocal: {instanceID: 0}
+  - turnTrigger: {fileID: 179448, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
+  - betControl: {instanceID: 0}
+  - pot: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

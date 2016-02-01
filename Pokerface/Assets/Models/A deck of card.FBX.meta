@@ -267,6 +267,58 @@ ModelImporter:
     4300098: Card_QDiamond
     4300100: Card_5Diamond
     4300102: Card_3Spade
+    6400000: Card_10Club
+    6400002: Card_10Diamond
+    6400004: Card_10Heart
+    6400006: Card_10Spade
+    6400008: Card_2Club
+    6400010: Card_2Diamond
+    6400012: Card_2Heart
+    6400014: Card_2Spade
+    6400016: Card_3Club
+    6400018: Card_3Diamond
+    6400020: Card_3Heart
+    6400022: Card_3Spade
+    6400024: Card_4Club
+    6400026: Card_4Diamond
+    6400028: Card_4Heart
+    6400030: Card_4Spade
+    6400032: Card_5Club
+    6400034: Card_5Diamond
+    6400036: Card_5Heart
+    6400038: Card_5Spade
+    6400040: Card_6Club
+    6400042: Card_6Diamond
+    6400044: Card_6Heart
+    6400046: Card_6Spade
+    6400048: Card_7Club
+    6400050: Card_7Diamond
+    6400052: Card_7Heart
+    6400054: Card_7Spade
+    6400056: Card_8Club
+    6400058: Card_8Diamond
+    6400060: Card_8Heart
+    6400062: Card_8Spade
+    6400064: Card_9Club
+    6400066: Card_9Diamond
+    6400068: Card_9Heart
+    6400070: Card_9Spade
+    6400072: Card_AClub
+    6400074: Card_ADiamond
+    6400076: Card_AHeart
+    6400078: Card_ASpade
+    6400080: Card_JClub
+    6400082: Card_JDiamond
+    6400084: Card_JHeart
+    6400086: Card_JSpade
+    6400088: Card_KClub
+    6400090: Card_KDiamond
+    6400092: Card_KHeart
+    6400094: Card_KSpade
+    6400096: Card_QClub
+    6400098: Card_QDiamond
+    6400100: Card_QHeart
+    6400102: Card_QSpade
   materials:
     importMaterials: 1
     materialName: 0
@@ -292,7 +344,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 10
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

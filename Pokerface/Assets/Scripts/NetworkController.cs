@@ -95,6 +95,7 @@ public class NetworkController : Photon.MonoBehaviour
         Debug.Log("Connected to Room");
         StartGame();
     }
+
     void StartGame()
     {
         Debug.Log(PhotonNetwork.player.ID.ToString());
