@@ -16,7 +16,13 @@ public class TestRaycast : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
+            //Debug.Log("i hit something");
             Debug.DrawLine(transform.position, hit.point, Color.cyan);
+            var c = hit.transform.GetComponent<IClicker>();
+            if (c !=null)
+            {
+                c.OnClick();
+            }
         }
         else
         {

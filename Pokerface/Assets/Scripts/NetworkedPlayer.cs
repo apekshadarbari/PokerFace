@@ -38,7 +38,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
             playerGlobal = GameObject.Find("[CameraRig]").transform;
             playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
-            GameObject.Find("[SteamVR]").transform.position = playerLocal.transform.position;
+            GameObject.Find("[SteamVR]").transform.position = seatTrans.position;
 
             this.transform.position = (playerGlobal).transform.position;
             this.transform.rotation = (playerLocal).transform.rotation;
