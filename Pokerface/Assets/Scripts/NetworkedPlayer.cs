@@ -38,6 +38,13 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             vrUI.SetActive(false);
             //GameObject.Find("UI").SetActive(false);
         }
+        if (photonView.isMine)
+        {
+            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
+            //create a betcontroller for each player
+            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
+
+        }
 
 
     }
@@ -51,11 +58,9 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         if (photonView.isMine)
         {
             //PhotonNetwork.InstantiateSceneObject(cardControl.name, cardControl.transform.position, cardControl.transform.rotation, 0, null);
-            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
 
-            //create a betcontroller for each player
-            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
 
+      
             //seat tranform = desired transform for player
             Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
 
