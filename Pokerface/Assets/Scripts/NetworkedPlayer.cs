@@ -39,11 +39,20 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //GameObject.Find("UI").SetActive(false);
         }
 
+
+    }
+
+    void Update()
+    {
+        if (gameIsStarted)
+        {
+            turnTrigger.SetActive(true);
+        }
         if (photonView.isMine)
         {
             //PhotonNetwork.InstantiateSceneObject(cardControl.name, cardControl.transform.position, cardControl.transform.rotation, 0, null);
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
-            
+
             //create a betcontroller for each player
             betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
 
@@ -69,14 +78,6 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
             //this.transform.localRotation = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID -1].rotation;
             //NetworkController.Seats[PhotonNetwork.player.ID - 1].transform.position;
-        }
-    }
-
-    void Update()
-    {
-        if (gameIsStarted)
-        {
-            turnTrigger.SetActive(true);
         }
     }
 
