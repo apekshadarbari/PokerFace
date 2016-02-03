@@ -3,11 +3,29 @@ using System.Collections;
 
 public class TestRaycast : MonoBehaviour
 {
+    private IClicker current;
+    private float timer;
+    [SerializeField]
+    private float delay = 2f;
 
-    // Use this for initialization
+    public float Timer
+    {
+        get
+        {
+            return timer;
+        }
+    }
+    public float Delay
+    {
+        get
+        {
+            return delay;
+        }
+    }
+
     void Start()
     {
-
+        timer = delay;
     }
 
     // Update is called once per frame
@@ -19,9 +37,44 @@ public class TestRaycast : MonoBehaviour
             //Debug.Log("i hit something");
             Debug.DrawLine(transform.position, hit.point, Color.cyan);
             var c = hit.transform.GetComponent<IClicker>();
-            if (c !=null)
+
+            if (c != null)
             {
-                c.OnClick();
+                if (current == null)
+                {
+                    current = c;
+                    current.OnHover();
+                    timer = delay;
+                }
+                else if (current != c)
+                {
+                    current.OnExitHover();
+                    current = c;
+                    current.OnHover();
+                    timer = delay;
+                }
+
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    c.OnClick();
+                    timer = 0f;
+                }
+                else if (Timer > 0f)
+                {
+                    timer -= Time.unscaledDeltaTime;
+
+                    if (Timer <= 0f)
+                    {
+                        c.OnClick();
+                    }
+
+                }
+
+            }
+            else if (current != null)
+            {
+                current.OnExitHover();
+                current = null;
             }
         }
         else

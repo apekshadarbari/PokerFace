@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
+using System;
 
 //[RequireComponent(typeof(PhotonView))]
 public class TurnSwitch : Photon.MonoBehaviour, IClicker
 {
-    CardManager cardRiver;
+    CardManager deckInteraction;
 
     bool playerOneTurn;
     bool playerTwoTurn;
@@ -38,20 +40,26 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //    playerOneTurn = true;
         //}
 
+        // deckInteraction = GameObject.Find("CardController").GetComponent<CardManager>();'
+        deckInteraction = GetComponent<CardManager>();
+        deckInteraction.Shuffle(); 
 
         Debug.Log("post awake owner " + photonView.ownerId.ToString());
     }
 
     void Start()
     {
-        cardRiver = GameObject.Find("Card_Manager").GetComponent<CardManager>();
+        if (deckInteraction  == null)
+        {
+            Debug.Log("No Deck");
+        }
     }
     void Update()
     {
         switch (this.photonView.ownerId)
         {
             case 1:
-                TurnTrigger.transform.position = new Vector3(4.32f, 0f, -0.54f);
+                TurnTrigger.transform.position = new Vector3(4.01f, 0f, -0.54f);
                 break;
             case 2:
                 TurnTrigger.transform.position = new Vector3(-2.2f, 0f, 4.57f);
@@ -59,14 +67,13 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             default:
                 break;
         }
-
         //river 
         if (turn == 5)
         {
             //CardManager.
 
-            Debug.Log("river");
-            cardRiver.DealRiver();
+            //Debug.Log("river");
+            deckInteraction.DealRiver();
         }
 
         //post river
@@ -75,7 +82,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             //CardManager.
 
             Debug.Log("river");
-            cardRiver.compareCards();
+            deckInteraction.compareCards();
         }
 
     }
@@ -123,6 +130,18 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             photonView.ownerId = (int)stream.ReceiveNext();
             this.TurnTrigger.transform.position = (Vector3)stream.ReceiveNext();
         }
+    }
+  
+    public void OnHover()
+    {
+        GetComponent<Renderer>().material.color = Color.red;
+        CrosshairTimerDisplay.Instance.Show();
+    }
+
+    public void OnExitHover()
+    {
+        GetComponent<Renderer>().material.color = Color.white;
+        CrosshairTimerDisplay.Instance.Hide();
     }
 }
 

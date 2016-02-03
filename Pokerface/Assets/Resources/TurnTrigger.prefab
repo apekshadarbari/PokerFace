@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11499740}
   - 114: {fileID: 11483200}
   - 114: {fileID: 11475168}
+  - 114: {fileID: 11478920}
   m_Layer: 0
   m_Name: TurnTrigger
   m_TagString: Untagged
@@ -96,6 +97,75 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &11478920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c22aa30f0b0a46543bf624160ad3d102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dealtRiver: 0
+  cards:
+  - {fileID: 191774, guid: ad4905f7e8e24154b827a139bb44cd66, type: 2}
+  - {fileID: 198938, guid: 90ba0a0924ae5d644a76eea00b2aa670, type: 2}
+  - {fileID: 103246, guid: fac1e62d2840f9a4099a419169d2f5af, type: 2}
+  - {fileID: 178742, guid: f76c41099103e24499cec72d644ec0c0, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cube: {fileID: 152060, guid: 264c089d522aec742a555eac89efa0d4, type: 2}
+  sphere: {fileID: 112430, guid: 5050be2fde7d6a744994cedba8bad08e, type: 2}
+  cylinder: {fileID: 170144, guid: 209f473dfbebcbb41930f63fa1464db9, type: 2}
+  time: 2
 --- !u!114 &11483200
 MonoBehaviour:
   m_ObjectHideFlags: 1

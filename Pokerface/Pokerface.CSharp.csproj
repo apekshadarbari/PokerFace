@@ -74,6 +74,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CrosshairTimerDisplay.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -209,12 +210,6 @@
     <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
     <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
     <Compile Include="Assets\NullifyTransform.cs" />
-    <Compile Include="Assets\PeterKoch\Gaze\Demo\ButtonClickHandler.cs" />
-    <Compile Include="Assets\PeterKoch\Gaze\Demo\ButtonListener.cs" />
-    <Compile Include="Assets\PeterKoch\Gaze\Demo\CubeListener.cs" />
-    <Compile Include="Assets\PeterKoch\Gaze\Demo\GazeCrosshairOnOff.cs" />
-    <Compile Include="Assets\PeterKoch\Gaze\GazeInputModule.cs" />
-    <Compile Include="Assets\PeterKoch\Gaze\GazeInputModuleCrosshair.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\Demo2DJumpAndRun.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\JumpAndRunMovement.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\DemoBoxes\ColorPerPlayer.cs" />
@@ -334,9 +329,17 @@
     <Compile Include="Assets\Scripts\BetHandlers\Fold.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\PotManager.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\WalletManager.cs" />
+    <Compile Include="Assets\Scripts\BetManager.cs" />
+    <Compile Include="Assets\Scripts\ButtonClickHandler.cs" />
+    <Compile Include="Assets\Scripts\ButtonListener.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
     <Compile Include="Assets\Scripts\Cards.cs" />
+    <Compile Include="Assets\Scripts\CubeListener.cs" />
+    <Compile Include="Assets\Scripts\GazeCrosshairOnOff.cs" />
+    <Compile Include="Assets\Scripts\GazeInputModule.cs" />
+    <Compile Include="Assets\Scripts\GazeInputModuleCrosshair.cs" />
     <Compile Include="Assets\Scripts\GrabAndDrop.cs" />
+    <Compile Include="Assets\Scripts\IClicker.cs" />
     <Compile Include="Assets\Scripts\NetworkController.cs" />
     <Compile Include="Assets\Scripts\NetworkedPlayer.cs" />
     <Compile Include="Assets\Scripts\Occupied.cs" />
@@ -374,6 +377,7 @@
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TestController.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
+    <Compile Include="Assets\TestRaycast.cs" />
     <Compile Include="Assets\VRTransform.cs" />
   </ItemGroup>
   <ItemGroup>

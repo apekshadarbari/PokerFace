@@ -19,6 +19,11 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     [SerializeField]
     GameObject pot;
 
+    [SerializeField]
+    GameObject cardControl;
+
+
+
     void Start()
     {
         if (PhotonNetwork.isMasterClient && photonView.isMine)
@@ -28,6 +33,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
         if (photonView.isMine)
         {
+            //PhotonNetwork.InstantiateSceneObject(cardControl.name, cardControl.transform.position, cardControl.transform.rotation, 0, null);
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
             
             //create a betcontroller for each player

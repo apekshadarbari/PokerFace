@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class CardManager : MonoBehaviour
+public class CardManager : Photon.MonoBehaviour
 {
+
+    public bool dealtRiver;
+
+    //[SerializeField]
+    //GameObject deck;
+
+
     public GameObject[] cards = new GameObject[52];
+
     //cards[i] is fixed cards, like cards[0] always refers to Diamond A, the only thing changes all the time is its position
     private int[] cardNum = new int[52];
     private string[] cardPattern = new string[52];
@@ -17,18 +26,28 @@ public class CardManager : MonoBehaviour
     private GameObject[] communityCards = new GameObject[3];
     #endregion
     #region Shuffle Variables
-    private GameObject[] shuffledCards = new GameObject[52];
-    private Vector3[] cardOriginPos = new Vector3[52];
-    private Vector3[] cardPos = new Vector3[52];
-    private Vector3[] cardNewPos = new Vector3[52];
+    private Stack<GameObject> cardStack;
+    //private GameObject[] shuffledCards = new GameObject[52];
+    //private Vector3[] cardOriginPos = new Vector3[52];
+    //private Vector3[] cardPos = new Vector3[52];
+    //private Vector3[] cardNewPos = new Vector3[52];
     private bool shuffled;
     #endregion
     #region Deal Variables
-    private Vector3 cubePos;
-    private Vector3 spherePos;
-    private Vector3 cylinderPos;
+    //private Transform playerOneHandTrans;
+    //private Transform playerTwoHandTrans;
+    //private Transform communityTrans;
+
+    //private Vector3 cubePos;
+    //private Vector3 spherePos;
+    //private Vector3 cylinderPos;
+
+    //private Quaternion cubeRot;
+    //private Quaternion sphereRot;
+    //private Quaternion cylinderRot;
 
     private Vector3 cardGap;
+
     public float time = 2.0f;
     private float rate = 0.0f;
     private float i = 0.0f;
@@ -36,54 +55,138 @@ public class CardManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 52; i++)
+        //if (PhotonNetwork.isMasterClient)
+        //{
+        //    PhotonNetwork.InstantiateSceneObject(deck.name, deck.transform.position, deck.transform.rotation, 0, null);
+
+        //}
+        //for (int i = 0; i < 52; i++)
+        //{
+        //    cardOriginPos[i] = cards[i].transform.position;
+        //    cardPos[i] = cards[i].transform.position;
+        //    cardNum[i] = cards[i].GetComponent<Cards>().cardNum;
+        //    cardPattern[i] = cards[i].GetComponent<Cards>().cardPattern;
+        //}
+
+        //cubePos = cube.transform.position;
+        //spherePos = sphere.transform.position;
+        //cylinderPos = cylinder.transform.position;
+
+        //cubeRot = cube.transform.rotation;
+        //sphereRot = sphere.transform.rotation;
+        //cylinderRot = cylinder.transform.rotation;
+
+        //playerOneHandTrans = cube.transform;
+        //playerTwoHandTrans = sphere.transform;
+        //communityTrans = cylinder.transform;
+        dealtRiver = false;
+        cardGap = new Vector3(0.5f, 0, 0);
+
+
+        cube = GameObject.Find("PlayerOneHand");
+        sphere = GameObject.Find("PlayerTwoHand");
+        cylinder = GameObject.Find("CommunityCards");
+
+        List<GameObject> cardPrefabs = new List<GameObject>();
+
+        string prefix = "Card_";
+        string[] value = new string[]
         {
-            cardOriginPos[i] = cards[i].transform.position;
-            cardPos[i] = cards[i].transform.position;
-            cardNum[i] = cards[i].GetComponent<Cards>().cardNum;
-            cardPattern[i] = cards[i].GetComponent<Cards>().cardPattern;
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "J",
+            "Q",
+            "K",
+            "A"
+        };
+        string[] suit = new string[]
+        {
+            "Club",
+            "Diamond",
+            "Heart",
+            "Spade"
+        };
+
+        foreach( var v in value )
+        {
+            foreach (var s in suit)
+            {
+                cardPrefabs.Add(Resources.Load<GameObject>(prefix + v + s));
+            }
         }
 
-        cubePos = cube.transform.position;
-        spherePos = sphere.transform.position;
-        cylinderPos = cylinder.transform.position;
-        cardGap = new Vector3(0.5f, 0, 0);
+        cards = cardPrefabs.ToArray();
+
+        Debug.Log("Hello from card manager(s)?");
     }
 
     public void Shuffle()
     {
-        for (int i = 0; i < 52; i++)
+        Debug.Log("Everyday I'm Shuffling");
+
+        var shuffledCards = new GameObject[cards.Length];
+
+        for (int i = 0; i < cards.Length; i++)
         {
-            Vector3 temp = cardPos[i];
-            int j = Random.Range(0, 51);
-            cardPos[i] = cardPos[j];
-            cardPos[j] = temp;
-            cards[i].transform.position = cardPos[i];
-            cards[j].transform.position = cardPos[j];
+            shuffledCards[i] = cards[i];
         }
 
-        for (int i = 0; i < 52; i++)
+        for (int iteration = 0; iteration < 5; iteration++)
         {
-            cardNewPos[i] = cards[i].transform.position;
-            for (int j = 0; j < 52; j++)
+            for (int i = 0; i < shuffledCards.Length; i++)
             {
-                if (cardNewPos[i] == cardOriginPos[j])
-                { //Find the card in the sequence, make sure who is the top, second, third...
-                    shuffledCards[j] = cards[i]; //shuffledCards[j] can be used as shuffled cards, with new positions
-                }
+                var c = shuffledCards[i];
+                int j = Random.Range(0, 51);
+                shuffledCards[i] = shuffledCards[j];
+                shuffledCards[j] = c;
             }
         }
+
+        cardStack = new Stack<GameObject>(shuffledCards);
         shuffled = true;
+
+
+        //for (int i = 0; i < 52; i++)
+        //{
+        //    Vector3 temp = cardPos[i];
+        //    int j = Random.Range(0, 51);
+        //    cardPos[i] = cardPos[j];
+        //    cardPos[j] = temp;
+        //    cards[i].transform.position = cardPos[i];
+        //    cards[j].transform.position = cardPos[j];
+        //}
+
+        //for (int i = 0; i < 52; i++)
+        //{
+        //    cardNewPos[i] = cards[i].transform.position;
+        //    for (int j = 0; j < 52; j++)
+        //    {
+        //        if (cardNewPos[i] == cardOriginPos[j])
+        //        { //Find the card in the sequence, make sure who is the top, second, third...
+        //            shuffledCards[j] = cards[i]; //shuffledCards[j] can be used as shuffled cards, with new positions
+        //        }
+        //    }
+        //}
+
+
     }
-    void MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
-    {
-        rate = 1.0f / time;
-        if (i < 1.0f)
-        {
-            i += Time.deltaTime * rate;
-            thisTransform.position = Vector3.Lerp(startPos, endPos, i);
-        }
-    }
+    //void MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, Quaternion endRot, float time)
+    //{
+    //    rate = 1.0f / time;
+    //    if (i < 1.0f)
+    //    {
+    //        i += Time.deltaTime * rate;
+    //        thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+    //        thisTransform.rotation = endRot;
+    //    }
+    //}
 
     private bool startDeal;
 
@@ -96,35 +199,86 @@ public class CardManager : MonoBehaviour
     {
         if (shuffled)
         {
+            Debug.Log("Dealing");
+            var c = cardStack.Pop();
+
             for (int j = 0; j < 4; j++) //j is the number of cards going to be dealed
             {
-                if (j < 4)
+
+                if (j % 2 == 0)//if j is even(number)
+                {                                                                               //cubepos = player pos + gap 
+                    DealCardTo(cube);                                                                           
+                    //PhotonNetwork.Instantiate(shuffledCards[j].name, cube.transform.position + 0.5f * j * cardGap, cube.transform.rotation, 0);
+                    //var card = cardStack.Pop();
+                    //PhotonNetwork.Instantiate(card.name, cube.transform.position, cube.transform.rotation, 0);
+                    //Debug.Log("player one´s hand contains " + card);
+
+                }
+                else //if j is odd //if player.id == 2 
                 {
-                    if (j % 2 == 0)//if j is even(number)
-                    {                                                                               //cubepos = player pos + gap 
-                        MoveObject(shuffledCards[j].transform, shuffledCards[j].transform.position, (cubePos + 0.5f * j * cardGap), 5f);
-                    }
-                    else //if j is odd //if player.id == 2 
-                    {
-                        MoveObject(shuffledCards[j].transform, shuffledCards[j].transform.position, (spherePos + 0.5f * (j - 1) * cardGap), 5f);
-                    }
+                    //var card = cardStack.Pop();
+                    DealCardTo(sphere);
+                    //PhotonNetwork.Instantiate(card.name, sphere.transform.position, sphere.transform.rotation, 0);
+                    //Debug.Log("player two´s hand contains " + card);
+                    //PhotonNetwork.Instantiate(shuffledCards[j].name, sphere.transform.position + 0.5f * (j - 1) * cardGap, sphere.transform.rotation, 0);
+                    //MoveObject(shuffledCards[j].transform, shuffledCards[j].transform.position, (spherePos + 0.5f * (j - 1) * cardGap), sphereRot, 5f);
                 }
             }
+
         }
     }
-
     public void DealRiver()
     {
-        for (int j = 0; j < 7; j++) //j is the number of cards going to be dealed
+        //MoveObject(
+        //    shuffledCards[j].transform,
+        //    shuffledCards[j].transform.position,
+        //    (cylinderPos + (j - 1) * cardGap),
+        //    Quaternion.Euler(-90, 180, 0),
+        //    5f);
+        ////}
+        if (!dealtRiver)
         {
-            //else 
-            //{        
-            Debug.Log("jeg burde få en river");//
-            MoveObject(shuffledCards[j].transform, shuffledCards[j].transform.position, (cylinderPos + (j - 4) * cardGap), 5f);
+            //if (cardStack == null && !shuffled)
+            //{
+            //    Debug.Log("Simon er bøsse");
+            //    return;
+            //}
+            //else
+            //{
+            //    Debug.Log("Jacob er bøsser");
             //}
 
+            //Shuffle();
+
+            //for (int j = 4; j < 7; j++) //j is the number of cards going to be dealed
+            for (int i = 0; i < 3; i++)
+            {
+                //var card = cardStack.Pop();
+                //PhotonNetwork.Instantiate(card.name, cylinder.transform.position, cylinder.transform.rotation, 0);
+                //Debug.Log("river contains" + card);
+                DealCardTo(cylinder);
+                //PhotonNetwork.Instantiate(shuffledCards[j].name, cylinder.transform.position, cylinder.transform.rotation, 0);
+
+                dealtRiver = true;
+
+            }
         }
+        //dealtRiver = false;
+        //Deal();
     }
+
+    private void DealCardTo( GameObject receiver )
+    {
+        var card = cardStack.Pop();
+        card = PhotonNetwork.Instantiate(card.name, receiver.transform.position, receiver.transform.rotation, 0);
+        //card.transform.parent = receiver.transform;
+        //card.transform.SetParent(receiver.transform, true);
+        //card.transform.position = Vector3.zero;
+
+        //if set parent kommer til at virke -
+        //compare
+    }
+
     //cube
     private GameObject[] cubeFiveCards;
     int[] cubeFiveNum = new int[5];
@@ -137,18 +291,21 @@ public class CardManager : MonoBehaviour
     public void compareCards()
     {
         //this will have to be run after the River - or whenever the game ends - or when 
-        cubeFiveCards = new GameObject[5] { shuffledCards[0], shuffledCards[2], shuffledCards[4], shuffledCards[5], shuffledCards[6] };
-        sphereFiveCards = new GameObject[5] { shuffledCards[1], shuffledCards[3], shuffledCards[4], shuffledCards[5], shuffledCards[6] };
+        //cubeFiveCards = new GameObject[5] { shuffledCards[0], shuffledCards[2], shuffledCards[4], shuffledCards[5], shuffledCards[6] };
+        //sphereFiveCards = new GameObject[5] { shuffledCards[1], shuffledCards[3], shuffledCards[4], shuffledCards[5], shuffledCards[6] };
 
-        #region Read the numbers and patterns of these five cards
-        for (int i = 0; i < 5; i++)
-        {
-            cubeFiveNum[i] = cubeFiveCards[i].GetComponent<Cards>().cardNum;
-            cubeFiveString[i] = cubeFiveCards[i].GetComponent<Cards>().cardPattern;
-            sphereFiveNum[i] = sphereFiveCards[i].GetComponent<Cards>().cardNum;
-            sphereFiveString[i] = sphereFiveCards[i].GetComponent<Cards>().cardPattern;
-        }
-        #endregion
+        //cube get children component
+        //card holder klasse
+
+        //#region Read the numbers and patterns of these five cards
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    cubeFiveNum[i] = cubeFiveCards[i].GetComponent<Cards>().cardNum;
+        //    cubeFiveString[i] = cubeFiveCards[i].GetComponent<Cards>().cardPattern;
+        //    sphereFiveNum[i] = sphereFiveCards[i].GetComponent<Cards>().cardNum;
+        //    sphereFiveString[i] = sphereFiveCards[i].GetComponent<Cards>().cardPattern;
+        //}
+        //#endregion
 
         pairs();
     }
@@ -159,6 +316,37 @@ public class CardManager : MonoBehaviour
     int spherePairs = 0;
     int spherePairNum = 0;
 
+    private int[] largerCards(int[] cardList)
+    {
+        //if (listI == null) throw new ArgumentNullException("listI");
+        int temp = 0;
+        for (int i = 0; i < cardList.Length - 1; i++)
+        {
+            for (int j = i + 1; j < cardList.Length; j++)
+            {
+                if (cardList[i] < cardList[j])
+                {
+                    temp = cardList[i];
+                    cardList[i] = cardList[j];
+                    cardList[j] = temp;
+                }
+            }
+        }
+        return cardList;
+    }
+
+    //void Update()
+    //{
+    //    if (startDeal)
+    //    {
+    //        Deal();
+    //    }
+    //}
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+
+    }
     private void pairs()
     {
         for (int i = 0; i <= 3; i++)
@@ -229,30 +417,4 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private int[] largerCards(int[] cardList)
-    {
-        //if (listI == null) throw new ArgumentNullException("listI");
-        int temp = 0;
-        for (int i = 0; i < cardList.Length - 1; i++)
-        {
-            for (int j = i + 1; j < cardList.Length; j++)
-            {
-                if (cardList[i] < cardList[j])
-                {
-                    temp = cardList[i];
-                    cardList[i] = cardList[j];
-                    cardList[j] = temp;
-                }
-            }
-        }
-        return cardList;
-    }
-
-    void Update()
-    {
-        if (startDeal)
-        {
-            Deal();
-        }
-    }
 }

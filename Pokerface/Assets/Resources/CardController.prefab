@@ -1,0 +1,392 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &131856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 428550}
+  - 114: {fileID: 11480144}
+  - 114: {fileID: 11417148}
+  m_Layer: 0
+  m_Name: CardController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &428550
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131856}
+  m_LocalRotation: {x: -0.00000032584137, y: 0, z: 0, w: -1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.2, z: 0.2}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11417148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 428550}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
+--- !u!114 &11480144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c22aa30f0b0a46543bf624160ad3d102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dealtRiver: 1
+  cards:
+  - {fileID: 191774, guid: ad4905f7e8e24154b827a139bb44cd66, type: 2}
+  - {fileID: 161898, guid: 049579e874e264d4a9c8bd65de543983, type: 2}
+  - {fileID: 198938, guid: 90ba0a0924ae5d644a76eea00b2aa670, type: 2}
+  - {fileID: 103246, guid: fac1e62d2840f9a4099a419169d2f5af, type: 2}
+  - {fileID: 178742, guid: f76c41099103e24499cec72d644ec0c0, type: 2}
+  - {fileID: 199434, guid: 6473656b4b819e54e8d8de884ef7d8b6, type: 2}
+  - {fileID: 191784, guid: b057df5be0bfcff44be16e6295daf074, type: 2}
+  - {fileID: 144142, guid: 7b3d056ee3887064298773771c740471, type: 2}
+  - {fileID: 185630, guid: 5285e8d436611034e85be189f2501055, type: 2}
+  - {fileID: 135356, guid: 2fb22c38a867d8e4e970c1c171702f9b, type: 2}
+  - {fileID: 192230, guid: b7bf23d504cfcc545be5f791ab05f8ab, type: 2}
+  - {fileID: 173592, guid: afc1c745743c57345918067903911d4e, type: 2}
+  - {fileID: 115348, guid: ea20053fbc4f74d49a59b204fb9c3d5b, type: 2}
+  - {fileID: 162676, guid: 344174538cdcd0146875da8ac6a794fb, type: 2}
+  - {fileID: 191076, guid: 3cbc69fde3c25a04ba7ea18788e0c188, type: 2}
+  - {fileID: 108878, guid: 8d8a2e0a6d26d3146831d364e2d9584f, type: 2}
+  - {fileID: 169846, guid: 7c6f15b52dcca094c8a91fc4920d256d, type: 2}
+  - {fileID: 191286, guid: ba2c64135a2160f479219e8ce571eadb, type: 2}
+  - {fileID: 137588, guid: a52ac70806977174aadbc5aacf77acfc, type: 2}
+  - {fileID: 127018, guid: 7f3e943796e412f498c7c5b5b5c717fe, type: 2}
+  - {fileID: 153860, guid: 71f6461cf3b99714082c0475abfc2f0e, type: 2}
+  - {fileID: 190456, guid: 5a782c0c091bbce489cca81bd4527625, type: 2}
+  - {fileID: 153204, guid: f61c06b2da43fe34eae6b4a1052b83bb, type: 2}
+  - {fileID: 109444, guid: 2687a6d0fe839754fb1b42341cefb2b9, type: 2}
+  - {fileID: 141350, guid: 51477db8ff776a24cb54894492a82d60, type: 2}
+  - {fileID: 176320, guid: a62d834d96dd2b5429c69d463b240228, type: 2}
+  - {fileID: 142076, guid: f6cdd63e5a4b8974ba09bca837c6b8c5, type: 2}
+  - {fileID: 113624, guid: 138f0506df93b9f4e80d6dbbbf0e403e, type: 2}
+  - {fileID: 167848, guid: ceee5073784977f40a628ec21cadf1f7, type: 2}
+  - {fileID: 130028, guid: b4a528aeff0d4554fba426b92ce23c66, type: 2}
+  - {fileID: 191226, guid: 3351ab3a7ca809144937889eacc5111b, type: 2}
+  - {fileID: 194776, guid: e0a5de207c1273542bb14f7c144b9f9c, type: 2}
+  - {fileID: 170556, guid: a0c33f1d94df5b146a010dadccd0bd52, type: 2}
+  - {fileID: 130254, guid: f3e55e6e8c0743d42aee89492b42b89c, type: 2}
+  - {fileID: 166248, guid: 6b52166d19a550d4c89b3121019857de, type: 2}
+  - {fileID: 142614, guid: bf37a76b1d403934699d65c8bf8b8d69, type: 2}
+  - {fileID: 151196, guid: 7390f11de033e98429fabc2519e87d6f, type: 2}
+  - {fileID: 163896, guid: eb2cfe6b341a8ab40bdbdfbbe3286f82, type: 2}
+  - {fileID: 142208, guid: 6116b0e5fa320e44fa3aa3ab720a72e7, type: 2}
+  - {fileID: 142308, guid: 81d48c91471303d4fa034fa6dbc0d185, type: 2}
+  - {fileID: 103934, guid: a9b8da30208ffe64f991eb7f05208fb1, type: 2}
+  - {fileID: 147982, guid: 197c43cff19582d489fed2c1219c47b2, type: 2}
+  - {fileID: 193958, guid: a8c488fa279c713439bce50286c6d280, type: 2}
+  - {fileID: 162048, guid: 59e22af75b7e5404f824f5a17a0d2eca, type: 2}
+  - {fileID: 197886, guid: 38e39de1b978b30418314951aff2bdf6, type: 2}
+  - {fileID: 105880, guid: 065005514cd9fbb4e9ecbe30b7254d12, type: 2}
+  - {fileID: 193958, guid: a8c488fa279c713439bce50286c6d280, type: 2}
+  - {fileID: 150272, guid: 03e0c39f853569e4795f800b363eb2c9, type: 2}
+  - {fileID: 169458, guid: ba0d3df8c36b0d341a1fdfe06f8a8e80, type: 2}
+  - {fileID: 146352, guid: 17b65a6b4dcabc4468817bf7137977a3, type: 2}
+  - {fileID: 114438, guid: 8752fe1f007c5d2408a75658653be28a, type: 2}
+  - {fileID: 118998, guid: e1ab9676b0314be479dc76ad0136b3fe, type: 2}
+  cube: {fileID: 152060, guid: 264c089d522aec742a555eac89efa0d4, type: 2}
+  sphere: {fileID: 112430, guid: 5050be2fde7d6a744994cedba8bad08e, type: 2}
+  cylinder: {fileID: 170144, guid: 209f473dfbebcbb41930f63fa1464db9, type: 2}
+  time: 2
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: cube
+      value: 
+      objectReference: {fileID: 152060, guid: 264c089d522aec742a555eac89efa0d4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: sphere
+      value: 
+      objectReference: {fileID: 112430, guid: 5050be2fde7d6a744994cedba8bad08e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cylinder
+      value: 
+      objectReference: {fileID: 170144, guid: 209f473dfbebcbb41930f63fa1464db9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: synchronization
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 428550}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[0]
+      value: 
+      objectReference: {fileID: 191774, guid: ad4905f7e8e24154b827a139bb44cd66, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[1]
+      value: 
+      objectReference: {fileID: 161898, guid: 049579e874e264d4a9c8bd65de543983, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[2]
+      value: 
+      objectReference: {fileID: 198938, guid: 90ba0a0924ae5d644a76eea00b2aa670, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[3]
+      value: 
+      objectReference: {fileID: 103246, guid: fac1e62d2840f9a4099a419169d2f5af, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[4]
+      value: 
+      objectReference: {fileID: 178742, guid: f76c41099103e24499cec72d644ec0c0, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[5]
+      value: 
+      objectReference: {fileID: 199434, guid: 6473656b4b819e54e8d8de884ef7d8b6, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[6]
+      value: 
+      objectReference: {fileID: 191784, guid: b057df5be0bfcff44be16e6295daf074, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[7]
+      value: 
+      objectReference: {fileID: 144142, guid: 7b3d056ee3887064298773771c740471, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[8]
+      value: 
+      objectReference: {fileID: 185630, guid: 5285e8d436611034e85be189f2501055, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[9]
+      value: 
+      objectReference: {fileID: 135356, guid: 2fb22c38a867d8e4e970c1c171702f9b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[10]
+      value: 
+      objectReference: {fileID: 192230, guid: b7bf23d504cfcc545be5f791ab05f8ab, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[11]
+      value: 
+      objectReference: {fileID: 173592, guid: afc1c745743c57345918067903911d4e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[12]
+      value: 
+      objectReference: {fileID: 115348, guid: ea20053fbc4f74d49a59b204fb9c3d5b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[13]
+      value: 
+      objectReference: {fileID: 162676, guid: 344174538cdcd0146875da8ac6a794fb, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[14]
+      value: 
+      objectReference: {fileID: 191076, guid: 3cbc69fde3c25a04ba7ea18788e0c188, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[15]
+      value: 
+      objectReference: {fileID: 108878, guid: 8d8a2e0a6d26d3146831d364e2d9584f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[16]
+      value: 
+      objectReference: {fileID: 169846, guid: 7c6f15b52dcca094c8a91fc4920d256d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[17]
+      value: 
+      objectReference: {fileID: 191286, guid: ba2c64135a2160f479219e8ce571eadb, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[18]
+      value: 
+      objectReference: {fileID: 137588, guid: a52ac70806977174aadbc5aacf77acfc, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[19]
+      value: 
+      objectReference: {fileID: 127018, guid: 7f3e943796e412f498c7c5b5b5c717fe, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[20]
+      value: 
+      objectReference: {fileID: 153860, guid: 71f6461cf3b99714082c0475abfc2f0e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[21]
+      value: 
+      objectReference: {fileID: 190456, guid: 5a782c0c091bbce489cca81bd4527625, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[22]
+      value: 
+      objectReference: {fileID: 153204, guid: f61c06b2da43fe34eae6b4a1052b83bb, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[23]
+      value: 
+      objectReference: {fileID: 109444, guid: 2687a6d0fe839754fb1b42341cefb2b9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[24]
+      value: 
+      objectReference: {fileID: 141350, guid: 51477db8ff776a24cb54894492a82d60, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[25]
+      value: 
+      objectReference: {fileID: 176320, guid: a62d834d96dd2b5429c69d463b240228, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[26]
+      value: 
+      objectReference: {fileID: 142076, guid: f6cdd63e5a4b8974ba09bca837c6b8c5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[27]
+      value: 
+      objectReference: {fileID: 113624, guid: 138f0506df93b9f4e80d6dbbbf0e403e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[28]
+      value: 
+      objectReference: {fileID: 167848, guid: ceee5073784977f40a628ec21cadf1f7, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[29]
+      value: 
+      objectReference: {fileID: 130028, guid: b4a528aeff0d4554fba426b92ce23c66, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[30]
+      value: 
+      objectReference: {fileID: 191226, guid: 3351ab3a7ca809144937889eacc5111b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[31]
+      value: 
+      objectReference: {fileID: 194776, guid: e0a5de207c1273542bb14f7c144b9f9c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[32]
+      value: 
+      objectReference: {fileID: 170556, guid: a0c33f1d94df5b146a010dadccd0bd52, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[33]
+      value: 
+      objectReference: {fileID: 130254, guid: f3e55e6e8c0743d42aee89492b42b89c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[34]
+      value: 
+      objectReference: {fileID: 166248, guid: 6b52166d19a550d4c89b3121019857de, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[35]
+      value: 
+      objectReference: {fileID: 142614, guid: bf37a76b1d403934699d65c8bf8b8d69, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[36]
+      value: 
+      objectReference: {fileID: 151196, guid: 7390f11de033e98429fabc2519e87d6f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[37]
+      value: 
+      objectReference: {fileID: 163896, guid: eb2cfe6b341a8ab40bdbdfbbe3286f82, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[38]
+      value: 
+      objectReference: {fileID: 142208, guid: 6116b0e5fa320e44fa3aa3ab720a72e7, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[39]
+      value: 
+      objectReference: {fileID: 142308, guid: 81d48c91471303d4fa034fa6dbc0d185, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[40]
+      value: 
+      objectReference: {fileID: 103934, guid: a9b8da30208ffe64f991eb7f05208fb1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[41]
+      value: 
+      objectReference: {fileID: 147982, guid: 197c43cff19582d489fed2c1219c47b2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[42]
+      value: 
+      objectReference: {fileID: 193958, guid: a8c488fa279c713439bce50286c6d280, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[43]
+      value: 
+      objectReference: {fileID: 162048, guid: 59e22af75b7e5404f824f5a17a0d2eca, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[44]
+      value: 
+      objectReference: {fileID: 197886, guid: 38e39de1b978b30418314951aff2bdf6, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[45]
+      value: 
+      objectReference: {fileID: 105880, guid: 065005514cd9fbb4e9ecbe30b7254d12, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[46]
+      value: 
+      objectReference: {fileID: 193958, guid: a8c488fa279c713439bce50286c6d280, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[47]
+      value: 
+      objectReference: {fileID: 150272, guid: 03e0c39f853569e4795f800b363eb2c9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[48]
+      value: 
+      objectReference: {fileID: 169458, guid: ba0d3df8c36b0d341a1fdfe06f8a8e80, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[49]
+      value: 
+      objectReference: {fileID: 146352, guid: 17b65a6b4dcabc4468817bf7137977a3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[50]
+      value: 
+      objectReference: {fileID: 114438, guid: 8752fe1f007c5d2408a75658653be28a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cards.Array.data[51]
+      value: 
+      objectReference: {fileID: 118998, guid: e1ab9676b0314be479dc76ad0136b3fe, type: 2}
+    - target: {fileID: 0}
+      propertyPath: deck
+      value: 
+      objectReference: {fileID: 155676, guid: 6e38155a1a68ab944993af63ce8a623c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000032584137
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 131856}
+  m_IsPrefabParent: 1
