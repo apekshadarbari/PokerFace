@@ -229,6 +229,7 @@ public class CardManager : Photon.MonoBehaviour
     }
     public void DealRiver()
     {
+        Debug.Log("river contains card");
         if (shuffled)
         {
             if (!dealtRiver)
