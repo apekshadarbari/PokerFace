@@ -22,13 +22,21 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     [SerializeField]
     GameObject cardControl;
 
+    GameObject vrUI;
+
 
 
     void Start()
     {
-        if (PhotonNetwork.isMasterClient && photonView.isMine)
+        vrUI = GameObject.Find("UI");
+        if (PhotonNetwork.isMasterClient && photonView.isMine && PhotonNetwork.player.ID == 1)
         {
-            GameObject.Find("UI").SetActive(true);
+            vrUI.SetActive(true);
+        }
+        if (!PhotonNetwork.isMasterClient && photonView.isMine && PhotonNetwork.player.ID == 2)
+        {
+            vrUI.SetActive(false);
+            //GameObject.Find("UI").SetActive(false);
         }
 
         if (photonView.isMine)
@@ -91,6 +99,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     {
         if (stream.isWriting)
         {
+            stream.SendNext(vrUI);
+
             stream.SendNext(playerGlobal.position);
             stream.SendNext(playerGlobal.rotation);
             stream.SendNext(playerLocal.localPosition);
@@ -99,6 +109,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         }
         else
         {
+            this.vrUI = (GameObject)stream.ReceiveNext();
+
             this.transform.position = (Vector3)stream.ReceiveNext();
             this.transform.rotation = (Quaternion)stream.ReceiveNext();
             avatar.transform.localPosition = (Vector3)stream.ReceiveNext();
