@@ -11,6 +11,8 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     bool playerOneTurn;
     bool playerTwoTurn;
 
+    bool riverIsDealt;
+
     //test
     int turn = 4;
 
@@ -41,15 +43,16 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //}
 
         // deckInteraction = GameObject.Find("CardController").GetComponent<CardManager>();'
-        deckInteraction = GetComponent<CardManager>();
-        deckInteraction.Shuffle(); 
+
+        //deckInteraction.Shuffle(); 
 
         Debug.Log("post awake owner " + photonView.ownerId.ToString());
     }
 
     void Start()
     {
-        if (deckInteraction  == null)
+        deckInteraction = GetComponent<CardManager>();
+        if (deckInteraction == null)
         {
             Debug.Log("No Deck");
         }
@@ -68,14 +71,19 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 break;
         }
         //river 
+
         if (turn == 5)
         {
             //CardManager.
 
             //Debug.Log("river");
-            deckInteraction.DealRiver();
+          
+            if (!riverIsDealt)
+            {
+                deckInteraction.DealRiver();
+                riverIsDealt = true;
+            }
         }
-
         //post river
         if (turn == 9)
         {
@@ -106,7 +114,11 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             this.photonView.TransferOwnership(2);
             return;
         }
-
+        if (turn == 4)
+        {
+            riverIsDealt = true;
+        }
+    
         Debug.Log("owner " + this.photonView.ownerId.ToString());
 
     }
@@ -131,7 +143,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             this.TurnTrigger.transform.position = (Vector3)stream.ReceiveNext();
         }
     }
-  
+
     public void OnHover()
     {
         GetComponent<Renderer>().material.color = Color.red;

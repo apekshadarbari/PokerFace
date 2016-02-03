@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class CardManager : Photon.MonoBehaviour
 {
 
-    public bool dealtRiver;
-
+    private bool dealtRiver;
+    private bool shuffled;
     //[SerializeField]
     //GameObject deck;
 
@@ -21,17 +21,18 @@ public class CardManager : Photon.MonoBehaviour
     public GameObject cube;
     public GameObject sphere;
     public GameObject cylinder;
+
     private GameObject[] cubeHands = new GameObject[2];
     private GameObject[] sphereHands = new GameObject[2];
     private GameObject[] communityCards = new GameObject[3];
     #endregion
     #region Shuffle Variables
-    private Stack<GameObject> cardStack;
+    public Stack<GameObject> cardStack;
     //private GameObject[] shuffledCards = new GameObject[52];
     //private Vector3[] cardOriginPos = new Vector3[52];
     //private Vector3[] cardPos = new Vector3[52];
     //private Vector3[] cardNewPos = new Vector3[52];
-    private bool shuffled;
+
     #endregion
     #region Deal Variables
     //private Transform playerOneHandTrans;
@@ -114,7 +115,7 @@ public class CardManager : Photon.MonoBehaviour
             "Spade"
         };
 
-        foreach( var v in value )
+        foreach (var v in value)
         {
             foreach (var s in suit)
             {
@@ -188,26 +189,26 @@ public class CardManager : Photon.MonoBehaviour
     //    }
     //}
 
-    private bool startDeal;
+    //private bool startDeal;
 
-    public void clickDeal()
-    {
-        startDeal = true;
-    }
+    //public void clickDeal()
+    //{
+    //    startDeal = true;
+    //}
     //initial deal 
     public void Deal()
     {
         if (shuffled)
         {
             Debug.Log("Dealing");
-            var c = cardStack.Pop();
+            //var c = cardStack.Pop();
 
             for (int j = 0; j < 4; j++) //j is the number of cards going to be dealed
             {
 
                 if (j % 2 == 0)//if j is even(number)
                 {                                                                               //cubepos = player pos + gap 
-                    DealCardTo(cube);                                                                           
+                    DealCardTo(cube);
                     //PhotonNetwork.Instantiate(shuffledCards[j].name, cube.transform.position + 0.5f * j * cardGap, cube.transform.rotation, 0);
                     //var card = cardStack.Pop();
                     //PhotonNetwork.Instantiate(card.name, cube.transform.position, cube.transform.rotation, 0);
@@ -224,50 +225,52 @@ public class CardManager : Photon.MonoBehaviour
                     //MoveObject(shuffledCards[j].transform, shuffledCards[j].transform.position, (spherePos + 0.5f * (j - 1) * cardGap), sphereRot, 5f);
                 }
             }
-
         }
     }
     public void DealRiver()
     {
-        //MoveObject(
-        //    shuffledCards[j].transform,
-        //    shuffledCards[j].transform.position,
-        //    (cylinderPos + (j - 1) * cardGap),
-        //    Quaternion.Euler(-90, 180, 0),
-        //    5f);
-        ////}
-        if (!dealtRiver)
+        if (shuffled)
         {
-            //if (cardStack == null && !shuffled)
-            //{
-            //    Debug.Log("Simon er bøsse");
-            //    return;
-            //}
-            //else
-            //{
-            //    Debug.Log("Jacob er bøsser");
-            //}
-
-            //Shuffle();
-
-            //for (int j = 4; j < 7; j++) //j is the number of cards going to be dealed
-            for (int i = 0; i < 3; i++)
+            if (!dealtRiver)
             {
-                //var card = cardStack.Pop();
-                //PhotonNetwork.Instantiate(card.name, cylinder.transform.position, cylinder.transform.rotation, 0);
-                //Debug.Log("river contains" + card);
-                DealCardTo(cylinder);
-                //PhotonNetwork.Instantiate(shuffledCards[j].name, cylinder.transform.position, cylinder.transform.rotation, 0);
-
+                for (int i = 0; i < 3; i++)
+                {
+                    Debug.Log("river contains card");
+                    DealCardTo(cylinder);
+                    //var card = cardStack.Pop();
+                    //PhotonNetwork.Instantiate(card.name, cylinder.transform.position, cylinder.transform.rotation, 0);
+                    //PhotonNetwork.Instantiate(shuffledCards[j].name, cylinder.transform.position, cylinder.transform.rotation, 0);
+                }
                 dealtRiver = true;
-
+                //dealtRiver = false;
+                //Deal();
             }
         }
-        //dealtRiver = false;
-        //Deal();
     }
+    //MoveObject(
+    //    shuffledCards[j].transform,
+    //    shuffledCards[j].transform.position,
+    //    (cylinderPos + (j - 1) * cardGap),
+    //    Quaternion.Euler(-90, 180, 0),
+    //    5f);
+    ////}
+    //if (!dealtRiver)
+    //{
+    //if (cardStack == null && !shuffled)
+    //{
+    //    Debug.Log("Simon er bøsse");
+    //    return;
+    //}
+    //else
+    //{
+    //    Debug.Log("Jacob er bøsser");
+    //}
 
-    private void DealCardTo( GameObject receiver )
+    //Shuffle();
+    //var c = cardStack.Pop();
+    //for (int j = 4; j < 7; j++) //j is the number of cards going to be dealed
+
+    private void DealCardTo(GameObject receiver)
     {
         var card = cardStack.Pop();
         card = PhotonNetwork.Instantiate(card.name, receiver.transform.position, receiver.transform.rotation, 0);
