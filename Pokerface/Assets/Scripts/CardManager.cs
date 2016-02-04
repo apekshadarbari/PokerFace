@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class CardManager : Photon.MonoBehaviour
 {
-    public GameObject cube;
-    public GameObject sphere;
-    public GameObject cylinder;
+    private GameObject cube;
+    private GameObject sphere;
+    private GameObject cylinder;
 
     private bool shuffled;
     TurnSwitch turnInteraction;
@@ -78,15 +78,6 @@ public class CardManager : Photon.MonoBehaviour
         Debug.Log("Hello from card manager(s)?");
 
     }
-    //void Update()
-    //{
-    //    if (turnInteraction.RiverIsDealt == true)
-    //    {
-
-    //        DealRiver();
-    //    }
-    //}
-
 
     public void Shuffle()
     {
@@ -120,6 +111,10 @@ public class CardManager : Photon.MonoBehaviour
     }
     public void Deal()
     {
+       Shuffle();
+        cube = GameObject.Find("PlayerOneHand");
+        sphere = GameObject.Find("PlayerTwoHand");
+
         if (shuffled)
         {
             Debug.Log("Dealing");
@@ -155,8 +150,10 @@ public class CardManager : Photon.MonoBehaviour
         //{
         card = PhotonNetwork.Instantiate(card.name, receiver.transform.position, receiver.transform.rotation, 0);
         //}
-        //card.transform.parent = receiver.transform;
-        //card.transform.SetParent(receiver.transform, true);
+        card.transform.parent = receiver.transform;
+        card.transform.SetParent(receiver.transform, true);
+        
+        card.transform.SetParent(receiver.transform);
         //card.transform.position = Vector3.zero;
 
         //if set parent kommer til at virke -

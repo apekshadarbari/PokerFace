@@ -74,6 +74,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         riverIsDealt = false;
         Debug.Log("I´m started");
         turn = 0;
+
         player1pot = 0;
         player2pot = 0;
 
@@ -166,7 +167,6 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         {
             this.photonView.TransferOwnership(2);
         }
-        
 
         Debug.Log("owner " + this.photonView.ownerId.ToString());
 
