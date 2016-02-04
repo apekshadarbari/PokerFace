@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class BetManager : Photon.MonoBehaviour
+public class BetManager : Photon.MonoBehaviour, IClicker
 {
     [SerializeField]
     int chipValue;
@@ -18,4 +19,18 @@ public class BetManager : Photon.MonoBehaviour
         Debug.Log(this.photonView.ownerId + " folds");
     }
 
+    public void OnClick()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnExitHover()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnHover()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -38,13 +38,21 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             vrUI.SetActive(false);
             //GameObject.Find("UI").SetActive(false);
         }
-        if (photonView.isMine)
+        if (photonView.isMine && PhotonNetwork.player.ID == 2)
         {
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
             //create a betcontroller for each player
             betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
 
         }
+        if (photonView.isMine && PhotonNetwork.player.ID == 1)
+        {
+            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
+            //create a betcontroller for each player
+            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.224f, 0, -0.064f), Quaternion.Euler(0, 180, 0), 0);
+
+        }
+
 
 
     }
@@ -98,6 +106,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //next turn button
             PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
         }
+
+
     }
 
     // Update is called once per frame

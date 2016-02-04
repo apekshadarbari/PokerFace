@@ -4,30 +4,31 @@ using System.Collections.Generic;
 
 public class CardManager : Photon.MonoBehaviour
 {
+    public GameObject cube;
+    public GameObject sphere;
+    public GameObject cylinder;
 
-    private bool dealtRiver;
+    //private bool dealtRiver;
     private bool shuffled;
     //[SerializeField]
     //GameObject deck;
 
 
+    TurnSwitch turnInteraction;
+
     public GameObject[] cards = new GameObject[52];
+    private Stack<GameObject> cardStack;
 
     //cards[i] is fixed cards, like cards[0] always refers to Diamond A, the only thing changes all the time is its position
     private int[] cardNum = new int[52];
     private string[] cardPattern = new string[52];
 
     #region Player Variables
-    public GameObject cube;
-    public GameObject sphere;
-    public GameObject cylinder;
 
-    private GameObject[] cubeHands = new GameObject[2];
-    private GameObject[] sphereHands = new GameObject[2];
-    private GameObject[] communityCards = new GameObject[3];
+
     #endregion
     #region Shuffle Variables
-    public Stack<GameObject> cardStack;
+
     //private GameObject[] shuffledCards = new GameObject[52];
     //private Vector3[] cardOriginPos = new Vector3[52];
     //private Vector3[] cardPos = new Vector3[52];
@@ -47,13 +48,19 @@ public class CardManager : Photon.MonoBehaviour
     //private Quaternion sphereRot;
     //private Quaternion cylinderRot;
 
+
+    #endregion
+
+    private GameObject[] cubeHands = new GameObject[2];
+    private GameObject[] sphereHands = new GameObject[2];
+    private GameObject[] communityCards = new GameObject[3];
+
+
     private Vector3 cardGap;
 
     public float time = 2.0f;
     private float rate = 0.0f;
     private float i = 0.0f;
-    #endregion
-
     void Start()
     {
         //if (PhotonNetwork.isMasterClient)
@@ -80,13 +87,16 @@ public class CardManager : Photon.MonoBehaviour
         //playerOneHandTrans = cube.transform;
         //playerTwoHandTrans = sphere.transform;
         //communityTrans = cylinder.transform;
-        dealtRiver = false;
+        //dealtRiver = false;
         cardGap = new Vector3(0.5f, 0, 0);
 
 
         cube = GameObject.Find("PlayerOneHand");
         sphere = GameObject.Find("PlayerTwoHand");
         cylinder = GameObject.Find("CommunityCards");
+
+        turnInteraction = GetComponent<TurnSwitch>();
+
 
         List<GameObject> cardPrefabs = new List<GameObject>();
 
@@ -127,6 +137,15 @@ public class CardManager : Photon.MonoBehaviour
 
         Debug.Log("Hello from card manager(s)?");
     }
+    //void Update()
+    //{
+    //    if (turnInteraction.RiverIsDealt == true)
+    //    {
+
+    //        DealRiver();
+    //    }
+    //}
+
 
     public void Shuffle()
     {
@@ -139,19 +158,25 @@ public class CardManager : Photon.MonoBehaviour
             shuffledCards[i] = cards[i];
         }
 
-        for (int iteration = 0; iteration < 5; iteration++)
+        //for (int iteration = 0; iteration < 5; iteration++)
+        //{
+        for (int i = 0; i < shuffledCards.Length; i++)
         {
-            for (int i = 0; i < shuffledCards.Length; i++)
-            {
-                var c = shuffledCards[i];
-                int j = Random.Range(0, 51);
-                shuffledCards[i] = shuffledCards[j];
-                shuffledCards[j] = c;
-            }
+            var c = shuffledCards[i];
+            int j = Random.Range(0, 51);
+            shuffledCards[i] = shuffledCards[j];
+            shuffledCards[j] = c;
         }
+        //}
+
 
         cardStack = new Stack<GameObject>(shuffledCards);
+        //foreach (GameObject item in cardStack)
+        //{
+        //    Debug.Log(item);
+        //}
         shuffled = true;
+
 
 
         //for (int i = 0; i < 52; i++)
@@ -229,24 +254,30 @@ public class CardManager : Photon.MonoBehaviour
     }
     public void DealRiver()
     {
+
         Debug.Log("river contains card");
-        if (shuffled)
+        //if (shuffled)
+        //{
+        //if (!dealtRiver)
+        //{
+        for (int i = 0; i < 3; i++)
         {
-            if (!dealtRiver)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    Debug.Log("river contains card");
-                    DealCardTo(cylinder);
-                    //var card = cardStack.Pop();
-                    //PhotonNetwork.Instantiate(card.name, cylinder.transform.position, cylinder.transform.rotation, 0);
-                    //PhotonNetwork.Instantiate(shuffledCards[j].name, cylinder.transform.position, cylinder.transform.rotation, 0);
-                }
-                dealtRiver = true;
-                //dealtRiver = false;
-                //Deal();
-            }
+
+            Debug.Log("river contains card");
+            DealCardTo(cylinder);
+            //var card = cardStack.Pop();
+            //PhotonNetwork.Instantiate(card.name, cylinder.transform.position, cylinder.transform.rotation, 0);
+            //PhotonNetwork.Instantiate(shuffledCards[j].name, cylinder.transform.position, cylinder.transform.rotation, 0);
         }
+
+
+
+        //Debug.Log(dealtRiver);
+        //dealtRiver = true;
+        //dealtRiver = false;
+        //Deal();
+        //}
+        //}
     }
     //MoveObject(
     //    shuffledCards[j].transform,
@@ -274,7 +305,10 @@ public class CardManager : Photon.MonoBehaviour
     private void DealCardTo(GameObject receiver)
     {
         var card = cardStack.Pop();
+        //foreach (var item in cardStack)
+        //{
         card = PhotonNetwork.Instantiate(card.name, receiver.transform.position, receiver.transform.rotation, 0);
+        //}
         //card.transform.parent = receiver.transform;
         //card.transform.SetParent(receiver.transform, true);
         //card.transform.position = Vector3.zero;
@@ -339,13 +373,7 @@ public class CardManager : Photon.MonoBehaviour
         return cardList;
     }
 
-    //void Update()
-    //{
-    //    if (startDeal)
-    //    {
-    //        Deal();
-    //    }
-    //}
+
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
