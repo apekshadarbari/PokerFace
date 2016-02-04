@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BetMore : Photon.MonoBehaviour, IClicker
+public class BetMore : Photon.MonoBehaviour
 {	
 	[SerializeField]
 	GameObject wallet;
@@ -60,7 +60,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
 		case 3:
 			//Raising 
-			raiseChips(chipsToRaise);
+			//raiseChips(chipsToRaise);
 			break;
 
 		case 4:
@@ -75,7 +75,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
 
 
-	public void raiseChips(int chipsToRaise){
+	/*public void raiseChips(int chipsToRaise){
 
 
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, chipsToRaise);
@@ -98,7 +98,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 		}
 
 
-	}
+	}*/
 
 
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PotTextManager : MonoBehaviour {
 
-	public GameObject potText;
+	//public Text potText;
 	public int potMoney;
 
 	// Use this for initialization
@@ -14,6 +14,6 @@ public class PotTextManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		potText.GetComponent<Text> ().text = "Pot:" + potMoney.ToString ();
+		this.GetComponent<Text> ().text = "Pot: " + potMoney.ToString ();
 	}
 }

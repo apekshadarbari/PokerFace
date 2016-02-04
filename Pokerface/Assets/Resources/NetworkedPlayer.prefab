@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 430200}
   - 114: {fileID: 11428668}
   - 114: {fileID: 11472502}
-  - 114: {fileID: 11445326}
   m_Layer: 0
   m_Name: NetworkedPlayer
   m_TagString: Untagged
@@ -432,17 +431,6 @@ MonoBehaviour:
   betControl: {fileID: 114612, guid: fbfdcca88dad2554e8b4387be3d2c6b6, type: 2}
   pot: {fileID: 134960, guid: 945a6f824dc054e4cb30c1aa9607933a, type: 2}
   cardControl: {fileID: 131856, guid: 916617909cd2d4e41886f96f06242931, type: 2}
---- !u!114 &11445326
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109782}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11455342265d648609172c0bdaf92af7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11472502
 MonoBehaviour:
   m_ObjectHideFlags: 1
