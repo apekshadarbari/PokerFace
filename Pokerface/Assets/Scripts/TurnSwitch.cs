@@ -10,9 +10,12 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 
     bool playerOneTurn;
     bool playerTwoTurn;
+    int player1pot;
+    int player2pot;
+    bool riverIsDealt;
 
     //test
-    int turn = 4;
+    int turn;
 
     PhotonPlayer player;
 
@@ -31,6 +34,20 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             turnTrigger = value;
         }
     }
+
+    public bool RiverIsDealt
+    {
+        get
+        {
+            return riverIsDealt;
+        }
+
+        set
+        {
+            riverIsDealt = value;
+        }
+    }
+
     void Awake()
     {
         Debug.Log("pre awake owner " + photonView.ownerId.ToString());
@@ -41,25 +58,35 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //}
 
         // deckInteraction = GameObject.Find("CardController").GetComponent<CardManager>();'
-        deckInteraction = GetComponent<CardManager>();
-        deckInteraction.Shuffle(); 
+
+        //deckInteraction.Shuffle(); 
 
         Debug.Log("post awake owner " + photonView.ownerId.ToString());
     }
 
     void Start()
     {
-        if (deckInteraction  == null)
+        deckInteraction = GetComponent<CardManager>();
+        if (deckInteraction == null)
         {
             Debug.Log("No Deck");
         }
+        riverIsDealt = false;
+
+        turn = 0;
+        player1pot = 0;
+        player2pot = 0;
+
+        StartTurn();
+
+
     }
     void Update()
     {
         switch (this.photonView.ownerId)
         {
             case 1:
-                TurnTrigger.transform.position = new Vector3(4.01f, 0f, -0.54f);
+                TurnTrigger.transform.position = new Vector3(3.84f, 0f, -0.54f);
                 break;
             case 2:
                 TurnTrigger.transform.position = new Vector3(-2.2f, 0f, 4.57f);
@@ -68,33 +95,74 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 break;
         }
         //river 
-        if (turn == 5)
+
+        if (turn == 2)
         {
             //CardManager.
 
             //Debug.Log("river");
-            deckInteraction.DealRiver();
-        }
 
+            if (!riverIsDealt)
+            {
+                //
+                riverIsDealt = true;
+            }
+        }
         //post river
-        if (turn == 9)
+        if (turn == 3)
         {
             //CardManager.
-
             Debug.Log("river");
             deckInteraction.compareCards();
         }
 
     }
 
-    void PlayerOneTrigger()
+
+    public void StartTurn()
     {
 
+        if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+        {
+            this.photonView.TransferOwnership(1);
+            return;
+        }
+
+        turn++;
+
+
     }
+
+    public void potComparison(int thisTurnbet)
+    {
+
+        if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+        {
+            player2pot = player2pot + thisTurnbet;
+        }
+        else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
+        {
+
+            player1pot = player1pot + thisTurnbet;
+        }
+
+        if (player1pot == player2pot)
+        {
+            turn++;
+            player1pot = 0;
+            player2pot = 0;
+
+        }
+        return;
+    }
+
+
 
     public void OnClick()
     {
         turn++;
+        GetComponent<CardManager>().DealRiver();
+
         Debug.Log("Turn: " + turn.ToString());
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
         {
@@ -106,6 +174,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             this.photonView.TransferOwnership(2);
             return;
         }
+        
 
         Debug.Log("owner " + this.photonView.ownerId.ToString());
 
@@ -131,7 +200,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             this.TurnTrigger.transform.position = (Vector3)stream.ReceiveNext();
         }
     }
-  
+
     public void OnHover()
     {
         GetComponent<Renderer>().material.color = Color.red;
