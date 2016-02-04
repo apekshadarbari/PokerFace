@@ -357,6 +357,7 @@
     <Compile Include="Assets\Scripts\BetManager.cs" />
     <Compile Include="Assets\Scripts\ButtonClickHandler.cs" />
     <Compile Include="Assets\Scripts\ButtonListener.cs" />
+    <Compile Include="Assets\Scripts\CardManBil.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
     <Compile Include="Assets\Scripts\Cards.cs" />
     <Compile Include="Assets\Scripts\CubeListener.cs" />

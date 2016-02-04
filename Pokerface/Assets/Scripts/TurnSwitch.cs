@@ -72,7 +72,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             Debug.Log("No Deck");
         }
         riverIsDealt = false;
-
+        Debug.Log("I´m started");
         turn = 0;
         player1pot = 0;
         player2pot = 0;
@@ -94,25 +94,21 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             default:
                 break;
         }
-        //river 
 
         if (turn == 2)
         {
-            //CardManager.
-
-            //Debug.Log("river");
-
             if (!riverIsDealt)
             {
-                //
                 riverIsDealt = true;
+                deckInteraction.Shuffle();
+                deckInteraction.DealRiver();
+
             }
         }
         //post river
         if (turn == 3)
         {
-            //CardManager.
-            Debug.Log("river");
+            Debug.Log("compare");
             deckInteraction.compareCards();
         }
 
@@ -122,11 +118,11 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     public void StartTurn()
     {
 
-        if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
-        {
-            this.photonView.TransferOwnership(1);
-            return;
-        }
+        //if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+        //{
+        //    this.photonView.TransferOwnership(1);
+        //    return;
+        //}
 
         turn++;
 
@@ -161,18 +157,14 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     public void OnClick()
     {
         turn++;
-        GetComponent<CardManager>().DealRiver();
-
         Debug.Log("Turn: " + turn.ToString());
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
         {
             this.photonView.TransferOwnership(1);
-            return;
         }
         else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
         {
             this.photonView.TransferOwnership(2);
-            return;
         }
         
 
