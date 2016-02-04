@@ -10,11 +10,12 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 
     bool playerOneTurn;
     bool playerTwoTurn;
-
+	int player1pot;
+	int player2pot;
     bool riverIsDealt;
 
     //test
-    int turn = 4;
+    int turn;
 
     PhotonPlayer player;
 
@@ -51,11 +52,19 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 
     void Start()
     {
-        deckInteraction = GetComponent<CardManager>();
-        if (deckInteraction == null)
-        {
-            Debug.Log("No Deck");
-        }
+		deckInteraction = GetComponent<CardManager>();
+		if (deckInteraction == null)
+		{
+			Debug.Log("No Deck");
+		}
+
+		turn = 0;
+		player1pot = 0;
+		player2pot = 0;
+	
+		StartTurn ();
+
+      
     }
     void Update()
     {
@@ -72,7 +81,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         }
         //river 
 
-        if (turn == 5)
+        if (turn == 2)
         {
             //CardManager.
 
@@ -85,7 +94,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             }
         }
         //post river
-        if (turn == 9)
+        if (turn == 3)
         {
             //CardManager.
 
@@ -95,12 +104,45 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 
     }
 
-    void PlayerOneTrigger()
-    {
 
-    }
+	public void StartTurn(){
 
-    public void OnClick()
+		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+		{
+			this.photonView.TransferOwnership(1);
+			return;
+		}
+
+		turn++;
+
+
+	}
+
+	public void potComparison(int thisTurnbet){
+
+		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2) {
+			player2pot = player2pot + thisTurnbet;
+		} else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1) {
+
+			player1pot = player1pot + thisTurnbet;
+		}
+
+		if (player1pot == player2pot) {
+			turn++;
+			player1pot = 0;
+			player2pot = 0;
+
+		}
+		return;
+	}
+
+
+
+	public void OnClick(){
+
+	}
+
+   /* public void OnClick()
     {
         turn++;
         Debug.Log("Turn: " + turn.ToString());
@@ -121,7 +163,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     
         Debug.Log("owner " + this.photonView.ownerId.ToString());
 
-    }
+    }*/
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
 
