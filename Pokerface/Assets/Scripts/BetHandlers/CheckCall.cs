@@ -9,10 +9,8 @@ public class CheckCall : Photon.MonoBehaviour {
 	TurnSwitch ts;
 	PotManager pot;
 	int chipsToBet;
-	public static int amt_to_call;
 	void Start()
 	{
-		chipsToBet = 0;
 		if (this.photonView.ownerId == 1)
 		{
 			this.photonView.transform.position = new Vector3(3.75f, -0.75f, 0.35f);
@@ -28,7 +26,7 @@ public class CheckCall : Photon.MonoBehaviour {
 	{
 		Debug.Log ("player " + this.photonView.ownerId + " checks/calls");
 
-		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, amt_to_call);
+//		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, amt_to_call);
 		pot.AddChips (this.photonView.ownerId, chipsToBet);
 		ts.GetComponent<TurnSwitch> ().potComparison (amt_to_call);
 

@@ -11,11 +11,11 @@ public class WordManager : MonoBehaviour {
 	public Text betText01;
 	public Text betText02;
 
-	public static int potMoney;
-	public static int walletMoney01;
-	public static int walletMoney02;
-	public static int betMoney01;
-	public static int betMoney02;
+	public int potMoney;
+	public int walletMoney01;
+	public int walletMoney02;
+	public int betMoney01;
+	public int betMoney02;
 
 	// Use this for initialization
 	void Start () {
@@ -34,32 +34,4 @@ public class WordManager : MonoBehaviour {
 		betText01.GetComponent<Text> ().text = "Bet: " + betMoney01.ToString ();
 		betText02.GetComponent<Text> ().text = "Bet: " + betMoney02.ToString ();
 	}
-
-	//If we're updating the text on the canvas through the update function, do we reall
-
-	/*
-	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-
-	{
-		if (stream.isWriting)
-		{
-			//send the next turn to next player
-			//make it uninteractable to others
-
-			stream.SendNext(potText);
-
-			stream.SendNext(walletText01);
-			stream.SendNext(walletText02);
-			stream.SendNext(betText01);
-			stream.SendNext(betText02);
-
-		}
-		else
-		{
-			this.turn = (int)stream.ReceiveNext();
-			photonView.ownerId = (int)stream.ReceiveNext();
-			this.TurnTrigger.transform.position = (Vector3)stream.ReceiveNext();
-		}
-	}
-	*/
 }

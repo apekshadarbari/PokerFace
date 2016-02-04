@@ -67,8 +67,6 @@ public class BetMore : Photon.MonoBehaviour
 			//Calling the last value
 			break;
 
-
-
 		}
 
 
@@ -77,7 +75,7 @@ public class BetMore : Photon.MonoBehaviour
 
 
 
-	public void raiseChips(int chipsToRaise){
+	/*public void raiseChips(int chipsToRaise){
 
 
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, chipsToRaise);
@@ -100,7 +98,7 @@ public class BetMore : Photon.MonoBehaviour
 		}
 
 
-	}
+	}*/
 
 
 

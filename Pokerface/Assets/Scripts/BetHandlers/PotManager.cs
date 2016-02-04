@@ -34,7 +34,7 @@ public class PotManager : MonoBehaviour
 	public void AddChips(int player, int chips)
 	{
 		chipValue += chips;
-		WordManager.potMoney = chipValue;
+
 	}
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

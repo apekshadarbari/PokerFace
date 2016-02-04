@@ -12,7 +12,6 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     bool playerTwoTurn;
 	int player1pot;
 	int player2pot;
-	int amt_to_call;
     bool riverIsDealt;
 
     //test
@@ -123,13 +122,9 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 
 		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2) {
 			player2pot = player2pot + thisTurnbet;
-
-			WordManager.betMoney02 = player2pot; 
-
 		} else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1) {
 
 			player1pot = player1pot + thisTurnbet;
-			WordManager.betMoney01 = player1pot; 
 		}
 
 		if (player1pot == player2pot) {
@@ -137,13 +132,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 			player1pot = 0;
 			player2pot = 0;
 
-		} else if (player1pot > player2pot) {
-			CheckCall.amt_to_call = player1pot - player2pot;
-		} else {
-			CheckCall.amt_to_call = player2pot - player1pot;
 		}
-
-
 		return;
 	}
 
