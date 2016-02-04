@@ -1,81 +1,102 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class BetMore : Photon.MonoBehaviour
-{	
-	[SerializeField]
-	GameObject wallet;
-	int chipsToIncrement;
-	PotManager pot;
-	int chipsToBet;
-	int chipsToRaise;
-	TurnSwitch ts;
-	void Start()
-	{
-		chipsToIncrement = 5;
-		chipsToRaise = 0;
-		if (this.photonView.ownerId == 1)
-		{
-			this.photonView.transform.position = new Vector3(3.75f, -0.75f, 0.35f);
-		}
-		if (this.photonView.ownerId == 2)
-		{
-			this.photonView.transform.position = new Vector3(-2f, -0.75f, 3f);
-		}
-		pot = GameObject.Find("pot").GetComponent<PotManager>();
-	}
+public class BetMore : Photon.MonoBehaviour, IClicker
+{
+    [SerializeField]
+    GameObject wallet;
+    int chipsToIncrement;
+    PotManager pot;
+    int chipsToBet;
+    int chipsToRaise;
+    TurnSwitch ts;
 
-
-	public void addChips(){
-
-		chipsToRaise = chipsToRaise + chipsToIncrement;
-	}
-
-	public void removeChips(){
-
-		if (chipsToRaise <= 0) {
-
-			chipsToRaise = 0;
-
-		}
-		else chipsToRaise = chipsToRaise - chipsToIncrement;
-	}
+    void Start()
+    {
+        chipsToIncrement = 5;
+        chipsToRaise = 0;
+        //if (this.photonView.ownerId == 1)
+        //{
+        //	this.photonView.transform.position = new Vector3(-1.588f, 0.34f, 1.51f);
+        //}
+        //if (this.photonView.ownerId == 2)
+        //{
+        //	this.photonView.transform.position = new Vector3(-2f, -0.75f, 3f);
+        //}
+        pot = GameObject.Find("pot").GetComponent<PotManager>();
+    }
 
 
-	public void OnClick(int choice)
-	{	
-		Debug.Log ("player " + this.photonView.ownerId + "raises");
+    public void addChips()
+    {
 
-		switch (choice) {
+        chipsToRaise = chipsToRaise + chipsToIncrement;
+    }
 
-		case 1:
-			//Adding chips to raise
-			addChips ();
-			break;
+    public void removeChips()
+    {
 
-		case 2:
-			//Reducing chips to raise
-			removeChips ();
-			break;
+        if (chipsToRaise <= 0)
+        {
 
-		case 3:
-			//Raising 
-			//raiseChips(chipsToRaise);
-			break;
+            chipsToRaise = 0;
 
-		case 4:
-			//Calling the last value
-			break;
-
-		}
+        }
+        else chipsToRaise = chipsToRaise - chipsToIncrement;
+    }
 
 
+    public void OnClick(int choice)
+    {
+        Debug.Log("player " + this.photonView.ownerId + "raises");
 
-	}
+        switch (choice)
+        {
+
+            case 1:
+                //Adding chips to raise
+                addChips();
+                break;
+
+            case 2:
+                //Reducing chips to raise
+                removeChips();
+                break;
+
+            case 3:
+                //Raising 
+                //raiseChips(chipsToRaise);
+                break;
+
+            case 4:
+                //Calling the last value
+                break;
+
+        }
 
 
 
-	/*public void raiseChips(int chipsToRaise){
+    }
+
+    public void OnHover()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnExitHover()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnClick()
+    {
+        throw new NotImplementedException();
+    }
+
+
+
+    /*public void raiseChips(int chipsToRaise){
 
 
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, chipsToRaise);
