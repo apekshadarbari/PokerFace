@@ -11,12 +11,18 @@ public class BetLess : Photon.MonoBehaviour, IClicker
 
     public void OnExitHover()
     {
-        throw new NotImplementedException();
+
+		GetComponent<Renderer>().material.color = Color.red;
+		CrosshairTimerDisplay.Instance.Show();
+       // throw new NotImplementedException();
     }
 
     public void OnHover()
     {
-        throw new NotImplementedException();
+
+		GetComponent<Renderer> ().material.color = Color.blue;
+		CrosshairTimerDisplay.Instance.Show();
+       // throw new NotImplementedException();
     }
 
     void Start()

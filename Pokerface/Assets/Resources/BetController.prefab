@@ -12,7 +12,7 @@ GameObject:
   - 135: {fileID: 13573068}
   - 23: {fileID: 2367440}
   - 114: {fileID: 11426550}
-  - 114: {fileID: 11449794}
+  - 114: {fileID: 11425022}
   m_Layer: 0
   m_Name: Call_Check
   m_TagString: Untagged
@@ -48,7 +48,7 @@ GameObject:
   - 135: {fileID: 13597538}
   - 23: {fileID: 2303838}
   - 114: {fileID: 11494122}
-  - 114: {fileID: 11407304}
+  - 114: {fileID: 11431226}
   m_Layer: 0
   m_Name: Lower
   m_TagString: Untagged
@@ -68,7 +68,7 @@ GameObject:
   - 135: {fileID: 13588796}
   - 23: {fileID: 2362798}
   - 114: {fileID: 11445602}
-  - 114: {fileID: 11415842}
+  - 114: {fileID: 11437582}
   m_Layer: 0
   m_Name: Fold
   m_TagString: Untagged
@@ -124,7 +124,7 @@ GameObject:
   - 135: {fileID: 13514226}
   - 23: {fileID: 2348330}
   - 114: {fileID: 11488630}
-  - 114: {fileID: 11455774}
+  - 114: {fileID: 11465292}
   m_Layer: 0
   m_Name: Bet
   m_TagString: Untagged
@@ -412,28 +412,6 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!114 &11407304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 954d0011bf7363f49bb82574e4c1d19d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11415842
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 125540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2547cc4697acf7438c66006dd636392, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11419230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -471,6 +449,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chipValue: 0
+--- !u!114 &11425022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc685871edb8e04191fa97e7fcd0ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallet: {fileID: 158418}
+  choice: 4
 --- !u!114 &11426550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -508,6 +499,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallet: {fileID: 158418}
+  choice: 1
+--- !u!114 &11431226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc685871edb8e04191fa97e7fcd0ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallet: {fileID: 158418}
+  choice: 2
+--- !u!114 &11437582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc685871edb8e04191fa97e7fcd0ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallet: {fileID: 158418}
+  choice: 5
 --- !u!114 &11445602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -533,19 +551,7 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!114 &11449794
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d102676261f875d478e22acedb1fbe69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallet: {fileID: 158418}
---- !u!114 &11455774
+--- !u!114 &11465292
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -553,10 +559,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 168072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf0f13e202fa32e4ba92e546d5a58cef, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dc685871edb8e04191fa97e7fcd0ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipValue: 0
+  wallet: {fileID: 158418}
+  choice: 3
 --- !u!114 &11488630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -677,11 +684,23 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: wallet
       value: 
-      objectReference: {fileID: 108542, guid: 9bda4e40ad067294bb79935df6da3371, type: 2}
+      objectReference: {fileID: 158418}
     - target: {fileID: 0}
       propertyPath: pot
       value: 
       objectReference: {fileID: 134960, guid: 945a6f824dc054e4cb30c1aa9607933a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: player1ChipValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: player2ChipValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: choice
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114612}
