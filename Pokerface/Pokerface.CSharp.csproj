@@ -357,9 +357,12 @@
     <Compile Include="Assets\Scripts\BetManager.cs" />
     <Compile Include="Assets\Scripts\ButtonClickHandler.cs" />
     <Compile Include="Assets\Scripts\ButtonListener.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\CardDummy.cs" />
     <Compile Include="Assets\Scripts\CardHolder.cs" />
+=======
+>>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
     <Compile Include="Assets\Scripts\CardManBil.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
     <Compile Include="Assets\Scripts\CardMatch.cs" />

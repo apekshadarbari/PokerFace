@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿/*
+
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -26,16 +28,16 @@ public class Fold : Photon.MonoBehaviour, IClicker
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
         {
             Debug.Log("player " + this.photonView.ownerId + " folds");
-            //	wallet.GetComponent<WalletManager> ().player1ChipValue = pot.GetComponent<PotManager>().chipValue;
-            //	pot.GetComponent<PotManager>().chipValue = 0;
+            wallet.GetComponent<WalletManager> ().player1ChipValue = pot.GetComponent<PotManager>().chipValue;
+            pot.GetComponent<PotManager>().chipValue = 0;
             // needs more logic here to end game
             return;
         }
         else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
         {
             Debug.Log("player " + this.photonView.ownerId + " folds");
-            //		wallet.GetComponent<WalletManager> ().player2ChipValue = pot.GetComponent<PotManager>().chipValue;
-            //		pot.GetComponent<PotManager>().chipValue = 0;
+             wallet.GetComponent<WalletManager> ().player2ChipValue = pot.GetComponent<PotManager>().chipValue;
+             pot.GetComponent<PotManager>().chipValue = 0;
             // needs more logic here to end game
             return;
         }
@@ -43,11 +45,19 @@ public class Fold : Photon.MonoBehaviour, IClicker
 
     public void OnHover()
     {
-        throw new NotImplementedException();
+
+		GetComponent<Renderer> ().material.color = Color.red;
+		CrosshairTimerDisplay.Instance.Show();
+		//throw new NotImplementedException();
     }
 
     public void OnExitHover()
     {
-        throw new NotImplementedException();
+
+
+		GetComponent<Renderer> ().material.color = Color.blue;
+		CrosshairTimerDisplay.Instance.Show();
+       // throw new NotImplementedException();
     }
 }
+*/

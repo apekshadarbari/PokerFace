@@ -103,7 +103,10 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 riverIsDealt = true;
                 deckInteraction.Shuffle();
                 deckInteraction.DealRiver();
+<<<<<<< HEAD
                 deckInteraction.CompareCards();
+=======
+>>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
 
             }
         }
@@ -111,7 +114,11 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         if (turn == 3)
         {
             Debug.Log("compare");
+<<<<<<< HEAD
             deckInteraction.CompareCards();
+=======
+            deckInteraction.compareCards();
+>>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
         }
 
     }
@@ -144,13 +151,19 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             player1pot = player1pot + thisTurnbet;
         }
 
-        if (player1pot == player2pot)
-        {
-            turn++;
-            player1pot = 0;
-            player2pot = 0;
+		if (player1pot == player2pot) {
+			turn++;
+			player1pot = 0;
+			player2pot = 0;
 
-        }
+		} else if (player1pot > player2pot) {
+
+			BetMore.amt_to_call = player1pot - player2pot;
+
+		}
+		else {
+			BetMore.amt_to_call = player2pot - player1pot;
+		}
         return;
     }
 

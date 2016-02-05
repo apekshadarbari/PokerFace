@@ -28,7 +28,7 @@ public class CheckCall : Photon.MonoBehaviour, IClicker
     {
         Debug.Log("player " + this.photonView.ownerId + " checks/calls");
 
-        //		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, amt_to_call);
+        		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, amt_to_call);
         pot.AddChips(this.photonView.ownerId, chipsToBet);
         ts.GetComponent<TurnSwitch>().potComparison(amt_to_call);
 
@@ -60,6 +60,7 @@ public class CheckCall : Photon.MonoBehaviour, IClicker
 
     public void OnExitHover()
     {
+		
         throw new NotImplementedException();
     }
 
