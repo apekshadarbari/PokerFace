@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public enum Suits
 {
@@ -12,18 +13,20 @@ public enum Suits
 
 public class Card : MonoBehaviour
 {
+    [SerializeField]
     private int value;
+    [SerializeField]
     private Suits suit;
 
     public int Value
     {
         get { return value; }
-        set { this.value = value; }
     }
     public Suits Suit
     {
         get { return suit; }
-        set { suit = value; }
     }
+
+    [Obsolete]
     public string suitName; // TODO: NO PUBLIC FIELDS!!!
 }

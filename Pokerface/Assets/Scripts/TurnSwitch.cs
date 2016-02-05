@@ -96,7 +96,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 break;
         }
 
-        if (turn == 2)
+        if (turn == 1)
         {
             if (!riverIsDealt)
             {
