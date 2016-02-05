@@ -103,6 +103,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 riverIsDealt = true;
                 deckInteraction.Shuffle();
                 deckInteraction.DealRiver();
+                deckInteraction.CompareCards();
 
             }
         }
@@ -110,7 +111,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         if (turn == 3)
         {
             Debug.Log("compare");
-            deckInteraction.compareCards();
+            deckInteraction.CompareCards();
         }
 
     }
