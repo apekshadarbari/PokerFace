@@ -6,6 +6,8 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 {
     [SerializeField]
     GameObject wallet;
+	public int choice;
+	public static int amt_to_call;
     int chipsToIncrement;
     PotManager pot;
     int chipsToBet;
@@ -16,6 +18,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     {
         chipsToIncrement = 5;
         chipsToRaise = 0;
+		amt_to_call = 0;
         //if (this.photonView.ownerId == 1)
         //{
         //	this.photonView.transform.position = new Vector3(-1.588f, 0.34f, 1.51f);
@@ -30,13 +33,13 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     public void addChips()
     {
-
+		Debug.Log("add chips detected ");
         chipsToRaise = chipsToRaise + chipsToIncrement;
     }
 
     public void removeChips()
     {
-
+		Debug.Log("remove chips detected ");
         if (chipsToRaise <= 0)
         {
 
@@ -47,7 +50,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     }
 
 
-    public void OnClick(int choice)
+    public void OnClick()
     {
         Debug.Log("player " + this.photonView.ownerId + "raises");
 
@@ -66,12 +69,19 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
             case 3:
                 //Raising 
-                //raiseChips(chipsToRaise);
+                raiseChips(chipsToRaise);
                 break;
 
             case 4:
                 //Calling the last value
+				callCheck();
                 break;
+
+			case 5:
+				
+				//Folding cards
+				fold ();	
+			break;
 
         }
 
@@ -79,24 +89,57 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     }
 
-    public void OnHover()
-    {
-        throw new NotImplementedException();
-    }
+	public void callCheck(){
 
-    public void OnExitHover()
-    {
-        throw new NotImplementedException();
-    }
+		Debug.Log("player " + this.photonView.ownerId + " checks/calls");
 
-    public void OnClick()
-    {
-        throw new NotImplementedException();
-    }
+		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, amt_to_call);
+		pot.AddChips(this.photonView.ownerId, chipsToBet);
+		ts.GetComponent<TurnSwitch>().potComparison(amt_to_call);
+		amt_to_call = 0;
 
 
+		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+		{
+			this.photonView.TransferOwnership(1);
+			return;
+		}
+		else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
+		{
+			this.photonView.TransferOwnership(2);
+			return;
+		}
 
-    /*public void raiseChips(int chipsToRaise){
+
+
+	}
+
+	public void fold(){
+
+
+		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+		{
+			Debug.Log("player " + this.photonView.ownerId + " folds");
+			WalletManager.player1ChipValue = pot.GetComponent<PotManager>().chipValue;
+			pot.GetComponent<PotManager>().chipValue = 0;
+			// needs more logic here to end game
+			return;
+		}
+		else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
+		{
+			Debug.Log("player " + this.photonView.ownerId + " folds");
+			//wallet.GetComponent<WalletManager> ().player2ChipValue = pot.GetComponent<PotManager>().chipValue;
+			WalletManager.player2ChipValue = pot.chipValue;
+			pot.GetComponent<PotManager>().chipValue = 0;
+			// needs more logic here to end game
+			return;
+		}
+
+	}
+
+
+
+    public void raiseChips(int chipsToRaise){
 
 
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, chipsToRaise);
@@ -119,8 +162,21 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 		}
 
 
-	}*/
+	}
 
+
+
+	public void OnHover()
+	{	GetComponent<Renderer>().material.color = Color.red;
+		CrosshairTimerDisplay.Instance.Show();
+		//throw new NotImplementedException();
+	}
+
+	public void OnExitHover()
+	{	GetComponent<Renderer>().material.color = Color.blue;
+		CrosshairTimerDisplay.Instance.Show();
+		//throw new NotImplementedException();
+	}
 
 
 }

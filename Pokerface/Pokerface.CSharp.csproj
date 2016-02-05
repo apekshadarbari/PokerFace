@@ -74,7 +74,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Bet.cs" />
     <Compile Include="Assets\CrosshairTimerDisplay.cs" />
+    <Compile Include="Assets\EmptyClass.cs" />
+    <Compile Include="Assets\Lower.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -348,6 +351,7 @@
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\SmoothSyncMovement.cs" />
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\SupportLogger.cs" />
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
+    <Compile Include="Assets\Raise.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\BetLess.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\BetMore.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\CheckCall.cs" />
@@ -357,13 +361,20 @@
     <Compile Include="Assets\Scripts\BetManager.cs" />
     <Compile Include="Assets\Scripts\ButtonClickHandler.cs" />
     <Compile Include="Assets\Scripts\ButtonListener.cs" />
+    <Compile Include="Assets\Scripts\Card.cs" />
+    <Compile Include="Assets\Scripts\CardDummy.cs" />
+    <Compile Include="Assets\Scripts\CardHolder.cs" />
+    <Compile Include="Assets\Scripts\CardManBil.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
-    <Compile Include="Assets\Scripts\Cards.cs" />
+    <Compile Include="Assets\Scripts\CardMatch.cs" />
+    <Compile Include="Assets\Scripts\CompareHighestCard.cs" />
+    <Compile Include="Assets\Scripts\ComparePaires.cs" />
     <Compile Include="Assets\Scripts\CubeListener.cs" />
     <Compile Include="Assets\Scripts\GazeCrosshairOnOff.cs" />
     <Compile Include="Assets\Scripts\GazeInputModule.cs" />
     <Compile Include="Assets\Scripts\GazeInputModuleCrosshair.cs" />
     <Compile Include="Assets\Scripts\GrabAndDrop.cs" />
+    <Compile Include="Assets\Scripts\ICardCompare.cs" />
     <Compile Include="Assets\Scripts\IClicker.cs" />
     <Compile Include="Assets\Scripts\NetworkController.cs" />
     <Compile Include="Assets\Scripts\NetworkedPlayer.cs" />
