@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public enum CardCombos
 {
@@ -21,7 +22,7 @@ public class CardMatch
     string name;
     CardCombos combo;
     int[] values;
-    int playerID;
+    GameObject player;
 
     public string Name
     {
@@ -43,25 +44,26 @@ public class CardMatch
         }
     }
 
-    public int PlayerID
+    public GameObject Player
     {
         get
         {
-            return playerID;
+            return player;
         }
 
     }
 
-    public CardMatch(int playerID,string name, CardCombos combo, params int[] values )
+    public CardMatch(GameObject playerID, string name, CardCombos combo, params int[] values )
     {
         this.name = name;
         this.combo = combo;
-        this.values = values;
-        this.playerID = playerID;
+        this.values = values.OrderByDescending(i => i).ToArray();
+        this.player = playerID;
 
         if (values.Length == 0)
         {
             values = new int[] { -1 };
         }
+
     }
 }

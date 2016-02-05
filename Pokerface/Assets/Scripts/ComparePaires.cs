@@ -5,11 +5,11 @@ using System.Linq;
 
 public class ComparePaires : ICardCompare
 {
-    public CardMatch Matches(int playerID, Card[] hand, Card[] community)
+    public CardMatch Matches(GameObject player, Card[] hand, Card[] community)
     {
         if (hand.Length >= 2 && hand[0].Value == hand[1].Value)
         {
-            return new CardMatch(playerID, "One Pair", CardCombos.OnePair, hand[0].Value);
+            return new CardMatch(player, "One Pair", CardCombos.OnePair, hand[0].Value);
         }
         else
         {
@@ -26,14 +26,14 @@ public class ComparePaires : ICardCompare
             switch (paires.Count)
             {
                 case 2:
-                    return new CardMatch(playerID, "Two Pair", CardCombos.TwoPair, paires.Max(), paires.Min());
+                    return new CardMatch(player, "Two Pair", CardCombos.TwoPair, paires.Max(), paires.Min());
 
                 case 1:
-                    return new CardMatch(playerID, "One Pair", CardCombos.OnePair, paires.First());
+                    return new CardMatch(player, "One Pair", CardCombos.OnePair, paires.First());
 
                 case 0:
                 default:
-                    return new CardMatch(playerID, "-ERR", CardCombos.ERRR);
+                    return new CardMatch(player, "-ERR", CardCombos.ERRR);
             }
         }
     }

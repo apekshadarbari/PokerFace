@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class CardManager : Photon.MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class CardManager : Photon.MonoBehaviour
 
     public GameObject[] cards = new GameObject[52];
     private Stack<GameObject> cardStack;
+
+    public int StraightFlush { get; private set; }
 
     void Start()
     {
@@ -47,19 +50,24 @@ public class CardManager : Photon.MonoBehaviour
             "K",
             "A"
         };
-        string[] suit = new string[]
+        Suits[] suit = new Suits[]
         {
-            "Club",
-            "Diamond",
-            "Heart",
-            "Spade"
+            Suits.Club,
+            Suits.Diamond,
+            Suits.Heart,
+            Suits.Spade
         };
 
-        foreach (var v in value)
+        //foreach (var v in value)
+        for( int i = 0; i < value.Length; i++ )
         {
             foreach (var s in suit)
             {
-                cardPrefabs.Add(Resources.Load<GameObject>(prefix + v + s));
+                var prefab = Resources.Load<GameObject>(prefix + value[i] + s);
+                //var card = prefab.GetComponent<Card>();
+                //card.Suit = s;
+                //card.Value = i + 2;
+                cardPrefabs.Add(prefab);
             }
         }
 
@@ -84,7 +92,7 @@ public class CardManager : Photon.MonoBehaviour
             for (int i = 0; i < shuffledCards.Length; i++)
             {
                 var c = shuffledCards[i];
-                int j = Random.Range(0, 51);
+                int j = UnityEngine.Random.Range(0, 51);
                 shuffledCards[i] = shuffledCards[j];
                 shuffledCards[j] = c;
             }
@@ -175,7 +183,7 @@ public class CardManager : Photon.MonoBehaviour
 
         foreach (var compare in cardCompares)
         {
-            matches.Add(compare.Matches(PhotonNetwork.player.ID, hand, community));
+            matches.Add(compare.Matches(player, hand, community));
             Debug.Log(PhotonNetwork.player.ID);
             Debug.Log(hand);
 
@@ -196,7 +204,70 @@ public class CardManager : Photon.MonoBehaviour
         matches.AddRange(GetMatches(sphere, community));
 
         // Sort so higher combos are at the top
-        matches.OrderByDescending(m => m.Combo);
+        //matches.OrderByDescending(m => m.Combo);
+
+        var combos = new CardCombos[]
+        {
+            CardCombos.RoyalFlush,
+            CardCombos.StraightFlush,
+            CardCombos.FourOfAKind,
+            CardCombos.FullHouse,
+            CardCombos.Flush,
+            CardCombos.Straight,
+            CardCombos.ThreeOfAKind,
+            CardCombos.TwoPair,
+            CardCombos.OnePair,
+            CardCombos.HighestCard,
+        };
+
+        CardMatch winner = null;
+
+        foreach (var c in combos)
+        {
+            var m = matches.FindAll(i => i.Combo == c);
+
+            if (m.Count > 1)
+            {
+                Debug.Log("Multiple matches for " + c);
+
+                for (int i = 0; i < m[0].Values.Length && i < m[1].Values.Length; i++)
+                {
+                    if (m[0].Values[i] > m[1].Values[i])
+                    {
+                        winner = m[0];
+                        break;
+                    }
+                    else if (m[1].Values[i] > m[0].Values[i])
+                    {
+                        winner = m[1];
+                        break;
+                    }
+                }
+
+                if (winner != null)
+                    break;
+            }
+            else if (m.Count == 1)
+            {
+                Debug.Log("One matches for " + c);
+
+                winner = m.First();
+                break;
+            }
+            else
+            {
+                Debug.Log("No matches for " + c );
+            }
+        }
+
+        if (winner != null)
+        {
+            Debug.LogFormat("The winner is {0} with {1}", winner.Player.name, winner.Name);
+        }
+        else
+        {
+            throw new InvalidOperationException("No winner!!!");
+        }
     }
 
 }

@@ -120,8 +120,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalPosition: {x: 2.8, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 497326}
   m_Father: {fileID: 0}
@@ -398,7 +398,6 @@ MonoBehaviour:
   - {fileID: 146352, guid: 17b65a6b4dcabc4468817bf7137977a3, type: 2}
   - {fileID: 114438, guid: 8752fe1f007c5d2408a75658653be28a, type: 2}
   - {fileID: 118998, guid: e1ab9676b0314be479dc76ad0136b3fe, type: 2}
-  time: 2
 --- !u!114 &11483200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -710,6 +709,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
