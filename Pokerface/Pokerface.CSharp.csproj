@@ -74,7 +74,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Bet.cs" />
     <Compile Include="Assets\CrosshairTimerDisplay.cs" />
+    <Compile Include="Assets\EmptyClass.cs" />
+    <Compile Include="Assets\Lower.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -348,6 +351,7 @@
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\SmoothSyncMovement.cs" />
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\SupportLogger.cs" />
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
+    <Compile Include="Assets\Raise.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\BetLess.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\BetMore.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\CheckCall.cs" />
@@ -357,12 +361,9 @@
     <Compile Include="Assets\Scripts\BetManager.cs" />
     <Compile Include="Assets\Scripts\ButtonClickHandler.cs" />
     <Compile Include="Assets\Scripts\ButtonListener.cs" />
-<<<<<<< HEAD
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\CardDummy.cs" />
     <Compile Include="Assets\Scripts\CardHolder.cs" />
-=======
->>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
     <Compile Include="Assets\Scripts\CardManBil.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
     <Compile Include="Assets\Scripts\CardMatch.cs" />

@@ -87,7 +87,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         switch (this.photonView.ownerId)
         {
             case 1:
-                TurnTrigger.transform.position = new Vector3(3.84f, 0f, -0.54f);
+                TurnTrigger.transform.position = new Vector3(2.8f, .4f, 0f);
                 break;
             case 2:
                 TurnTrigger.transform.position = new Vector3(-2.2f, 0f, 4.57f);
@@ -103,10 +103,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 riverIsDealt = true;
                 deckInteraction.Shuffle();
                 deckInteraction.DealRiver();
-<<<<<<< HEAD
                 deckInteraction.CompareCards();
-=======
->>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
 
             }
         }
@@ -114,11 +111,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         if (turn == 3)
         {
             Debug.Log("compare");
-<<<<<<< HEAD
             deckInteraction.CompareCards();
-=======
-            deckInteraction.compareCards();
->>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
         }
 
     }

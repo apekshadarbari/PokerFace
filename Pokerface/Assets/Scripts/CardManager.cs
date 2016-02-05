@@ -21,32 +21,8 @@ public class CardManager : Photon.MonoBehaviour
     public GameObject[] cards = new GameObject[52];
     private Stack<GameObject> cardStack;
 
-<<<<<<< HEAD
-=======
-    //cards[i] is fixed cards, like cards[0] always refers to Diamond A, the only thing changes all the time is its position
-    private int[] cardNum = new int[52];
-    private string[] cardPattern = new string[52];
-
-
-    private GameObject[] cubeHands = new GameObject[2];
-    private GameObject[] sphereHands = new GameObject[2];
-    private GameObject[] communityCards = new GameObject[3];
-
->>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
-    private Vector3 cardGap;
-    
-
-<<<<<<< HEAD
-=======
-    public float time = 2.0f;
-    private float rate = 0.0f;
-    private float i = 0.0f;
-
->>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
     void Start()
     {
-        cardGap = new Vector3(0.5f, 0, 0);
-
 
         cube = GameObject.Find("PlayerOneHand");
         sphere = GameObject.Find("PlayerTwoHand");
@@ -90,20 +66,6 @@ public class CardManager : Photon.MonoBehaviour
         cards = cardPrefabs.ToArray();
 
         Debug.Log("Hello from card manager(s)?");
-<<<<<<< HEAD
-=======
-
-    }
-    //void Update()
-    //{
-    //    if (turnInteraction.RiverIsDealt == true)
-    //    {
-
-    //        DealRiver();
-    //    }
-    //}
-
->>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
 
     }
     public void Shuffle()
@@ -177,7 +139,7 @@ public class CardManager : Photon.MonoBehaviour
         //{
         card = PhotonNetwork.Instantiate(card.name, receiver.transform.position, receiver.transform.rotation, 0);
         receiver.GetComponent<CardHolder>().DealCard(card.GetComponent<Card>());
-        
+
         ////}
         //card.transform.parent = receiver.transform;
         //card.transform.SetParent(receiver.transform, true);
@@ -202,7 +164,6 @@ public class CardManager : Photon.MonoBehaviour
         //    }
         //}
 
-<<<<<<< HEAD
         //return cards.ToArray();
         return owner.GetComponent<CardHolder>().GetCards();
     }
@@ -212,47 +173,18 @@ public class CardManager : Photon.MonoBehaviour
         var hand = GetCards(player);
         List<CardMatch> matches = new List<CardMatch>();
 
-        foreach( var compare in cardCompares )
+        foreach (var compare in cardCompares)
         {
             matches.Add(compare.Matches(PhotonNetwork.player.ID, hand, community));
             Debug.Log(PhotonNetwork.player.ID);
             Debug.Log(hand);
 
         }
-=======
-        //pairs();
-    }
 
-    //int cubePairs = 0;
-    //int cubePairNum = 0;
-
-    //int spherePairs = 0;
-    //int spherePairNum = 0;
-
-    //private int[] largerCards(int[] cardList)
-    //{
-    //    //if (listI == null) throw new ArgumentNullException("listI");
-    //    int temp = 0;
-    //    for (int i = 0; i < cardList.Length - 1; i++)
-    //    {
-    //        for (int j = i + 1; j < cardList.Length; j++)
-    //        {
-    //            if (cardList[i] < cardList[j])
-    //            {
-    //                temp = cardList[i];
-    //                cardList[i] = cardList[j];
-    //                cardList[j] = temp;
-    //            }
-    //        }
-    //    }
-    //    return cardList;
-    //}
->>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
 
         return matches;
     }
 
-<<<<<<< HEAD
     public void CompareCards()
     {
         Debug.Log("comparing");
@@ -266,82 +198,5 @@ public class CardManager : Photon.MonoBehaviour
         // Sort so higher combos are at the top
         matches.OrderByDescending(m => m.Combo);
     }
-    
-=======
 
-    //void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    //{
-
-    //}
-    //private void pairs()
-    //{
-    //    for (int i = 0; i <= 3; i++)
-    //    {
-    //        for (int j = i + 1; j <= 4; j++)
-    //        {
-    //            if (cubeFiveNum[i] == cubeFiveNum[j])
-    //            {
-    //                cubePairs++;
-    //                cubePairNum = cubeFiveNum[i];
-    //            }
-    //            if (sphereFiveNum[i] == sphereFiveNum[j])
-    //            {
-    //                spherePairs++;
-    //                spherePairNum = sphereFiveNum[i];
-    //            }
-    //        }
-    //    }
-
-    //    if (cubePairs > spherePairs)
-    //    {
-    //        Debug.Log("Cube has one more pairs. So cube wins!");
-    //    }
-    //    else if (cubePairs < spherePairs)
-    //    {
-    //        Debug.Log("Sphere has one more pairs. So Sphere wins!");
-    //    }
-    //    else
-    //    {
-    //        if (cubePairs == 0 && spherePairs == 0)
-    //        {
-    //            int cubeTop = largerCards(cubeFiveNum)[0];
-    //            int sphereTop = largerCards(sphereFiveNum)[0];
-    //            for (int i = 0; i < 5; i++)
-    //            {
-    //                Debug.Log(cubeTop);
-    //                Debug.Log(sphereTop);
-    //            }
-
-    //            if (cubeTop > sphereTop)
-    //            {
-    //                Debug.Log("No one has any pairs. Cube has the largest card: " + cubeTop + ". So cube wins!");
-    //            }
-    //            else if (cubeTop < sphereTop)
-    //            {
-    //                Debug.Log("No one has any pairs. Sphere has the largest card: " + sphereTop + ". So sphere wins!");
-    //            }
-    //            else
-    //            {
-    //                Debug.Log("No one has any pairs. They both have largest cards. So it's draw game!");
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (cubePairNum > spherePairNum)
-    //            {
-    //                Debug.Log("Cube has a pair of " + cubePairNum + ". Sphere has a pair of " + spherePairNum + " . So cube wins!");
-    //            }
-    //            else if (cubePairNum < spherePairNum)
-    //            {
-    //                Debug.Log("Cube has a pair of " + cubePairNum + ". Sphere has a pair of " + spherePairNum + " . So sphere wins!");
-    //            }
-    //            else
-    //            {
-    //                Debug.Log("Cube has a pair of " + cubePairNum + ". Sphere has a pair of " + spherePairNum + " . So draw game!");
-    //            }
-    //        }
-    //    }
-    //}
-
->>>>>>> f4ce25abcc8d9967c83a94bd6428a7614de65ae0
 }
