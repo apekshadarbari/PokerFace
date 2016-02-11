@@ -11,8 +11,21 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     int chipsToIncrement;
     PotManager pot;
     int chipsToBet;
-    int chipsToRaise;
+    static int chipsToRaise;
     TurnSwitch ts;
+
+	/*public int ChipsToRaise
+	{
+		get
+		{
+			return chipsToRaise;
+		}
+
+		set
+		{
+			chipsToRaise = value;
+		}
+	}*/
 
     void Start()
     {
@@ -33,8 +46,9 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     public void addChips()
     {
-		Debug.Log("add chips detected ");
+
         chipsToRaise = chipsToRaise + chipsToIncrement;
+		Debug.Log("add chips detected : " + chipsToRaise);
     }
 
     public void removeChips()
@@ -69,7 +83,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
             case 3:
                 //Raising 
-                raiseChips(chipsToRaise);
+                raiseChips();
                 break;
 
             case 4:
@@ -95,7 +109,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, amt_to_call);
 		pot.AddChips(this.photonView.ownerId, chipsToBet);
-		ts.GetComponent<TurnSwitch>().potComparison(amt_to_call);
+	//	ts.GetComponent<TurnSwitch> ().potComparison(amt_to_call);
 		amt_to_call = 0;
 
 
@@ -139,12 +153,15 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
 
 
-    public void raiseChips(int chipsToRaise){
+    public void raiseChips(){
 
 
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, chipsToRaise);
 		pot.AddChips (this.photonView.ownerId, chipsToBet);
-		ts.GetComponent<TurnSwitch> ().potComparison (chipsToRaise);
+		Debug.Log ("chips to raise value is " + chipsToRaise);
+		ts.GetComponent<TurnSwitch> ().potComparison(chipsToRaise);
+//	TurnSwitch.GetComponent<TurnSwitch> ().potComparison(chipsToRaise);
+	//	TurnSwitch.potComparison (chipsToRaise);
 		Debug.Log ("player " + this.photonView.ownerId + " raised" + chipsToRaise + "chips");
 		//The other player needs to get a message to call this value
 
