@@ -12,7 +12,8 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     PotManager pot;
     int chipsToBet;
     static int chipsToRaise;
-    TurnSwitch ts;
+	[SerializeField]
+	TurnSwitch ts;
 
 	/*public int ChipsToRaise
 	{
@@ -66,7 +67,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     public void OnClick()
     {
-        Debug.Log("player " + this.photonView.ownerId + "raises");
+       
 
         switch (choice)
         {
@@ -160,19 +161,18 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 		pot.AddChips (this.photonView.ownerId, chipsToBet);
 		Debug.Log ("chips to raise value is " + chipsToRaise);
 		ts.GetComponent<TurnSwitch> ().potComparison(chipsToRaise);
-//	TurnSwitch.GetComponent<TurnSwitch> ().potComparison(chipsToRaise);
-	//	TurnSwitch.potComparison (chipsToRaise);
-		Debug.Log ("player " + this.photonView.ownerId + " raised" + chipsToRaise + "chips");
-		//The other player needs to get a message to call this value
-
+		chipsToRaise = 0;
 		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
 		{
+			Debug.Log ("player 2 transferring control to 1" );
 			this.photonView.TransferOwnership(1);
+
 			//disable buttons for player2 here after this
 			return;
 		}
 		else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
 		{
+			Debug.Log ("player 1 transferring control to 2" );
 			this.photonView.TransferOwnership(2);
 			//disable buttons for player1 here after this
 			return;
