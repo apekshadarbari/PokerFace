@@ -11,8 +11,22 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     int chipsToIncrement;
     PotManager pot;
     int chipsToBet;
-    int chipsToRaise;
-    TurnSwitch ts;
+    static int chipsToRaise;
+	[SerializeField]
+	TurnSwitch ts;
+
+	/*public int ChipsToRaise
+	{
+		get
+		{
+			return chipsToRaise;
+		}
+
+		set
+		{
+			chipsToRaise = value;
+		}
+	}*/
 
     void Start()
     {
@@ -33,8 +47,9 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     public void addChips()
     {
-		Debug.Log("add chips detected ");
+
         chipsToRaise = chipsToRaise + chipsToIncrement;
+		Debug.Log("add chips detected : " + chipsToRaise);
     }
 
     public void removeChips()
@@ -52,7 +67,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     public void OnClick()
     {
-        Debug.Log("player " + this.photonView.ownerId + "raises");
+       
 
         switch (choice)
         {
@@ -69,7 +84,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
             case 3:
                 //Raising 
-                raiseChips(chipsToRaise);
+                raiseChips();
                 break;
 
             case 4:
@@ -95,7 +110,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, amt_to_call);
 		pot.AddChips(this.photonView.ownerId, chipsToBet);
-		ts.GetComponent<TurnSwitch>().potComparison(amt_to_call);
+	//	ts.GetComponent<TurnSwitch> ().potComparison(amt_to_call);
 		amt_to_call = 0;
 
 
@@ -139,23 +154,25 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
 
 
-    public void raiseChips(int chipsToRaise){
+    public void raiseChips(){
 
 
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, chipsToRaise);
 		pot.AddChips (this.photonView.ownerId, chipsToBet);
-		ts.GetComponent<TurnSwitch> ().potComparison (chipsToRaise);
-		Debug.Log ("player " + this.photonView.ownerId + " raised" + chipsToRaise + "chips");
-		//The other player needs to get a message to call this value
-
+		Debug.Log ("chips to raise value is " + chipsToRaise);
+		ts.GetComponent<TurnSwitch> ().potComparison(chipsToRaise);
+		chipsToRaise = 0;
 		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
 		{
+			Debug.Log ("player 2 transferring control to 1" );
 			this.photonView.TransferOwnership(1);
+
 			//disable buttons for player2 here after this
 			return;
 		}
 		else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
 		{
+			Debug.Log ("player 1 transferring control to 2" );
 			this.photonView.TransferOwnership(2);
 			//disable buttons for player1 here after this
 			return;
