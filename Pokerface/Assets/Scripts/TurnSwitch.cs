@@ -173,14 +173,14 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 	//		GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
 	//		GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
 			Debug.Log ("player 2 transferring control to 1" );
-			GameObject.FindGameObjectWithTag ("Player2betController").SetActive(false);
+			GameObject.FindGameObjectWithTag ("Player2BetController").SetActive(false);
             this.photonView.TransferOwnership(1);
         }
         else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
         {
 //			GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
 //			GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
-			GameObject.FindGameObjectWithTag ("Player1betController").SetActive(false);
+			GameObject.FindGameObjectWithTag ("Player1BetController").SetActive(false);
 			Debug.Log ("player 1 transferring control to 2" );
             this.photonView.TransferOwnership(2);
         }
