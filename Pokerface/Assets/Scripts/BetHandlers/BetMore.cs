@@ -114,16 +114,16 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 		amt_to_call = 0;
 
 
-		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
-		{
-			this.photonView.TransferOwnership(1);
-			return;
-		}
-		else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
-		{
-			this.photonView.TransferOwnership(2);
-			return;
-		}
+		//if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+		//{
+			ts.OnClick();
+		//	return;
+		//}
+		//else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
+		//{
+		//	TurnSwitch.OnClick();
+		//	return;
+		//}
 
 
 
@@ -165,15 +165,22 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
 		{
 			Debug.Log ("player 2 transferring control to 1" );
-			this.photonView.TransferOwnership(1);
 
+			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
+			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
+
+			//TurnSwitch.OnClick();
+			ts.OnClick();
 			//disable buttons for player2 here after this
 			return;
 		}
 		else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
 		{
 			Debug.Log ("player 1 transferring control to 2" );
-			this.photonView.TransferOwnership(2);
+			//GameObject.FindGameObjectWithTag ("Player1betController").GetComponentInChildren<MeshRenderer>().enabled = false;
+			//GameObject.FindGameObjectWithTag ("Player1betController").GetComponentInChildren<SphereCollider> ().enabled = false;
+			//TurnSwitch.OnClick();
+			ts.OnClick();
 			//disable buttons for player1 here after this
 			return;
 		}
@@ -190,7 +197,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 	}
 
 	public void OnExitHover()
-	{	GetComponent<Renderer>().material.color = Color.blue;
+	{	GetComponent<Renderer>().material.color = Color.white;
 		CrosshairTimerDisplay.Instance.Show();
 		//throw new NotImplementedException();
 	}

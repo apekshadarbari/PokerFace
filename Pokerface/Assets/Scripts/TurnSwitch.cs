@@ -74,11 +74,11 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         riverIsDealt = false;
         Debug.Log("I´m started");
         turn = 0;
-
+		Debug.Log ("Turn " + turn.ToString ());
         player1pot = 0;
         player2pot = 0;
 
-        StartTurn();
+        //StartTurn();
 
 
     }
@@ -126,13 +126,13 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //    return;
         //}
 
-        turn++;
+        //turn++;
 
 
     }
 
     public void potComparison(int thisTurnbet)
-    {
+	{	Debug.Log("entered pot comparison");
 
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
         {
@@ -145,7 +145,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         }
 
 		if (player1pot == player2pot) {
-			turn++;
+			//turn++;
 			player1pot = 0;
 			player2pot = 0;
 
@@ -167,11 +167,18 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         turn++;
         Debug.Log("Turn: " + turn.ToString());
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
-        {
+		{
+			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
+			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
+			GameObject.FindGameObjectWithTag ("Player2betController").SetActive(false);
             this.photonView.TransferOwnership(1);
         }
         else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
         {
+			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
+			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
+			GameObject.FindGameObjectWithTag ("Player1betController").SetActive(false);
+
             this.photonView.TransferOwnership(2);
         }
 

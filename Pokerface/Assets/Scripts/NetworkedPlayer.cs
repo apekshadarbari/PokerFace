@@ -43,6 +43,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
             //create a betcontroller for each player
             betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
+			betControl.tag = "Player2betController";
 
         }
         if (photonView.isMine && PhotonNetwork.player.ID == 1)
@@ -50,6 +51,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
             //create a betcontroller for each player
             betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.224f, 0, -0.064f), Quaternion.Euler(0, 180, 0), 0);
+			betControl.tag = "Player1betController";
 
         }
 
