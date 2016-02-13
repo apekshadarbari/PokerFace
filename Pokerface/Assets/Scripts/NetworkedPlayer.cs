@@ -31,11 +31,11 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         vrUI = GameObject.Find("UI");
         if (PhotonNetwork.isMasterClient && photonView.isMine && PhotonNetwork.player.ID == 1)
         {
-            vrUI.SetActive(true);
+            //vrUI.SetActive(true);
         }
         if (!PhotonNetwork.isMasterClient && photonView.isMine && PhotonNetwork.player.ID == 2)
         {
-            vrUI.SetActive(false);
+            //vrUI.SetActive(false);
             //GameObject.Find("UI").SetActive(false);
         }
         if (photonView.isMine && PhotonNetwork.player.ID == 2)
@@ -99,9 +99,9 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
             //temporary start game button
-            Debug.Log("pik lort");
+            Debug.Log("Starting Game");
 
-            GameObject.Find("UI").SetActive(false);
+            //GameObject.Find("UI").SetActive(false);
 
             //next turn button
             PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
