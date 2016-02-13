@@ -31,11 +31,12 @@ public class TestRaycast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height, 0f) / 2f);
+       // Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height, 0f) / 2f);
         //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
+       // if (Physics.Raycast(ray, out hit))
+		if(Physics.Raycast(transform.position, transform.forward, out hit))
+		{
             //Debug.Log("i hit something");
             Debug.DrawLine(transform.position, hit.point, Color.cyan);
             var c = hit.transform.GetComponent<IClicker>();

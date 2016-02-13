@@ -51,11 +51,11 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     void Awake()
     {
         Debug.Log("pre awake owner " + photonView.ownerId.ToString());
-        //if (this.photonView.ownerId == 0)
-        //{
-        //    this.photonView.TransferOwnership(1);
+        if (this.photonView.ownerId == 0)
+        {
+            this.photonView.TransferOwnership(1);
         //    playerOneTurn = true;
-        //}
+        }
 
         // deckInteraction = GameObject.Find("CardController").GetComponent<CardManager>();'
 
@@ -166,19 +166,22 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     {
         turn++;
         Debug.Log("Turn: " + turn.ToString());
+		Debug.Log ("this.photonView.ownerId: " + this.photonView.ownerId);
+		Debug.Log ("PhotonNetwork.player.ID: " + PhotonNetwork.player.ID);
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
 		{
-			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
-			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
+	//		GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
+	//		GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
+			Debug.Log ("player 2 transferring control to 1" );
 			GameObject.FindGameObjectWithTag ("Player2betController").SetActive(false);
             this.photonView.TransferOwnership(1);
         }
         else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
         {
-			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
-			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
+//			GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
+//			GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
 			GameObject.FindGameObjectWithTag ("Player1betController").SetActive(false);
-
+			Debug.Log ("player 1 transferring control to 2" );
             this.photonView.TransferOwnership(2);
         }
 

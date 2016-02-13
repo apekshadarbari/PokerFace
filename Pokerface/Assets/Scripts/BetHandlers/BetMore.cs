@@ -12,7 +12,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     PotManager pot;
     int chipsToBet;
     static int chipsToRaise;
-	[SerializeField]
+	//[SerializeField]
 	TurnSwitch ts;
 
 	/*public int ChipsToRaise
@@ -42,6 +42,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         //	this.photonView.transform.position = new Vector3(-2f, -0.75f, 3f);
         //}
         pot = GameObject.Find("pot").GetComponent<PotManager>();
+
     }
 
 
@@ -67,8 +68,8 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     public void OnClick()
     {
-       
-
+		
+		ts = GameObject.FindGameObjectWithTag ("TurnTrigger").GetComponent<TurnSwitch>();
         switch (choice)
         {
 
@@ -116,7 +117,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
 		//if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
 		//{
-			ts.OnClick();
+		ts.GetComponent<TurnSwitch>().OnClick();
 		//	return;
 		//}
 		//else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
@@ -160,30 +161,30 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 		chipsToBet = wallet.GetComponent<WalletManager> ().GetChips (this.photonView.ownerId, chipsToRaise);
 		pot.AddChips (this.photonView.ownerId, chipsToBet);
 		Debug.Log ("chips to raise value is " + chipsToRaise);
-		ts.GetComponent<TurnSwitch> ().potComparison(chipsToRaise);
+		ts.GetComponent<TurnSwitch>().potComparison(chipsToRaise);
 		chipsToRaise = 0;
-		if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
-		{
-			Debug.Log ("player 2 transferring control to 1" );
+	//	if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+	//	{
+	//		Debug.Log ("player 2 transferring control to 1" );
 
 			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
 			//GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
 
 			//TurnSwitch.OnClick();
-			ts.OnClick();
+		ts.GetComponent<TurnSwitch>().OnClick();
 			//disable buttons for player2 here after this
-			return;
-		}
-		else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
-		{
-			Debug.Log ("player 1 transferring control to 2" );
+		//	return;
+		//}
+		//else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
+		//{
+		//	Debug.Log ("player 1 transferring control to 2" );
 			//GameObject.FindGameObjectWithTag ("Player1betController").GetComponentInChildren<MeshRenderer>().enabled = false;
 			//GameObject.FindGameObjectWithTag ("Player1betController").GetComponentInChildren<SphereCollider> ().enabled = false;
 			//TurnSwitch.OnClick();
-			ts.OnClick();
+
 			//disable buttons for player1 here after this
-			return;
-		}
+		//	return;
+		//}
 
 
 	}
