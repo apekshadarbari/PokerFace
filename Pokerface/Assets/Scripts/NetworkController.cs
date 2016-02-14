@@ -5,6 +5,7 @@ using ExitGames.Client.Photon;
 
 public class NetworkController : Photon.MonoBehaviour
 {
+    //an array of seats in the room
     [SerializeField]
     private Transform[] seats;
     public Transform[] Seats
@@ -19,17 +20,19 @@ public class NetworkController : Photon.MonoBehaviour
             seats = value;
         }
     }
+    //current version
     private string version = "0.1";
+
     private string roomName = "New_room";
     private TypedLobby lobbyName = new TypedLobby("New_Lobby", LobbyType.Default);
+    
+    //the player
     public GameObject player;
 
-    //public List<GameObject> players = new List<GameObject>();
     void Start()
     {
-
+        //the current version of the game, change at milestones
         PhotonNetwork.ConnectUsingSettings(version);
-
         Debug.Log("started");
     }
 
@@ -38,6 +41,11 @@ public class NetworkController : Photon.MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// For Later use if lobby is implemented
+    /// </summary>
+    /// 
     //void OnConnectedToMaster()
     //{
     //    Debug.Log("hej");
@@ -82,24 +90,32 @@ public class NetworkController : Photon.MonoBehaviour
     //    }
     //    //roomsList = PhotonNetwork.GetRoomList();
     //}
+
+        //step before joinging the rooom, changed if acutal lobby implemented
     void OnJoinedLobby()
     {
         Debug.Log("Joined Lobby!");
 
+        //set room options as needed
         RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 2 };
+        //If there is no room, create one, otherwise join 
         PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
     }
 
     void OnJoinedRoom()
     {
+        //when a room is joined
         Debug.Log("Connected to Room");
+        //run startgame
         StartGame();
     }
 
     void StartGame()
     {
+        //which player am i?
         Debug.Log(PhotonNetwork.player.ID.ToString());
-        //PhotonNetwork.Instantiate(player.name, Seats[PhotonNetwork.playerList.Length].position, Quaternion.identity, 0);
+
+        //instantiates the player at the corresponding seat
         PhotonNetwork.Instantiate(player.name, Seats[PhotonNetwork.player.ID - 1].position, Quaternion.identity, 0);
     }
 

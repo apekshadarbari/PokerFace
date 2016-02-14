@@ -25,12 +25,6 @@ public class PotManager : MonoBehaviour
 
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-
-	}
-
 	public void AddChips(int player, int chips)
 	{
 		chipValue += chips;

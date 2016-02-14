@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: b940820b03efbe342af94fb4144d79c4
+timeCreated: 1453536847
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Bone
+    100002: ChamferBox001
+    100004: Dog_01
+    100006: Dog_02
+    100008: Dog_03
+    100010: Dog_03_01
+    100012: Dog_03_02
+    100014: //RootNode
+    100016: Floor
+    100018: Room_01_Table
+    100020: Room_01_Wall_01
+    100022: Room_01_Wall_02
+    100024: Room_01_Wall_03
+    100026: Room_01_Wall_04
+    100028: TableCard_01
+    100030: TableCard_02
+    100032: TableCard_03
+    100034: TableCard_04
+    100036: TableCard_05
+    100038: Wall_01
+    100040: Wall_02
+    100042: Wall_03
+    400000: Bone
+    400002: ChamferBox001
+    400004: Dog_01
+    400006: Dog_02
+    400008: Dog_03
+    400010: Dog_03_01
+    400012: Dog_03_02
+    400014: //RootNode
+    400016: Floor
+    400018: Room_01_Table
+    400020: Room_01_Wall_01
+    400022: Room_01_Wall_02
+    400024: Room_01_Wall_03
+    400026: Room_01_Wall_04
+    400028: TableCard_01
+    400030: TableCard_02
+    400032: TableCard_03
+    400034: TableCard_04
+    400036: TableCard_05
+    400038: Wall_01
+    400040: Wall_02
+    400042: Wall_03
+    2300000: Bone
+    2300002: ChamferBox001
+    2300004: Dog_01
+    2300006: Dog_02
+    2300008: Dog_03_01
+    2300010: Dog_03_02
+    2300012: Floor
+    2300014: Room_01_Table
+    2300016: Room_01_Wall_01
+    2300018: Room_01_Wall_02
+    2300020: Room_01_Wall_03
+    2300022: Room_01_Wall_04
+    2300024: TableCard_01
+    2300026: TableCard_02
+    2300028: TableCard_03
+    2300030: TableCard_04
+    2300032: TableCard_05
+    2300034: Wall_01
+    2300036: Wall_02
+    2300038: Wall_03
+    3300000: Bone
+    3300002: ChamferBox001
+    3300004: Dog_01
+    3300006: Dog_02
+    3300008: Dog_03_01
+    3300010: Dog_03_02
+    3300012: Floor
+    3300014: Room_01_Table
+    3300016: Room_01_Wall_01
+    3300018: Room_01_Wall_02
+    3300020: Room_01_Wall_03
+    3300022: Room_01_Wall_04
+    3300024: TableCard_01
+    3300026: TableCard_02
+    3300028: TableCard_03
+    3300030: TableCard_04
+    3300032: TableCard_05
+    3300034: Wall_01
+    3300036: Wall_02
+    3300038: Wall_03
+    4300000: Room_01_Table
+    4300002: Room_01_Wall_04
+    4300004: Room_01_Wall_02
+    4300006: Room_01_Wall_03
+    4300008: Room_01_Wall_01
+    4300010: ChamferBox001
+    4300012: Floor
+    4300014: Wall_01
+    4300016: Wall_02
+    4300018: Wall_03
+    4300020: TableCard_01
+    4300022: TableCard_03
+    4300024: TableCard_04
+    4300026: TableCard_05
+    4300028: TableCard_02
+    4300030: Bone
+    4300032: Dog_02
+    4300034: Dog_01
+    4300036: Dog_03_01
+    4300038: Dog_03_02
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
