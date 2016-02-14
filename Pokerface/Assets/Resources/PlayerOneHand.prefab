@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05decb0add2b2884198f48317023b3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
+  cardslots:
   - {fileID: 491660}
   - {fileID: 495750}
 --- !u!114 &11425884
@@ -114,7 +114,7 @@ MonoBehaviour:
   group: 0
   prefixBackup: -1
   observed: {fileID: 0}
-  synchronization: 1
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0

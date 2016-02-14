@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 491406}
   m_Layer: 0
-  m_Name: CardSlot
+  m_Name: CardSlot_PlayerTwo_Left
   m_TagString: Untagged
   m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 494636}
   m_Layer: 0
-  m_Name: CardSlot
+  m_Name: CardSlot_PlayerTwo_Right
   m_TagString: Untagged
   m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05decb0add2b2884198f48317023b3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
+  cardslots:
   - {fileID: 494636}
   - {fileID: 491406}
 --- !u!1001 &100100000

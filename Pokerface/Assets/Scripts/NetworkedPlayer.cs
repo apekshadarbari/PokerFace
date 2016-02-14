@@ -6,69 +6,65 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 {
     // Use this for initialization
     bool gameIsStarted;
+    //players avatar
     public GameObject avatar;
+    //players camera rig / perspective
     public Transform playerGlobal;
     public Transform playerLocal;
 
+    //the turnswitch trigger
     [SerializeField]
     public GameObject turnTrigger;
 
+    //players betcontrol for buttons
     [SerializeField]
     GameObject betControl;
 
+    //the game pot
     [SerializeField]
     GameObject pot;
 
+    //control of the cards
     [SerializeField]
     GameObject cardControl;
 
-    GameObject vrUI;
-
-
-
+   
     void Start()
     {
-        vrUI = GameObject.Find("UI");
-        if (PhotonNetwork.isMasterClient && photonView.isMine && PhotonNetwork.player.ID == 1)
-        {
-            vrUI.SetActive(true);
-        }
-        if (!PhotonNetwork.isMasterClient && photonView.isMine && PhotonNetwork.player.ID == 2)
-        {
-            vrUI.SetActive(false);
-            //GameObject.Find("UI").SetActive(false);
-        }
+
+        //creates a betcontroller for each player and tags it for later reference
+
+        //player 2 
         if (photonView.isMine && PhotonNetwork.player.ID == 2)
         {
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
             //create a betcontroller for each player
             betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
-
+			betControl.tag = "Player2BetController";
         }
+
+        //player 1
         if (photonView.isMine && PhotonNetwork.player.ID == 1)
         {
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
             //create a betcontroller for each player
-            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.224f, 0, -0.064f), Quaternion.Euler(0, 180, 0), 0);
+            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.2f, 0, -0.060f), Quaternion.Euler(0, 180, 0), 0);
 
+            //test position - when no oculus
+            //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
+
+            betControl.tag = "Player1BetController";
         }
-
-
-
     }
 
     void Update()
     {
-        if (gameIsStarted)
+        if (gameIsStarted) //TODO: check for redundancy
         {
             turnTrigger.SetActive(true);
         }
-        if (photonView.isMine)
+        if (photonView.isMine) //TODO: check how much can be moved to start - making seats the Parents might make it easier to deal with but will require some restructuring
         {
-            //PhotonNetwork.InstantiateSceneObject(cardControl.name, cardControl.transform.position, cardControl.transform.rotation, 0, null);
-
-
-      
             //seat tranform = desired transform for player
             Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
 
@@ -98,35 +94,29 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     {
         if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
-            //temporary start game button
-            Debug.Log("pik lort");
+            //start game button clicked
+            Debug.Log("Starting Game");
 
-            GameObject.Find("UI").SetActive(false);
-
-            //next turn button
+            //next turn button created
             PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
         }
-
-
     }
 
     // Update is called once per frame
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        //what are we sending to the network?
         if (stream.isWriting)
         {
-            stream.SendNext(vrUI);
-
             stream.SendNext(playerGlobal.position);
             stream.SendNext(playerGlobal.rotation);
             stream.SendNext(playerLocal.localPosition);
             stream.SendNext(playerLocal.localRotation);
 
         }
+        //what are we receiving from the network?
         else
         {
-            this.vrUI = (GameObject)stream.ReceiveNext();
-
             this.transform.position = (Vector3)stream.ReceiveNext();
             this.transform.rotation = (Quaternion)stream.ReceiveNext();
             avatar.transform.localPosition = (Vector3)stream.ReceiveNext();
