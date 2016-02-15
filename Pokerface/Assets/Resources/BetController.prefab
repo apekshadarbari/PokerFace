@@ -30,6 +30,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 438650}
   - 114: {fileID: 11419230}
+  - 114: {fileID: 11466386}
   m_Layer: 0
   m_Name: BetController
   m_TagString: Untagged
@@ -526,9 +527,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choice: 4
-  amountToCall: 0
-  chipsToRaise: 0
-  wallet: {fileID: 158418}
 --- !u!114 &11426550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -566,9 +564,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choice: 1
-  amountToCall: 0
-  chipsToRaise: 0
-  wallet: {fileID: 158418}
 --- !u!114 &11431226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -581,9 +576,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choice: 2
-  amountToCall: 0
-  chipsToRaise: 0
-  wallet: {fileID: 158418}
 --- !u!114 &11437582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -596,9 +588,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choice: 5
-  amountToCall: 0
-  chipsToRaise: 0
-  wallet: {fileID: 158418}
 --- !u!114 &11445602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -636,6 +625,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choice: 3
+--- !u!114 &11466386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5b97977aa3a7547ae2528292706f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   amountToCall: 0
   chipsToRaise: 0
   wallet: {fileID: 158418}

@@ -6,9 +6,7 @@ using System;
 //[RequireComponent(typeof(PhotonView))]
 public class TurnSwitch : Photon.MonoBehaviour, IClicker
 {
-    //TODO: Get rid og redundancy
-    int player1pot;
-    int player2pot;
+    
     bool gameIsStarted;
     bool flopIsDealt;
     //test turn-counter
@@ -17,7 +15,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     GameObject turnTrigger;
     //intereaction with cards
     CardManager deckInteraction;
-    BetMore betInteraction;
+    //BetMore betInteraction;
 
     public GameObject TurnTrigger
     {
@@ -49,7 +47,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //turntrigger gets instantiated after start button is clicked
         //then we use the cardmanager built into it
         deckInteraction = GetComponent<CardManager>();
-        betInteraction = GetComponent<BetMore>();
+        //betInteraction = GetComponent<BetMore>();
 
         if (deckInteraction == null)
         {
@@ -60,9 +58,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         flopIsDealt = false;
         gameIsStarted = false;
         turn = 0;
-        player1pot = 0;
-        player2pot = 0;
-
+        
         Debug.Log("I´m started");
         Debug.Log("Turn " + turn.ToString());
 
@@ -124,53 +120,6 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 break;
         }
     }
-
-    /// <summary>
-    /// Compares the pot ... 
-    /// </summary>
-    /// <param name="thisTurnbet">bet this turn</param>
-    public void PotComparison(int thisTurnbet)
-    {
-        Debug.Log("entered pot comparison");
-        Debug.Log("this turns bet: "+ thisTurnbet);
-        //if the turnswitch belongs to player 2
-        if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
-        {
-            //add the players bet to their pot
-            player2pot = player2pot + thisTurnbet;
-        }
-        //if the turnswitch belongs to player 1
-        else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1 && thisTurnbet>=0)
-        {
-            player1pot = player1pot + thisTurnbet;
-        }
-        //if both pots are the same set them to 0
-        if (player1pot == player2pot)
-        {
-            player1pot = 0;
-            player2pot = 0;
-
-            //for testing purposes
-            player2pot = 15;
-
-            //turn++;
-        }
-        //if player 1 has bet more 
-        else if (player1pot > player2pot)
-        {
-            //set amount to cal
-            betInteraction.AmountToCall = player1pot - player2pot;
-
-        }
-        else //vice versa
-        {
-            betInteraction.AmountToCall = player1pot - player2pot;
-            //if we change back to public in betmore
-            //BetMore.amountToCall = player2pot - player1pot;
-        }
-        return;
-    }
-
 
     /// <summary>
     ///  when clicking the turnswitch I.E. we want to switch turn or are done with our turn and or can do no more

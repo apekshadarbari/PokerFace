@@ -21,6 +21,8 @@ public class NetworkController : Photon.MonoBehaviour
         }
     }
     //current version
+    [Header("the current version of the build - change when testing seperately")]
+    [SerializeField]
     private string version = "0.1";
 
     private string roomName = "New_room";

@@ -40,6 +40,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9074344cace3f474a8da54972f161d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1pot: 0
+  player2pot: 0
+  amountToCall: 0
+  raise: {fileID: 11429402, guid: fbfdcca88dad2554e8b4387be3d2c6b6, type: 2}
+  checkCall: {fileID: 11425022, guid: fbfdcca88dad2554e8b4387be3d2c6b6, type: 2}
+  fold: {fileID: 11437582, guid: fbfdcca88dad2554e8b4387be3d2c6b6, type: 2}
   chipValue: 0
 --- !u!114 &11482960
 MonoBehaviour:
@@ -62,7 +68,6 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 494946}
-  - {fileID: 11405868}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

@@ -48,10 +48,10 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         {
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
             //create a betcontroller for each player
-            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.2f, 0, -0.060f), Quaternion.Euler(0, 180, 0), 0);
+            //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.2f, 0, -0.060f), Quaternion.Euler(0, 180, 0), 0);
 
             //test position - when no oculus
-            //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
+            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
 
             betControl.tag = "Player1BetController";
         }
