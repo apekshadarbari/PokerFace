@@ -47,5 +47,9 @@ public class CardHolder : MonoBehaviour {
         cards.Clear();
     }
 
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
+
 
 }

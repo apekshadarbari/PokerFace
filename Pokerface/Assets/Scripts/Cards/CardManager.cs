@@ -26,7 +26,7 @@ public class CardManager : Photon.MonoBehaviour
 
     //whether or not the cards have been shuffled
     private bool shuffled;
-    
+
     //instance of the turnswitch script
     TurnSwitch turnInteraction;
     //all the cards in the deck
@@ -74,7 +74,7 @@ public class CardManager : Photon.MonoBehaviour
         };
 
         //
-        for( int i = 0; i < value.Length; i++ )
+        for (int i = 0; i < value.Length; i++)
         {
             foreach (var s in suit)
             {
@@ -139,24 +139,24 @@ public class CardManager : Photon.MonoBehaviour
         //playerOneHand = GameObject.Find("PlayerOneHand");
         //PlayerTwoHand = GameObject.Find("PlayerTwoHand");
 
-        
+
         //if (shuffled)
         //{
-            Debug.Log("Dealing");
-            //cards are dealt
-            //4 cards  - 2 each
-            for (int j = 0; j < 4; j++) //j is the number of cards going to be dealed
-            {
+        Debug.Log("Dealing");
+        //cards are dealt
+        //4 cards  - 2 each
+        for (int j = 0; j < 4; j++) //j is the number of cards going to be dealed
+        {
 
-                if (j % 2 == 0)//if j is even(number)
-                {
-                    DealCardTo(playerOneHand);
-                }
-                else //if j is odd //if player.id == 2 
-                {
-                    DealCardTo(PlayerTwoHand);
-                }
+            if (j % 2 == 0)//if j is even(number)
+            {
+                DealCardTo(playerOneHand);
             }
+            else //if j is odd //if player.id == 2 
+            {
+                DealCardTo(PlayerTwoHand);
+            }
+        }
         //}
     }
     /// <summary>
@@ -256,10 +256,10 @@ public class CardManager : Photon.MonoBehaviour
     public void CompareCards()
     {
         Debug.Log("comparing");
-        
+
         //list of matches
         var matches = new List<CardMatch>();
-        
+
         //cards from the community pile
         var community = GetCards(communityCards);
 
@@ -282,7 +282,7 @@ public class CardManager : Photon.MonoBehaviour
             CardCombos.OnePair,
             CardCombos.HighestCard,
         };
-        
+
         //we havent found a winner yet
         CardMatch winner = null;
 
@@ -320,7 +320,7 @@ public class CardManager : Photon.MonoBehaviour
             else if (m.Count == 1)
             {
                 Debug.Log("One matches for " + c);
-                
+
                 //there is only one!
                 winner = m.First();
                 break;
@@ -328,7 +328,7 @@ public class CardManager : Photon.MonoBehaviour
             //there are no matches for the current combo
             else
             {
-                Debug.Log("No matches for " + c );
+                Debug.Log("No matches for " + c);
             }
         }
 
@@ -343,5 +343,7 @@ public class CardManager : Photon.MonoBehaviour
             throw new InvalidOperationException("No winner!!!");
         }
     }
-
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
 }

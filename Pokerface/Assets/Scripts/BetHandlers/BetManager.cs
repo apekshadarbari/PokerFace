@@ -178,6 +178,8 @@ public class BetManager : Photon.MonoBehaviour
         }
     }
 
-
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
 
 }

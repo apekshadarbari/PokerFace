@@ -49,4 +49,8 @@ public class StartButton : Photon.MonoBehaviour, IClicker
             return;
         }
     }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
 }

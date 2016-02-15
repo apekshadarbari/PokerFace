@@ -105,7 +105,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                     deckInteraction.DealFlop();
 
                     //temp compare for testing
-                    //deckInteraction.CompareCards();
+                    deckInteraction.CompareCards();
                 }
                 break;
             //deal the turn
@@ -173,9 +173,10 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         Debug.Log("owner " + this.photonView.ownerId.ToString());
 
     }
-
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        //    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        //{
         if (stream.isWriting)
         {
             //send the next turn to next player
