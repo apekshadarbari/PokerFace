@@ -6,7 +6,7 @@ using System;
 //[RequireComponent(typeof(PhotonView))]
 public class TurnSwitch : Photon.MonoBehaviour, IClicker
 {
-    
+
     bool gameIsStarted;
     bool flopIsDealt;
     //test turn-counter
@@ -16,6 +16,8 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     //intereaction with cards
     CardManager deckInteraction;
     //BetMore betInteraction;
+
+    PotManager pot;
 
     public GameObject TurnTrigger
     {
@@ -47,6 +49,9 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //turntrigger gets instantiated after start button is clicked
         //then we use the cardmanager built into it
         deckInteraction = GetComponent<CardManager>();
+
+        //pot = GameObject.Find("pot").GetComponent<PotManager>();
+
         //betInteraction = GetComponent<BetMore>();
 
         if (deckInteraction == null)
@@ -58,7 +63,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         flopIsDealt = false;
         gameIsStarted = false;
         turn = 0;
-        
+
         Debug.Log("I´m started");
         Debug.Log("Turn " + turn.ToString());
 
@@ -143,6 +148,8 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 
             //deactivate the buttons
             GameObject.FindGameObjectWithTag("Player2BetController").SetActive(false);
+            //GameObject.FindGameObjectWithTag("Player1BetController").SetActive(true);
+
 
             //transfor ownership to the other player
             this.photonView.TransferOwnership(1);
@@ -155,6 +162,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
 
             //deactivate the buttons
             GameObject.FindGameObjectWithTag("Player1BetController").SetActive(false);
+            //GameObject.FindGameObjectWithTag("Player2BetController").SetActive(true);
 
             Debug.Log("player 1 transferring control to 2");
 
@@ -181,6 +189,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         else
         {
             this.turn = (int)stream.ReceiveNext();
+
             photonView.ownerId = (int)stream.ReceiveNext();
             this.TurnTrigger.transform.position = (Vector3)stream.ReceiveNext();
         }

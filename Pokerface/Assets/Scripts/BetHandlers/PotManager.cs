@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PotManager : MonoBehaviour
+public class PotManager : Photon.MonoBehaviour
 {
 
     //TODO: Get rid og redundancy
@@ -29,12 +29,12 @@ public class PotManager : MonoBehaviour
         {
             return chipValue;
         }
-
     }
 
     // Use this for initialization
     void Start()
     {
+        
         chipValue = 0;
         //player1pot = 0;
 
@@ -46,9 +46,13 @@ public class PotManager : MonoBehaviour
 
     //adds chips to the pot I.E. the pots chipvalue
     //do we need the player param here? TODO: find out if we ever use the player param here
-    public void AddChips(int player, int chips)
+    public void AddChips(int chips)
     {
         chipValue += chips;
+    }
+
+    public void Update()
+    {
 
     }
 
@@ -89,7 +93,7 @@ public class PotManager : MonoBehaviour
         if (player1pot == player2pot)
         {
             //if the pots are the same we can add them to the pot and they no longer belong to a player
-            AddChips(0, player1pot + player2pot);
+            AddChips(player1pot + player2pot);
 
             //reset the players pots
             player1pot = 0;

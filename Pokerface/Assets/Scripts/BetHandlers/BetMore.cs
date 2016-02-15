@@ -13,7 +13,6 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     BetManager betMan;
     
-
     void Start()
     {
 
@@ -22,7 +21,15 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         //chipsToRaise = 0;
         ////amountToCall = 0;
         ////find the pot
-        //pot = GameObject.Find("pot").GetComponent<PotManager>();
+
+    }
+
+
+    /// <summary>
+    /// onclick function for each of the buttons that have to do with betting
+    /// </summary>
+    public void OnClick()
+    {
 
         if (this.photonView.ownerId == 1)
         {
@@ -33,14 +40,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
             betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
 
         }
-    }
 
-
-    /// <summary>
-    /// onclick function for each of the buttons that have to do with betting
-    /// </summary>
-    public void OnClick()
-    {
         //TODO: move all of these into another script called betcontroller
         Debug.Log("this button belongs to player: " + this.photonView.ownerId);
         switch (choice)

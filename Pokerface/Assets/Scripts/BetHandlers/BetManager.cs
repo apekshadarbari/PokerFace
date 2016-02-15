@@ -91,8 +91,8 @@ public class BetManager : Photon.MonoBehaviour
         //we get chips from our wallet as the player id
         chipsToBet = wallet.GetComponent<WalletManager>().GetChips(this.photonView.ownerId, chipsToRaise);
 
-        //add the chips to the pot
-        pot.AddChips(this.photonView.ownerId, chipsToBet);
+        //add the chips to the pot TODO: should add to the player pot
+        //pot.AddChips(chipsToBet);
 
         Debug.Log("chips to raise value is " + chipsToRaise + "the amount being sent on is " + ChipsToRaise);
 
@@ -113,7 +113,6 @@ public class BetManager : Photon.MonoBehaviour
     /// <param name="amountToCall"> the amount the player needs to call</param>
     public void GetAmountToCall(int player, int amountToCall)
     {
-
         //we set the scripts field values = the the values we get from the pot
         this.player = player;
         this.amountToCall = amountToCall;
@@ -142,7 +141,7 @@ public class BetManager : Photon.MonoBehaviour
             //TODO: get rid of redundancy in the wallet call
             chipsToBet = wallet.GetComponent<WalletManager>().GetChips(this.photonView.ownerId, amountToCall);//we get chips equal to the amount needed to call
 
-            pot.AddChips(this.photonView.ownerId, chipsToBet);//we add chips to the pot equal to the bet/call
+            pot.AddChips(chipsToBet);//we add chips to the pot equal to the bet/call
 
             ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
             ts.GetComponent<TurnSwitch>().OnClick();//we send the turn on to our opponent
