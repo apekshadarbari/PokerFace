@@ -15,10 +15,10 @@ public class StartButton : Photon.MonoBehaviour, IClicker
 
     public void Start()
     {
-        //if (PhotonNetwork.isMasterClient)
-        //{
-        //    gameIsStarted = false;
-        //}
+        if (!PhotonNetwork.isMasterClient)
+        {
+            gameIsStarted = true;
+        }
         //else
         //{
         //    gameIsStarted = true;
