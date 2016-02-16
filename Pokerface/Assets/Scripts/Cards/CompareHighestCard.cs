@@ -7,7 +7,7 @@ public class CompareHighestCard : ICardCompare
 {/// <summary>
 /// matching cards by value to find the highest value card
 /// </summary>
-/// <param name="player">tje player</param>
+/// <param name="player">the player</param>
 /// <param name="hand">the players hand of cards</param>
 /// <param name="community">the available commmunity cards</param>
 /// <returns></returns>

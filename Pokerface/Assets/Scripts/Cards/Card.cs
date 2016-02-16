@@ -32,4 +32,8 @@ public class Card : MonoBehaviour
 
     [Obsolete]
     public string suitName; // TODO: NO PUBLIC FIELDS!!!
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
 }
