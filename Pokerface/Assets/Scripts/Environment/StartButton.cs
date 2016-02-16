@@ -15,7 +15,15 @@ public class StartButton : Photon.MonoBehaviour, IClicker
 
     public void Start()
     {
-        gameIsStarted = false;
+        if (PhotonNetwork.isMasterClient && photonView.isMine)
+        {
+            gameIsStarted = false;
+        }
+        else
+        {
+            gameIsStarted = true;
+        }
+        
     }
 
     public void Update()
@@ -39,6 +47,10 @@ public class StartButton : Photon.MonoBehaviour, IClicker
             //deal the cards
             //cardMan.Deal();
             gameIsStarted = true;
+        }
+        else
+        {
+
         }
         
     }
