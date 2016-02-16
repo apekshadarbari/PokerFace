@@ -11,6 +11,11 @@ public class StartButton : Photon.MonoBehaviour, IClicker
     CardManager cardMan;
     [SerializeField]
     NetworkedPlayer playerCtrl;
+    bool gameIsStarted;
+    public void Start()
+    {
+        gameIsStarted = false;
+    }
 
     public void OnClick()
     {
@@ -18,12 +23,17 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
             Debug.Log("Clicked");
-            //set the start button to inactive
-            gameObject.SetActive(false);
+
             //start game through the networked player
             playerCtrl.StartGame();
             //deal the cards
             //cardMan.Deal();
+            gameIsStarted = true;
+        }
+        if (gameIsStarted)
+        {
+            //set the start button to inactive
+            gameObject.SetActive(false);
         }
     }
 
@@ -37,7 +47,6 @@ public class StartButton : Photon.MonoBehaviour, IClicker
 
             return;
         }
-
     }
     ///hovering the start button
     public void OnHover()
@@ -52,5 +61,32 @@ public class StartButton : Photon.MonoBehaviour, IClicker
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        if (stream.isWriting)
+        {
+            stream.SendNext(gameIsStarted);
+        }
+        else
+        {
+             gameIsStarted= (bool)stream.ReceiveNext();
+        }
     }
 }
+
+
+//what are we sending to the network?
+//if (stream.isWriting)
+//{
+//    stream.SendNext(playerGlobal.position);
+//    stream.SendNext(playerGlobal.rotation);
+//    stream.SendNext(playerLocal.localPosition);
+//    stream.SendNext(playerLocal.localRotation);
+
+//}
+////what are we receiving from the network?
+//else
+//{
+//    this.transform.position = (Vector3)stream.ReceiveNext();
+//    this.transform.rotation = (Quaternion)stream.ReceiveNext();
+//    avatar.transform.localPosition = (Vector3)stream.ReceiveNext();
+//    avatar.transform.localRotation = (Quaternion)stream.ReceiveNext();
+//}

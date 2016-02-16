@@ -42,13 +42,26 @@ public class CardHolder : MonoBehaviour {
         foreach (var card in cards)
         {
             card.transform.parent = null;
-            
         }
         cards.Clear();
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+
+        ////what are we sending to the network?
+        //if (stream.isWriting)
+        //{
+
+        //    stream.SendNext(cards);
+        //    stream.SendNext(DealCard())
+
+        //}
+        ////what are we receiving from the network?
+        //else
+        //{
+        //    this.cards = (List<Card>)stream.ReceiveNext();
+        //}
     }
 
 

@@ -345,5 +345,6 @@ public class CardManager : Photon.MonoBehaviour
     }
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+
     }
 }
