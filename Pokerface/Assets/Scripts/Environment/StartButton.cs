@@ -12,9 +12,19 @@ public class StartButton : Photon.MonoBehaviour, IClicker
     [SerializeField]
     NetworkedPlayer playerCtrl;
     bool gameIsStarted;
+
     public void Start()
     {
         gameIsStarted = false;
+    }
+
+    public void Update()
+    {
+        if (gameIsStarted)
+        {
+            //set the start button to inactive
+            gameObject.SetActive(false);
+        }
     }
 
     public void OnClick()
@@ -30,13 +40,9 @@ public class StartButton : Photon.MonoBehaviour, IClicker
             //cardMan.Deal();
             gameIsStarted = true;
         }
-        if (gameIsStarted)
-        {
-            //set the start button to inactive
-            gameObject.SetActive(false);
-        }
+        
     }
-
+    
     public void OnExitHover()
     {
         if (PhotonNetwork.isMasterClient && photonView.isMine)
