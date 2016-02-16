@@ -91,10 +91,14 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             case 0:
                 if (!gameIsStarted) //make sure we only do it once
                 {
-                    //we shuffle and deal to starting cards
-                    gameIsStarted = true;
-                    deckInteraction.Shuffle();
-                    deckInteraction.Deal();
+                    //make sure we only run this once in the scene
+                    if (PhotonNetwork.isMasterClient)
+                    {
+                        //we shuffle and deal to starting cards
+                        gameIsStarted = true;
+                        deckInteraction.Shuffle();
+                        deckInteraction.Deal();
+                    }
                 }
                 break;
             //deal the flop
@@ -182,6 +186,9 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             //send the next turn to next player
             //make it uninteractable to others
 
+            stream.SendNext(gameIsStarted);
+            stream.SendNext(flopIsDealt);
+
             stream.SendNext(turn);
 
             stream.SendNext(photonView.ownerId);
@@ -189,6 +196,9 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         }
         else
         {
+            this.gameIsStarted = (bool)stream.ReceiveNext();
+            this.flopIsDealt = (bool)stream.ReceiveNext();
+
             this.turn = (int)stream.ReceiveNext();
 
             photonView.ownerId = (int)stream.ReceiveNext();

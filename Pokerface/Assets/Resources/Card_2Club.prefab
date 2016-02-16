@@ -99,7 +99,6 @@ MonoBehaviour:
   ownershipTransfer: 1
   ObservedComponents:
   - {fileID: 424536}
-  - {fileID: 11424480}
   - {fileID: 11476618}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
@@ -128,7 +127,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.x
@@ -173,11 +172,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[1]
       value: 
-      objectReference: {fileID: 11424480}
+      objectReference: {fileID: 11476618}
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[2]
       value: 
-      objectReference: {fileID: 11476618}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: synchronization
       value: 1

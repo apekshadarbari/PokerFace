@@ -100,7 +100,6 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 460858}
   - {fileID: 11477582}
-  - {fileID: 11413712}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -128,7 +127,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.x
@@ -169,7 +168,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[2]
       value: 
-      objectReference: {fileID: 11413712}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: synchronization
       value: 1
