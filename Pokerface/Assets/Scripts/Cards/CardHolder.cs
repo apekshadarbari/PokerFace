@@ -26,10 +26,10 @@ public class CardHolder : Photon.MonoBehaviour {
         behaviour.Card = card;
         behaviour.LoadResource();
         //how many cards are in the list already, match index of new card with cardslot, and set that cardslot as parrent
-        behaviour.transform.SetParent( cardslots[cards.Count - 1]);
+        behaviour.transform.SetParent( cardslots[cards.Count - 1], true);
         //reset transform ( bug avoidance)
-        behaviour.transform.localPosition = Vector3.zero;
-        behaviour.transform.localRotation = Quaternion.identity;
+        //behaviour.transform.localPosition = Vector3.zero;
+        //behaviour.transform.localRotation = Quaternion.identity;
     }
 
     /// <summary>

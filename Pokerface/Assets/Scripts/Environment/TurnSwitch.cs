@@ -114,7 +114,8 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 if (!flopIsDealt) //make sure we only do it once
                 {
                     flopIsDealt = true;
-                    deckInteraction.GetComponent<PhotonView>().RPC("DealFlop", PhotonTargets.AllBufferedViaServer);
+                    deckInteraction.DealFlop();
+                    //deckInteraction.GetComponent<PhotonView>().RPC("DealFlop", PhotonTargets.AllBufferedViaServer);
 
                     //temp compare for testing
                     //deckInteraction.CompareCards();

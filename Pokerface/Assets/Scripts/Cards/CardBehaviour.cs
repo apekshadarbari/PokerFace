@@ -9,6 +9,9 @@ public class CardBehaviour : MonoBehaviour
     [SerializeField]
     private string cardName;
 
+    float offset;
+    float speedOffset;
+
     private Card card;
 
     public Card Card
@@ -19,6 +22,21 @@ public class CardBehaviour : MonoBehaviour
             card = value;
             cardName = card.ToString();
         }
+    }
+
+    private void Start()
+    {
+        offset = UnityEngine.Random.Range( -50f, 50f );
+        speedOffset = UnityEngine.Random.Range(-1f, 1f);
+        transform.localRotation = Quaternion.identity;
+        //transform.localRotation = Quaternion.AngleAxis(90f, Vector3.left);
+    }
+
+    private void Update()
+    {
+        //transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.smoothDeltaTime);
+        //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.smoothDeltaTime);
+        transform.localPosition = transform.parent.up * Mathf.Sin((Time.time + offset) * (3f + speedOffset)) * 0.2f;
     }
 
     public void LoadResource()
