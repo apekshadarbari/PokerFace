@@ -98,7 +98,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                     if (PhotonNetwork.isMasterClient)
                     {
                         deckInteraction.GetComponent<PhotonView>().RPC("Shuffle", PhotonTargets.AllBufferedViaServer);
-                        deckInteraction.GetComponent<PhotonView>().RPC("Deal", PhotonTargets.AllBufferedViaServer);
+                        //deckInteraction.GetComponent<PhotonView>().RPC("Deal", PhotonTargets.AllBufferedViaServer);
                         
                         //we shuffle and deal to starting cards
                         //deckInteraction.Shuffle();

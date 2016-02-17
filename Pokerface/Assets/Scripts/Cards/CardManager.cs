@@ -136,6 +136,7 @@ public class CardManager : Photon.MonoBehaviour
 
         //cards are now shuffled
         shuffled = true;
+        Deal();
     }
 
     [PunRPC]

@@ -85,4 +85,14 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         GetComponent<Renderer>().material.color = Color.clear;
         CrosshairTimerDisplay.Instance.Show();
     }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+        }
+        else
+        {
+        }
+    }
 }
