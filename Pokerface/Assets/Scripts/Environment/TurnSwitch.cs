@@ -97,12 +97,13 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                     //TODO: try without masteclient? does player two get the righht cards still?
                     if (PhotonNetwork.isMasterClient)
                     {
-                        deckInteraction.GetComponent<PhotonView>().RPC("Shuffle", PhotonTargets.AllBufferedViaServer);
+
+                        //deckInteraction.GetComponent<PhotonView>().RPC("Shuffle", PhotonTargets.AllBufferedViaServer);
                         //deckInteraction.GetComponent<PhotonView>().RPC("Deal", PhotonTargets.AllBufferedViaServer);
-                        
+
                         //we shuffle and deal to starting cards
-                        //deckInteraction.Shuffle();
-                        //deckInteraction.Deal();
+                        deckInteraction.Shuffle();
+                        deckInteraction.Deal();
 
                         gameIsStarted = true;
                     }

@@ -10,9 +10,7 @@ GameObject:
   - 4: {fileID: 487428}
   - 33: {fileID: 3342872}
   - 23: {fileID: 2343150}
-  - 114: {fileID: 11409458}
   - 65: {fileID: 6575256}
-  - 114: {fileID: 11468866}
   m_Layer: 0
   m_Name: Card_10Heart
   m_TagString: Untagged
@@ -78,46 +76,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 4.0000005, z: 0.02}
   m_Center: {x: -0.0000038146973, y: 0.00000047683716, z: 0.010007632}
---- !u!114 &11409458
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 166248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c66378eb670bbeb43b5d46c744706c5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 10
-  suit: 3
-  suitName: Heart
---- !u!114 &11468866
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 166248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 1
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 1
-  ObservedComponents:
-  - {fileID: 487428}
-  - {fileID: 11409458}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -164,7 +122,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[1]
       value: 
-      objectReference: {fileID: 11409458}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[2]
       value: 

@@ -10,9 +10,7 @@ GameObject:
   - 4: {fileID: 472900}
   - 33: {fileID: 3300610}
   - 23: {fileID: 2304778}
-  - 114: {fileID: 11475672}
   - 65: {fileID: 6574624}
-  - 114: {fileID: 11426570}
   m_Layer: 0
   m_Name: Card_JHeart
   m_TagString: Untagged
@@ -78,46 +76,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 4.0000005, z: 0.02}
   m_Center: {x: -0.0000038146973, y: 0, z: 0.010007632}
---- !u!114 &11426570
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 1
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 1
-  ObservedComponents:
-  - {fileID: 472900}
-  - {fileID: 11475672}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
---- !u!114 &11475672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c66378eb670bbeb43b5d46c744706c5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 11
-  suit: 3
-  suitName: Heart
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -168,7 +126,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[1]
       value: 
-      objectReference: {fileID: 11475672}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[2]
       value: 

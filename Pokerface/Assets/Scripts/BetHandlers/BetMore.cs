@@ -15,7 +15,6 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     
     void Start()
     {
-
         ////reset of the values (starting values)
         //chipsToIncrement = 5;
         //chipsToRaise = 0;

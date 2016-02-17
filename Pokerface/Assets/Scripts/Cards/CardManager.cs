@@ -30,15 +30,23 @@ public class CardManager : Photon.MonoBehaviour
     //instance of the turnswitch script
     TurnSwitch turnInteraction;
     //all the cards in the deck
-    public GameObject[] cards = new GameObject[52];
+    public Card[] cards; // = new Card[52];
     //shuffled cards to look at
     //[SerializeField]
-    private Stack<GameObject> cardStack;
+    private Stack<Card> cardStack;
+
+    // EXTENSION METHOD
+    //public static void ForEach<T>( this T[] array, Action<T> action)
+    //{
+    //    foreach (var i in array)
+    //    {
+    //        action(i);
+    //    }
+    //}
 
     public int StraightFlush { get; private set; }
     void Awake()
     {
-
         //TODO:which is better?
         ///find the hands and associated with the players etc
         playerOneHand = GameObject.Find("PlayerOneHand");
@@ -53,26 +61,26 @@ public class CardManager : Photon.MonoBehaviour
         communityCards = GameObject.Find("CommunityCards");
 
         //list for the cards, 
-        List<GameObject> cardPrefabs = new List<GameObject>();
+        var cardList = new List<Card>();
 
         //the possible names of the prefabs and add them to the list
-        string prefix = "Card_";
-        string[] value = new string[]
-        {
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "J",
-            "Q",
-            "K",
-            "A"
-        };
+        //string prefix = "Card_";
+        //string[] value = new string[]
+        //{
+        //    "2",
+        //    "3",
+        //    "4",
+        //    "5",
+        //    "6",
+        //    "7",
+        //    "8",
+        //    "9",
+        //    "10",
+        //    "J",
+        //    "Q",
+        //    "K",
+        //    "A"
+        //};
         Suits[] suit = new Suits[]
         {
             Suits.Club,
@@ -82,33 +90,35 @@ public class CardManager : Photon.MonoBehaviour
         };
 
         //
-        for (int i = 0; i < value.Length; i++)
+        for (int i = 2; i <= 14; i++)
         {
             foreach (var s in suit)
             {
-                var prefab = Resources.Load<GameObject>(prefix + value[i] + s);
+                cardList.Add(new Card(s, i));
+
+                //var prefab = Resources.Load<GameObject>(prefix + value[i] + s);
                 //var card = prefab.GetComponent<Card>();
                 //card.Suit = s;
                 //card.Value = i + 2;
-                cardPrefabs.Add(prefab);
+                //cardPrefabs.Add(prefab);
             }
         }
         //put the prefabs in the list
-        cards = cardPrefabs.ToArray();
-
-        //Debug.Log("Hello from card manager(s)?");
-
+        cards = cardList.ToArray();
+        
+        // TODO: Remove this shit
+        cardList.ForEach(c => Debug.Log(c));
     }
     /// <summary>
     /// shuffle the cards
     /// </summary>
-    [PunRPC]
+    //[PunRPC]
     public void Shuffle()
     {
         Debug.Log("Everyday I'm Shuffling");
 
         //shuffle as many cards as there are cards in the deck
-        var shuffledCards = new GameObject[cards.Length];
+        var shuffledCards = new Card[cards.Length];
 
         //add them to shuffled cards
         for (int i = 0; i < cards.Length; i++)
@@ -128,7 +138,7 @@ public class CardManager : Photon.MonoBehaviour
         }
 
         //put the shuffled cards in the stack
-        cardStack = new Stack<GameObject>(shuffledCards);
+        cardStack = new Stack<Card>(shuffledCards);
         //foreach (GameObject item in cardStack)
         //{
         //    Debug.Log(item);
@@ -136,7 +146,6 @@ public class CardManager : Photon.MonoBehaviour
 
         //cards are now shuffled
         shuffled = true;
-        Deal();
     }
 
     [PunRPC]
@@ -159,13 +168,13 @@ public class CardManager : Photon.MonoBehaviour
                 if (j % 2 == 0)//if j is even(number)
                 {
                     //this.GetComponent<PhotonView>().RPC("DealCardTo", PhotonTargets.AllBuffered,playerOneHand);
-                    DealCardTo(/*"playerOneHand"*/playerOneHand);
+                    DealCardTo(playerOneHand, cardStack.Pop());
                 }
                 else //if j is odd //if player.id == 2 
                 {
                     //this.GetComponent<PhotonView>().RPC("DealCardTo", PhotonTargets.AllBufferedViaServer,playerTwoHand);
 
-                    DealCardTo(/*"playerTwoHand"*/playerTwoHand);
+                    DealCardTo(playerTwoHand, cardStack.Pop());
                 }
             }
         }
@@ -183,7 +192,10 @@ public class CardManager : Photon.MonoBehaviour
             Debug.Log("flop contains card");
             //this.photonView.RPC("DealCardTo", PhotonTargets.AllBufferedViaServer, communityCards);
 
-            DealCardTo(communityCards);
+            //Card card = cardStack.Pop().GetComponent<Card>();
+            //card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0).GetComponent<Card>();
+            
+            DealCardTo(communityCards, cardStack.Pop());
         }
     }
 
@@ -192,17 +204,18 @@ public class CardManager : Photon.MonoBehaviour
     /// </summary>
     /// <param name="receiver">the players or community</param>
     //[PunRPC]
-    public void DealCardTo(/*string receiver*/GameObject receiver)
+    public void DealCardTo(GameObject receiver, Card card)
     {
         Debug.Log(receiver.ToString());
-        //pop the top card in the stack
-        var card = cardStack.Pop();
-        //GameObject cardHolder.name = receiver;
-        //instantiate it where #the receiver
-        card = PhotonNetwork.Instantiate(card.name, receiver.transform.position, receiver.transform.rotation,0);
-        receiver.GetComponent<CardHolder>().DealCard(card.GetComponent<Card>());
 
+        //receiver.GetComponent<CardHolder>().DealCard(card.GetComponent<Card>());
+
+        //receiver.GetComponent<PhotonView>().RPC("CardHolder", PhotonTargets.AllBufferedViaServer,card.GetComponent<Card>());
+
+        receiver.GetComponent<PhotonView>().RPC("DealCard", PhotonTargets.All, card.Serialize());
     }
+
+
 
     /// <summary>
     /// get the cards that the owner holds - cardholder

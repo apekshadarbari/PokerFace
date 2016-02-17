@@ -10,9 +10,7 @@ GameObject:
   - 4: {fileID: 461144}
   - 33: {fileID: 3336786}
   - 23: {fileID: 2370526}
-  - 114: {fileID: 11440466}
   - 65: {fileID: 6507208}
-  - 114: {fileID: 11431924}
   m_Layer: 0
   m_Name: Card_5Spade
   m_TagString: Untagged
@@ -78,46 +76,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 4.0000005, z: 0.02}
   m_Center: {x: 0.0000038146973, y: 0.0000019073486, z: 0.010000003}
---- !u!114 &11431924
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 1
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 1
-  ObservedComponents:
-  - {fileID: 461144}
-  - {fileID: 11440466}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
---- !u!114 &11440466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c66378eb670bbeb43b5d46c744706c5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 5
-  suit: 1
-  suitName: Spade
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -168,7 +126,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[1]
       value: 
-      objectReference: {fileID: 11440466}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[2]
       value: 
