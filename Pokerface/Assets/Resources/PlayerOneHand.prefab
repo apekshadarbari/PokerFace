@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 495750}
   m_Layer: 0
-  m_Name: CardSlot
+  m_Name: CardSlot_PlayerOne_Left
   m_TagString: Untagged
   m_Icon: {fileID: -1089502233064743932, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 491660}
   m_Layer: 0
-  m_Name: CardSlot
+  m_Name: CardSlot_PlayerOne_Right
   m_TagString: Untagged
   m_Icon: {fileID: -1089502233064743932, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,6 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 439924}
   - {fileID: 11412328}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0

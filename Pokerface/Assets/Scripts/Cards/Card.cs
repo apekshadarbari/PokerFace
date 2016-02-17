@@ -12,7 +12,7 @@ public enum Suits
 }
 
 
-public class Card : MonoBehaviour
+public class Card : Photon.MonoBehaviour
 {
     //the card value - higher means better card
     [SerializeField]

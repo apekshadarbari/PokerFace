@@ -28,8 +28,12 @@ public class NetworkController : Photon.MonoBehaviour
     private string roomName = "New_room";
     private TypedLobby lobbyName = new TypedLobby("New_Lobby", LobbyType.Default);
     
-    //the player
+    //the player TODO: FIX THIS CLASS , FIND OUT WHAT A GROUP CAN BE USED FOR WHEN INSTANTIATING OBJECTS HERE.
     public GameObject player;
+
+    [SerializeField]
+    GameObject startgameButton;
+
 
     void Start()
     {
@@ -119,6 +123,12 @@ public class NetworkController : Photon.MonoBehaviour
 
         //instantiates the player at the corresponding seat
         PhotonNetwork.Instantiate(player.name, Seats[PhotonNetwork.player.ID - 1].position, Quaternion.identity, 0);
+
+        //TODO: make sure that this makes it instantiate the button only the one time
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.Instantiate(startgameButton.name, startgameButton.transform.position, startgameButton.transform.rotation, 0);
+        }
     }
 
     void OnLeftRoom()

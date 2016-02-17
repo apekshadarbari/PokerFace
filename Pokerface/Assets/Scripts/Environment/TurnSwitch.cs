@@ -92,12 +92,19 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 if (!gameIsStarted) //make sure we only do it once
                 {
                     //make sure we only run this once in the scene
+
+
+                    //TODO: try without masteclient? does player two get the righht cards still?
                     if (PhotonNetwork.isMasterClient)
                     {
+                        deckInteraction.GetComponent<PhotonView>().RPC("Shuffle", PhotonTargets.AllBufferedViaServer);
+                        deckInteraction.GetComponent<PhotonView>().RPC("Deal", PhotonTargets.AllBufferedViaServer);
+                        
                         //we shuffle and deal to starting cards
+                        //deckInteraction.Shuffle();
+                        //deckInteraction.Deal();
+
                         gameIsStarted = true;
-                        deckInteraction.Shuffle();
-                        deckInteraction.Deal();
                     }
                 }
                 break;
@@ -106,10 +113,12 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 if (!flopIsDealt) //make sure we only do it once
                 {
                     flopIsDealt = true;
-                    deckInteraction.DealFlop();
+                    deckInteraction.GetComponent<PhotonView>().RPC("DealFlop", PhotonTargets.AllBufferedViaServer);
 
                     //temp compare for testing
-                    deckInteraction.CompareCards();
+                    //deckInteraction.CompareCards();
+                    deckInteraction.GetComponent<PhotonView>().RPC("CompareCards", PhotonTargets.AllBufferedViaServer);
+
                 }
                 break;
             //deal the turn

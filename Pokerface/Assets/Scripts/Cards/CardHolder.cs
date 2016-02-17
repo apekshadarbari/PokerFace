@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CardHolder : MonoBehaviour {
+public class CardHolder : Photon.MonoBehaviour {
 
     //list of the cards
     List<Card> cards = new List<Card>();
@@ -15,6 +15,7 @@ public class CardHolder : MonoBehaviour {
     /// takes a card
     /// </summary>
     /// <param name="card">card from card manager</param>
+    //[PunRPC]
     public void DealCard(Card card)
     {
         //adds the card to the list cards in cardhoolder
@@ -25,6 +26,7 @@ public class CardHolder : MonoBehaviour {
         card.transform.localPosition = Vector3.zero;
         card.transform.localRotation = Quaternion.identity;
     }
+
     /// <summary>
     /// get cards dealt to this holder  - a holder for each player and one for community
     /// </summary>
@@ -50,18 +52,20 @@ public class CardHolder : MonoBehaviour {
     {
 
         ////what are we sending to the network?
-        //if (stream.isWriting)
-        //{
+        if (stream.isWriting)
+        {
 
-        //    stream.SendNext(cards);
-        //    stream.SendNext(DealCard())
+            stream.SendNext(cards);
+            stream.SendNext(cardslots);
 
-        //}
+        }
         ////what are we receiving from the network?
-        //else
-        //{
-        //    this.cards = (List<Card>)stream.ReceiveNext();
-        //}
+        else
+        {
+            this.cards = (List<Card>)stream.ReceiveNext();
+            this.cardslots = (Transform[])stream.ReceiveNext();
+
+        }
     }
 
 

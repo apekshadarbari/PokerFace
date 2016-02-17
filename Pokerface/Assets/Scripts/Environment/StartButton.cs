@@ -15,19 +15,23 @@ public class StartButton : Photon.MonoBehaviour, IClicker
 
     public void Start()
     {
-        if (!PhotonNetwork.isMasterClient)
+
+        //TODO: changed so that masterclient is whoever makes the room
+        if (PhotonNetwork.isMasterClient)
         {
-            gameIsStarted = true;
+            gameIsStarted = false;
+        }     
+        else if (!PhotonNetwork.isMasterClient)
+        {
+            //TODO: spawn a different message for player 2?
+            gameObject.SetActive(false);
         }
-        //else
-        //{
-        //    gameIsStarted = true;
-        //}
 
     }
 
     public void Update()
     {
+        //TODO: might be more efficient in onclick...
         if (gameIsStarted)
         {
             //set the start button to inactive
@@ -45,6 +49,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
             //start game through the networked player
             playerCtrl.StartGame();
             //deal the cards
+
             //cardMan.Deal();
             gameIsStarted = true;
         }

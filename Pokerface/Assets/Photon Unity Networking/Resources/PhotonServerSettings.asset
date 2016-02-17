@@ -16,7 +16,7 @@ MonoBehaviour:
   ServerAddress: 
   ServerPort: 5055
   AppID: 500a3d41-25ce-4128-8543-93470753d717
-  PreferredRegion: 0
+  PreferredRegion: 1
   EnabledRegions: -1
   JoinLobby: 1
   EnableLobbyStatistics: 0
@@ -39,4 +39,10 @@ MonoBehaviour:
   - Polo
   - TaggedPlayer
   - SwitchTurns
+  - CompareCards
+  - Deal
+  - DealCardTo
+  - DealFlop
+  - Shuffle
+  - DealCard
   DisableAutoOpenWizard: 1
