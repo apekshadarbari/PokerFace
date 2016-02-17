@@ -4,12 +4,21 @@ using System;
 
 public class BetMore : Photon.MonoBehaviour, IClicker
 {
+    enum BetAction
+    {
+        Add,
+        Remove,
+        Raise,
+        Call,
+        Fold
+    }
 
     //TODO: Enumeration, private fields! pascal vs camel casing
 
     //the choice of fold, call , raise etc.
     [SerializeField]
-    private int choice;
+    //private int choice;
+    private BetAction action;
 
     BetManager betMan;
     
@@ -42,25 +51,25 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
         //TODO: move all of these into another script called betcontroller
         Debug.Log("this button belongs to player: " + this.photonView.ownerId);
-        switch (choice)
+        switch (action)
         {
-            case 1:
+            case BetAction.Add:
                 //Adding chips to raise
                 betMan.AddChips();
                 break;
-            case 2:
+            case BetAction.Remove:
                 //Reducing chips to raise
                 betMan.RemoveChips();
                 break;
-            case 3:
+            case BetAction.Raise:
                 //Raising 
                 betMan.RaiseChips();
                 break;
-            case 4:
+            case BetAction.Call:
                 //Calling the last value
                 betMan.CallCheck();
                 break;
-            case 5:
+            case BetAction.Fold:
                 //Folding cards
                 betMan.Fold();
                 break;
