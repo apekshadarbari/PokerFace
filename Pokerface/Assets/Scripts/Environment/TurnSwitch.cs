@@ -54,6 +54,10 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //then we use the cardmanager built into it
         deckInteraction = GetComponent<CardManager>();
 
+        btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
+        btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
+
+
         //pot = GameObject.Find("pot").GetComponent<PotManager>();
 
         //betInteraction = GetComponent<BetMore>();
@@ -80,9 +84,28 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         {
             case 1:
                 TurnTrigger.transform.position = new Vector3(2.8f, .4f, 0f);
+                foreach (var btn in btnTwo)
+                {
+                    btn.GetComponent<MeshRenderer>().enabled = false;
+                }
+                foreach (var btn in btnOne)
+                {
+                    btn.GetComponent<MeshRenderer>().enabled = true;
+                }
+
                 break;
             case 2:
                 TurnTrigger.transform.position = new Vector3(-2.2f, 0f, 4.57f);
+                //deactivate the buttons //TODO: Make more effecient
+                foreach (var btn in btnTwo)
+                {
+                    btn.GetComponent<MeshRenderer>().enabled = true;
+                }
+                foreach (var btn in btnOne)
+                {
+                    btn.GetComponent<MeshRenderer>().enabled = false;
+                }
+
                 break;
             default:
                 break;
@@ -158,23 +181,12 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         Debug.Log("this.photonView.ownerId: " + this.photonView.ownerId);
         Debug.Log("PhotonNetwork.player.ID: " + PhotonNetwork.player.ID);
 
-        //get the buttons in the space
-        btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
-        btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
 
         //if it was player two´s turn
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
         {
             //deactivate the buttons //TODO: Make more effecient
     
-            foreach (var btn in btnTwo)
-            {
-                btn.GetComponent<MeshRenderer>().enabled = false;
-            }
-            foreach (var btn in btnOne)
-            {
-                btn.GetComponent<MeshRenderer>().enabled = true;
-            }
 
             Debug.Log("player 2 transferring control to 1");
 
@@ -185,16 +197,6 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
         {
             Debug.Log("player 1 transferring control to 2");
-
-            //deactivate the buttons //TODO: Make more effecient
-            foreach (var btn in btnTwo)
-            {
-                btn.GetComponent<MeshRenderer>().enabled = true;
-            }
-            foreach (var btn in btnOne)
-            {
-                btn.GetComponent<MeshRenderer>().enabled = false;
-            }
 
 
             //transfor ownership to the other player

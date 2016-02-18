@@ -33,12 +33,18 @@ public class CardBehaviour : MonoBehaviour
         //speedOffset = UnityEngine.Random.Range(-1f, 1f);
         //rotateTimeOffset = UnityEngine.Random.Range(-50f, 50f);
         //rotateSpeedOffset = UnityEngine.Random.Range(-0.2f, 0.2f);
-        //transform.localRotation = Quaternion.identity;
+
+        transform.localRotation = Quaternion.identity;
+
+        transform.localPosition = Vector3.zero;//added to make it instant
+        
         //transform.localRotation = Quaternion.AngleAxis(90f, Vector3.left);
     }
 
     private void Update()
     {
+        //     transform.position = Vector3.zero;
+        //transform.rotation = Quaternion.identity;
         //card movement
         //transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.smoothDeltaTime);
         //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.smoothDeltaTime);
@@ -75,7 +81,7 @@ public class CardBehaviour : MonoBehaviour
 
         var obj = Instantiate( Resources.Load(string.Format("Card_{0}{1}", valueName, card.Suit))) as GameObject;
         obj.transform.SetParent(transform);
-        obj.transform.position = Vector3.zero;
-        obj.transform.rotation = Quaternion.identity;
+        //obj.transform.position = Vector3.zero;
+        //obj.transform.rotation = Quaternion.identity;
     }
 }
