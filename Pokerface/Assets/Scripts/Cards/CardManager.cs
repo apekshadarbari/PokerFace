@@ -148,7 +148,7 @@ public class CardManager : Photon.MonoBehaviour
         shuffled = true;
     }
 
-    [PunRPC]
+    //[PunRPC]
     public void Deal()
     {
         //TODO: Fix that we have to shuffle here and look into whether or not the hands being set here is necesary
@@ -184,7 +184,7 @@ public class CardManager : Photon.MonoBehaviour
     /// Deal the flop
     /// to the community
     /// </summary>
-    [PunRPC]
+    //[PunRPC]
     public void DealFlop()
     {
         for (int i = 0; i < 3; i++)
@@ -371,18 +371,18 @@ public class CardManager : Photon.MonoBehaviour
             //stream.SendNext(cardStack);
             stream.SendNext(shuffled);
 
-            stream.SendNext(playerOneHand);
-            stream.SendNext(playerTwoHand);
-            stream.SendNext(communityCards);
+            //stream.SendNext(playerOneHand);
+            //stream.SendNext(playerTwoHand);
+            //stream.SendNext(communityCards);
         }
         else
         {
             //cardStack = (Stack<GameObject>)stream.ReceiveNext();
             shuffled = (bool)stream.ReceiveNext();
 
-            playerOneHand = (GameObject)stream.ReceiveNext();
-            playerTwoHand = (GameObject)stream.ReceiveNext();
-            communityCards = (GameObject)stream.ReceiveNext();
+            //playerOneHand = (GameObject)stream.ReceiveNext();
+            //playerTwoHand = (GameObject)stream.ReceiveNext();
+            //communityCards = (GameObject)stream.ReceiveNext();
 
         }
     }

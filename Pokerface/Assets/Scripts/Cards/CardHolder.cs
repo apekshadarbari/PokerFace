@@ -67,15 +67,15 @@ public class CardHolder : Photon.MonoBehaviour {
         if (stream.isWriting)
         {
 
-            stream.SendNext(cards);
-            stream.SendNext(cardslots);
+            //stream.SendNext(cards);
+            //stream.SendNext(cardslots);
 
         }
         ////what are we receiving from the network?
         else
         {
-            this.cards = (List<Card>)stream.ReceiveNext();
-            this.cardslots = (Transform[])stream.ReceiveNext();
+            //this.cards = (List<Card>)stream.ReceiveNext();
+            //this.cardslots = (Transform[])stream.ReceiveNext();
 
         }
     }

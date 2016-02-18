@@ -29,11 +29,11 @@ public class CardBehaviour : MonoBehaviour
     private void Start()
     {
         //card bob variables
-        timeOffest = UnityEngine.Random.Range( -50f, 50f );
-        speedOffset = UnityEngine.Random.Range(-1f, 1f);
-        rotateTimeOffset = UnityEngine.Random.Range(-50f, 50f);
-        rotateSpeedOffset = UnityEngine.Random.Range(-0.2f, 0.2f);
-        transform.localRotation = Quaternion.identity;
+        //timeOffest = UnityEngine.Random.Range( -50f, 50f );
+        //speedOffset = UnityEngine.Random.Range(-1f, 1f);
+        //rotateTimeOffset = UnityEngine.Random.Range(-50f, 50f);
+        //rotateSpeedOffset = UnityEngine.Random.Range(-0.2f, 0.2f);
+        //transform.localRotation = Quaternion.identity;
         //transform.localRotation = Quaternion.AngleAxis(90f, Vector3.left);
     }
 
@@ -44,10 +44,10 @@ public class CardBehaviour : MonoBehaviour
         //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.smoothDeltaTime);
 
         //card bob
-        transform.localPosition = transform.parent.up * Mathf.Sin((Time.time + timeOffest) * (3f + speedOffset)) * 0.2f;
-        transform.localRotation =
-            Quaternion.AngleAxis(Mathf.Sin((Time.time + rotateTimeOffset) * (0.8f + rotateSpeedOffset)) * 2f,  transform.parent.up) *
-            Quaternion.AngleAxis(Mathf.Sin((Time.time + rotateTimeOffset) * (0.8f + rotateSpeedOffset)) * 5f, transform.parent.forward);
+        //transform.localPosition = transform.parent.up * Mathf.Sin((Time.time + timeOffest) * (3f + speedOffset)) * 0.2f;
+        //transform.localRotation =
+        //    Quaternion.AngleAxis(Mathf.Sin((Time.time + rotateTimeOffset) * (0.8f + rotateSpeedOffset)) * 2f,  transform.parent.up) *
+        //    Quaternion.AngleAxis(Mathf.Sin((Time.time + rotateTimeOffset) * (0.8f + rotateSpeedOffset)) * 5f, transform.parent.forward);
     }
 
     public void LoadResource()
