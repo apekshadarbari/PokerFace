@@ -21,12 +21,24 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     private BetAction action;
 
     BetManager betMan;
-    
+
+    AudioSource audioSrc;
+
+    [SerializeField, Header("Audio - Hover -")]
+    AudioClip hoverSound;//they all need hover...
+    [SerializeField]
+    AudioClip buttonPressed;
+
+    // we can add them all here.. and then play them when needed... but then we add them a bunch of times.. all clicks for each buttonn..
+    // we can add them to betmanager and then send the clip back here or at least an enum that tells it what to play..
+    // we can create a method that takes an enum and then plays that sound or nothing...
+
     void Start()
     {
+        audioSrc = this.GetComponent<AudioSource>();
         ////reset of the values (starting values)
         //chipsToIncrement = 5;
-        //chipsToRaise = 0;
+        //chipsToRaise = 0;s
         ////amountToCall = 0;
         ////find the pot
 
@@ -38,6 +50,9 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
     public void OnClick()
     {
+        // TODO : do enable instead of deactivate as it cuts off the sound of the click
+        audioSrc.clip = buttonPressed;
+        audioSrc.Play();
 
         if (this.photonView.ownerId == 1)
         {
@@ -46,7 +61,6 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         if (this.photonView.ownerId == 2)
         {
             betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
-
         }
 
         //TODO: move all of these into another script called betcontroller
@@ -83,7 +97,15 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     {
         GetComponent<Renderer>().material.color = Color.red;
         CrosshairTimerDisplay.Instance.Show();
+        audioSrc.clip = hoverSound; // change the
+        audioSrc.Play();
     }
+
+    //void HoverSound()
+    //{
+    //    audioSrc.PlayOneShot(hoverSound, 1f);
+
+    //}
 
     /// <summary>
     /// change the color back

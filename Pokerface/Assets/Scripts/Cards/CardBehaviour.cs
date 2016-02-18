@@ -28,6 +28,7 @@ public class CardBehaviour : MonoBehaviour
 
     private void Start()
     {
+        //card bob variables
         timeOffest = UnityEngine.Random.Range( -50f, 50f );
         speedOffset = UnityEngine.Random.Range(-1f, 1f);
         rotateTimeOffset = UnityEngine.Random.Range(-50f, 50f);
@@ -38,8 +39,11 @@ public class CardBehaviour : MonoBehaviour
 
     private void Update()
     {
+        //card movement
         //transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.smoothDeltaTime);
         //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.smoothDeltaTime);
+
+        //card bob
         transform.localPosition = transform.parent.up * Mathf.Sin((Time.time + timeOffest) * (3f + speedOffset)) * 0.2f;
         transform.localRotation =
             Quaternion.AngleAxis(Mathf.Sin((Time.time + rotateTimeOffset) * (0.8f + rotateSpeedOffset)) * 2f,  transform.parent.up) *

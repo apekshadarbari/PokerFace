@@ -17,6 +17,10 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     CardManager deckInteraction;
     //BetMore betInteraction;
 
+    GameObject[] btnOne;
+    GameObject[] btnTwo;
+
+
     PotManager pot;
 
     public GameObject TurnTrigger
@@ -102,6 +106,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                         //deckInteraction.GetComponent<PhotonView>().RPC("Deal", PhotonTargets.AllBufferedViaServer);
 
                         //we shuffle and deal to starting cards
+
                         deckInteraction.Shuffle();
                         deckInteraction.Deal();
 
@@ -153,18 +158,25 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         Debug.Log("this.photonView.ownerId: " + this.photonView.ownerId);
         Debug.Log("PhotonNetwork.player.ID: " + PhotonNetwork.player.ID);
 
+        //get the buttons in the space
+        btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
+        btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
+
         //if it was player two´s turn
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
         {
-            //		GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
-            //		GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
+            //deactivate the buttons //TODO: Make more effecient
+    
+            foreach (var btn in btnTwo)
+            {
+                btn.GetComponent<MeshRenderer>().enabled = false;
+            }
+            foreach (var btn in btnOne)
+            {
+                btn.GetComponent<MeshRenderer>().enabled = true;
+            }
 
             Debug.Log("player 2 transferring control to 1");
-
-            //deactivate the buttons
-            GameObject.FindGameObjectWithTag("Player2BetController").SetActive(false);
-            //GameObject.FindGameObjectWithTag("Player1BetController").SetActive(true);
-
 
             //transfor ownership to the other player
             this.photonView.TransferOwnership(1);
@@ -172,14 +184,18 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //if it was player one´s turn
         else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
         {
-            //			GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<MeshRenderer>().enabled = false;
-            //			GameObject.FindGameObjectWithTag ("Player2betController").GetComponentInChildren<SphereCollider> ().enabled = false;
-
-            //deactivate the buttons
-            GameObject.FindGameObjectWithTag("Player1BetController").SetActive(false);
-            //GameObject.FindGameObjectWithTag("Player2BetController").SetActive(true);
-
             Debug.Log("player 1 transferring control to 2");
+
+            //deactivate the buttons //TODO: Make more effecient
+            foreach (var btn in btnTwo)
+            {
+                btn.GetComponent<MeshRenderer>().enabled = true;
+            }
+            foreach (var btn in btnOne)
+            {
+                btn.GetComponent<MeshRenderer>().enabled = false;
+            }
+
 
             //transfor ownership to the other player
             this.photonView.TransferOwnership(2);

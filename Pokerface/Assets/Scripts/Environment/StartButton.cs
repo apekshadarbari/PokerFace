@@ -12,9 +12,15 @@ public class StartButton : Photon.MonoBehaviour, IClicker
     [SerializeField]
     NetworkedPlayer playerCtrl;
     bool gameIsStarted;
+    [SerializeField]
+    AudioManager audMan;
+
+
+
 
     public void Start()
     {
+        audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
 
         //TODO: changed so that masterclient is whoever makes the room
         if (PhotonNetwork.isMasterClient)
@@ -44,10 +50,11 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         //if we are player one I.E. master
         if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
-            Debug.Log("Clicked");
+            //Debug.Log("Clicked");
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.roundStarted);
 
-            //start game through the networked player
-            playerCtrl.StartGame();
+            //start game through the networked player //TODO: make start button better
+            //playerCtrl.StartGame();
             //deal the cards
 
             //cardMan.Deal();

@@ -45,4 +45,7 @@ MonoBehaviour:
   - DealFlop
   - Shuffle
   - DealCard
+  - HoverSound
+  - ButtonPressed
+  - ButtonPressedAudio
   DisableAutoOpenWizard: 1

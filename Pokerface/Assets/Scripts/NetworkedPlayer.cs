@@ -33,7 +33,14 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     {
 
         //creates a betcontroller for each player and tags it for later reference
+        if (PhotonNetwork.isMasterClient && photonView.isMine)
+        {
+            //start game button clicked
+            //Debug.Log("Starting Game");
 
+            //next turn button created
+            PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
+        }
         //player 2 
         if (photonView.isMine && PhotonNetwork.player.ID == 2)
         {
@@ -41,6 +48,12 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //create a betcontroller for each player
             betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
 			betControl.tag = "Player2BetController";
+
+            foreach ( Transform t in betControl.transform)
+            {
+                t.gameObject.tag = "PlayerTwoButton";
+            }
+
         }
 
         //player 1
@@ -54,6 +67,12 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
 
             betControl.tag = "Player1BetController";
+
+            foreach (Transform t in betControl.transform)
+            {
+                t.gameObject.tag = "PlayerOneButton";
+            }
+
         }
     }
 
@@ -92,14 +111,17 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     public void StartGame()
     {
-        if (PhotonNetwork.isMasterClient && photonView.isMine)
-        {
-            //start game button clicked
-            Debug.Log("Starting Game");
+        //TODO: Enable things when game is started, should be RPC
 
-            //next turn button created
-            PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
-        }
+        //GameObject[] enablerArr;
+        //enablerArr.
+          
+        //    GameObject.FindGameObjectsWithTag("PlayerOneButton");
+        //enabler.a
+        //    PlayerTwoButton
+        //    Player2BetController
+        //    Player1BetController
+        //    TurnTrigger
     }
 
     // Update is called once per frame

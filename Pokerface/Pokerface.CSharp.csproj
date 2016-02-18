@@ -215,6 +215,7 @@
     <Compile Include="Assets\Scripts\BetHandlers\BetMore.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\PotManager.cs" />
     <Compile Include="Assets\Scripts\BetHandlers\WalletManager.cs" />
+    <Compile Include="Assets\Scripts\ButtonTrigger.cs" />
     <Compile Include="Assets\Scripts\Cards\Card.cs" />
     <Compile Include="Assets\Scripts\Cards\CardBehaviour.cs" />
     <Compile Include="Assets\Scripts\Cards\CardHolder.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Assets\Scripts\Controls\GazeInputModuleCrosshair.cs" />
     <Compile Include="Assets\Scripts\Controls\IClicker.cs" />
     <Compile Include="Assets\Scripts\Controls\TestRaycast.cs" />
+    <Compile Include="Assets\Scripts\Environment\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Environment\PotTextManager.cs" />
     <Compile Include="Assets\Scripts\Environment\StartButton.cs" />
     <Compile Include="Assets\Scripts\Environment\TurnSwitch.cs" />

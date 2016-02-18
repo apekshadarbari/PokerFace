@@ -39,7 +39,7 @@ public class PotManager : Photon.MonoBehaviour
         //player1pot = 0;
 
         //for testing purposes 
-        player2pot = 15;
+        //player2pot = 15;
 
 
     }
@@ -99,7 +99,7 @@ public class PotManager : Photon.MonoBehaviour
             player1pot = 0;
             player2pot = 0;
 
-            ////for testing purposes
+            ////for testing purposes //TODO: Blinds=
             //player2pot = 15;
 
             //turn++;
