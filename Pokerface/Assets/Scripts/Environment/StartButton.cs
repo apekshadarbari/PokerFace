@@ -88,11 +88,11 @@ public class StartButton : Photon.MonoBehaviour, IClicker
     {
         if (stream.isWriting)
         {
-            stream.SendNext(gameIsStarted);
+            //stream.SendNext(gameIsStarted);
         }
         else
         {
-            gameIsStarted  = (bool)stream.ReceiveNext();
+            //gameIsStarted  = (bool)stream.ReceiveNext();
         }
     }
 }

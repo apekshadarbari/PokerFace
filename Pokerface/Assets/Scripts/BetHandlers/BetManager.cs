@@ -54,7 +54,7 @@ public class BetManager : Photon.MonoBehaviour
 
         audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
 
-        ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
+        //ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
 
 
         //can be used for trading the buttons if we want ---
@@ -96,6 +96,7 @@ public class BetManager : Photon.MonoBehaviour
     /// </summary>
     public void RaiseChips()
     {
+        ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
 
         //the chips we want to bet is set to the raised chips an used with the current user(owner - player ´s id)
         //we get chips from our wallet as the player id
@@ -141,6 +142,7 @@ public class BetManager : Photon.MonoBehaviour
 
         Debug.Log("amount to call = " + amountToCall);
 
+        ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
 
 
         if (amountToCall == 0)
