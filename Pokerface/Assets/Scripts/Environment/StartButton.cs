@@ -54,7 +54,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.roundStarted);
 
             //start game through the networked player //TODO: make start button better
-            //playerCtrl.StartGame();
+            playerCtrl.StartGame();
             //deal the cards
 
             //cardMan.Deal();
@@ -97,21 +97,3 @@ public class StartButton : Photon.MonoBehaviour, IClicker
     }
 }
 
-
-//what are we sending to the network?
-//if (stream.isWriting)
-//{
-//    stream.SendNext(playerGlobal.position);
-//    stream.SendNext(playerGlobal.rotation);
-//    stream.SendNext(playerLocal.localPosition);
-//    stream.SendNext(playerLocal.localRotation);
-
-//}
-////what are we receiving from the network?
-//else
-//{
-//    this.transform.position = (Vector3)stream.ReceiveNext();
-//    this.transform.rotation = (Quaternion)stream.ReceiveNext();
-//    avatar.transform.localPosition = (Vector3)stream.ReceiveNext();
-//    avatar.transform.localRotation = (Quaternion)stream.ReceiveNext();
-//}

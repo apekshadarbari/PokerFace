@@ -41,39 +41,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //next turn button created
             PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
         }
-        //player 2 
-        if (photonView.isMine && PhotonNetwork.player.ID == 2)
-        {
-            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
-            //create a betcontroller for each player
-            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
-			betControl.tag = "Player2BetController";
 
-            foreach ( Transform t in betControl.transform)
-            {
-                t.gameObject.tag = "PlayerTwoButton";
-            }
-
-        }
-
-        //player 1
-        if (photonView.isMine && PhotonNetwork.player.ID == 1)
-        {
-            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
-            //create a betcontroller for each player
-            //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.2f, 0, -0.060f), Quaternion.Euler(0, 180, 0), 0);
-
-            //test position - when no oculus
-            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
-
-            betControl.tag = "Player1BetController";
-
-            foreach (Transform t in betControl.transform)
-            {
-                t.gameObject.tag = "PlayerOneButton";
-            }
-
-        }
     }
 
     void Update()
@@ -111,11 +79,46 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     public void StartGame()
     {
+
+        //player 2 
+        if (photonView.isMine && PhotonNetwork.player.ID == 2)
+        {
+            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
+            //create a betcontroller for each player
+            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
+            betControl.tag = "Player2BetController";
+
+            foreach (Transform t in betControl.transform)
+            {
+                t.gameObject.tag = "PlayerTwoButton";
+            }
+
+        }
+
+        //player 1
+        if (photonView.isMine && PhotonNetwork.player.ID == 1)
+        {
+            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
+            //create a betcontroller for each player
+            //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.2f, 0, -0.060f), Quaternion.Euler(0, 180, 0), 0);
+
+            //test position - when no oculus
+            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
+
+            betControl.tag = "Player1BetController";
+
+            foreach (Transform t in betControl.transform)
+            {
+                t.gameObject.tag = "PlayerOneButton";
+            }
+
+        }
+
         //TODO: Enable things when game is started, should be RPC
 
         //GameObject[] enablerArr;
         //enablerArr.
-          
+
         //    GameObject.FindGameObjectsWithTag("PlayerOneButton");
         //enabler.a
         //    PlayerTwoButton
@@ -123,6 +126,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         //    Player1BetController
         //    TurnTrigger
     }
+
+
 
     // Update is called once per frame
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

@@ -52,7 +52,6 @@ public class AudioManager : MonoBehaviour
     [PunRPC]
     void ButtonPressedAudio(ActionSound soundToPlay)
     {
-
         switch (soundToPlay)
         {
             case ActionSound.roundStarted:
@@ -87,6 +86,17 @@ public class AudioManager : MonoBehaviour
         }
         src.Play();
 
+    }
+
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+        }
+        else
+        {
+        }
     }
 
 }
