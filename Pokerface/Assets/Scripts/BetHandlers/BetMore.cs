@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+enum BetAction
+{
+    Add,
+    Remove,
+    Raise,
+    Call,
+    Fold
+}
 public class BetMore : Photon.MonoBehaviour, IClicker
 {
-    enum BetAction
-    {
-        Add,
-        Remove,
-        Raise,
-        Call,
-        Fold
-    }
+
 
     //TODO: Enumeration, private fields! pascal vs camel casing
 
