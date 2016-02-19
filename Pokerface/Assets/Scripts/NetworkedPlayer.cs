@@ -11,6 +11,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     //players camera rig / perspective
     public Transform playerGlobal;
     public Transform playerLocal;
+    public Transform playerHead;
 
     //the turnswitch trigger
     [SerializeField]
@@ -31,11 +32,12 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     void Start()
     {
-        Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
 
 
         if (photonView.isMine) //TODO: check how much can be moved to start - making seats the Parents might make it easier to deal with but will require some restructuring
         {
+            Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
+
             //Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
 
             //playerGlobal = GameObject.Find("[CameraRig]").transform;
@@ -112,11 +114,26 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         }
         if (photonView.isMine) //TODO: check how much can be moved to start - making seats the Parents might make it easier to deal with but will require some restructuring
         {
+
+            Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
+
+            //Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
+
+            //playerGlobal = GameObject.Find("[CameraRig]").transform;
+            playerGlobal = GameObject.Find("[CameraRig]").transform;
+            playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
+
+            GameObject.Find("[SteamVR]").transform.position = seatTrans.position;
+
+            playerGlobal.position = seatTrans.position;
+
             //TODO; might need another var for a player head for the pos tracking 
             this.transform.position = (playerLocal).transform.position;
             this.transform.rotation = (playerLocal).transform.rotation;
 
-            //seat tranform = desired transform for player
+            //avatar.transform.position = (playerLocal).transform.position;
+            //avatar.transform.rotation = (playerLocal).transform.rotation;
+            ////seat tranform = desired transform for player
 
             //TESTING ;; CHANGE BACK 
             //Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];

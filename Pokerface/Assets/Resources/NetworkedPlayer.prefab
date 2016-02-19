@@ -427,6 +427,7 @@ MonoBehaviour:
   avatar: {fileID: 173316}
   playerGlobal: {fileID: 0}
   playerLocal: {fileID: 0}
+  playerHead: {fileID: 0}
   turnTrigger: {fileID: 179448, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
   betControl: {fileID: 114612, guid: fbfdcca88dad2554e8b4387be3d2c6b6, type: 2}
   pot: {fileID: 134960, guid: 945a6f824dc054e4cb30c1aa9607933a, type: 2}
@@ -446,8 +447,8 @@ MonoBehaviour:
   group: 0
   prefixBackup: -1
   observed: {fileID: 0}
-  synchronization: 3
-  onSerializeTransformOption: 3
+  synchronization: 1
+  onSerializeTransformOption: 4
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
@@ -470,7 +471,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: synchronization
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[0]
