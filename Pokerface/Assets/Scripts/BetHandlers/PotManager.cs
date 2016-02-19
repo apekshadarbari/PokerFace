@@ -67,7 +67,7 @@ public class PotManager : Photon.MonoBehaviour
     {
         if (player == 2)
         {
-            walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
+            walletMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
             walletMan.AddChipsToWallet(chipValue + player1pot+player2pot);
         }
         else if (player == 1)
