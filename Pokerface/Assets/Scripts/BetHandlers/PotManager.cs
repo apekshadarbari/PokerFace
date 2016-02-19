@@ -21,10 +21,13 @@ public class PotManager : Photon.MonoBehaviour
     [SerializeField]
     WalletManager walletMan;
 
+    Canvas infoBoard;
+
     List<GameObject> players;
 
     [SerializeField]
     public int chipValue;
+
 
     public int ChipValue
     {
@@ -40,6 +43,7 @@ public class PotManager : Photon.MonoBehaviour
 
         chipValue = 5; //reset to 0 
         //player1pot = 0;
+        infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
         //for testing purposes 
         //player2pot = 15;
@@ -58,6 +62,9 @@ public class PotManager : Photon.MonoBehaviour
     public void Update()
     {
         //betMan.GetAmountToCall(player, amountToCall);
+
+        infoBoard.GetComponent<PhotonView>().RPC("TextPot", PhotonTargets.AllBuffered,chipValue);
+
 
 
     }

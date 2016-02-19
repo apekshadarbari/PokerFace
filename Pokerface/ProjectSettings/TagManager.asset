@@ -11,6 +11,7 @@ TagManager:
   - PlayerTwoButton
   - CardSlot
   - CardHolder
+  - InfoBoard
   layers:
   - Default
   - TransparentFX

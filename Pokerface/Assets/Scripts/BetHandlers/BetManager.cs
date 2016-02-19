@@ -25,6 +25,9 @@ public class BetManager : Photon.MonoBehaviour
     //[SerializeField]
     WalletManager wallet;
 
+    Canvas infoBoard;
+
+
     [SerializeField]
     AudioManager audMan;
 
@@ -44,6 +47,9 @@ public class BetManager : Photon.MonoBehaviour
 
     void Start()
     {
+
+        infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
+
         //reset of the values (starting values)
         chipsToIncrement = 5;
         chipsToRaise = 0;
@@ -90,7 +96,11 @@ public class BetManager : Photon.MonoBehaviour
         //}
     }
 
+    void Update()
+    {
+        infoBoard.GetComponent<PhotonView>().RPC("TextAmountToCall", PhotonTargets.AllBuffered, this.photonView.ownerId,amountToCall );
 
+    }
     /// <summary>
     /// add chips (plus button)
     /// </summary>

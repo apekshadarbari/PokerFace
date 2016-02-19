@@ -10,6 +10,8 @@ public class WalletManager : Photon.MonoBehaviour
     [SerializeField]
     int chipValue;
 
+    Canvas infoBoard;
+
     public int ChipValue
     {
         get
@@ -21,6 +23,12 @@ public class WalletManager : Photon.MonoBehaviour
     void Start()
     {
         chipValue = 100;
+        infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
+    }
+
+    void Update()
+    {
+        infoBoard.GetComponent<PhotonView>().RPC("TextWallet", PhotonTargets.AllBuffered, this.photonView.ownerId, chipValue);
     }
 
     [PunRPC]
