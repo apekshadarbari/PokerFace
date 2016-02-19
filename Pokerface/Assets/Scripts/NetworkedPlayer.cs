@@ -62,7 +62,6 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             {
                 t.gameObject.tag = "PlayerOneButton";
             }
-
         }
 
     }

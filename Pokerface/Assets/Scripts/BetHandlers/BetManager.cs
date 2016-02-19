@@ -54,6 +54,27 @@ public class BetManager : Photon.MonoBehaviour
 
         audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
 
+
+        if (this.photonView.ownerId == 2)
+        {
+            this.tag = "Player2BetController";
+
+            foreach (Transform t in this.transform)
+            {
+                t.gameObject.tag = "PlayerTwoButton";
+            }
+        }
+        else if (this.photonView.ownerId == 1)
+        {
+
+            this.tag = "Player1BetController";
+
+            foreach (Transform t in this.transform)
+            {
+                t.gameObject.tag = "PlayerOneButton";
+            }
+        }
+
         //ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
 
 
@@ -114,6 +135,10 @@ public class BetManager : Photon.MonoBehaviour
         //chipsToRaise = 0;
 
         ts.GetComponent<TurnSwitch>().OnClick();
+        //chipsToBet = wallet.GetComponent<WalletManager>().GetChips(this.photonView.ownerId, amountToCall);//we get chips equal to the amount needed to call
+
+        //pot.AddChips(chipsToBet);//we add chips to the pot equal to the bet/call
+
 
     }
 
@@ -182,7 +207,6 @@ public class BetManager : Photon.MonoBehaviour
             chipsToBet = wallet.GetComponent<WalletManager>().GetChips(this.photonView.ownerId, amountToCall);//we get chips equal to the amount needed to call
 
             pot.AddChips(chipsToBet);//we add chips to the pot equal to the bet/call
-
 
             //	ts.GetComponent<TurnSwitch> ().potComparison(amt_to_call);
             //AmountToCall = 0;

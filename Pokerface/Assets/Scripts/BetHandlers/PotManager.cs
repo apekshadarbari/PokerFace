@@ -89,22 +89,6 @@ public class PotManager : Photon.MonoBehaviour
         }
 
 
-        //if both pots are the same set them to 0
-        if (player1pot == player2pot)
-        {
-            //if the pots are the same we can add them to the pot and they no longer belong to a player
-            AddChips(player1pot + player2pot);
-
-            //reset the players pots
-            player1pot = 0;
-            player2pot = 0;
-
-            ////for testing purposes //TODO: Blinds=
-            //player2pot = 15;
-
-            //turn++;
-        }
-
         //if one of the pots have more value than the other then we need to change the amount to call
         if (player1pot != player2pot)
         {
@@ -134,6 +118,22 @@ public class PotManager : Photon.MonoBehaviour
                 Debug.Log("ERROR in the amount to call");
             }
         }
+        //if both pots are the same set them to 0
+        if (player1pot == player2pot)
+        {
+            //if the pots are the same we can add them to the pot and they no longer belong to a player
+            AddChips(player1pot + player2pot);
+
+            //reset the players pots
+            player1pot = 0;
+            player2pot = 0;
+
+            ////for testing purposes //TODO: Blinds=
+            //player2pot = 15;
+
+            //turn++;
+        }
+
 
         //return;
     }

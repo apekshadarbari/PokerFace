@@ -87,10 +87,14 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 foreach (var btn in btnTwo)
                 {
                     btn.GetComponent<MeshRenderer>().enabled = false;
+                    btn.GetComponent<SphereCollider>().enabled = false;
+
                 }
                 foreach (var btn in btnOne)
                 {
                     btn.GetComponent<MeshRenderer>().enabled = true;
+                    btn.GetComponent<SphereCollider>().enabled = true;
+
                 }
 
                 break;
@@ -100,10 +104,13 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 foreach (var btn in btnTwo)
                 {
                     btn.GetComponent<MeshRenderer>().enabled = true;
+                    btn.GetComponent<SphereCollider>().enabled = true;
+
                 }
                 foreach (var btn in btnOne)
                 {
                     btn.GetComponent<MeshRenderer>().enabled = false;
+                    btn.GetComponent<SphereCollider>().enabled = false;
                 }
 
                 break;
