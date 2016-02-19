@@ -36,6 +36,19 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         }
     }
 
+    public int Turn
+    {
+        get
+        {
+            return turn;
+        }
+
+        set
+        {
+            turn = value;
+        }
+    }
+
     void Awake()
     {
         Debug.Log("pre awake owner " + photonView.ownerId.ToString());
@@ -70,10 +83,10 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //game just started so we set everything to 0
         flopIsDealt = false;
         gameIsStarted = false;
-        turn = 0;
+        Turn = 0;
 
         Debug.Log("I´m started");
-        Debug.Log("Turn " + turn.ToString());
+        Debug.Log("Turn " + Turn.ToString());
 
     }
 
@@ -115,9 +128,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             default:
                 break;
         }
-
-        //go through the turns, to see what needs to happen
-        switch (turn)
+        switch (Turn)
         {
             //game (round) just started 
             case 0:
@@ -156,8 +167,6 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                         //deckInteraction.CompareCards();
                         flopIsDealt = true;
 
-
-
                     }
 
                 }
@@ -178,6 +187,9 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             default:
                 break;
         }
+
+        //go through the turns, to see what needs to happen
+
     }
 
     /// <summary>
@@ -185,10 +197,13 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
     /// </summary>
     public void OnClick()
     {
-        //increment the turn
-        turn++;
+        Turn++;
+        gameObject.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, Turn, gameIsStarted,flopIsDealt);
 
-        Debug.Log("Turn: " + turn.ToString());
+
+        //increment the turn
+
+        Debug.Log("Turn: " + Turn);
         Debug.Log("this.photonView.ownerId: " + this.photonView.ownerId);
         Debug.Log("PhotonNetwork.player.ID: " + PhotonNetwork.player.ID);
 
@@ -217,29 +232,41 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         Debug.Log("owner " + this.photonView.ownerId.ToString());
 
     }
+
+    [PunRPC]
+    void TurnChange(int turn, bool gameStarted, bool flopDealt)
+    {
+        this.Turn = turn;
+        Debug.Log("Turn: "  +turn);
+        this.gameIsStarted = gameStarted;
+        this.flopIsDealt = flopDealt; 
+        //return this.Turn;
+
+
+    }
+
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        //    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        //{
+
         if (stream.isWriting)
         {
             //send the next turn to next player
             //make it uninteractable to others
 
-            stream.SendNext(gameIsStarted);
-            stream.SendNext(flopIsDealt);
+            //stream.SendNext(gameIsStarted);
+            //stream.SendNext(flopIsDealt);
 
-            stream.SendNext(turn);
+            //stream.SendNext(turn);
 
             stream.SendNext(photonView.ownerId);
             stream.SendNext(TurnTrigger.transform.position);
         }
         else
         {
-            this.gameIsStarted = (bool)stream.ReceiveNext();
-            this.flopIsDealt = (bool)stream.ReceiveNext();
+            //this.gameIsStarted = (bool)stream.ReceiveNext();
+            //this.flopIsDealt = (bool)stream.ReceiveNext();
 
-            this.turn = (int)stream.ReceiveNext();
+            //turn = (int)stream.ReceiveNext();
 
             photonView.ownerId = (int)stream.ReceiveNext();
             this.TurnTrigger.transform.position = (Vector3)stream.ReceiveNext();

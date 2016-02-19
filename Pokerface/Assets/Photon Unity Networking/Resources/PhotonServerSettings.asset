@@ -56,4 +56,6 @@ MonoBehaviour:
   - RemoveAllCards
   - RemoveCard
   - WinPotToPlayer
+  - Turn
+  - TurnChange
   DisableAutoOpenWizard: 1
