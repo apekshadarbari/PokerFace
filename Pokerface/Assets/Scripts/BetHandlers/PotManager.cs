@@ -39,7 +39,7 @@ public class PotManager : Photon.MonoBehaviour
         //player1pot = 0;
 
         //for testing purposes 
-        //player2pot = 15;
+        player2pot = 15;
 
     }
 
@@ -67,8 +67,7 @@ public class PotManager : Photon.MonoBehaviour
     /// </summary>
     /// <param name="thisTurnbet">bet this turn</param>
     /// 
-    [PunRPC]
-    void PotComparison(int player, int thisTurnbet)
+    public void PotComparison(int player, int thisTurnbet)
     {
         Debug.Log("entered pot comparison");
         Debug.Log("player: " + player + " bet: " + thisTurnbet);
@@ -99,7 +98,7 @@ public class PotManager : Photon.MonoBehaviour
                 //set amount to call
                 //send it back with a player id to the betmore checkcall function
                 amountToCall = player1pot - player2pot;
-                //betMan.GetAmountToCall(player, amountToCall);
+                betMan.GetAmountToCall(player, amountToCall);
                 Debug.Log("player 2 has to call " + amountToCall);
             }
             else if (player2pot > player1pot)//vice versa
@@ -123,7 +122,8 @@ public class PotManager : Photon.MonoBehaviour
 
             //check occured
         }
-        betMan.GetComponent<PhotonView>().RPC("GetAmountToCall", PhotonTargets.All, player, amountToCall);
+        betMan.GetAmountToCall(player,amountToCall);
+        //betMan.GetComponent<PhotonView>().RPC("GetAmountToCall", PhotonTargets.All, player, amountToCall);
 
         //return;
     }

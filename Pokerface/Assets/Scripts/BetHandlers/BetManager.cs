@@ -73,6 +73,7 @@ public class BetManager : Photon.MonoBehaviour
             }
         }
 
+        pot.PotComparison(this.photonView.ownerId, 0);
         //ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
 
 
@@ -128,12 +129,17 @@ public class BetManager : Photon.MonoBehaviour
         Debug.Log("chips to raise value is " + chipsToRaise + "the amount being sent on is " + ChipsToRaise);
 
         //tell the pot the value we want to raise
-        pot.GetComponent<PhotonView>().RPC("PotComparison", PhotonTargets.All, this.photonView.ownerId, chipsToBet);
 
         //reset the chips we want to raise
         //chipsToRaise = 0;
-        if (chipsToBet >= amountToCall)
+        if (chipsToBet == amountToCall)
         {
+            CallCheck();
+        }
+        if (chipsToBet > amountToCall)
+        {
+            pot.PotComparison(this.photonView.ownerId, chipsToBet);
+
             if (this.photonView.ownerId == 1)
             {
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Raise);
@@ -156,7 +162,7 @@ public class BetManager : Photon.MonoBehaviour
     /// </summary>
     /// <param name="player"> player who needs to call / has bet the least</param>
     /// <param name="amountToCall"> the amount the player needs to call</param>
-     [PunRPC]
+
     public void GetAmountToCall(int player, int amountToCall)
     {
         //we set the scripts field values = the the values we get from the pot
@@ -197,7 +203,7 @@ public class BetManager : Photon.MonoBehaviour
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Check);
                 //audMan.ButtonPressedAudio(ActionSound.p1Call);
             }
-            pot.GetComponent<PhotonView>().RPC("PotComparison", PhotonTargets.All, this.photonView.ownerId, 0);
+            pot.PotComparison(this.photonView.ownerId, 0);
         }
         else
         {
