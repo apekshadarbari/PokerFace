@@ -111,7 +111,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             this.transform.position = (playerGlobal).transform.position;
             this.transform.rotation = (playerLocal).transform.rotation;
 
-            this.transform.localPosition = Vector3.zero;
+            //this.transform.localPosition = Vector3.zero;
             //stream.SendNext(GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats);
 
             //moves the camera to your seat
