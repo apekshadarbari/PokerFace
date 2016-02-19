@@ -9,6 +9,8 @@ TagManager:
   - Player2BetController
   - PlayerOneButton
   - PlayerTwoButton
+  - CardSlot
+  - CardHolder
   layers:
   - Default
   - TransparentFX

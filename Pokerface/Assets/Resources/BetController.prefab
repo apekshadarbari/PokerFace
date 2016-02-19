@@ -32,6 +32,7 @@ GameObject:
   - 4: {fileID: 438650}
   - 114: {fileID: 11419230}
   - 114: {fileID: 11466386}
+  - 114: {fileID: 11400746}
   m_Layer: 0
   m_Name: BetController
   m_TagString: Untagged
@@ -116,6 +117,7 @@ GameObject:
   - 114: {fileID: 11419304}
   - 23: {fileID: 2396938}
   - 135: {fileID: 13517154}
+  - 114: {fileID: 11475810}
   m_Layer: 0
   m_Name: Wallet
   m_TagString: Untagged
@@ -931,6 +933,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11400746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dac06e9a621f1746bf174d004f6cb1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chipValue: 0
 --- !u!114 &11402620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -979,6 +993,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 438650}
   - {fileID: 11466386}
+  - {fileID: 11400746}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -1133,6 +1148,31 @@ MonoBehaviour:
   ts: {fileID: 0}
   wallet: {fileID: 158418}
   audMan: {fileID: 0}
+--- !u!114 &11475810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 11419304}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &11488630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1266,7 +1306,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: wallet
@@ -1384,6 +1424,22 @@ Prefab:
       propertyPath: m_Radius
       value: 0.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: synchronization
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 11419304}
+    - target: {fileID: 0}
+      propertyPath: instantiationId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400746}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114612}

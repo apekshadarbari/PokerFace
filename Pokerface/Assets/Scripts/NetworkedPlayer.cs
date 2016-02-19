@@ -42,6 +42,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             foreach (Transform t in betControl.transform)
             {
                 t.gameObject.tag = "PlayerTwoButton";
+                t.GetComponent<MeshRenderer>().enabled = false;
+                t.GetComponent<SphereCollider>().enabled = false;
             }
 
         }
@@ -61,6 +63,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             foreach (Transform t in betControl.transform)
             {
                 t.gameObject.tag = "PlayerOneButton";
+                t.GetComponent<MeshRenderer>().enabled = false;
+                t.GetComponent<SphereCollider>().enabled = false;
             }
         }
 

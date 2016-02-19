@@ -88,13 +88,11 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                 {
                     btn.GetComponent<MeshRenderer>().enabled = false;
                     btn.GetComponent<SphereCollider>().enabled = false;
-
                 }
                 foreach (var btn in btnOne)
                 {
                     btn.GetComponent<MeshRenderer>().enabled = true;
                     btn.GetComponent<SphereCollider>().enabled = true;
-
                 }
 
                 break;
@@ -136,7 +134,6 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                         //deckInteraction.GetComponent<PhotonView>().RPC("Deal", PhotonTargets.AllBufferedViaServer);
 
                         //we shuffle and deal to starting cards
-
                         deckInteraction.Shuffle();
                         deckInteraction.Deal();
 
@@ -148,14 +145,16 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
             case 1:
                 if (!flopIsDealt) //make sure we only do it once
                 {
-                    flopIsDealt = true;
-                    deckInteraction.DealFlop();
-                    //deckInteraction.GetComponent<PhotonView>().RPC("DealFlop", PhotonTargets.AllBufferedViaServer);
+                    if (PhotonNetwork.isMasterClient)
+                    {
+                        flopIsDealt = true;
+                        deckInteraction.DealFlop();
+                        //deckInteraction.GetComponent<PhotonView>().RPC("DealFlop", PhotonTargets.AllBufferedViaServer);
 
-                    //temp compare for testing
-                    //deckInteraction.CompareCards();
-                    deckInteraction.GetComponent<PhotonView>().RPC("CompareCards", PhotonTargets.AllBufferedViaServer);
-
+                        //temp compare for testing
+                        //deckInteraction.CompareCards();
+                        deckInteraction.GetComponent<PhotonView>().RPC("CompareCards", PhotonTargets.AllBufferedViaServer);
+                    }
                 }
                 break;
             //deal the turn
@@ -193,7 +192,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
         {
             //deactivate the buttons //TODO: Make more effecient
-    
+
 
             Debug.Log("player 2 transferring control to 1");
 

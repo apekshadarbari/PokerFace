@@ -69,10 +69,11 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         {
             case BetAction.Add:
                 //Adding chips to raise
-                betMan.AddChips();
+                betMan.Fold(); //TODO: REMOVE TEST
+                //betMan.AddChips(); 
                 break;
             case BetAction.Remove:
-                //Reducing chips to raise
+                //Reducing chips to raises
                 betMan.RemoveChips();
                 break;
             case BetAction.Raise:

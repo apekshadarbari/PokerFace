@@ -23,11 +23,12 @@ public class WalletManager : Photon.MonoBehaviour
         chipValue = 100;
     }
 
-    /*  public void AddChips(int value)
+    [PunRPC]
+    public void AddChipsToWallet(int value)
     {
         chipValue += value;
-        
-    } */
+
+    }
 
     public int GetChips(int player, int value)
     {
@@ -63,6 +64,17 @@ public class WalletManager : Photon.MonoBehaviour
             }
         }
         return value;
+    }
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(chipValue);
+        }
+        else
+        {
+            chipValue = (int)stream.ReceiveNext();
+        }
     }
 }
 

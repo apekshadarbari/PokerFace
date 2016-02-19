@@ -22,8 +22,8 @@ public class BetManager : Photon.MonoBehaviour
     //an instance of the pot
     PotManager pot;
     //the players wallet I.E. chipvalue
-    [SerializeField]
-    GameObject wallet;
+    //[SerializeField]
+    WalletManager wallet;
 
     [SerializeField]
     AudioManager audMan;
@@ -52,6 +52,8 @@ public class BetManager : Photon.MonoBehaviour
         pot = GameObject.Find("pot").GetComponent<PotManager>();
 
         audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
+
+        wallet = gameObject.GetComponent<WalletManager>();
 
         if (this.photonView.ownerId == 2)
         {
@@ -121,7 +123,7 @@ public class BetManager : Photon.MonoBehaviour
 
         //the chips we want to bet is set to the raised chips an used with the current user(owner - player ´s id)
         //we get chips from our wallet as the player id
-        chipsToBet = wallet.GetComponent<WalletManager>().GetChips(this.photonView.ownerId, chipsToRaise);
+        chipsToBet = wallet.GetChips(this.photonView.ownerId, chipsToRaise);
 
         //add the chips to the pot TODO: should add to the player pot
         //pot.AddChips(chipsToBet);
@@ -176,7 +178,7 @@ public class BetManager : Photon.MonoBehaviour
     }
 
     /// <summary>
-    /// call the current bet
+    /// call the current bet //TODO: make sure you cant call/raise after you run out of chips
     /// </summary>
     public void CallCheck()
     {
@@ -221,7 +223,7 @@ public class BetManager : Photon.MonoBehaviour
             }
 
             //TODO: get rid of redundancy in the wallet call
-            chipsToBet = wallet.GetComponent<WalletManager>().GetChips(this.photonView.ownerId, amountToCall);//we get chips equal to the amount needed to call
+            chipsToBet = wallet.GetChips(this.photonView.ownerId, amountToCall);//we get chips equal to the amount needed to call
 
             pot.AddChipsToPot(chipsToBet);//we add chips to the pot equal to the bet/call
 
@@ -239,31 +241,42 @@ public class BetManager : Photon.MonoBehaviour
     /// </summary>
 	public void Fold()
     {
-        ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
-
-        if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+        if (this.photonView.ownerId == 2)
         {
-            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
-
             Debug.Log("player " + this.photonView.ownerId + " folds");
-            //WalletManager.player1ChipValue = pot.GetComponent<PotManager>().chipValue; //what are we trying to do here?
-            pot.GetComponent<PotManager>().chipValue = 0;//TODO: what are we trying to do here?
-            // needs more logic here to end game
-            return;
+
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
+            pot.FoldPotToPlayer(1);
+
         }
-        else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
+        else if (this.photonView.ownerId == 1)
         {
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
 
             Debug.Log("player " + this.photonView.ownerId + " folds");
-            //wallet.GetComponent<WalletManager> ().player2ChipValue = pot.GetComponent<PotManager>().chipValue;
-            //WalletManager.player2ChipValue = pot.chipValue;
-            pot.GetComponent<PotManager>().chipValue = 0;
-            // needs more logic here to end game
-            return;
+
+            pot.FoldPotToPlayer(2);
+        }
+        //destroy children of cardslots
+        gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
+
+    }
+    [PunRPC]
+    void RemoveCard()
+    {
+        //var fold = GameObject.FindGameObjectsWithTag("CardSlot");
+        var holders = GameObject.FindGameObjectsWithTag("CardHolder");
+
+        foreach (var slot in holders)
+        {
+            slot.GetComponent<CardHolder>().RemoveAllCards();
+
+            //foreach (Transform c in s.transform)
+            //{
+            //    GameObject.Destroy(c.gameObject);
+            //}
         }
     }
-
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
     }

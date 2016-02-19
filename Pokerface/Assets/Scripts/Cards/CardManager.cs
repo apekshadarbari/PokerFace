@@ -24,6 +24,8 @@ public class CardManager : Photon.MonoBehaviour
     [SerializeField]
     private GameObject communityCards;
 
+    [SerializeField]
+    GameObject pot;
     //whether or not the cards have been shuffled
     private bool shuffled;
 
@@ -59,6 +61,8 @@ public class CardManager : Photon.MonoBehaviour
         playerOneHand = GameObject.Find("PlayerOneHand");
         playerTwoHand = GameObject.Find("PlayerTwoHand");
         communityCards = GameObject.Find("CommunityCards");
+
+        pot = GameObject.Find("pot");
 
         //list for the cards, 
         var cardList = new List<Card>();
@@ -105,9 +109,9 @@ public class CardManager : Photon.MonoBehaviour
         }
         //put the prefabs in the list
         cards = cardList.ToArray();
-        
+
         // TODO: Remove this shit
-        cardList.ForEach(c => Debug.Log(c));
+        //cardList.ForEach(c => Debug.Log(c));
     }
     /// <summary>
     /// shuffle the cards
@@ -194,7 +198,7 @@ public class CardManager : Photon.MonoBehaviour
 
             //Card card = cardStack.Pop().GetComponent<Card>();
             //card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0).GetComponent<Card>();
-            
+
             DealCardTo(communityCards, cardStack.Pop());
         }
     }
@@ -356,7 +360,16 @@ public class CardManager : Photon.MonoBehaviour
         //if there is a winner return the name and how they won
         if (winner != null)
         {
-            Debug.LogFormat("The winner is {0} with {1}", winner.Player.name, winner.Name);
+            Debug.LogFormat("The winner is {0} with {1}", winner.Player.name, winner.Name);//TODO: ADD chips to winner wallet
+            if (winner.Player.name == "PlayerOneHand")
+            {
+                pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 1);
+                
+            }
+            else if (winner.Player.name == "PlayerTwoHand")
+            {
+                pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 2);
+            }
         }
         //otherwise there is no winner and we throw an exception - should very rarely happen
         else

@@ -51,4 +51,8 @@ MonoBehaviour:
   - CurrentPots
   - PotComparison
   - GetAmountToCall
+  - AddChipsToPot
+  - AddChipsToWallet
+  - RemoveAllCards
+  - RemoveCard
   DisableAutoOpenWizard: 1

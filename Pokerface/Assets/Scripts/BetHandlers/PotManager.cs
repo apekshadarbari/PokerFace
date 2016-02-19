@@ -18,6 +18,9 @@ public class PotManager : Photon.MonoBehaviour
     [SerializeField]
     BetManager betMan;
 
+    [SerializeField]
+    WalletManager walletMan;
+
     List<GameObject> players;
 
     [SerializeField]
@@ -35,11 +38,13 @@ public class PotManager : Photon.MonoBehaviour
     void Start()
     {
 
-        chipValue = 0;
+        chipValue = 0; //reset to 0 
         //player1pot = 0;
 
         //for testing purposes 
-        player2pot = 15;
+        //player2pot = 15;
+        //player1pot = 15;
+
 
     }
 
@@ -53,10 +58,41 @@ public class PotManager : Photon.MonoBehaviour
     public void Update()
     {
         //betMan.GetAmountToCall(player, amountToCall);
-        
+
 
     }
 
+    [PunRPC]
+    void WinPotToPlayer(int player)
+    {
+        if (player == 2)
+        {
+            walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
+            walletMan.AddChipsToWallet(chipValue + player1pot+player2pot);
+        }
+        else if (player == 1)
+        {
+            walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
+            walletMan.AddChipsToWallet(chipValue + player1pot + player2pot);
+        }
+        chipValue = 0;
+
+    }
+
+    public void FoldPotToPlayer(int player)
+    {
+        if (player == 2)
+        {                                                   //TODO: change to player 2 contr
+            walletMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
+            walletMan.AddChipsToWallet(chipValue);
+        }
+        else if (player == 1)
+        {
+            walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
+            walletMan.AddChipsToWallet(chipValue);
+        }
+        chipValue = 0;
+    }
     //public int GetAmountToCall()
     //{
     //    return;
@@ -122,7 +158,7 @@ public class PotManager : Photon.MonoBehaviour
 
             //check occured
         }
-        betMan.GetAmountToCall(player,amountToCall);
+        betMan.GetAmountToCall(player, amountToCall);
         //betMan.GetComponent<PhotonView>().RPC("GetAmountToCall", PhotonTargets.All, player, amountToCall);
 
         //return;
