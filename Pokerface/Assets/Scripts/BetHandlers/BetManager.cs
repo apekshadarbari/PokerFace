@@ -261,6 +261,7 @@ public class BetManager : Photon.MonoBehaviour
         gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
 
     }
+
     [PunRPC]
     void RemoveCard()
     {

@@ -55,4 +55,5 @@ MonoBehaviour:
   - AddChipsToWallet
   - RemoveAllCards
   - RemoveCard
+  - WinPotToPlayer
   DisableAutoOpenWizard: 1

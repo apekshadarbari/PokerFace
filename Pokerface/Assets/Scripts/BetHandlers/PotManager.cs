@@ -38,7 +38,7 @@ public class PotManager : Photon.MonoBehaviour
     void Start()
     {
 
-        chipValue = 0; //reset to 0 
+        chipValue = 5; //reset to 0 
         //player1pot = 0;
 
         //for testing purposes 
@@ -84,13 +84,16 @@ public class PotManager : Photon.MonoBehaviour
         if (player == 2)
         {                                                   //TODO: change to player 2 contr
             walletMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
+            betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
             walletMan.AddChipsToWallet(chipValue);
         }
         else if (player == 1)
         {
             walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
+            betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
             walletMan.AddChipsToWallet(chipValue);
         }
+        betMan.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
         chipValue = 0;
     }
     //public int GetAmountToCall()

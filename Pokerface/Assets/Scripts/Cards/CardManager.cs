@@ -364,12 +364,12 @@ public class CardManager : Photon.MonoBehaviour
             if (winner.Player.name == "PlayerOneHand")
             {
                 pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 1);
-                
             }
             else if (winner.Player.name == "PlayerTwoHand")
             {
                 pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 2);
             }
+
         }
         //otherwise there is no winner and we throw an exception - should very rarely happen
         else
