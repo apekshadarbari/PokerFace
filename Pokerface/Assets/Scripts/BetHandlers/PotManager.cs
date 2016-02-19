@@ -41,7 +41,7 @@ public class PotManager : Photon.MonoBehaviour
     void Start()
     {
 
-        chipValue = 5; //reset to 0 
+        chipValue = 0; //reset to 0 
         //player1pot = 0;
         infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
@@ -63,7 +63,7 @@ public class PotManager : Photon.MonoBehaviour
     {
         //betMan.GetAmountToCall(player, amountToCall);
 
-        infoBoard.GetComponent<PhotonView>().RPC("TextPot", PhotonTargets.AllBuffered,chipValue);
+        //infoBoard.GetComponent<PhotonView>().RPC("TextPot", PhotonTargets.AllBuffered,chipValue);
 
 
 

@@ -28,46 +28,67 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     [SerializeField]
     GameObject cardControl;
 
-   
+
     void Start()
     {
+        Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
+
+
+        if (photonView.isMine) //TODO: check how much can be moved to start - making seats the Parents might make it easier to deal with but will require some restructuring
+        {
+
+            ////seat tranform = desired transform for player
+            //playerGlobal = GameObject.Find("[CameraRig]").transform;
+            //playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
+            //Transform vrSpace = GameObject.Find("[SteamVR]").transform;
+
+            //playerGlobal.transform.SetParent(seatTrans);
+
+            //playerLocal.transform.SetParent(seatTrans);
+            //vrSpace.transform.SetParent(seatTrans);
+            //playerGlobal.position = seatTrans.position;
+
+            //avatar.SetActive(false);
+        }
+
         //player 2 
         if (photonView.isMine && PhotonNetwork.player.ID == 2)
-        {
-            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
-            //create a betcontroller for each player
-            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
-            betControl.tag = "Player2BetController";
-
-            foreach (Transform t in betControl.transform)
             {
-                t.gameObject.tag = "PlayerTwoButton";
-                t.GetComponent<MeshRenderer>().enabled = false;
-                t.GetComponent<SphereCollider>().enabled = false;
+                Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
+                //create a betcontroller for each player
+                betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
+                betControl.tag = "Player2BetController";
+
+                foreach (Transform t in betControl.transform)
+                {
+                    t.gameObject.tag = "PlayerTwoButton";
+                    t.GetComponent<MeshRenderer>().enabled = false;
+                    t.GetComponent<SphereCollider>().enabled = false;
+                }
+
             }
 
-        }
-
-        //player 1
-        if (photonView.isMine && PhotonNetwork.player.ID == 1)
-        {
-            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
-            //create a betcontroller for each player
-            //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.2f, 0, -0.060f), Quaternion.Euler(0, 180, 0), 0);
-
-            //test position - when no oculus
-            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
-
-            betControl.tag = "Player1BetController";
-
-            foreach (Transform t in betControl.transform)
+            //player 1
+            if (photonView.isMine && PhotonNetwork.player.ID == 1)
             {
-                t.gameObject.tag = "PlayerOneButton";
-                t.GetComponent<MeshRenderer>().enabled = false;
-                t.GetComponent<SphereCollider>().enabled = false;
-            }
-        }
+                Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
+                //create a betcontroller for each player
+                betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.2f, 0, -0.060f), Quaternion.Euler(0, 180, 0), 0);
 
+                //test position - when no oculus
+                //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
+
+                betControl.tag = "Player1BetController";
+
+                foreach (Transform t in betControl.transform)
+                {
+                    t.gameObject.tag = "PlayerOneButton";
+                    t.GetComponent<MeshRenderer>().enabled = false;
+                    t.GetComponent<SphereCollider>().enabled = false;
+                }
+            }
+
+        //}
     }
 
     void Update()
@@ -79,6 +100,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         if (photonView.isMine) //TODO: check how much can be moved to start - making seats the Parents might make it easier to deal with but will require some restructuring
         {
             //seat tranform = desired transform for player
+
+            //TESTING ;; CHANGE BACK 
             Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
 
             playerGlobal = GameObject.Find("[CameraRig]").transform;
@@ -88,18 +111,19 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             this.transform.position = (playerGlobal).transform.position;
             this.transform.rotation = (playerLocal).transform.rotation;
 
-            //this.transform.localPosition = Vector3.zero;
+            this.transform.localPosition = Vector3.zero;
             //stream.SendNext(GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats);
 
             //moves the camera to your seat
-            playerGlobal.position = seatTrans.position;
             //GameObject.Find("[CameraRig]/Camera (head)").transform.position = seatTrans.position;
+            playerGlobal.position = seatTrans.position;
 
             //we dont want to see ourselves
             avatar.SetActive(false);
 
-            //this.transform.localRotation = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID -1].rotation;
+            //this.transform.localRotation = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1].rotation;
             //NetworkController.Seats[PhotonNetwork.player.ID - 1].transform.position;
+
         }
     }
 
