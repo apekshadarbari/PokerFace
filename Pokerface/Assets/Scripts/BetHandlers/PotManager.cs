@@ -174,8 +174,8 @@ public class PotManager : Photon.MonoBehaviour
 
             //check occured
         }
-        betMan.GetAmountToCall(player, amountToCall);
-        //betMan.GetComponent<PhotonView>().RPC("GetAmountToCall", PhotonTargets.All, player, amountToCall);
+        //betMan.GetAmountToCall(player, amountToCall);
+        betMan.GetComponent<PhotonView>().RPC("GetAmountToCall", PhotonTargets.All, player, amountToCall);
 
         //return;
     }
