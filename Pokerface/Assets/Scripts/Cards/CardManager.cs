@@ -29,6 +29,9 @@ public class CardManager : Photon.MonoBehaviour
     //whether or not the cards have been shuffled
     private bool shuffled;
 
+    GameObject betMan;
+
+
     //instance of the turnswitch script
     TurnSwitch turnInteraction;
     //all the cards in the deck
@@ -364,12 +367,15 @@ public class CardManager : Photon.MonoBehaviour
             if (winner.Player.name == "PlayerOneHand")
             {
                 pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 1);
+                betMan = GameObject.FindGameObjectWithTag("Player1BetController");
             }
             else if (winner.Player.name == "PlayerTwoHand")
             {
                 pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 2);
-            }
+                betMan = GameObject.FindGameObjectWithTag("Player2BetController");
 
+            }
+            betMan.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
         }
         //otherwise there is no winner and we throw an exception - should very rarely happen
         else

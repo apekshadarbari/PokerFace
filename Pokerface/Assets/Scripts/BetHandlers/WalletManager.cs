@@ -42,7 +42,6 @@ public class WalletManager : Photon.MonoBehaviour
     {
         if (player == 1)
         {
-
             if (chipValue > value)
             {
                 chipValue -= value;
@@ -71,6 +70,7 @@ public class WalletManager : Photon.MonoBehaviour
         }
         return value;
     }
+
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
