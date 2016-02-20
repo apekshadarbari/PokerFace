@@ -356,7 +356,7 @@ public class CardManager : Photon.MonoBehaviour
                 Debug.Log("No matches for " + c);
             }
         }
-
+        
         //if there is a winner return the name and how they won
         if (winner != null)
         {

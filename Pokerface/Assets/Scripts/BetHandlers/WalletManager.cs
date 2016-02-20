@@ -28,7 +28,7 @@ public class WalletManager : Photon.MonoBehaviour
 
     void Update()
     {
-        infoBoard.GetComponent<PhotonView>().RPC("TextWallet", PhotonTargets.AllBuffered, this.photonView.ownerId, chipValue);
+        //infoBoard.GetComponent<PhotonView>().RPC("TextWallet", PhotonTargets.AllBuffered, this.photonView.ownerId, chipValue);
     }
 
     [PunRPC]
@@ -53,7 +53,6 @@ public class WalletManager : Photon.MonoBehaviour
                 value = chipValue;
                 chipValue = 0;
                 Debug.Log("player " + this.photonView.ownerId + " all-in");
-
             }
         }
         else if (player == 2)
@@ -68,7 +67,6 @@ public class WalletManager : Photon.MonoBehaviour
                 chipValue = 0;
 
                 Debug.Log("player " + this.photonView.ownerId + " all-in");
-
             }
         }
         return value;

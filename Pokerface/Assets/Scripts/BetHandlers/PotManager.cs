@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PotManager : Photon.MonoBehaviour
 {
-
+    bool winnerFound;
     //TODO: Get rid og redundancy
     [SerializeField, Header("Player one has put in")]
     int player1pot;
@@ -72,17 +72,23 @@ public class PotManager : Photon.MonoBehaviour
     [PunRPC]
     void WinPotToPlayer(int player)
     {
-        if (player == 2)
-        {
-            walletMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
-            walletMan.AddChipsToWallet(chipValue + player1pot+player2pot);
-        }
-        else if (player == 1)
-        {
-            walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
-            walletMan.AddChipsToWallet(chipValue + player1pot + player2pot);
-        }
-        chipValue = 0;
+        //if (winnerFound)
+        //{
+
+            if (player == 2)
+            {
+                walletMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
+                walletMan.AddChipsToWallet(chipValue + player1pot + player2pot);
+            }
+            else if (player == 1)
+            {
+                walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
+                walletMan.AddChipsToWallet(chipValue + player1pot + player2pot);
+                
+            }
+            chipValue = 0;
+        //}
+
 
     }
 

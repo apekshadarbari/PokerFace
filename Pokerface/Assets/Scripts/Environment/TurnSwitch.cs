@@ -83,6 +83,9 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
         //game just started so we set everything to 0
         flopIsDealt = false;
         gameIsStarted = false;
+
+
+        //TODO > untill the 2 pot amounts this should not be changed
         Turn = 0;
 
         Debug.Log("I´m started");
@@ -159,7 +162,7 @@ public class TurnSwitch : Photon.MonoBehaviour, IClicker
                     if (PhotonNetwork.isMasterClient)
                     {
                         deckInteraction.DealFlop();
-                        deckInteraction.GetComponent<PhotonView>().RPC("CompareCards", PhotonTargets.AllBufferedViaServer);
+                        //deckInteraction.GetComponent<PhotonView>().RPC("CompareCards", PhotonTargets.AllBufferedViaServer);
 
                         //deckInteraction.GetComponent<PhotonView>().RPC("DealFlop", PhotonTargets.AllBufferedViaServer);
 
