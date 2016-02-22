@@ -16,5 +16,5 @@ public interface IClicker
     /// <summary>
     /// when clicking the object - interacting 
     /// </summary>
-    void OnClick();
+    void EndTurn();
 }

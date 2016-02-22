@@ -15,7 +15,7 @@ Fixed: PhotonTransformView interpolation for "estimated speed" now avoids jitter
 
 
 v1.65 (16. December 2015)
-Fixed: Potential NullReference Exception when transfering ownership. The PhotonView which gets transfered might get destroyed before the transfer is complete and that case is now handled.
+Fixed: PotManager.Instanceential NullReference Exception when transfering ownership. The PhotonView which gets transfered might get destroyed before the transfer is complete and that case is now handled.
 Fixed: PUN Wizard for Unity 5, which incorrectly pointed out that you need PUN+ to export to iOS or Android. This was the case in Unity 4 but it's no longer true. Removed this note.
 Fixed: Automatic configuration of the demos, when you import PUN (with demos) into a new, empty project and have no saved (named) scene open. This is done once per Editor only. You can do this in the Editor Main Menu: Window, Photon Unity Networking, Configure Demos.
 Fixed: Compatibility with Unity 5.3. The new SceneManager class is re-implemented for our needs for older Editors and the code got adjusted. No "obsolete" warnings anymore.
@@ -148,7 +148,7 @@ Fixed: PhotonNetwork.player.name now syncs the name with others while in a room.
 Added: PhotonNetwork.RemovePlayerCustomProperties() which must be used with care. It can clear custom properties you set in one room and don't want to use in the next but it won't sync changes. Read the summary and remarks.
 Added: Optional caching of a PhotonView's MonoBehaviours for RPCs. This is off by default (as before) but can be enabled with PhotonNetwork.UseRpcMonoBehaviourCache. 
 Added: PhotonView.RefreshRpcMonoBehaviourCache() for manual refreshing of the PhotonView's MonoBehaviour cache. Only useful when PhotonNetwork.UseRpcMonoBehaviourCache is true.
-Fixed: Potential NullReference Exception when a PhotonView has no ObservedComponents list. It can be null, if an existing view was never shown in Inspector. Thanks Don.
+Fixed: PotManager.Instanceential NullReference Exception when a PhotonView has no ObservedComponents list. It can be null, if an existing view was never shown in Inspector. Thanks Don.
 Fixed: Issue with PhotonNetwork.time. On 64bit builds and on Mac Editor, this was showing different values than on some other platforms. This should be fixed for Unity 5.0.2p1 and newer (some IL2CPP exports have bugs in EnvironmentTickCount).
 Fixed: A special case when you return from a Demo to the Demo Hub, this will now Disconnect you, so the next demo will connect again. The "Return to Hub" button is bottom right in all demos.
 Changed: Internally, an encrypted authentication-token by the Name Server is now used as shortcut for authentication on Master- and Game-Server (if available).
@@ -296,13 +296,13 @@ Added: ShowInfoOfPlayer component (in UtilityScripts folder). It's an example ho
 Added: SupportLogger component (in UtilityScripts folder). Attach to any GameObject in a start scene and it will vital values we need when you have support-questions about your subscription, your CCU usage, etc. We might ask you to run your game with this script. Send the log or at least the output starting with "SupportLogger Info" in doubt.
 Added: InRoomRoundTimer component (again: in UtilityScripts folder). It is a simple synchronized timer for rounds. Players who join late can still count down to the end of a round, etc. Check out the code and usage and you should be able to implement state changes on top of this.
 Added: ErrorCode.WebHookCallFailed (32752). This can happen when you accidentally use a Turnbased or Chat ApplicationId. It just makes sense to know and maybe check AppID.
-Added: LogError for Operations that failed in a WebHook or Server Plugin. This should make it relatively easy to spot situations where an AppId is misconfigured on the server.
+Added: LogError for Operations that failed in a WebHook or Server Plugin. This should make it relatively easy to sPotManager.Instance situations where an AppId is misconfigured on the server.
 Added: Optional object[] parameter for OnPhotonRandomJoinFailed, OnPhotonJoinRoomFailed and OnPhotonCreateRoomFailed. It makes debugging easier. When your callback has this parameter, you get ErrorCode and the debug message. You don't have to implement this new parameter though. It's only interesting in a few cases.
 Changed: RaiseEvent can now send events with code 0..199. They also get dispatched when you registered a OnEventCall. Before, eventCode had to be 1 and up which was a unnecessary limitation.
 Added: Description for all RoomOptions.
 Changed: The RPC-List is now sorted when new ones are added. On refresh, the whole list is sorted, which is more likely to be the same across Editors.
 Added: HashCode for RPC-List so you can (more easily) compare them across Editors.
-Added: Commented-out potential solution for OfflineMode RPCs which go to all via server.
+Added: Commented-out PotManager.Instanceential solution for OfflineMode RPCs which go to all via server.
 Updated: Reference documentation. PhotonNetworkingMessage is now well documented, PhotonView.RPC and some others are improved. Also the organization of "General" topics is improved.
 Changed: When setting offlineMode to true, PUN now directly calls OnConnectedToMaster. This is the same workflow as if you go online but not into a lobby. There won't be any room-listing in offlineMode, so this hopefully makes sense.
 Updated: To latest Photon Unity dll v4.0.0.2.
@@ -495,7 +495,7 @@ Changed: RPC calls without parameters are now a little more compact, cause the k
 
 v1.18.2 (18. February 2013)
 Updated: To a new Photon Client library (v3.2.0.1) which includes a fix for disconnects caused by network simulation.
-Fixed: A potential endless loading-loop on the master client, when using level synchronization
+Fixed: A PotManager.Instanceential endless loading-loop on the master client, when using level synchronization
 Added: callback for changes to custom room properties and changes to player properties
 
 v1.18 (31. January 2013)

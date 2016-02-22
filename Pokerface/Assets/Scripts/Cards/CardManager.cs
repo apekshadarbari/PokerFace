@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using UnityEngine;
 
 public class CardManager : Photon.MonoBehaviour
 {
     // Card combo compares - TODO: add more comparers
-    ICardCompare[] cardCompares = new ICardCompare[]
+    private ICardCompare[] cardCompares = new ICardCompare[]
     {
         new ComparePaires(),
         new CompareHighestCard(),
@@ -17,25 +17,26 @@ public class CardManager : Photon.MonoBehaviour
     [Header("Player One")]
     [SerializeField]
     private GameObject playerOneHand;
+
     [Header("Player Two")]
     [SerializeField]
     private GameObject playerTwoHand;
+
     [Header("Community Cards")]
     [SerializeField]
     private GameObject communityCards;
 
-    [SerializeField]
-    GameObject pot;
     //whether or not the cards have been shuffled
     private bool shuffled;
 
-    GameObject betMan;
-
+    private GameObject betMan;
 
     //instance of the turnswitch script
-    TurnSwitch turnInteraction;
+    private TurnSwitch turnInteraction;
+
     //all the cards in the deck
     public Card[] cards; // = new Card[52];
+
     //shuffled cards to look at
     //[SerializeField]
     private Stack<Card> cardStack;
@@ -50,7 +51,7 @@ public class CardManager : Photon.MonoBehaviour
     //}
 
     public int StraightFlush { get; private set; }
-    void Awake()
+    private void Awake()
     {
         //TODO:which is better?
         ///find the hands and associated with the players etc
@@ -58,16 +59,14 @@ public class CardManager : Photon.MonoBehaviour
         playerTwoHand = GameObject.Find("PlayerTwoHand");
         communityCards = GameObject.Find("CommunityCards");
     }
-    void Start()
+    private void Start()
     {
         ///find the hands and associated with the players etc
         playerOneHand = GameObject.Find("PlayerOneHand");
         playerTwoHand = GameObject.Find("PlayerTwoHand");
         communityCards = GameObject.Find("CommunityCards");
 
-        pot = GameObject.Find("pot");
-
-        //list for the cards, 
+        //list for the cards,
         var cardList = new List<Card>();
 
         //the possible names of the prefabs and add them to the list
@@ -122,7 +121,7 @@ public class CardManager : Photon.MonoBehaviour
     //[PunRPC]
     public void Shuffle()
     {
-        Debug.Log("Everyday I'm Shuffling");
+        //Debug.Log("Everyday I'm Shuffling");
 
         //shuffle as many cards as there are cards in the deck
         var shuffledCards = new Card[cards.Length];
@@ -166,18 +165,17 @@ public class CardManager : Photon.MonoBehaviour
 
         if (shuffled)
         {
-            Debug.Log("Dealing");
+            //Debug.Log("Dealing");
             //cards are dealt
             //4 cards  - 2 each
             for (int j = 0; j < 4; j++) //j is the number of cards going to be dealed
             {
-
                 if (j % 2 == 0)//if j is even(number)
                 {
                     //this.GetComponent<PhotonView>().RPC("DealCardTo", PhotonTargets.AllBuffered,playerOneHand);
                     DealCardTo(playerOneHand, cardStack.Pop());
                 }
-                else //if j is odd //if player.id == 2 
+                else //if j is odd //if player.id == 2
                 {
                     //this.GetComponent<PhotonView>().RPC("DealCardTo", PhotonTargets.AllBufferedViaServer,playerTwoHand);
 
@@ -196,7 +194,7 @@ public class CardManager : Photon.MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            Debug.Log("flop contains card");
+            //Debug.Log("flop contains card");
             //this.photonView.RPC("DealCardTo", PhotonTargets.AllBufferedViaServer, communityCards);
 
             //Card card = cardStack.Pop().GetComponent<Card>();
@@ -207,13 +205,13 @@ public class CardManager : Photon.MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="receiver">the players or community</param>
     //[PunRPC]
     public void DealCardTo(GameObject receiver, Card card)
     {
-        Debug.Log(receiver.ToString());
+        //Debug.Log(receiver.ToString());
 
         //receiver.GetComponent<CardHolder>().DealCard(card.GetComponent<Card>());
 
@@ -221,8 +219,6 @@ public class CardManager : Photon.MonoBehaviour
 
         receiver.GetComponent<PhotonView>().RPC("DealCard", PhotonTargets.All, card.Serialize());
     }
-
-
 
     /// <summary>
     /// get the cards that the owner holds - cardholder
@@ -232,8 +228,6 @@ public class CardManager : Photon.MonoBehaviour
     private Card[] GetCards(GameObject owner)
     {
         return owner.GetComponent<CardHolder>().GetCards();
-
-
 
         //var cards = new List<Card>();
 
@@ -270,9 +264,7 @@ public class CardManager : Photon.MonoBehaviour
 
             //Debug.Log(PhotonNetwork.player.ID);
             //Debug.Log(hand);
-
         }
-
 
         return matches;
     }
@@ -359,21 +351,20 @@ public class CardManager : Photon.MonoBehaviour
                 Debug.Log("No matches for " + c);
             }
         }
-        
+
         //if there is a winner return the name and how they won
         if (winner != null)
         {
             Debug.LogFormat("The winner is {0} with {1}", winner.Player.name, winner.Name);//TODO: ADD chips to winner wallet
             if (winner.Player.name == "PlayerOneHand")
             {
-                pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 1);
+                PotManager.Instance.GetComponent<PhotonView>().RPC("WinPotManager.InstanceToPlayer", PhotonTargets.All, 1);
                 betMan = GameObject.FindGameObjectWithTag("Player1BetController");
             }
             else if (winner.Player.name == "PlayerTwoHand")
             {
-                pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 2);
+                PotManager.Instance.GetComponent<PhotonView>().RPC("WinPotManager.InstanceToPlayer", PhotonTargets.All, 2);
                 betMan = GameObject.FindGameObjectWithTag("Player2BetController");
-
             }
             betMan.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
         }
@@ -383,7 +374,7 @@ public class CardManager : Photon.MonoBehaviour
             throw new InvalidOperationException("No winner!!!");
         }
     }
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
         {
@@ -402,7 +393,6 @@ public class CardManager : Photon.MonoBehaviour
             //playerOneHand = (GameObject)stream.ReceiveNext();
             //playerTwoHand = (GameObject)stream.ReceiveNext();
             //communityCards = (GameObject)stream.ReceiveNext();
-
         }
     }
 }

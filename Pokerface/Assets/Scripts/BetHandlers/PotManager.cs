@@ -1,62 +1,62 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class PotManager : Photon.MonoBehaviour
+public class PotManager : PhotonManager<PotManager>
 {
-    bool winnerFound;
+    private bool winnerFound;
+
     //TODO: Get rid og redundancy
     [SerializeField, Header("Player one has put in")]
-    int player1pot;
+    private int player1pot;
+
     [SerializeField, Header("Player two has put in")]
-    int player2pot;
+    private int player2pot;
 
     [SerializeField, Header("The amount needed to call")]
-    int amountToCall;
-    int player;
+    private int amountToCall;
+
+    private int player;
+
+    //[SerializeField]
+    //private WalletManager walletMan;
+
+    private Canvas infoBoard;
+
+    private List<GameObject> players;
 
     [SerializeField]
-    BetManager betMan;
+    private int potValue;
 
-    [SerializeField]
-    WalletManager walletMan;
-
-    Canvas infoBoard;
-
-    List<GameObject> players;
-
-    [SerializeField]
-    public int chipValue;
-
-
-    public int ChipValue
+    public int PotValue
     {
-        get
-        {
-            return chipValue;
-        }
+        get { return potValue; }
+        private set { potValue = value; }
+    }
+
+    public int TotalPotValue
+    {
+        get { return potValue + player1pot + player2pot; }
     }
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-
-        chipValue = 0; //reset to 0 
+        PotValue = 0; //reset to 0
         //player1pot = 0;
         infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
-        //for testing purposes 
+        //for testing purposes
         //player2pot = 15;
         //player1pot = 15;
-
-
     }
 
     //adds chips to the pot I.E. the pots chipvalue
     //do we need the player param here? TODO: find out if we ever use the player param here
     public void AddChipsToPot(int chips)
     {
-        chipValue += chips;
+        PotValue += chips;
     }
 
     public void Update()
@@ -64,134 +64,90 @@ public class PotManager : Photon.MonoBehaviour
         //betMan.GetAmountToCall(player, amountToCall);
 
         //infoBoard.GetComponent<PhotonView>().RPC("TextPot", PhotonTargets.AllBuffered,chipValue);
-
-
-
     }
 
     [PunRPC]
-    void WinPotToPlayer(int player)
+    private void WinPotToPlayer(int player)
     {
         //if (winnerFound)
         //{
-
-            if (player == 2)
-            {
-                walletMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
-                walletMan.AddChipsToWallet(chipValue + player1pot + player2pot);
-            }
-            else if (player == 1)
-            {
-                walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
-                walletMan.AddChipsToWallet(chipValue + player1pot + player2pot);
-                
-            }
-            chipValue = 0;
+        if (player == 2)
+        {
+            var wallet = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
+            wallet.Deposit(PotValue + player1pot + player2pot);
+        }
+        else if (player == 1)
+        {
+            var wallet = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
+            wallet.Deposit(PotValue + player1pot + player2pot);
+        }
+        PotValue = 0;
         //}
-
-
     }
 
-    public void FoldPotToPlayer(int player)
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (player == 2)
-        {                                                   //TODO: change to player 2 contr
-            walletMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
-            betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
-            walletMan.AddChipsToWallet(chipValue);
-        }
-        else if (player == 1)
-        {
-            walletMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
-            betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
-            walletMan.AddChipsToWallet(chipValue);
-        }
-        betMan.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
-        chipValue = 0;
     }
-    //public int GetAmountToCall()
-    //{
-    //    return;
-    //}
 
+    public void Bet(int player, int betValue)
+    {
+        gameObject.GetComponent<PhotonView>().RPC("BetBehaviour", PhotonTargets.All, player, betValue);
+    }
+
+    [PunRPC]
+    private void BetBehaviour(int player, int betValue)
+    {
+        Debug.LogFormat("Bet of ${0} received from player {1}", betValue, player);
+
+        // Add bets to temporary player pot
+        switch (player)
+        {
+            case 1:
+                player1pot += betValue;
+                break;
+
+            case 2:
+                player2pot += betValue;
+                break;
+        }
+
+        // Update call value
+        //CallValue = Mathf.Abs(player1pot - player2pot);
+    }
     /// <summary>
-    /// Compares the pot ... 
+    /// terminologi for rounds turns and game...  this is after all betting is over in a "...."
     /// </summary>
-    /// <param name="thisTurnbet">bet this turn</param>
-    /// 
-    public void PotComparison(int player, int thisTurnbet)
+    public void EndRound()
     {
-        Debug.Log("entered pot comparison");
-        Debug.Log("player: " + player + " bet: " + thisTurnbet);
-
-        //we add the bet to the players pot
-        //if the turnswitch belongs to player 2
-        if (player == 2)
-        {
-            //add the players bet to their pot
-            Debug.Log("player: " + player + " bet: " + thisTurnbet);
-            betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
-        }
-        //if the turnswitch belongs to player 1
-        else if (player == 1)
-        {
-            player1pot = player1pot + thisTurnbet;
-            Debug.Log("player: " + player + " bet: " + thisTurnbet);
-            betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
-        }
-
-
-        //if one of the pots have more value than the other then we need to change the amount to call
-        if (player1pot != player2pot)
-        {
-            //if player 1 has bet more 
-            if (player1pot > player2pot)
-            {
-                //set amount to call
-                //send it back with a player id to the betmore checkcall function
-                amountToCall = player1pot - player2pot;
-                betMan.GetAmountToCall(player, amountToCall);
-                Debug.Log("player 2 has to call " + amountToCall);
-            }
-            else if (player2pot > player1pot)//vice versa
-            {
-                amountToCall = player2pot - player1pot;
-                Debug.Log("player " + player + " has to call " + amountToCall);
-            }
-            else
-            {
-                Debug.Log("ERROR in the amount to call");
-            }
-        }
-        //if both pots are the same set them to 0
-        if (player1pot == player2pot)
-        {
-            //if the pots are the same we can add them to the pot and they no longer belong to a player
-            AddChipsToPot(player1pot + player2pot);
-            //reset the players pots
-            player1pot = 0;
-            player2pot = 0;
-
-            //check occured
-        }
-        //betMan.GetAmountToCall(player, amountToCall);
-        betMan.GetComponent<PhotonView>().RPC("GetAmountToCall", PhotonTargets.All, player, amountToCall);
-
-        //return;
+        gameObject.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
     }
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+
+    [PunRPC]
+    private void EndRoundBehaviour()
     {
-        if (stream.isWriting)
+        potValue += player1pot + player2pot;
+        player1pot = 0;
+        player2pot = 0;
+    }
+
+    public int GetCallValue(int player)
+    {
+        switch (player)
         {
-            stream.SendNext(chipValue);
-            stream.SendNext(player1pot);
-            stream.SendNext(player2pot);
+            case 1:
+                return Mathf.Max(player2pot - player1pot, 0);
+
+            case 2:
+                return Mathf.Max(player1pot - player2pot, 0);
+
+            default:
+                throw new NotImplementedException("Only two players!");
         }
-        else
-        {
-            chipValue = (int)stream.ReceiveNext();
-            player1pot = (int)stream.ReceiveNext();
-            player2pot = (int)stream.ReceiveNext();
-        }
+    }
+
+    public void DumpIfEqual()
+    {
+        if (player1pot != 0 && player1pot == player2pot)
+            EndRound();
     }
 }

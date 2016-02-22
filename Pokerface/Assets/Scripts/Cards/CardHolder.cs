@@ -1,16 +1,19 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class CardHolder : Photon.MonoBehaviour {
-
+public class CardHolder : Photon.MonoBehaviour
+{
     //list of the cards
-    List<Card> cards = new List<Card>();
+    private List<Card> cards = new List<Card>();
 
     //array of the cards positions in the room (cardslots)
     [SerializeField]
     private Transform[] cardslots;
-    
+
+    [SerializeField]
+    private bool isCommunity;
+
     /// <summary>
     /// takes a card
     /// </summary>
@@ -26,7 +29,12 @@ public class CardHolder : Photon.MonoBehaviour {
         behaviour.Card = card;
         behaviour.LoadResource();
         //how many cards are in the list already, match index of new card with cardslot, and set that cardslot as parrent
-        behaviour.transform.SetParent( cardslots[cards.Count - 1], true);
+        behaviour.transform.SetParent(cardslots[cards.Count - 1], true);
+        behaviour.transform.localPosition = Vector3.zero;
+        behaviour.transform.localRotation = Quaternion.identity;
+
+        if (isCommunity)
+            behaviour.FacePlayer();
         //reset transform ( bug avoidance)
         //behaviour.transform.localPosition = Vector3.zero;
         //behaviour.transform.localRotation = Quaternion.identity;
@@ -53,32 +61,28 @@ public class CardHolder : Photon.MonoBehaviour {
         Debug.Log("Removcards please");
 
         cards.Clear();
-        foreach( var s in cardslots )
+        foreach (var s in cardslots)
         {
-            foreach( var b in s.GetComponentsInChildren<CardBehaviour>() )
+            foreach (var b in s.GetComponentsInChildren<CardBehaviour>())
             {
                 Destroy(b.gameObject);
             }
         }
     }
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-
         ////what are we sending to the network?
         if (stream.isWriting)
         {
-
             //stream.SendNext(cards);
             //stream.SendNext(cardslots);
-
         }
         ////what are we receiving from the network?
         else
         {
             //this.cards = (List<Card>)stream.ReceiveNext();
             //this.cardslots = (Transform[])stream.ReceiveNext();
-
         }
     }
 

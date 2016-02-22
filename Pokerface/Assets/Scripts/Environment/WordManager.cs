@@ -1,67 +1,60 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class WordManager : Photon.MonoBehaviour
 {
     [SerializeField]
-    Text potValue;
+    private Text pot;
 
     [SerializeField]
-    Text walletValuePlayerOne;
+    private Text walletValuePlayerOne;
 
     [SerializeField]
-    Text walletValuePlayerTwo;
+    private Text walletValuePlayerTwo;
 
     [SerializeField]
-    Text betPlayerOne;
+    private Text betPlayerOne;
 
     [SerializeField]
-    Text betPlayerTwo;
+    private Text betPlayerTwo;
 
-
-    //int potMoney;
+    //int PotManager.InstanceMoney;
     //int walletMoney01;
     //int walletMoney02;
     //int betMoney01;
     //int betMoney02;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
     }
 
     [PunRPC]
-    void TextPot(int potValue)
+    private void TextPot(int pot)
     {
-        this.potValue.GetComponent<Text>().text = "Current Pot: " + potValue.ToString();
-
+        this.pot.GetComponent<Text>().text = "Current PotManager.Instance: " + pot.ToString();
     }
     [PunRPC]
-    void TextAmountToCall(int player, int amountToCall)
+    private void TextAmountToCall(int player, int amountToCall)
     {
         if (player == 1)
         {
             this.betPlayerOne.GetComponent<Text>().text = "Current Bet: " + amountToCall.ToString();
-
         }
         else if (player == 2)
         {
             this.betPlayerTwo.GetComponent<Text>().text = "Current Bet: " + amountToCall.ToString();
         }
-
     }
 
     [PunRPC]
-    void TextWallet(int player, int walletValue)
+    private void TextWallet(int player, int walletValue)
     {
         if (player == 1)
         {
@@ -71,9 +64,8 @@ public class WordManager : Photon.MonoBehaviour
         {
             this.walletValuePlayerTwo.GetComponent<Text>().text = "Chip Value: " + walletValue.ToString();
         }
-
     }
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
         {

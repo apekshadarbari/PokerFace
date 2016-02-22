@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace NewtonVR.Example
 {
@@ -7,16 +7,16 @@ namespace NewtonVR.Example
     {
         public NVRSwitch Switch;
 
-        private Light SpotLight;
+        private Light spotlight;
 
         private void Awake()
         {
-            SpotLight = this.GetComponent<Light>();
+            spotlight = this.GetComponent<Light>();
         }
 
         private void Update()
         {
-            SpotLight.enabled = Switch.CurrentState;
+            spotlight.enabled = Switch.CurrentState;
         }
     }
 }

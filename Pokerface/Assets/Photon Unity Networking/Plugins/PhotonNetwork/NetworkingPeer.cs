@@ -1562,7 +1562,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
                     if (this.IsInitialConnect)
                     {
-                        this.IsInitialConnect = false;  // after handling potential initial-connect issues with special messages, we are now sure we can reach a server
+                        this.IsInitialConnect = false;  // after handling PotManager.Instanceential initial-connect issues with special messages, we are now sure we can reach a server
                         SendMonoMessage(PhotonNetworkingMessage.OnConnectedToPhoton);
                     }
                 }

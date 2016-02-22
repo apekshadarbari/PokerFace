@@ -272,7 +272,7 @@ LoadBalancing API
 
 *** Version 3.2.1.5 (06.08.2013 - rev2242)
     Added: Steam and Facebook entries to CustomAuthenticationType enum.
-    Fixed: Potential nullreference exception in TCP SendAcksOnly() code. If called before Connect(), this always failed.
+    Fixed: PotManager.Instanceential nullreference exception in TCP SendAcksOnly() code. If called before Connect(), this always failed.
     Updated: Replacement classes for datatypes not supported on some platforms (Hashtable mostly).
       Added: Hashtable got a new GetEnumerator that returns a IDictionary just like the standard Hashtable does.
       Changed: Constructor with int InitialSize now calls the matching base constructor.
@@ -337,7 +337,7 @@ LoadBalancing API
     Added: TrafficStatsGameLevel.ResetMaximumCounters() to reset those values that could max-out easily. Allows to get "longest delta between SendOutgoingCommands()-calls since last query".
 
 *** Version 3.2.0.2 (21.02.2013 - rev2066)
-    Fixed: Potential lock-up during sending. This could cause infinite blocking and thus a crash in some apps. (Win8 / Win Store api only)
+    Fixed: PotManager.Instanceential lock-up during sending. This could cause infinite blocking and thus a crash in some apps. (Win8 / Win Store api only)
 
 *** Version 3.2.0.1 (15.02.2013 - rev2060)
     Fixed: Issue with delayed sending of operations in udp. The data could become overwritten before being sent. The bug was leading to high disconnect rates for clients using Windows Phone 7 and 8 and Silverlight or any client that used Network Simulation.
@@ -444,7 +444,7 @@ LoadBalancing API:
     Fixed: Some documentation errors (due to changed API, etc)
 Loadbalancing API:
     Changed: LoadBalancingClient.OnEvent() now uses a join-event's actornumber-list to create Player instances for anyone who wasn't created as Player before
-    Fixed: LoadBalancingClient.OnEvent() handling for join-event does not expect any actor/player properties anymore (which fixes a potential null-reference exception when not even a name is set)
+    Fixed: LoadBalancingClient.OnEvent() handling for join-event does not expect any actor/player properties anymore (which fixes a PotManager.Instanceential null-reference exception when not even a name is set)
 
 *** Version 3.0.1.9 (10.05.2012 - rev1512)
     Fixed: Reference to project in Windows Phone SDK
@@ -599,7 +599,7 @@ Internal:
 
 *** Version 3.0.0.5
 - Fixed: ObjectDisposedException in DotNet UDP workflow. This was caused by disconnecting while incoming data was processed (and before the next datagram was accepted)
-- Added: PhotonPeer.LimitOfUnreliableCommands property. This helps you skip potentially "outdated" unreliable commands (events), which helps if you couldn't dispatch for a while
+- Added: PhotonPeer.LimitOfUnreliableCommands property. This helps you skip PotManager.Instanceentially "outdated" unreliable commands (events), which helps if you couldn't dispatch for a while
 - Internal: Minor performance improvements. Example: The check if network simulation is turned on is done earlier in the workflow, which avoids a bit of overhead
 
 *** Version 3.0.0.4
@@ -1061,10 +1061,10 @@ Siverlight:
 
 *** Version 4.9.3
 - New: Errors constants in NeutronListener: RC_FATAL_LOGIC, RC_MATCHMAKING_NOT_COMPLETED, RC_CHANNEL_ACCESS_VIOLATION
-- New: for game-creation you can now reserve "spots", which are not filled up by Neutron matchmaking. players can be invited to fill the spots, or they can be deblocked later on
-- New: Parameter reservedSpots in NeutronSession.gameCreate()
-- New: NeutronGame.setReservedSpots() to modify the number of reserved slots (to make them available to matchmaking again, or block/reserve them)
-- New: event EV_RESERVED_SPOTS will update the NeutronGame.reservedSpots value after a call to NeutronGame.setReservedSpots()
+- New: for game-creation you can now reserve "sPotManager.Instances", which are not filled up by Neutron matchmaking. players can be invited to fill the sPotManager.Instances, or they can be deblocked later on
+- New: Parameter reservedSPotManager.Instances in NeutronSession.gameCreate()
+- New: NeutronGame.setReservedSPotManager.Instances() to modify the number of reserved slots (to make them available to matchmaking again, or block/reserve them)
+- New: event EV_RESERVED_SPotManager.InstanceS will update the NeutronGame.reservedSPotManager.Instances value after a call to NeutronGame.setReservedSPotManager.Instances()
 - New: NeutronSession.listBannedPlayers() gives you the list of banned players for a known game - only usable by "admin" users
 - New: NeutronSession.unbanPlayer() is a modified "kick" operation which allows the respective user to join a certain game again - only usable by "admin" users
 - New: the event invitation includes now the game's name (in the new key EV_KEY_NAME)

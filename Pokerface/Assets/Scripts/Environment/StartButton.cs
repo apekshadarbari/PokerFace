@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
-using System;
+using UnityEngine;
 
 /// <summary>
 /// start button class
@@ -8,15 +8,15 @@ using System;
 public class StartButton : Photon.MonoBehaviour, IClicker
 {
     [SerializeField]
-    CardManager cardMan;
+    private CardManager cardMan;
+
     [SerializeField]
-    NetworkedPlayer playerCtrl;
-    bool gameIsStarted;
+    private NetworkedPlayer playerCtrl;
+
+    private bool gameIsStarted;
+
     [SerializeField]
-    AudioManager audMan;
-
-
-
+    private AudioManager audMan;
 
     public void Start()
     {
@@ -26,13 +26,12 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         if (PhotonNetwork.isMasterClient)
         {
             gameIsStarted = false;
-        }     
+        }
         else if (!PhotonNetwork.isMasterClient)
         {
             //TODO: spawn a different message for player 2?
             gameObject.SetActive(false);
         }
-
     }
 
     public void Update()
@@ -45,7 +44,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         }
     }
 
-    public void OnClick()
+    public void EndTurn()
     {
         //if we are player one I.E. master
         if (PhotonNetwork.isMasterClient && photonView.isMine)
@@ -66,7 +65,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
     {
         if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
-            Debug.Log("stopped hovering");
+            //Debug.Log("stopped hovering");
 
             GetComponent<Renderer>().material.color = Color.blue;
 
@@ -78,13 +77,13 @@ public class StartButton : Photon.MonoBehaviour, IClicker
     {
         if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
-            Debug.Log("hovering");
+            //Debug.Log("hovering");
             GetComponent<Renderer>().material.color = Color.clear;
             return;
         }
     }
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
         {
@@ -96,4 +95,3 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         }
     }
 }
-

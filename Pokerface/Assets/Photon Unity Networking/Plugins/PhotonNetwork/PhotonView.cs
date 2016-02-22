@@ -533,7 +533,7 @@ public class PhotonView : Photon.MonoBehaviour
     /// </summary>
     /// <remarks>
     /// Set PhotonNetwork.UseRpcMonoBehaviourCache to true to enable the caching.
-    /// Uses this.GetComponents<MonoBehaviour>() to get a list of MonoBehaviours to call RPCs on (potentially).
+    /// Uses this.GetComponents<MonoBehaviour>() to get a list of MonoBehaviours to call RPCs on (PotManager.Instanceentially).
     ///
     /// While PhotonNetwork.UseRpcMonoBehaviourCache is false, this method has no effect,
     /// because the list is refreshed when a RPC gets called.

@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using ExitGames.Client.Photon;
 using System.Collections;
 using System.Collections.Generic;
-using ExitGames.Client.Photon;
+using UnityEngine;
 
 public class NetworkController : Photon.MonoBehaviour
 {
     //an array of seats in the room
     [SerializeField]
     private Transform[] seats;
+
     public Transform[] Seats
     {
         get
@@ -20,6 +21,7 @@ public class NetworkController : Photon.MonoBehaviour
             seats = value;
         }
     }
+
     //current version
     [Header("the current version of the build - change when testing seperately")]
     [SerializeField]
@@ -27,31 +29,28 @@ public class NetworkController : Photon.MonoBehaviour
 
     private string roomName = "New_room";
     private TypedLobby lobbyName = new TypedLobby("New_Lobby", LobbyType.Default);
-    
+
     //the player TODO: FIX THIS CLASS , FIND OUT WHAT A GROUP CAN BE USED FOR WHEN INSTANTIATING OBJECTS HERE.
     public GameObject player;
 
     [SerializeField]
-    GameObject startgameButton;
+    private GameObject startgameButton;
 
-
-    void Start()
+    private void Start()
     {
         //the current version of the game, change at milestones
         PhotonNetwork.ConnectUsingSettings(version);
         Debug.Log("started");
     }
 
-    void Update()
+    private void Update()
     {
-
     }
-
 
     /// <summary>
     /// For Later use if lobby is implemented
     /// </summary>
-    /// 
+    ///
     //void OnConnectedToMaster()
     //{
     //    Debug.Log("hej");
@@ -68,7 +67,6 @@ public class NetworkController : Photon.MonoBehaviour
     //    else if (PhotonNetwork.room == null)
     //    {
     //        Debug.Log("room length : " + PhotonNetwork.GetRoomList().Length);
-
 
     //        Debug.Log("if no room joined any key for create");
 
@@ -97,18 +95,18 @@ public class NetworkController : Photon.MonoBehaviour
     //    //roomsList = PhotonNetwork.GetRoomList();
     //}
 
-        //step before joinging the rooom, changed if acutal lobby implemented
-    void OnJoinedLobby()
+    //step before joinging the rooom, changed if acutal lobby implemented
+    private void OnJoinedLobby()
     {
         Debug.Log("Joined Lobby!");
 
         //set room options as needed
         RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 2 };
-        //If there is no room, create one, otherwise join 
+        //If there is no room, create one, otherwise join
         PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
     }
 
-    void OnJoinedRoom()
+    private void OnJoinedRoom()
     {
         //when a room is joined
         Debug.Log("Connected to Room");
@@ -116,10 +114,10 @@ public class NetworkController : Photon.MonoBehaviour
         StartGame();
     }
 
-    void StartGame()
+    private void StartGame()
     {
         //which player am i?
-        Debug.Log(PhotonNetwork.player.ID.ToString());
+        //Debug.Log(PhotonNetwork.player.ID.ToString());
 
         //instantiates the player at the corresponding seat
         PhotonNetwork.Instantiate(player.name, Seats[PhotonNetwork.player.ID - 1].position, Quaternion.identity, 0);
@@ -131,16 +129,14 @@ public class NetworkController : Photon.MonoBehaviour
         }
     }
 
-    void OnLeftRoom()
+    private void OnLeftRoom()
     {
         //Debug.Log(PhotonNetwork.player.ID.ToString());
         //Debug.Log(PhotonNetwork.playerList.Length.ToString());
         //PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.player.ID);
     }
 
-    void OnRoomCleanup()
+    private void OnRoomCleanup()
     {
-
-
     }
 }

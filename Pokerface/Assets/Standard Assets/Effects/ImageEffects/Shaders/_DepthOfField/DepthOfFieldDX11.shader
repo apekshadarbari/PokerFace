@@ -5,7 +5,7 @@
 
 	basic algorithm:
 
-	* find bright spots
+	* find bright sPotManager.Instances
 	* verify high frequency (otherwise dont care)
 	* if possitive, replace with black pixel and add to append buffer
 	* box blur buffer (thus smearing black pixels)

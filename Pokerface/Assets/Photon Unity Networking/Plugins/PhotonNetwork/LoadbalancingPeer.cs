@@ -584,7 +584,7 @@ namespace ExitGames.Client.Photon
         /// <remarks>This override explicitly uses another parameter order to not mix it up with the implementation for Hashtable only.</remarks>
         /// <param name="eventCode">Identifies this type of event (and the content). Your game's event codes can start with 0.</param>
         /// <param name="customEventContent">Any serializable datatype (including Hashtable like the other OpRaiseEvent overloads).</param>
-        /// <param name="sendReliable">If this event has to arrive reliably (potentially repeated if it's lost).</param>
+        /// <param name="sendReliable">If this event has to arrive reliably (PotManager.Instanceentially repeated if it's lost).</param>
         /// <param name="raiseEventOptions">Contains (slightly) less often used options. If you pass null, the default options will be used.</param>
         /// <returns>If operation could be enqueued for sending. Sent when calling: Service or SendOutgoingCommands.</returns>
         public virtual bool OpRaiseEvent(byte eventCode, object customEventContent, bool sendReliable, RaiseEventOptions raiseEventOptions)

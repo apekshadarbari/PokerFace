@@ -19,7 +19,7 @@ using UnityEngine;
 public class ColorPerPlayer : PunBehaviour
 {
     /// <summary>
-    /// Defines the available colors per room. There should be at least one color per available player spot.
+    /// Defines the available colors per room. There should be at least one color per available player sPotManager.Instance.
     /// </summary>
     public Color[] Colors = new Color[] { Color.red, Color.blue, Color.yellow, Color.green };
 

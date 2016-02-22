@@ -32,11 +32,13 @@ public class TestRaycast : MonoBehaviour
 
     void Update()
     {
-        /*UNCOMMENT FOR USING GAZE*/
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height, 0f) / 2f);
 
+        /*UNCOMMENT FOR USING GAZE*/
+        //Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height, 0f) / 2f);
+
+        /*TESTING*/
         /*UNCOMMENT FOR USING MOUSE*/
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
 
@@ -77,7 +79,7 @@ public class TestRaycast : MonoBehaviour
                 //use fire1 to click
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    c.OnClick();
+                    c.EndTurn();
                     timer = 0f;
                 }
                 //wait for the gaze timer to reach 2 seconds and click for you
@@ -87,7 +89,7 @@ public class TestRaycast : MonoBehaviour
 
                     if (Timer <= 0f)
                     {
-                        c.OnClick();
+                        c.EndTurn();
                     }
 
                 }

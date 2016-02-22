@@ -1,87 +1,32 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class WalletManager : Photon.MonoBehaviour
+public class WalletManager : Manager<WalletManager>
 {
-
-    List<GameObject> players;
-
     [SerializeField]
-    int chipValue;
+    private int credits = 100;
 
-    Canvas infoBoard;
-
-    public int ChipValue
+    public int Credits
     {
-        get
+        get { return credits; }
+    }
+
+    public void Deposit(int value)
+    {
+        credits += value;
+    }
+
+    public bool Withdraw(int value)
+    {
+        if (credits >= value)
         {
-            return chipValue;
-        }
-    }
-
-    void Start()
-    {
-        chipValue = 100;
-        infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
-    }
-
-    void Update()
-    {
-        //infoBoard.GetComponent<PhotonView>().RPC("TextWallet", PhotonTargets.AllBuffered, this.photonView.ownerId, chipValue);
-    }
-
-    [PunRPC]
-    public void AddChipsToWallet(int value)
-    {
-        chipValue += value;
-
-    }
-
-    public int GetChips(int player, int value)
-    {
-        if (player == 1)
-        {
-            if (chipValue > value)
-            {
-                chipValue -= value;
-            }
-
-            else
-            {
-                value = chipValue;
-                chipValue = 0;
-                Debug.Log("player " + this.photonView.ownerId + " all-in");
-            }
-        }
-        else if (player == 2)
-        {
-            if (chipValue > value)
-            {
-                chipValue -= value;
-            }
-            else
-            {
-                value = chipValue;
-                chipValue = 0;
-
-                Debug.Log("player " + this.photonView.ownerId + " all-in");
-            }
-        }
-        return value;
-    }
-
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.isWriting)
-        {
-            stream.SendNext(chipValue);
+            credits -= value;
+            return true;
         }
         else
         {
-            chipValue = (int)stream.ReceiveNext();
+            return false;
         }
     }
 }
-
-

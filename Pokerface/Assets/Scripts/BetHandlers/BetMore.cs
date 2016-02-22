@@ -1,54 +1,53 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
-using System;
-enum BetAction
+using UnityEngine;
+
+internal enum BetAction
 {
-    Add,
-    Remove,
-    Raise,
-    Call,
+    IncreaseBet,
+    DecreaseBet,
+    CommitBet,
+    CallOrCheck,
+
     Fold
 }
+
 public class BetMore : Photon.MonoBehaviour, IClicker
 {
-
-
     //TODO: Enumeration, private fields! pascal vs camel casing
 
     //the choice of fold, call , raise etc.
     [SerializeField]
-    //private int choice;
     private BetAction action;
 
-    BetManager betMan;
+    private BetManager betMan;
 
-    AudioSource audioSrc;
+    private AudioSource audioSrc;
 
     [SerializeField, Header("Audio - Hover -")]
-    AudioClip hoverSound;//they all need hover...
+    private AudioClip hoverSound;//they all need hover...
+
     [SerializeField]
-    AudioClip buttonPressed;
+    private AudioClip buttonPressed;
 
     // we can add them all here.. and then play them when needed... but then we add them a bunch of times.. all clicks for each buttonn..
     // we can add them to betmanager and then send the clip back here or at least an enum that tells it what to play..
     // we can create a method that takes an enum and then plays that sound or nothing...
 
-    void Start()
+    private void Start()
     {
         audioSrc = this.GetComponent<AudioSource>();
         ////reset of the values (starting values)
         //chipsToIncrement = 5;
         //chipsToRaise = 0;s
         ////amountToCall = 0;
-        ////find the pot
-
+        ////find the PotManager.Instance
     }
-
 
     /// <summary>
     /// onclick function for each of the buttons that have to do with betting
     /// </summary>
-    public void OnClick()
+    public void EndTurn()
     {
         // TODO : do enable instead of deactivate as it cuts off the sound of the click
         audioSrc.clip = buttonPressed;
@@ -64,26 +63,30 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         }
 
         //TODO: move all of these into another script called betcontroller
-        Debug.Log("this button belongs to player: " + this.photonView.ownerId);
+        //Debug.Log("this button belongs to player: " + this.photonView.ownerId);
         switch (action)
         {
-            case BetAction.Add:
+            case BetAction.IncreaseBet:
                 //Adding chips to raise
                 //betMan.Fold(); //TODO: REMOVE TEST
-                betMan.AddChips();
+                betMan.IncreaseBet();
                 break;
-            case BetAction.Remove:
+
+            case BetAction.DecreaseBet:
                 //Reducing chips to raises
-                betMan.RemoveChips();
+                betMan.DecreaseBet();
                 break;
-            case BetAction.Raise:
-                //Raising 
-                betMan.RaiseChips();
+
+            case BetAction.CommitBet:
+                betMan.Bet();
                 break;
-            case BetAction.Call:
+
+            case BetAction.CallOrCheck:
                 //Calling the last value
-                betMan.CallCheck();
+                betMan.SetBetToCallValue();
+                betMan.Bet();
                 break;
+
             case BetAction.Fold:
                 //Folding cards
                 betMan.Fold();
@@ -96,7 +99,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
 	public void OnHover()
     {
-        GetComponent<Renderer>().material.color = Color.red;
+        GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.3f);
         CrosshairTimerDisplay.Instance.Show();
         audioSrc.clip = hoverSound; // change the
         audioSrc.Play();
@@ -117,7 +120,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         CrosshairTimerDisplay.Instance.Show();
     }
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
         {

@@ -61,4 +61,6 @@ MonoBehaviour:
   - TextAmountToCall
   - TextPot
   - TextWallet
+  - BetBehaviour
+  - EndRoundBehaviour
   DisableAutoOpenWizard: 1
