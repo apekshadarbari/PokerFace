@@ -13,6 +13,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     //players camera rig / perspective
     public Transform playerRig;
+    Vector3 vrSpace;
 
     public Transform playerLocal;
     public Transform playerGlobal;
@@ -36,8 +37,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
 
             playerRig = GameObject.Find("[CameraRig]").transform;
-
-            GameObject.Find("[SteamVR]").transform.position = seatTrans.position;
+            vrSpace = GameObject.Find("[SteamVR]").transform.position;
+            vrSpace = seatTrans.position;
 
             playerGlobal = GameObject.Find("[CameraRig]/Camera (head)").transform;
             playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
