@@ -38,6 +38,10 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             playerRig = GameObject.Find("[CameraRig]").transform;
 
             GameObject.Find("[SteamVR]").transform.position = seatTrans.position;
+
+            playerGlobal = GameObject.Find("[CameraRig]/Camera (head)").transform;
+            playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
+
             playerRig.position = seatTrans.position;
 
             ////Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
@@ -130,8 +134,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
 
             //playerGlobal = GameObject.Find("[CameraRig]").transform;
-            playerGlobal = GameObject.Find("[CameraRig]/Camera (head)").transform;
-            playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
+
 
             //TODO; might need another var for a player head for the pos tracking
             this.transform.position = (playerGlobal).transform.position;
