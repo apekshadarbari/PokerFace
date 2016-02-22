@@ -12,6 +12,9 @@ TagManager:
   - CardSlot
   - CardHolder
   - InfoBoard
+  - CrosshairRift
+  - CrosshairVive
+  - CrosshairGear
   layers:
   - Default
   - TransparentFX
