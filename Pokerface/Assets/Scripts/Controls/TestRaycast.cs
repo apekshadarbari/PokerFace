@@ -1,11 +1,13 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class TestRaycast : MonoBehaviour
 {
     //use iclicker
     private IClicker current;
+
     private float timer;
+
     [Header("The time in seconds it takes to activate onclick with gaze")]
     [SerializeField]
     private float delay = 2f;
@@ -17,6 +19,7 @@ public class TestRaycast : MonoBehaviour
             return timer;
         }
     }
+
     public float Delay
     {
         get
@@ -25,20 +28,19 @@ public class TestRaycast : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         timer = delay;
     }
 
-    void Update()
+    private void Update()
     {
-
         /*UNCOMMENT FOR USING GAZE*/
-        //Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height, 0f) / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height, 0f) / 2f);
 
         /*TESTING*/
         /*UNCOMMENT FOR USING MOUSE*/
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
 
@@ -48,7 +50,7 @@ public class TestRaycast : MonoBehaviour
             //Debug.Log("i hit something");
             //draw a line we can see in the scene
             Debug.DrawLine(transform.position, hit.point, Color.cyan);
-            
+
             //am i hitting something with an iclicker??
             var c = hit.transform.GetComponent<IClicker>();
 
@@ -91,9 +93,7 @@ public class TestRaycast : MonoBehaviour
                     {
                         c.EndTurn();
                     }
-
                 }
-
             }
             // if we stopped hovering and arent hovering something else hoverable call only exit and set current to null
             else if (current != null)
@@ -107,6 +107,5 @@ public class TestRaycast : MonoBehaviour
             //draw red if we arent hitting anything
             Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
         }
-
     }
 }
