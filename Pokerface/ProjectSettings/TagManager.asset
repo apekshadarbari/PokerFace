@@ -7,6 +7,11 @@ TagManager:
   - TurnTrigger
   - Player1BetController
   - Player2BetController
+  - PlayerOneButton
+  - PlayerTwoButton
+  - CardSlot
+  - CardHolder
+  - InfoBoard
   layers:
   - Default
   - TransparentFX

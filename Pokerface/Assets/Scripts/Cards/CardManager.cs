@@ -19,52 +19,75 @@ public class CardManager : Photon.MonoBehaviour
     private GameObject playerOneHand;
     [Header("Player Two")]
     [SerializeField]
-    private GameObject PlayerTwoHand;
+    private GameObject playerTwoHand;
     [Header("Community Cards")]
     [SerializeField]
     private GameObject communityCards;
 
+    [SerializeField]
+    GameObject pot;
     //whether or not the cards have been shuffled
     private bool shuffled;
-    
+
+    GameObject betMan;
+
+
     //instance of the turnswitch script
     TurnSwitch turnInteraction;
     //all the cards in the deck
-    public GameObject[] cards = new GameObject[52];
+    public Card[] cards; // = new Card[52];
     //shuffled cards to look at
     //[SerializeField]
-    private Stack<GameObject> cardStack;
+    private Stack<Card> cardStack;
+
+    // EXTENSION METHOD
+    //public static void ForEach<T>( this T[] array, Action<T> action)
+    //{
+    //    foreach (var i in array)
+    //    {
+    //        action(i);
+    //    }
+    //}
 
     public int StraightFlush { get; private set; }
-
+    void Awake()
+    {
+        //TODO:which is better?
+        ///find the hands and associated with the players etc
+        playerOneHand = GameObject.Find("PlayerOneHand");
+        playerTwoHand = GameObject.Find("PlayerTwoHand");
+        communityCards = GameObject.Find("CommunityCards");
+    }
     void Start()
     {
         ///find the hands and associated with the players etc
         playerOneHand = GameObject.Find("PlayerOneHand");
-        PlayerTwoHand = GameObject.Find("PlayerTwoHand");
+        playerTwoHand = GameObject.Find("PlayerTwoHand");
         communityCards = GameObject.Find("CommunityCards");
 
+        pot = GameObject.Find("pot");
+
         //list for the cards, 
-        List<GameObject> cardPrefabs = new List<GameObject>();
+        var cardList = new List<Card>();
 
         //the possible names of the prefabs and add them to the list
-        string prefix = "Card_";
-        string[] value = new string[]
-        {
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "J",
-            "Q",
-            "K",
-            "A"
-        };
+        //string prefix = "Card_";
+        //string[] value = new string[]
+        //{
+        //    "2",
+        //    "3",
+        //    "4",
+        //    "5",
+        //    "6",
+        //    "7",
+        //    "8",
+        //    "9",
+        //    "10",
+        //    "J",
+        //    "Q",
+        //    "K",
+        //    "A"
+        //};
         Suits[] suit = new Suits[]
         {
             Suits.Club,
@@ -74,32 +97,35 @@ public class CardManager : Photon.MonoBehaviour
         };
 
         //
-        for( int i = 0; i < value.Length; i++ )
+        for (int i = 2; i <= 14; i++)
         {
             foreach (var s in suit)
             {
-                var prefab = Resources.Load<GameObject>(prefix + value[i] + s);
+                cardList.Add(new Card(s, i));
+
+                //var prefab = Resources.Load<GameObject>(prefix + value[i] + s);
                 //var card = prefab.GetComponent<Card>();
                 //card.Suit = s;
                 //card.Value = i + 2;
-                cardPrefabs.Add(prefab);
+                //cardPrefabs.Add(prefab);
             }
         }
         //put the prefabs in the list
-        cards = cardPrefabs.ToArray();
+        cards = cardList.ToArray();
 
-        //Debug.Log("Hello from card manager(s)?");
-
+        // TODO: Remove this shit
+        //cardList.ForEach(c => Debug.Log(c));
     }
     /// <summary>
     /// shuffle the cards
     /// </summary>
+    //[PunRPC]
     public void Shuffle()
     {
         Debug.Log("Everyday I'm Shuffling");
 
         //shuffle as many cards as there are cards in the deck
-        var shuffledCards = new GameObject[cards.Length];
+        var shuffledCards = new Card[cards.Length];
 
         //add them to shuffled cards
         for (int i = 0; i < cards.Length; i++)
@@ -119,7 +145,7 @@ public class CardManager : Photon.MonoBehaviour
         }
 
         //put the shuffled cards in the stack
-        cardStack = new Stack<GameObject>(shuffledCards);
+        cardStack = new Stack<Card>(shuffledCards);
         //foreach (GameObject item in cardStack)
         //{
         //    Debug.Log(item);
@@ -128,6 +154,8 @@ public class CardManager : Photon.MonoBehaviour
         //cards are now shuffled
         shuffled = true;
     }
+
+    //[PunRPC]
     public void Deal()
     {
         //TODO: Fix that we have to shuffle here and look into whether or not the hands being set here is necesary
@@ -136,12 +164,8 @@ public class CardManager : Photon.MonoBehaviour
         //    Shuffle();
         //}
 
-        //playerOneHand = GameObject.Find("PlayerOneHand");
-        //PlayerTwoHand = GameObject.Find("PlayerTwoHand");
-
-        
-        //if (shuffled)
-        //{
+        if (shuffled)
+        {
             Debug.Log("Dealing");
             //cards are dealt
             //4 cards  - 2 each
@@ -150,57 +174,56 @@ public class CardManager : Photon.MonoBehaviour
 
                 if (j % 2 == 0)//if j is even(number)
                 {
-                    DealCardTo(playerOneHand);
+                    //this.GetComponent<PhotonView>().RPC("DealCardTo", PhotonTargets.AllBuffered,playerOneHand);
+                    DealCardTo(playerOneHand, cardStack.Pop());
                 }
                 else //if j is odd //if player.id == 2 
                 {
-                    DealCardTo(PlayerTwoHand);
+                    //this.GetComponent<PhotonView>().RPC("DealCardTo", PhotonTargets.AllBufferedViaServer,playerTwoHand);
+
+                    DealCardTo(playerTwoHand, cardStack.Pop());
                 }
             }
-        //}
+        }
     }
+
     /// <summary>
     /// Deal the flop
     /// to the community
     /// </summary>
+    //[PunRPC]
     public void DealFlop()
     {
-        //if (!shuffled)
-        //{
-        //    Shuffle();
-
-        //}
         for (int i = 0; i < 3; i++)
         {
             Debug.Log("flop contains card");
-            DealCardTo(communityCards);
+            //this.photonView.RPC("DealCardTo", PhotonTargets.AllBufferedViaServer, communityCards);
+
+            //Card card = cardStack.Pop().GetComponent<Card>();
+            //card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0).GetComponent<Card>();
+
+            DealCardTo(communityCards, cardStack.Pop());
         }
     }
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="receiver">the plyers or community</param>
-    private void DealCardTo(GameObject receiver)
+    /// <param name="receiver">the players or community</param>
+    //[PunRPC]
+    public void DealCardTo(GameObject receiver, Card card)
     {
-        //pop the top card in the stack
-        var card = cardStack.Pop();
-        //foreach (var item in cardStack)
-        //{
-        //instantiate it where #the receiver
-        card = PhotonNetwork.Instantiate(card.name, receiver.transform.position, receiver.transform.rotation, 0);
-        receiver.GetComponent<CardHolder>().DealCard(card.GetComponent<Card>());
+        Debug.Log(receiver.ToString());
 
-        ////}
-        //card.transform.parent = receiver.transform;
-        //card.transform.SetParent(receiver.transform, true);
+        //receiver.GetComponent<CardHolder>().DealCard(card.GetComponent<Card>());
 
-        //card.transform.SetParent(receiver.transform);
-        //card.transform.position = Vector3.zero;
+        //receiver.GetComponent<PhotonView>().RPC("CardHolder", PhotonTargets.AllBufferedViaServer,card.GetComponent<Card>());
 
-        //if set parent kommer til at virke -
-        //compare
+        receiver.GetComponent<PhotonView>().RPC("DealCard", PhotonTargets.All, card.Serialize());
     }
+
+
+
     /// <summary>
     /// get the cards that the owner holds - cardholder
     /// </summary>
@@ -208,6 +231,10 @@ public class CardManager : Photon.MonoBehaviour
     /// <returns></returns>
     private Card[] GetCards(GameObject owner)
     {
+        return owner.GetComponent<CardHolder>().GetCards();
+
+
+
         //var cards = new List<Card>();
 
         //for (int i = 0; i < owner.transform.childCount; i++)
@@ -221,8 +248,8 @@ public class CardManager : Photon.MonoBehaviour
 
         //return cards.ToArray();
         //
-        return owner.GetComponent<CardHolder>().GetCards();
     }
+
     /// <summary>
     /// any matches in the current hands + community
     /// </summary>
@@ -253,19 +280,20 @@ public class CardManager : Photon.MonoBehaviour
     /// <summary>
     /// compares cards
     /// </summary>
+    [PunRPC]
     public void CompareCards()
     {
         Debug.Log("comparing");
-        
+
         //list of matches
         var matches = new List<CardMatch>();
-        
+
         //cards from the community pile
         var community = GetCards(communityCards);
 
         //adds the cards from each player to the matches + the community cards - to see if there are any matches
         matches.AddRange(GetMatches(playerOneHand, community));
-        matches.AddRange(GetMatches(PlayerTwoHand, community));
+        matches.AddRange(GetMatches(playerTwoHand, community));
 
         // Sort so higher combos are at the top
         //matches.OrderByDescending(m => m.Combo);
@@ -282,7 +310,7 @@ public class CardManager : Photon.MonoBehaviour
             CardCombos.OnePair,
             CardCombos.HighestCard,
         };
-        
+
         //we havent found a winner yet
         CardMatch winner = null;
 
@@ -320,7 +348,7 @@ public class CardManager : Photon.MonoBehaviour
             else if (m.Count == 1)
             {
                 Debug.Log("One matches for " + c);
-                
+
                 //there is only one!
                 winner = m.First();
                 break;
@@ -328,14 +356,26 @@ public class CardManager : Photon.MonoBehaviour
             //there are no matches for the current combo
             else
             {
-                Debug.Log("No matches for " + c );
+                Debug.Log("No matches for " + c);
             }
         }
-
+        
         //if there is a winner return the name and how they won
         if (winner != null)
         {
-            Debug.LogFormat("The winner is {0} with {1}", winner.Player.name, winner.Name);
+            Debug.LogFormat("The winner is {0} with {1}", winner.Player.name, winner.Name);//TODO: ADD chips to winner wallet
+            if (winner.Player.name == "PlayerOneHand")
+            {
+                pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 1);
+                betMan = GameObject.FindGameObjectWithTag("Player1BetController");
+            }
+            else if (winner.Player.name == "PlayerTwoHand")
+            {
+                pot.GetComponent<PhotonView>().RPC("WinPotToPlayer", PhotonTargets.All, 2);
+                betMan = GameObject.FindGameObjectWithTag("Player2BetController");
+
+            }
+            betMan.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
         }
         //otherwise there is no winner and we throw an exception - should very rarely happen
         else
@@ -343,5 +383,26 @@ public class CardManager : Photon.MonoBehaviour
             throw new InvalidOperationException("No winner!!!");
         }
     }
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            //stream.SendNext(cardStack);
+            stream.SendNext(shuffled);
 
+            //stream.SendNext(playerOneHand);
+            //stream.SendNext(playerTwoHand);
+            //stream.SendNext(communityCards);
+        }
+        else
+        {
+            //cardStack = (Stack<GameObject>)stream.ReceiveNext();
+            shuffled = (bool)stream.ReceiveNext();
+
+            //playerOneHand = (GameObject)stream.ReceiveNext();
+            //playerTwoHand = (GameObject)stream.ReceiveNext();
+            //communityCards = (GameObject)stream.ReceiveNext();
+
+        }
+    }
 }

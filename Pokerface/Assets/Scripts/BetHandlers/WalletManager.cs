@@ -6,10 +6,11 @@ public class WalletManager : Photon.MonoBehaviour
 {
 
     List<GameObject> players;
-    //public static int player1ChipValue;
-    //public static int player2ChipValue;
+
     [SerializeField]
     int chipValue;
+
+    Canvas infoBoard;
 
     public int ChipValue
     {
@@ -22,34 +23,25 @@ public class WalletManager : Photon.MonoBehaviour
     void Start()
     {
         chipValue = 100;
-        //player1ChipValue = 100;
-        //player2ChipValue = 100;
-
-        //switch (this.photonView.ownerId)
-        //{
-        //    case 1:
-        //        chipValue = 100;
-        //        break;
-        //    case 2:
-        //        chipValue = 100;
-        //        break;
-        //    default:
-        //        break;
-        //}
+        infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
     }
 
-    /*  public void AddChips(int value)
+    void Update()
+    {
+        //infoBoard.GetComponent<PhotonView>().RPC("TextWallet", PhotonTargets.AllBuffered, this.photonView.ownerId, chipValue);
+    }
+
+    [PunRPC]
+    public void AddChipsToWallet(int value)
     {
         chipValue += value;
-        
-    } */
+
+    }
 
     public int GetChips(int player, int value)
     {
-
         if (player == 1)
         {
-
             if (chipValue > value)
             {
                 chipValue -= value;
@@ -60,7 +52,6 @@ public class WalletManager : Photon.MonoBehaviour
                 value = chipValue;
                 chipValue = 0;
                 Debug.Log("player " + this.photonView.ownerId + " all-in");
-
             }
         }
         else if (player == 2)
@@ -75,49 +66,22 @@ public class WalletManager : Photon.MonoBehaviour
                 chipValue = 0;
 
                 Debug.Log("player " + this.photonView.ownerId + " all-in");
-
             }
         }
-
-
         return value;
-
     }
 
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(chipValue);
+        }
+        else
+        {
+            chipValue = (int)stream.ReceiveNext();
+        }
+    }
 }
 
-
-//        if (player == 1)
-//        {
-
-//            if (player1ChipValue > value)
-//            {
-//                player1ChipValue -= value;
-//            }
-//            else
-//            {
-//                value = player1ChipValue;
-//                player1ChipValue = 0;
-//                Debug.Log("player " + this.photonView.ownerId + " all-in");
-
-//}
-//        }
-//        else if (player == 2)
-//        {
-//            if (player2ChipValue > value)
-//            {
-//                player2ChipValue -= value;
-//            }
-//            else
-//            {
-//                value = player2ChipValue;
-//                player2ChipValue = 0;
-
-//                Debug.Log("player " + this.photonView.ownerId + " all-in");
-
-//}
-//        }
-
-
-//        return value;
 

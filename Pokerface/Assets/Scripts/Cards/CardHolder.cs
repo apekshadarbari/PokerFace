@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CardHolder : MonoBehaviour {
+public class CardHolder : Photon.MonoBehaviour {
 
     //list of the cards
     List<Card> cards = new List<Card>();
@@ -15,16 +15,23 @@ public class CardHolder : MonoBehaviour {
     /// takes a card
     /// </summary>
     /// <param name="card">card from card manager</param>
-    public void DealCard(Card card)
+    [PunRPC]
+    private void DealCard(byte[] memoryBuffer)
     {
+        Card card = Card.Deserialize(memoryBuffer);
+
         //adds the card to the list cards in cardhoolder
         cards.Add(card);
+        var behaviour = new GameObject("card_behaviour", typeof(CardBehaviour)).GetComponent<CardBehaviour>();
+        behaviour.Card = card;
+        behaviour.LoadResource();
         //how many cards are in the list already, match index of new card with cardslot, and set that cardslot as parrent
-        card.transform.SetParent( cardslots[cards.Count - 1]);
+        behaviour.transform.SetParent( cardslots[cards.Count - 1], true);
         //reset transform ( bug avoidance)
-        card.transform.localPosition = Vector3.zero;
-        card.transform.localRotation = Quaternion.identity;
+        //behaviour.transform.localPosition = Vector3.zero;
+        //behaviour.transform.localRotation = Quaternion.identity;
     }
+
     /// <summary>
     /// get cards dealt to this holder  - a holder for each player and one for community
     /// </summary>
@@ -39,13 +46,50 @@ public class CardHolder : MonoBehaviour {
     /// </summary>
     public void RemoveAllCards()
     {
-        foreach (var card in cards)
-        {
-            card.transform.parent = null;
-            
-        }
+        //foreach (var card in cards)
+        //{
+        //    card.transform.parent = null;
+        //}
+        Debug.Log("Removcards please");
+
         cards.Clear();
+        foreach( var s in cardslots )
+        {
+            foreach( var b in s.GetComponentsInChildren<CardBehaviour>() )
+            {
+                Destroy(b.gameObject);
+            }
+        }
     }
 
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
 
+        ////what are we sending to the network?
+        if (stream.isWriting)
+        {
+
+            //stream.SendNext(cards);
+            //stream.SendNext(cardslots);
+
+        }
+        ////what are we receiving from the network?
+        else
+        {
+            //this.cards = (List<Card>)stream.ReceiveNext();
+            //this.cardslots = (Transform[])stream.ReceiveNext();
+
+        }
+    }
+
+    //private void ReceiveCard( Card card )
+    //{
+    //    var behaviour = new GameObject("card_behavior", typeof(CardBehaviour)).GetComponent<CardBehaviour>();
+    //    behaviour.Card = card;
+    //    behaviour.LoadResource();
+
+    //    behaviour.transform.SetParent(- );
+    //    behaviour.transform.position = Vector3.zero;
+    //    behaviour.transform.rotation = Quaternion.identity;
+    //}
 }
