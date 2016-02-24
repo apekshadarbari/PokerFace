@@ -205,6 +205,43 @@ public class CardManager : Photon.MonoBehaviour
     }
 
     /// <summary>
+    /// Deal the turn
+    /// to the community
+    /// </summary>
+    //[PunRPC]
+    public void DealTurn()
+    {
+        for (int i = 0; i < 1; i++)
+        {
+            //Debug.Log("flop contains card");
+            //this.photonView.RPC("DealCardTo", PhotonTargets.AllBufferedViaServer, communityCards);
+
+            //Card card = cardStack.Pop().GetComponent<Card>();
+            //card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0).GetComponent<Card>();
+
+            DealCardTo(communityCards, cardStack.Pop());
+        }
+    }
+
+    /// <summary>
+    /// Deal the river
+    /// to the community
+    /// </summary>
+    //[PunRPC]
+    public void DealRiver()
+    {
+        for (int i = 0; i < 1; i++)
+        {
+            //Debug.Log("flop contains card");
+            //this.photonView.RPC("DealCardTo", PhotonTargets.AllBufferedViaServer, communityCards);
+
+            //Card card = cardStack.Pop().GetComponent<Card>();
+            //card = PhotonNetwork.Instantiate(card.name, Vector3.zero, Quaternion.identity, 0).GetComponent<Card>();
+
+            DealCardTo(communityCards, cardStack.Pop());
+        }
+    }
+    /// <summary>
     ///
     /// </summary>
     /// <param name="receiver">the players or community</param>

@@ -68,7 +68,6 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         {
             case BetAction.IncreaseBet:
                 //Adding chips to raise
-                //betMan.Fold(); //TODO: REMOVE TEST
                 betMan.IncreaseBet();
                 break;
 
@@ -78,6 +77,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
                 break;
 
             case BetAction.CommitBet:
+                //accepting the bet size and commiting it
                 betMan.Bet();
                 break;
 
@@ -101,15 +101,9 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     {
         GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.3f);
         CrosshairTimerDisplay.Instance.Show();
-        audioSrc.clip = hoverSound; // change the
+        audioSrc.clip = hoverSound;
         audioSrc.Play();
     }
-
-    //void HoverSound()
-    //{
-    //    audioSrc.PlayOneShot(hoverSound, 1f);
-
-    //}
 
     /// <summary>
     /// change the color back

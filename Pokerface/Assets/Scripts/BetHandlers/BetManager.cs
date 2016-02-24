@@ -15,6 +15,12 @@ public class BetManager : PhotonManager<BetManager>
 
     private int player;//int we get from PotManager.Instanceman
 
+    [SerializeField]
+    private bool playerOneChecks;
+
+    [SerializeField]
+    private bool playerTwoChecks;
+
     //how many chips are added each time the + button is used
 
     //how many chips are we betting
@@ -48,6 +54,8 @@ public class BetManager : PhotonManager<BetManager>
     private void Start()
     {
         player = PhotonNetwork.player.ID;
+        //turnMan = GameObject.FindGameObjectWithTag("TurnManager").GetComponent<TurnManager>();
+
         infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
         //reset of the values (starting values)
@@ -306,15 +314,15 @@ public class BetManager : PhotonManager<BetManager>
             }
             else if (callValue == 0)
             {
-                Check();
+                //Check(player);
             }
             else
             {
                 Call(betValue);
             }
+            TurnManager.Instance.OnTurnEnd(this.photonView.ownerId);
 
             // End turn
-            TurnSwitch.Instance.EndTurn();
         }
         else
         {
@@ -322,9 +330,20 @@ public class BetManager : PhotonManager<BetManager>
         }
     }
 
-    private void Check()
+    private void Check(int player)
     {
         // ANNOUNCE CHECK
+        // if both players check
+        if (player == 1)
+        {
+            playerOneChecks = true;
+            Debug.Log("Player One Checks");
+        }
+        if (player == 2)
+        {
+            playerTwoChecks = true;
+            Debug.Log("Player Two Checks");
+        }
     }
 
     private void Call(int betValue)

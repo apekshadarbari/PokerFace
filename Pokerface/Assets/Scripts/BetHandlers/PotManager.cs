@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PotManager : PhotonManager<PotManager>
 {
+    private int roundIncrement;
     private bool winnerFound;
 
     //TODO: Get rid og redundancy
@@ -14,17 +15,20 @@ public class PotManager : PhotonManager<PotManager>
     [SerializeField, Header("Player two has put in")]
     private int player2pot;
 
-    [SerializeField, Header("The amount needed to call")]
-    private int amountToCall;
+    //[SerializeField, Header("The amount needed to call")]
+    //private int amountToCall;
 
     private int player;
 
     //[SerializeField]
     //private WalletManager walletMan;
 
+    [SerializeField, Header("")]
+    private GameObject roundMan;
+
     private Canvas infoBoard;
 
-    private List<GameObject> players;
+    //private List<GameObject> players;
 
     [SerializeField]
     private int potValue;
@@ -47,7 +51,7 @@ public class PotManager : PhotonManager<PotManager>
         //player1pot = 0;
         infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
-        //for testing purposes
+        /*TESTING*/
         //player2pot = 15;
         //player1pot = 15;
     }
@@ -114,14 +118,14 @@ public class PotManager : PhotonManager<PotManager>
         // Update call value
         //CallValue = Mathf.Abs(player1pot - player2pot);
     }
-    /// <summary>
-    /// terminologi for rounds turns and game...  this is after all betting is over in a "...."
-    /// </summary>
-    public void EndRound()
-    {
-        gameObject.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
-    }
 
+    //private void CurrentRound(Round currentRound)
+    //{
+    //    this.currentRound = currentRound;
+    //}
+    /// <summary>
+    /// terminologi for rounds turns and hand...  this is after all betting is over in a "...."
+    /// </summary>
     [PunRPC]
     private void EndRoundBehaviour()
     {
@@ -145,9 +149,15 @@ public class PotManager : PhotonManager<PotManager>
         }
     }
 
-    public void DumpIfEqual()
+    public void DumpIfEqual(bool bothCheck)
     {
-        if (player1pot != 0 && player1pot == player2pot)
-            EndRound();
+        //Debug.Log("pots equal");
+        if (player1pot != 0 && player1pot == player2pot || bothCheck)
+        {
+            roundIncrement++;
+            gameObject.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
+            roundMan.GetComponent<PhotonView>().RPC("RoundEnd", PhotonTargets.All, roundIncrement);
+            Debug.Log("Hygge");
+        }
     }
 }

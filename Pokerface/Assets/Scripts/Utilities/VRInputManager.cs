@@ -1,26 +1,23 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class VRInputManager : MonoBehaviour
 {
+    private SteamVR vr;
 
-    SteamVR vr;
+    private GameObject crosshair;
 
-    GameObject crosshair;
+    private GameObject seat;
 
-    GameObject seat;
+    private Vector3 playerRig;
 
-    Vector3 playerRig;
-
-
-    void Start()
+    private void Start()
     {
         //null for rift
         vr = SteamVR.instance;
         //Debug.Log(PhotonNetwork.countOfPlayers);
-        Debug.Log(PhotonNetwork.player.isLocal);
+        //Debug.Log(PhotonNetwork.player.isLocal);
         //lighthouse if vive
-        string hmd = vr.hmd_TrackingSystemName.ToString();
 
         playerRig = GameObject.Find("[CameraRig]").transform.position;
         var vrSpace = GameObject.Find("[SteamVR]").transform.position;
@@ -29,28 +26,34 @@ public class VRInputManager : MonoBehaviour
         {
             //if the player is local, and not vive
         }
-        if (hmd == "lighthouse")
+        if (vr != null)
         {
-            //crosshair if gaze on enable crosshair on head 
-            //seats set to Y.0
-            crosshair = GameObject.FindGameObjectWithTag("CrosshairVive");
-            crosshair.GetComponent<MeshRenderer>().enabled = true;
-            //GameObject.Find("[CameraRig]").transform.position += Vector3.up * 1.4f;
-  
+            string hmd = vr.hmd_TrackingSystemName.ToString();
 
-            Debug.Log("Vive");
+            if (hmd == "lighthouse")
+            {
+                //crosshair if gaze on enable crosshair on head
+                //seats set to Y.0
+                crosshair = GameObject.FindGameObjectWithTag("CrosshairVive");
+                crosshair.GetComponent<MeshRenderer>().enabled = true;
+                //GameObject.Find("[CameraRig]").transform.position += Vector3.up * 1.4f;
+                Debug.Log("Vive");
+            }
+            else
+            {
+                //gaze on eye
+                //raycast from eye?
+                crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
+                crosshair.GetComponent<MeshRenderer>().enabled = true;
+                Debug.Log("Not Vive");
+            }
         }
         else
         {
-            //gaze on eye
-            //raycast from eye?
-            //
-            crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
+            crosshair = GameObject.FindGameObjectWithTag("CrosshairVive");
             crosshair.GetComponent<MeshRenderer>().enabled = true;
-            playerRig = GameObject.Find("[CameraRig]").transform.position += Vector3.up * 1.4f;
-            Debug.Log("Not Vive");
+            Debug.Log("No VR device");
         }
-
         //Debug.Log(hmd);
     }
 }

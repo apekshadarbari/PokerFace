@@ -46,9 +46,9 @@ public class TurnSwitch : PhotonManager<TurnSwitch>, IClicker
 
     protected override void Awake()
     {
-        base.Awake();
-        //Debug.Log("pre awake owner " + photonView.ownerId.ToString());
-        //make sure the owner id is 1 from the start
+        //base.Awake();
+        ////Debug.Log("pre awake owner " + photonView.ownerId.ToString());
+        ////make sure the owner id is 1 from the start
         if (this.photonView.ownerId == 0)
         {
             this.photonView.TransferOwnership(1);
@@ -58,28 +58,28 @@ public class TurnSwitch : PhotonManager<TurnSwitch>, IClicker
 
     private void Start()
     {
+        if (this.photonView.ownerId == 0)
+        {
+            this.photonView.TransferOwnership(1);
+        }
         //turntrigger gets instantiated after start button is clicked
         //then we use the cardmanager built into it
-        deckInteraction = GetComponent<CardManager>();
+        //deckInteraction = GetComponent<CardManager>();
 
-        btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
-        btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
+        //btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
+        //btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
 
-        //pot = GameObject.Find("pot").GetComponent<PotManager>();
+        //if (deckInteraction == null)
+        //{
+        //    //Debug.Log("No Deck");
+        //}
 
-        //betInteraction = GetComponent<BetMore>();
-
-        if (deckInteraction == null)
-        {
-            //Debug.Log("No Deck");
-        }
-
-        //game just started so we set everything to 0
-        flopIsDealt = false;
-        gameIsStarted = false;
+        ////game just started so we set everything to 0
+        //flopIsDealt = false;
+        //gameIsStarted = false;
 
         //TODO > untill the 2 pot amounts this should not be changed
-        Turn = 0;
+        //Turn = 0;
 
         //Debug.Log("I´m started");
         //Debug.Log("Turn " + Turn.ToString());
@@ -88,98 +88,95 @@ public class TurnSwitch : PhotonManager<TurnSwitch>, IClicker
     private void Update()
     {
         //make sure the trigger is in the right position
-        switch (this.photonView.ownerId)
-        {
-            case 1:
-                TurnTrigger.transform.position = new Vector3(2.8f, .4f, 0f);
-                foreach (var btn in btnTwo)
-                {
-                    btn.GetComponent<MeshRenderer>().enabled = false;
-                    btn.GetComponent<SphereCollider>().enabled = false;
-                }
-                foreach (var btn in btnOne)
-                {
-                    btn.GetComponent<MeshRenderer>().enabled = true;
-                    btn.GetComponent<SphereCollider>().enabled = true;
-                }
+        //switch (this.photonView.ownerId)
+        //{
+        //    case 1:
+        //        TurnTrigger.transform.position = new Vector3(2.8f, 1.35f, 0f);
+        //        foreach (var btn in btnTwo)
+        //        {
+        //            btn.GetComponent<MeshRenderer>().enabled = false;
+        //            btn.GetComponent<SphereCollider>().enabled = false;
+        //        }
+        //        foreach (var btn in btnOne)
+        //        {
+        //            btn.GetComponent<MeshRenderer>().enabled = true;
+        //            btn.GetComponent<SphereCollider>().enabled = true;
+        //        }
 
-                break;
+        //        break;
 
-            case 2:
-                TurnTrigger.transform.position = new Vector3(-2.2f, 0f, 4.57f);
-                //deactivate the buttons //TODO: Make more effecient
-                foreach (var btn in btnTwo)
-                {
-                    btn.GetComponent<MeshRenderer>().enabled = true;
-                    btn.GetComponent<SphereCollider>().enabled = true;
-                }
-                foreach (var btn in btnOne)
-                {
-                    btn.GetComponent<MeshRenderer>().enabled = false;
-                    btn.GetComponent<SphereCollider>().enabled = false;
-                }
+        //    case 2:
+        //        TurnTrigger.transform.position = new Vector3(-2.75f, 1.35f, 0f);
+        //        //deactivate the buttons //TODO: Make more effecient
+        //        foreach (var btn in btnTwo)
+        //        {
+        //            btn.GetComponent<MeshRenderer>().enabled = true;
+        //            btn.GetComponent<SphereCollider>().enabled = true;
+        //        }
+        //        foreach (var btn in btnOne)
+        //        {
+        //            btn.GetComponent<MeshRenderer>().enabled = false;
+        //            btn.GetComponent<SphereCollider>().enabled = false;
+        //        }
 
-                break;
+        //        break;
 
-            default:
-                break;
-        }
-        switch (Turn)
-        {
-            //game (round) just started
-            case 0:
-                if (!gameIsStarted) //make sure we only do it once
-                {
-                    //make sure we only run this once in the scene
+        //    default:
+        //        break;
+        //}
+        //switch (Turn)
+        //{
+        //    //game (round) just started
+        //    case 0:
+        //        if (!gameIsStarted) //make sure we only do it once
+        //        {
+        //            //make sure we only run this once in the scene
 
-                    //TODO: try without masteclient? does player two get the righht cards still?
-                    if (PhotonNetwork.isMasterClient)
-                    {
-                        //deckInteraction.GetComponent<PhotonView>().RPC("Shuffle", PhotonTargets.AllBufferedViaServer);
-                        //deckInteraction.GetComponent<PhotonView>().RPC("Deal", PhotonTargets.AllBufferedViaServer);
+        //            //TODO: try without masteclient? does player two get the righht cards still?
+        //            if (PhotonNetwork.isMasterClient)
+        //            {
+        //                //we shuffle and deal to starting cards
+        //                deckInteraction.Shuffle();
+        //                deckInteraction.Deal();
 
-                        //we shuffle and deal to starting cards
-                        deckInteraction.Shuffle();
-                        deckInteraction.Deal();
+        //                gameIsStarted = true;
+        //            }
+        //        }
+        //        break;
+        //    //deal the flop
+        //    case 1:
+        //        //if (!flopIsDealt) //make sure we only do it once
+        //        //{
+        //        //    if (PhotonNetwork.isMasterClient)
+        //        //    {
+        //        //        //deckInteraction.DealFlop();
+        //        //        //deckInteraction.GetComponent<PhotonView>().RPC("CompareCards", PhotonTargets.AllBufferedViaServer);
 
-                        gameIsStarted = true;
-                    }
-                }
-                break;
-            //deal the flop
-            case 1:
-                if (!flopIsDealt) //make sure we only do it once
-                {
-                    if (PhotonNetwork.isMasterClient)
-                    {
-                        deckInteraction.DealFlop();
-                        //deckInteraction.GetComponent<PhotonView>().RPC("CompareCards", PhotonTargets.AllBufferedViaServer);
+        //        //        //deckInteraction.GetComponent<PhotonView>().RPC("DealFlop", PhotonTargets.AllBufferedViaServer);
 
-                        //deckInteraction.GetComponent<PhotonView>().RPC("DealFlop", PhotonTargets.AllBufferedViaServer);
+        //        //        //temp compare for testing
+        //        //        //deckInteraction.CompareCards();
+        //        //        flopIsDealt = true;
+        //        //    }
+        //        //}
+        //        break;
+        //    //deal the turn
+        //    case 2:
+        //        break;
+        //    //deal the river
+        //    case 3:
+        //        //reset round after the game is over
+        //        //turn = 0;
+        //        break;
+        //    //compare cards
+        //    case 4:
+        //        //compare the cards
+        //        deckInteraction.CompareCards();
+        //        break;
 
-                        //temp compare for testing
-                        //deckInteraction.CompareCards();
-                        flopIsDealt = true;
-                    }
-                }
-                break;
-            //deal the turn
-            case 2:
-                break;
-            //deal the river
-            case 3:
-                //reset round after the game is over
-                //turn = 0;
-                break;
-            //compare cards
-            case 4:
-                //compare the cards
-                deckInteraction.CompareCards();
-                break;
-
-            default:
-                break;
-        }
+        //    default:
+        //        break;
+        //}
 
         //go through the turns, to see what needs to happen
     }
@@ -189,8 +186,8 @@ public class TurnSwitch : PhotonManager<TurnSwitch>, IClicker
     /// </summary>
     public void EndTurn()
     {
-        Turn++;
-        gameObject.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, Turn, gameIsStarted, flopIsDealt);
+        //Turn++;
+        //gameObject.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, Turn, gameIsStarted, flopIsDealt);
 
         //increment the turn
 
@@ -198,65 +195,52 @@ public class TurnSwitch : PhotonManager<TurnSwitch>, IClicker
         //Debug.Log("this.photonView.ownerId: " + this.photonView.ownerId);
         //Debug.Log("PhotonNetwork.player.ID: " + PhotonNetwork.player.ID);
 
-        PotManager.Instance.DumpIfEqual();
+        //PotManager.Instance.DumpIfEqual();
 
-        //if it was player two´s turn
-        if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
-        {
-            //deactivate the buttons //TODO: Make more effecient
+        ////if it was player two´s turn
+        //if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 2)
+        //{
+        //    //deactivate the buttons //TODO: Make more effecient
 
-            Debug.Log("player 2 transferring control to 1");
+        //    Debug.Log("player 2 transferring control to 1");
 
-            //dump temp bets (remake when making round mech)
+        //    //dump temp bets (remake when making round mech)
 
-            //transfor ownership to the other player
-            this.photonView.TransferOwnership(1);
-        }
-        //if it was player one´s turn
-        else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
-        {
-            Debug.Log("player 1 transferring control to 2");
+        //    //transfor ownership to the other player
+        //    this.photonView.TransferOwnership(1);
+        //}
+        ////if it was player one´s turn
+        //else if (this.photonView.ownerId == PhotonNetwork.player.ID && PhotonNetwork.player.ID == 1)
+        //{
+        //    Debug.Log("player 1 transferring control to 2");
 
-            //transfor ownership to the other player
-            this.photonView.TransferOwnership(2);
-        }
+        //    //transfor ownership to the other player
+        //    this.photonView.TransferOwnership(2);
+        //}
 
         //Debug.Log("owner " + this.photonView.ownerId.ToString());
     }
 
-    [PunRPC]
-    private void TurnChange(int turn, bool gameStarted, bool flopDealt)
-    {
-        this.Turn = turn;
-        Debug.Log("Turn: " + turn);
-        this.gameIsStarted = gameStarted;
-        this.flopIsDealt = flopDealt;
-        //return this.Turn;
-        BetManager.Instance.OnTurnStart();
-    }
+    //[PunRPC]
+    //private void TurnChange(int turn, bool gameStarted, bool flopDealt)
+    //{
+    //    this.Turn = turn;
+    //    Debug.Log("Turn: " + turn);
+    //    this.gameIsStarted = gameStarted;
+    //    this.flopIsDealt = flopDealt;
+    //    //return this.Turn;
+    //    BetManager.Instance.OnTurnStart();
+    //}
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
         {
-            //send the next turn to next player
-            //make it uninteractable to others
-
-            //stream.SendNext(gameIsStarted);
-            //stream.SendNext(flopIsDealt);
-
-            //stream.SendNext(turn);
-
             stream.SendNext(photonView.ownerId);
             stream.SendNext(TurnTrigger.transform.position);
         }
         else
         {
-            //this.gameIsStarted = (bool)stream.ReceiveNext();
-            //this.flopIsDealt = (bool)stream.ReceiveNext();
-
-            //turn = (int)stream.ReceiveNext();
-
             photonView.ownerId = (int)stream.ReceiveNext();
             this.TurnTrigger.transform.position = (Vector3)stream.ReceiveNext();
         }

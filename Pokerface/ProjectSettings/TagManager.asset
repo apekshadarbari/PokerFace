@@ -15,6 +15,7 @@ TagManager:
   - CrosshairRift
   - CrosshairVive
   - CrosshairGear
+  - TurnManager
   layers:
   - Default
   - TransparentFX
