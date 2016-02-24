@@ -334,6 +334,7 @@ public class BetManager : PhotonManager<BetManager>
     {
         // ANNOUNCE CHECK
         // if both players check
+        /*TESTING*/
         if (player == 1)
         {
             playerOneChecks = true;

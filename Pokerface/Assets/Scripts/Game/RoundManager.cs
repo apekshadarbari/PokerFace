@@ -64,8 +64,8 @@ public class RoundManager : Photon.MonoBehaviour
     [PunRPC]
     private void RoundEnd(int round)
     {
-        this.round = round;
-        Debug.Log(round);
+        this.round += round;
+        Debug.Log("Round Number: " + round);
         //next round
         RoundStart(round);
     }
@@ -84,22 +84,27 @@ public class RoundManager : Photon.MonoBehaviour
                 case 0: // handStarted
                     cardMan.Shuffle();
                     cardMan.Deal();
+                    Debug.Log("Cards shuffled and dealt");
                     break;
 
                 case 1: // The Flop
                     cardMan.DealFlop();
+                    Debug.Log("Flop Dealt");
                     break;
 
                 case 2: // the Turn
                     cardMan.DealTurn();
+                    Debug.Log("Turn Dealt");
                     break;
 
                 case 3: // the River
                     cardMan.DealRiver();
+                    Debug.Log("River Dealt");
                     break;
 
-                case 4: // the End Comparison - who wins?
-                    cardMan.CompareCards();
+                case 4: // the End Comparison - who wins
+                    Debug.Log("Hand over finding winner...");
+                    HandEnd(false);
                     break;
 
                 default:
@@ -116,7 +121,8 @@ public class RoundManager : Photon.MonoBehaviour
     /// </summary>
     private void HandEnd(bool fold)
     {
-        //cardMan.CompareCards();
+        cardMan.CompareCards();
+        round = 0;
         //if (!fold)
         //{
         //    //next round
