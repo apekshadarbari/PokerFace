@@ -7,7 +7,6 @@
 using UnityEngine;
 using System.Collections;
 using Valve.VR;
-using UnityEngine.SceneManagement;
 
 public class SteamVR_LoadLevel : MonoBehaviour
 {
@@ -312,11 +311,10 @@ public class SteamVR_LoadLevel : MonoBehaviour
 		transform.parent = null;
 		DontDestroyOnLoad(gameObject);
 
-        // Loading asynchronously so we can update the progress bar above.
-        //async = loadAdditive ? Application.LoadLevelAdditiveAsync(levelName) : Application.LoadLevelAsync(levelName);
-        async = loadAdditive ? SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive) : SceneManager.LoadSceneAsync(levelName);
+		// Loading asynchronously so we can update the progress bar above.
+		async = loadAdditive ? Application.LoadLevelAdditiveAsync(levelName) : Application.LoadLevelAsync(levelName);
 		yield return async;
-        
+
 		System.GC.Collect();
 
 		// Optionally wait a short period of time after loading everything back in, but before we start rendering again
