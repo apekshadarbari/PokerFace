@@ -29,10 +29,11 @@ public class BetManager : PhotonManager<BetManager>
     //[SerializeField]
     //private int chipsToRaise;
 
-    //an instance of the turnswitch scripts
+    private RoundManager roundMan;
 
     //the players wallet I.E. chipvalue
     //[SerializeField]
+    private bool wantsNextRound;
 
     private Canvas infoBoard;
 
@@ -64,6 +65,7 @@ public class BetManager : PhotonManager<BetManager>
         //find the PotManager.Instance
 
         audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
+        roundMan = GameObject.Find("Round").GetComponent<RoundManager>();
 
         if (this.photonView.ownerId == 2)
         {
@@ -250,43 +252,7 @@ public class BetManager : PhotonManager<BetManager>
     /// <summary>
     /// fold
     /// </summary>
-	public void Fold()
-    {
-        if (this.photonView.ownerId == 2)
-        {
-            Debug.Log("player " + this.photonView.ownerId + " folds");
 
-            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
-            //PotManager.Instance.FoldPotManager.InstanceToPlayer(1);
-        }
-        else if (this.photonView.ownerId == 1)
-        {
-            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
-
-            Debug.Log("player " + photonView.ownerId + " folds");
-
-            //PotManager.Instance.FoldPotManager.InstanceToPlayer(2);
-        }
-        //destroy children of cardslots
-        gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
-    }
-
-    [PunRPC]
-    private void RemoveCard()
-    {
-        //var fold = GameObject.FindGameObjectsWithTag("CardSlot");
-        var holders = GameObject.FindGameObjectsWithTag("CardHolder");
-
-        foreach (var slot in holders)
-        {
-            slot.GetComponent<CardHolder>().RemoveAllCards();
-
-            //foreach (Transform c in s.transform)
-            //{
-            //    GameObject.Destroy(c.gameObject);
-            //}
-        }
-    }
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
     }
@@ -306,23 +272,25 @@ public class BetManager : PhotonManager<BetManager>
         {
             if (betValue < callValue)
             {
-                throw new NotImplementedException("DON'T UNDERBET YOU BIATCH!");
+                throw new NotImplementedException("You have to at least match the other players bet...");
             }
             else if (betValue > callValue)
             {
+                wantsNextRound = false;
                 Raise(betValue);
             }
             else if (callValue == 0)
             {
-                //Check(player);
+                wantsNextRound = true;
+                Check();
             }
             else
             {
+                wantsNextRound = true;
                 Call(betValue);
             }
-            TurnManager.Instance.OnTurnEnd(this.photonView.ownerId);
-
             // End turn
+            TurnManager.Instance.OnTurnEnd(this.photonView.ownerId, wantsNextRound);
         }
         else
         {
@@ -330,25 +298,31 @@ public class BetManager : PhotonManager<BetManager>
         }
     }
 
-    private void Check(int player)
+    private void Check()
     {
         // ANNOUNCE CHECK
-        // if both players check
-        /*TESTING*/
         if (player == 1)
         {
-            playerOneChecks = true;
-            Debug.Log("Player One Checks");
+            //Debug.Log("Player One Checks");
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Check);
         }
         if (player == 2)
         {
-            playerTwoChecks = true;
-            Debug.Log("Player Two Checks");
+            //Debug.Log("Player Two Checks");
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Check);
         }
     }
 
     private void Call(int betValue)
     {
+        if (player == 1)
+        {
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Call);
+        }
+        else if (player == 2)
+        {
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Call);
+        }
         PotManager.Instance.Bet(player, betValue);
         // ANNOUNCE CALL
     }
@@ -358,7 +332,28 @@ public class BetManager : PhotonManager<BetManager>
         // IF OPPONENT CAN'T MATCH
         //      REJECT RAISE
 
-        PotManager.Instance.Bet(player, betValue);
         // ANOUNCE RAISE
+        if (player == 1)
+        {
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Raise);
+        }
+        else if (player == 2)
+        {
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Raise);
+        }
+        PotManager.Instance.Bet(player, betValue);
+    }
+
+    public void Fold()
+    {
+        if (player == 1)
+        {
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
+        }
+        else if (player == 2)
+        {
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
+        }
+        roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
     }
 }

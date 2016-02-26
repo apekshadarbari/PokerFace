@@ -149,14 +149,14 @@ public class PotManager : PhotonManager<PotManager>
         }
     }
 
-    public void DumpIfEqual(bool bothCheck)
+    public void DumpIfEqual()
     {
         //Debug.Log("pots equal");
-        if (player1pot != 0 && player1pot == player2pot || bothCheck)
+        if (player1pot != 0 && player1pot == player2pot)
         {
-            roundIncrement++;
+            //roundIncrement = 1;
             gameObject.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
-            roundMan.GetComponent<PhotonView>().RPC("RoundEnd", PhotonTargets.All, roundIncrement);
+            //roundMan.GetComponent<PhotonView>().RPC("RoundEnd", PhotonTargets.All, roundIncrement);
             Debug.Log("Hygge");
         }
     }

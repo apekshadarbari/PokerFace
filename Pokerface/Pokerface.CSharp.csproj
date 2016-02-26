@@ -240,6 +240,7 @@
     <Compile Include="Assets\Scripts\Utilities\Manager.cs" />
     <Compile Include="Assets\Scripts\Utilities\NetworkController.cs" />
     <Compile Include="Assets\Scripts\Utilities\PhotonManager.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Testing.cs" />
     <Compile Include="Assets\Scripts\Utilities\VRInputManager.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />

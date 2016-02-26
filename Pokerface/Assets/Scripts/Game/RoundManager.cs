@@ -27,16 +27,42 @@ public class RoundManager : Photon.MonoBehaviour
 
     private int round;
 
+    [SerializeField]
+    private bool playerOneWantsNextRound;
+
+    [SerializeField]
+    private bool playerTwoWantsNextRound;
+
     // den der har turnswitchen har turen..
     /// <summary>
     /// who has the action?
     /// </summary>
     /// <param name="player"></param>
     [PunRPC]
-    private void TurnChange(int receivingPlayer)
+    private void TurnChange(int player, bool wantsNextRound, int receivingPlayer)
     {
         turnIndicater.GetComponent<PhotonView>().TransferOwnership(receivingPlayer);
         GetComponent<PhotonView>().RPC("CurrentPlayerTurn", PhotonTargets.All, receivingPlayer);
+
+        if (player == 1 && wantsNextRound)
+        {
+            playerOneWantsNextRound = true;
+        }
+        if (player == 2 && wantsNextRound)
+        {
+            playerTwoWantsNextRound = true;
+        }
+        if (player == 1 && !wantsNextRound || player == 2 && !wantsNextRound)
+        {
+            playerOneWantsNextRound = false;
+            playerTwoWantsNextRound = false;
+        }
+        //if we receive true from both players we can increment the round by 1
+        if (playerOneWantsNextRound && playerTwoWantsNextRound)
+        {
+            PotManager.Instance.DumpIfEqual();
+            RoundEnd(1);
+        }
     }
 
     [PunRPC]
@@ -65,10 +91,11 @@ public class RoundManager : Photon.MonoBehaviour
     private void RoundEnd(int round)
     {
         this.round += round;
-        Debug.Log("Round Number: " + round);
+        Debug.Log("Round Number: " + this.round);
         //next round
-        RoundStart(round);
+        RoundStart(this.round);
     }
+
     /// <summary>
     /// når der skal gives nye kort til community, flop, turn, river
     /// spillernes tur cyklus restartes og alle individuelle pots lægges i den samlede
@@ -76,6 +103,10 @@ public class RoundManager : Photon.MonoBehaviour
     [PunRPC]
     private void RoundStart(int round)
     {
+        PotManager.Instance.DumpIfEqual();
+        playerOneWantsNextRound = false;
+        playerTwoWantsNextRound = false;
+
         if (PhotonNetwork.isMasterClient)
         {
             // call flop etc
@@ -104,7 +135,7 @@ public class RoundManager : Photon.MonoBehaviour
 
                 case 4: // the End Comparison - who wins
                     Debug.Log("Hand over finding winner...");
-                    HandEnd(false);
+                    HandEnd(0, false);
                     break;
 
                 default:
@@ -119,21 +150,23 @@ public class RoundManager : Photon.MonoBehaviour
     /// en spiller folder, eller én spiller har en bedre hånd og vinder
     /// Potten gives til vinderen
     /// </summary>
-    private void HandEnd(bool fold)
+    [PunRPC]
+    private void HandEnd(int player, bool fold)
     {
-        cardMan.CompareCards();
+        if (!fold)
+        {
+            //next round
+            cardMan.CompareCards();
+            RoundStart(0);
+            //need the current enum so we can send on the next enum
+        }
+        else if (fold)
+        {
+            //give whoever didnt fold the pot and remove all cards in the game
+            gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
+        }
+        //PotManager.Instance
         round = 0;
-        //if (!fold)
-        //{
-        //    //next round
-        //    RoundStart();
-        //    //need the current enum so we can send on the next enum
-        //}
-        //else if (fold)
-        //{
-        //    //give whoever didnt fold the pot and remove all cards in the game
-        //}
-        //
     }
 
     /// <summary>
@@ -152,6 +185,23 @@ public class RoundManager : Photon.MonoBehaviour
         //Debug.Log(playerTurn);
         CurrentPlayerTurn(playerTurn);
         RoundStart(0);
+    }
+
+    [PunRPC]
+    private void RemoveCard()
+    {
+        //var fold = GameObject.FindGameObjectsWithTag("CardSlot");
+        var holders = GameObject.FindGameObjectsWithTag("CardHolder");
+
+        foreach (var slot in holders)
+        {
+            slot.GetComponent<CardHolder>().RemoveAllCards();
+
+            //foreach (Transform c in s.transform)
+            //{
+            //    GameObject.Destroy(c.gameObject);
+            //}
+        }
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

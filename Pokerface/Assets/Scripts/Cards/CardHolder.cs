@@ -58,7 +58,7 @@ public class CardHolder : Photon.MonoBehaviour
         //{
         //    card.transform.parent = null;
         //}
-        Debug.Log("Removcards please");
+        //Debug.Log("Removcards please");
 
         cards.Clear();
         foreach (var s in cardslots)

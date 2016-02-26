@@ -68,4 +68,5 @@ MonoBehaviour:
   - RoundEnd
   - HandStart
   - Check
+  - HandEnd
   DisableAutoOpenWizard: 1

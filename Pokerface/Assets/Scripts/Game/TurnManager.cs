@@ -62,23 +62,21 @@ public class TurnManager : PhotonManager<TurnManager>
     ///hvad gør spilleren?
     ///send data til roundmanager så infoen kan bruges i næste playerturn
     /// </summary>
-    public void OnTurnEnd(int player)
+    public void OnTurnEnd(int player, bool wantsNextRound)
     {
-        PotManager.Instance.DumpIfEqual(false);//remake
-
         //if it was player one´s turn
         if (player == 1)
         {
             Debug.Log("player 1 transferring control to 2");
 
             //transfor ownership to the other player
-            roundMan.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, 2);
+            roundMan.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, player, wantsNextRound, 2);
         }
         //if it was player two´s turn
         else if (player == 2)
         {
             Debug.Log("player 2 transferring control to 1");
-            roundMan.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, 1);
+            roundMan.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, player, wantsNextRound, 1);
         }
     }
 }

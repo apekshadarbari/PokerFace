@@ -46,6 +46,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
             playerRig.position = seatTrans.position;
 
+            VRInputManager.Instance.DeviceSpecificSeating();
+
             avatar.SetActive(false);
         }
 

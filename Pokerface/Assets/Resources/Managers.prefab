@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 481308}
+  - 114: {fileID: 11489316}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -226,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9074344cace3f474a8da54972f161d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1pot: 5
-  player2pot: 10
+  player1pot: 0
+  player2pot: 0
   roundMan: {fileID: 164330}
   potValue: 0
 --- !u!114 &11425532
@@ -241,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c364eee331bbb9240b3401b6fc2b0de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHeight: 1.5
 --- !u!114 &11438230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,6 +320,22 @@ MonoBehaviour:
   turnIndicater: {fileID: 179448, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
   turnMan: {fileID: 11455716}
   cardMan: {fileID: 11495990}
+  playerOneWantsNextRound: 0
+  playerTwoWantsNextRound: 0
+--- !u!114 &11489316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40922c167d48b64d899acb9c188db11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seats:
+  - {fileID: 135804, guid: db8e4539ced7090469dad84b9b65d4f1, type: 2}
+  - {fileID: 168148, guid: 9ed84e411742c644ebdb5790ad72385e, type: 2}
 --- !u!114 &11495990
 MonoBehaviour:
   m_ObjectHideFlags: 1
