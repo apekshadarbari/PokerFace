@@ -24,38 +24,40 @@ public class TurnManager : PhotonManager<TurnManager>
         btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
         //set players buttons to active..
         //other players buttons should be inactive
-        switch (player)
-        {
-            case 1:
-                foreach (var btn in btnOne) // meshcolliders skal nok af og de skal ha rigid bods
-                {
-                    btn.GetComponent<MeshRenderer>().enabled = true;
-                    btn.GetComponent<SphereCollider>().enabled = true;
-                }
-                foreach (var btn in btnTwo)
-                {
-                    btn.GetComponent<MeshRenderer>().enabled = false;
-                    btn.GetComponent<SphereCollider>().enabled = false;
-                }
-                break;
+        
+        /*TESTING turned off #HTC 2602*/
+        //switch (player)
+        //{
+        //    case 1:
+        //        foreach (var btn in btnOne) // meshcolliders skal nok af og de skal ha rigid bods
+        //        {
+        //            btn.GetComponent<MeshRenderer>().enabled = true;
+        //            btn.GetComponent<SphereCollider>().enabled = true;
+        //        }
+        //        foreach (var btn in btnTwo)
+        //        {
+        //            btn.GetComponent<MeshRenderer>().enabled = false;
+        //            btn.GetComponent<SphereCollider>().enabled = false;
+        //        }
+        //        break;
 
-            case 2:
-                foreach (var btn in btnOne)
-                {
-                    btn.GetComponent<MeshRenderer>().enabled = false;
-                    btn.GetComponent<SphereCollider>().enabled = false;
-                }
-                foreach (var btn in btnTwo)
-                {
-                    btn.GetComponent<MeshRenderer>().enabled = true;
-                    btn.GetComponent<SphereCollider>().enabled = true;
-                }
+        //    case 2:
+        //        foreach (var btn in btnOne)
+        //        {
+        //            btn.GetComponent<MeshRenderer>().enabled = false;
+        //            btn.GetComponent<SphereCollider>().enabled = false;
+        //        }
+        //        foreach (var btn in btnTwo)
+        //        {
+        //            btn.GetComponent<MeshRenderer>().enabled = true;
+        //            btn.GetComponent<SphereCollider>().enabled = true;
+        //        }
 
-                break;
+        //        break;
 
-            default:
-                break;
-        }
+        //    default:
+        //        break;
+        //}
     }
 
     /// <summary>
