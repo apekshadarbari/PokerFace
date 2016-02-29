@@ -69,4 +69,5 @@ MonoBehaviour:
   - HandStart
   - Check
   - HandEnd
+  - PotToPlayer
   DisableAutoOpenWizard: 1

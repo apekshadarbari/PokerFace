@@ -33,12 +33,6 @@ public class PotManager : PhotonManager<PotManager>
     [SerializeField]
     private int potValue;
 
-    public int PotValue
-    {
-        get { return potValue; }
-        private set { potValue = value; }
-    }
-
     public int TotalPotValue
     {
         get { return potValue + player1pot + player2pot; }
@@ -47,7 +41,7 @@ public class PotManager : PhotonManager<PotManager>
     // Use this for initialization
     private void Start()
     {
-        PotValue = 0; //reset to 0
+        //potValue = 0; //reset to 0
         //player1pot = 0;
         infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
@@ -56,41 +50,11 @@ public class PotManager : PhotonManager<PotManager>
         //player1pot = 15;
     }
 
-    //adds chips to the pot I.E. the pots chipvalue
-    //do we need the player param here? TODO: find out if we ever use the player param here
-    public void AddChipsToPot(int chips)
-    {
-        PotValue += chips;
-    }
-
     public void Update()
     {
         //betMan.GetAmountToCall(player, amountToCall);
 
         //infoBoard.GetComponent<PhotonView>().RPC("TextPot", PhotonTargets.AllBuffered,chipValue);
-    }
-
-    [PunRPC]
-    private void WinPotToPlayer(int player)
-    {
-        //if (winnerFound)
-        //{
-        if (player == 2)
-        {
-            var wallet = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<WalletManager>();
-            wallet.Deposit(PotValue + player1pot + player2pot);
-        }
-        else if (player == 1)
-        {
-            var wallet = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<WalletManager>();
-            wallet.Deposit(PotValue + player1pot + player2pot);
-        }
-        PotValue = 0;
-        //}
-    }
-
-    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
     }
 
     public void Bet(int player, int betValue)
@@ -134,6 +98,12 @@ public class PotManager : PhotonManager<PotManager>
         player2pot = 0;
     }
 
+    [PunRPC]
+    private void EndHandBehaviour()
+    {
+        potValue = 0;
+    }
+
     public int GetCallValue(int player)
     {
         switch (player)
@@ -157,7 +127,41 @@ public class PotManager : PhotonManager<PotManager>
             //roundIncrement = 1;
             gameObject.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
             //roundMan.GetComponent<PhotonView>().RPC("RoundEnd", PhotonTargets.All, roundIncrement);
-            Debug.Log("Hygge");
+            //Debug.Log("Hygge");
         }
+    }
+
+    /// <summary>
+    /// take the player who wins and give the pot to that player
+    /// </summary>
+    [PunRPC]
+    public void PotToPlayer(int player)
+    {
+        //if (player == 1)
+        //{
+        //    //player one has won
+        //    //run end round behaviour to put the pots together
+        //    //gameObject.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
+
+        //    //WalletManager.Instance.Deposit(potValue, player);
+
+        //    //add total pot to that players wallet
+        //    //TotalPotValue();
+        //    //TODO: need to add whatever a player has already bet to the pot when someone folds.. /dump if fold or remake dumpifequal
+        //}
+        //else if (player == 2)
+        //{
+        //    //player two has won
+        //    //gameObject.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
+        //    //WalletManager.Instance.Deposit(potValue);
+        //}
+        //else
+        //{
+        //    //no one wins
+        //}
+    }
+
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
     }
 }

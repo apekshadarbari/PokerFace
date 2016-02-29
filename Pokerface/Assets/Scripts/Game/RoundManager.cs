@@ -162,6 +162,8 @@ public class RoundManager : Photon.MonoBehaviour
         }
         else if (fold)
         {
+            cardMan.CompareCards();//compares the cards
+
             //give whoever didnt fold the pot and remove all cards in the game
             gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
         }

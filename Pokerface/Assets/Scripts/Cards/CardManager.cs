@@ -41,6 +41,7 @@ public class CardManager : Photon.MonoBehaviour
     //[SerializeField]
     private Stack<Card> cardStack;
 
+    private int winningPlayer;
     // EXTENSION METHOD
     //public static void ForEach<T>( this T[] array, Action<T> action)
     //{
@@ -385,7 +386,7 @@ public class CardManager : Photon.MonoBehaviour
             //there are no matches for the current combo
             else
             {
-                Debug.Log("No matches for " + c);
+                //Debug.Log("No matches for " + c); // debug for matches
             }
         }
 
@@ -393,17 +394,23 @@ public class CardManager : Photon.MonoBehaviour
         if (winner != null)
         {
             Debug.LogFormat("The winner is {0} with {1}", winner.Player.name, winner.Name);//TODO: ADD chips to winner wallet
-            //if (winner.Player.name == "PlayerOneHand")
-            //{
-            //    PotManager.Instance.GetComponent<PhotonView>().RPC("WinPotManager.InstanceToPlayer", PhotonTargets.All, 1);
-            //    betMan = GameObject.FindGameObjectWithTag("Player1BetController");
-            //}
-            //else if (winner.Player.name == "PlayerTwoHand")
-            //{
-            //    PotManager.Instance.GetComponent<PhotonView>().RPC("WinPotManager.InstanceToPlayer", PhotonTargets.All, 2);
-            //    betMan = GameObject.FindGameObjectWithTag("Player2BetController");
-            //}
-            //betMan.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.All);
+
+            if (winner.Player.name == "PlayerOneHand")
+            {
+                //player one has won
+                winningPlayer = 1;
+            }
+            else if (winner.Player.name == "PlayerTwoHand")
+            {
+                //player two has won
+                winningPlayer = 2;
+            }
+            else
+            {
+                throw new InvalidOperationException("No winner found"); // pot should be split evenly at this point
+            }
+            //PotManager.Instance.PotToPlayer(winningPlayer);
+            WalletManager.Instance.ReceivePot(winningPlayer);
         }
         //otherwise there is no winner and we throw an exception - should very rarely happen
         else

@@ -15,11 +15,11 @@ public class BetManager : PhotonManager<BetManager>
 
     private int player;//int we get from PotManager.Instanceman
 
-    [SerializeField]
-    private bool playerOneChecks;
+    //[SerializeField]
+    //private bool playerOneChecks;
 
-    [SerializeField]
-    private bool playerTwoChecks;
+    //[SerializeField]
+    //private bool playerTwoChecks;
 
     //how many chips are added each time the + button is used
 
@@ -133,130 +133,6 @@ public class BetManager : PhotonManager<BetManager>
         else betValue = betValue - chipsToIncrement;
     }
 
-    ///// <summary>
-    ///// raise button clicked
-    ///// </summary>
-    //public void RaiseChips()
-    //{
-    //    ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
-
-    //    //the chips we want to bet is set to the raised chips an used with the current user(owner - player ´s id)
-    //    //we get chips from our wallet as the player id
-    //    betValue = wallet.GetChips(this.photonView.ownerId, betValue);
-
-    //    //add the chips to the PotManager.Instance TODO: should add to the player PotManager.Instance
-    //    //PotManager.Instance.AddChips(chipsToBet);
-
-    //    Debug.Log("chips to raise value is " + betValue + "the amount being sent on is " + ChipsToRaise);
-
-    //    //tell the PotManager.Instance the value we want to raise
-
-    //    //reset the chips we want to raise
-    //    //chipsToRaise = 0;
-    //    if (betValue == amountToCall)
-    //    {
-    //        CallCheck();
-    //    }
-    //    if (betValue > amountToCall)
-    //    {
-    //        PotManager.Instance.PotManager.InstanceComparison(this.photonView.ownerId, betValue);
-
-    //        if (this.photonView.ownerId == 1)
-    //        {
-    //            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Raise);
-    //        }
-    //        if (this.photonView.ownerId == 2)
-    //        {
-    //            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Raise);
-    //        }
-    //        ts.GetComponent<TurnSwitch>().EndTurn();
-    //    }
-    //    //chipsToBet = wallet.GetComponent<WalletManager>().GetChips(this.photonView.ownerId, amountToCall);//we get chips equal to the amount needed to call
-
-    //    //PotManager.Instance.AddChips(chipsToBet);//we add chips to the PotManager.Instance equal to the bet/call
-    //}
-
-    /// <summary>
-    /// which player has to call how much?
-    /// </summary>
-    /// <param name="player"> player who needs to call / has bet the least</param>
-    /// <param name="amountToCall"> the amount the player needs to call</param>
-
-    //public void GetAmountToCall(int player, int amountToCall)
-    //{
-    //    //we set the scripts field values = the the values we get from the PotManager.Instance
-    //    this.player = player;
-    //    this.amountToCall = amountToCall;
-
-    //    //we might be able to run call/check again here
-    //    //CallCheck();
-    //    //return player,amountToCall;
-    //}
-
-    ///// <summary>
-    ///// call the current bet //TODO: make sure you cant call/raise after you run out of chips
-    ///// </summary>
-    //public void CallCheck()
-    //{
-    //    Debug.Log("player " + this.photonView.ownerId + " checks/calls");
-
-    //    Debug.Log("amount to call = " + amountToCall);
-
-    //    ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
-
-    //    if (amountToCall == 0)
-    //    {
-    //        //try to check with 0 added value to the PotManager.Instance
-
-    //        if (this.photonView.ownerId == 1)
-    //        {
-    //            //we can tell the button to play the call sound for player a sound..
-    //            //we should do it using an RPC though...
-    //            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Check);
-    //            //audMan.ButtonPressedAudio(ActionSound.p1Call);
-    //        }
-    //        else if (this.photonView.ownerId == 2)
-    //        {
-    //            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Check);
-    //            //audMan.ButtonPressedAudio(ActionSound.p1Call);
-    //        }
-    //        PotManager.Instance.PotManager.InstanceComparison(this.photonView.ownerId, 0);
-    //    }
-    //    else
-    //    {
-    //        if (this.photonView.ownerId == 1)
-    //        {
-    //            //we can tell the button to play the call sound for player a sound..
-    //            //we should do it using an RPC though...
-    //            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Call);
-    //            //audMan.ButtonPressedAudio(ActionSound.p1Call);
-    //        }
-    //        else if (this.photonView.ownerId == 2)
-    //        {
-    //            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Call);
-    //            //audMan.ButtonPressedAudio(ActionSound.p1Call);
-    //        }
-
-    //        //TODO: get rid of redundancy in the wallet call
-    //        betValue = wallet.GetChips(this.photonView.ownerId, amountToCall);//we get chips equal to the amount needed to call
-
-    //        PotManager.Instance.AddChipsToPotManager.Instance(betValue);//we add chips to the PotManager.Instance equal to the bet/call
-
-    //        //	ts.GetComponent<TurnSwitch> ().PotManager.InstanceComparison(amt_to_call);
-    //        //AmountToCall = 0;
-    //    }
-
-    //    ts.EndTurn();//we send the turn on to our opponent
-    //}
-
-    /// <summary>
-    /// fold
-    /// </summary>
-
-    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-    }
-
     public void OnTurnStart()
     {
         callValue = PotManager.Instance.GetCallValue(player);
@@ -346,14 +222,19 @@ public class BetManager : PhotonManager<BetManager>
 
     public void Fold()
     {
-        if (player == 1)
-        {
-            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
-        }
-        else if (player == 2)
-        {
-            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
-        }
+        if (WalletManager.Instance.Withdraw(betValue))
+            if (player == 1)
+            {
+                audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
+            }
+            else if (player == 2)
+            {
+                audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
+            }
         roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
+    }
+
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
     }
 }
