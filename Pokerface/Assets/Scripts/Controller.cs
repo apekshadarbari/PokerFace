@@ -43,7 +43,10 @@ public class Controller : MonoBehaviour
             bool triggerPressed = (state.ulButtonPressed & SteamVR_Controller.ButtonMask.Trigger) != 0;
 
             if (triggerPressed == true)
+
             {
+
+                Debug.Log("Trigger Pressed is true");
                 if (triggerIsPressed == false)
                 {
                     OnTriggerPressed();
@@ -85,6 +88,7 @@ public class Controller : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("On Trigger Enter");
         if (touchedObject != null && touchedObject != other.gameObject)
             touchedObject.SendMessage("OffTouch", this, SendMessageOptions.DontRequireReceiver);
 		other.GetComponent<BetMore> ().OnHover();
@@ -94,6 +98,7 @@ public class Controller : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        Debug.Log("On Trigger Exit");
         if (touchedObject != null && touchedObject == other.gameObject)
         {
             touchedObject.SendMessage("OffTouch", this, SendMessageOptions.DontRequireReceiver);
@@ -104,6 +109,7 @@ public class Controller : MonoBehaviour
 
     void OnTriggerPressed()
     {
+        Debug.Log("On Trigger Pressed");
         if (touchedObject != null && HeldObject == null && heldJoint == null)
         {
             HeldObject = touchedObject;
@@ -127,6 +133,7 @@ public class Controller : MonoBehaviour
 
     void OnTriggerReleased()
     {
+        Debug.Log("On Trigger Released");
         if (HeldObject == null)
             return;
 

@@ -227,6 +227,7 @@
     <Compile Include="Assets\Scripts\Cards\CompareHighestCard.cs" />
     <Compile Include="Assets\Scripts\Cards\ComparePaires.cs" />
     <Compile Include="Assets\Scripts\Cards\ICardCompare.cs" />
+    <Compile Include="Assets\Scripts\Controller.cs" />
     <Compile Include="Assets\Scripts\Controls\CrosshairTimerDisplay.cs" />
     <Compile Include="Assets\Scripts\Controls\GazeInputModule.cs" />
     <Compile Include="Assets\Scripts\Controls\GazeInputModuleCrosshair.cs" />
@@ -240,11 +241,11 @@
     <Compile Include="Assets\Scripts\Environment\WordManager.cs" />
     <Compile Include="Assets\Scripts\Game\RoundManager.cs" />
     <Compile Include="Assets\Scripts\Game\TurnManager.cs" />
-    <Compile Include="Assets\Scripts\Trigger_trial1.cs" />
     <Compile Include="Assets\Scripts\Utilities\Manager.cs" />
     <Compile Include="Assets\Scripts\Utilities\NetworkController.cs" />
     <Compile Include="Assets\Scripts\Utilities\NetworkedPlayer.cs" />
     <Compile Include="Assets\Scripts\Utilities\PhotonManager.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Trigger_trial2.cs" />
     <Compile Include="Assets\Scripts\Utilities\VRInputManager.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />

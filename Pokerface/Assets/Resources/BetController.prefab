@@ -76,8 +76,7 @@ GameObject:
   - 114: {fileID: 11401780}
   - 64: {fileID: 6412186}
   - 82: {fileID: 8213120}
-  - 114: {fileID: 11437570}
-  - 54: {fileID: 5478830}
+  - 54: {fileID: 5430234}
   m_Layer: 0
   m_Name: Call_Check
   m_TagString: Untagged
@@ -372,7 +371,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162900}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5478830
+--- !u!54 &5430234
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -382,7 +381,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -973,24 +972,6 @@ MonoBehaviour:
   action: 1
   hoverSound: {fileID: 8300000, guid: 99403d84bdc9fc94497385557093493e, type: 3}
   buttonPressed: {fileID: 8300000, guid: 8f2be3c031e93f64998ffaf90ca491e9, type: 3}
---- !u!114 &11437570
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ef368f6f3f784214b7fb07951cfd8e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  CanAttach: 1
-  DisableKinematicOnAttach: 1
-  EnableKinematicOnDetach: 0
-  DropDistance: 3
-  AttachedHand: {fileID: 0}
-  InteractionPoint: {fileID: 451890}
 --- !u!114 &11447894
 MonoBehaviour:
   m_ObjectHideFlags: 1
