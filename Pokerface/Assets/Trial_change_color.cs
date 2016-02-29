@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using NewtonVR;
 
-public class Trial_change_color : MonoBehaviour {
+public class Trial_change_color : NVRHand {
 	
 			public bool CurrentState = true;
 			public bool LastState = true;
