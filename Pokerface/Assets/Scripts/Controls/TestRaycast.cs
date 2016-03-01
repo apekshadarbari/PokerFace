@@ -35,7 +35,7 @@ public class TestRaycast : MonoBehaviour
 
     private void Update()
     {
-        /*UNCOMMENT FOR USING GAZE*/
+
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height, 0f) / 2f);
 
         /*TESTING*/
@@ -44,8 +44,9 @@ public class TestRaycast : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
-        //if(Physics.Raycast(transform.position, transform.forward, out hit))
+        //if (Physics.Raycast(ray, out hit))
+        /*UNCOMMENT FOR USING GAZE*/
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
             //Debug.Log("i hit something");
             //draw a line we can see in the scene

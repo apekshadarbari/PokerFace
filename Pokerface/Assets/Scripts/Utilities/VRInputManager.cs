@@ -21,8 +21,8 @@ public class VRInputManager : PhotonManager<VRInputManager>
 
     private void Start()
     {
-        gazeEye = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<TestRaycast>();
-        gazeHead = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
+         //gazeHead= GameObject.Find("[CameraRig]/Camera (head)").GetComponent<TestRaycast>();
+        gazeEye = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
         mouseLook = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<MouseLook>();
 
         //null for rift
@@ -44,19 +44,19 @@ public class VRInputManager : PhotonManager<VRInputManager>
             /*RIFT CROSSHAIR*/
             //gaze on eye
             //raycast from eye?
-            gazeHead.enabled = true;
+            //gazeHead.enabled = false;
             gazeEye.enabled = true;
 
             crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
             crosshair.GetComponent<MeshRenderer>().enabled = true;
 
-            //Debug.Log("Not Vive");
+            Debug.Log("Not Vive");
             //playerRig.transform.position += Vector3.up * 1.2f;
 
             /*TESTING*/
             //enable mouselook for testting
             //maybe move it to a hotkey
-            mouseLook.enabled = true;
+            //mouseLook.enabled = true;
         }
     }
 

@@ -22,12 +22,10 @@ public class Testing : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        gaze = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestRaycast>();
         crosshairRift = GameObject.FindGameObjectWithTag("CrosshairRift").GetComponent<MeshRenderer>();
-        crosshairVive = GameObject.FindGameObjectWithTag("CrosshairVive").GetComponent<MeshRenderer>();
+        //crosshairVive = GameObject.FindGameObjectWithTag("CrosshairVive").GetComponent<MeshRenderer>();
 
-        gazeEye = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<TestRaycast>();
-        gazeHead = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
+        gazeEye = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
         mouseLook = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<MouseLook>();
 
         playerRig = GameObject.Find("[CameraRig]");
@@ -57,14 +55,12 @@ public class Testing : MonoBehaviour
             if (gazeIsOn)
             {
                 gazeIsOn = false;
-                gazeHead.enabled = false;
                 gazeEye.enabled = false;
                 crosshairRift.enabled = false;
             }
             else
             {
                 gazeIsOn = true;
-                gazeHead.enabled = true;
                 gazeEye.enabled = true;
                 crosshairRift.enabled = true;
             }
