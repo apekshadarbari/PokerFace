@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using ExitGames.Client.Photon;
 using System;
-using ExitGames.Client.Photon;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 //globally callable suits
 public enum Suits
@@ -19,6 +19,7 @@ public class Card //: Photon.MonoBehaviour
 {
     //the card value - higher means better card
     private int value;
+
     //the cards suit
     private Suits suit;
 
@@ -26,6 +27,7 @@ public class Card //: Photon.MonoBehaviour
     {
         get { return value; }
     }
+
     public Suits Suit
     {
         get { return suit; }
@@ -39,8 +41,7 @@ public class Card //: Photon.MonoBehaviour
     //    PhotonPeer.RegisterType(typeof(Card), (byte)'W', Serialize, Deserialize);
     //}
 
-
-    public Card( Suits suit, int value )
+    public Card(Suits suit, int value)
     {
         this.suit = suit;
         this.value = value;
@@ -72,17 +73,20 @@ public class Card //: Photon.MonoBehaviour
     public override string ToString()
     {
         string valueName;
-        switch( value )
+        switch (value)
         {
             case 11:
                 valueName = "Jack";
                 break;
+
             case 12:
                 valueName = "Queen";
                 break;
+
             case 13:
                 valueName = "King";
                 break;
+
             case 14:
                 valueName = "Ace";
                 break;

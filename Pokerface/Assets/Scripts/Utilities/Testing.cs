@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class Testing : MonoBehaviour
 {
+    private TestRaycast gaze;
     private MeshRenderer crosshairVive;
     private MeshRenderer crosshairRift;
     private GameObject playerRig;
+
+    private TestRaycast gazeEye;
+    private TestRaycast gazeHead;
+    private MouseLook mouseLook;
 
     [SerializeField, Header("Seats to swap between")]
     private GameObject[] seats;
 
     private bool seatChange;
+    private bool gazeIsOn;
 
     // Use this for initialization
     private void Start()
     {
+        gaze = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestRaycast>();
         crosshairRift = GameObject.FindGameObjectWithTag("CrosshairRift").GetComponent<MeshRenderer>();
         crosshairVive = GameObject.FindGameObjectWithTag("CrosshairVive").GetComponent<MeshRenderer>();
+
+        gazeEye = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<TestRaycast>();
+        gazeHead = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
+        mouseLook = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<MouseLook>();
 
         playerRig = GameObject.Find("[CameraRig]");
         var vrSpace = GameObject.Find("[SteamVR]").transform.position;
@@ -38,6 +49,24 @@ public class Testing : MonoBehaviour
             {
                 crosshairRift.enabled = false;
                 crosshairVive.enabled = true;
+            }
+        }
+        //toggle gaze input
+        if (Input.GetKeyDown("g"))
+        {
+            if (gazeIsOn)
+            {
+                gazeIsOn = false;
+                gazeHead.enabled = false;
+                gazeEye.enabled = false;
+                crosshairRift.enabled = false;
+            }
+            else
+            {
+                gazeIsOn = true;
+                gazeHead.enabled = true;
+                gazeEye.enabled = true;
+                crosshairRift.enabled = true;
             }
         }
         if (Input.GetKeyDown("z"))

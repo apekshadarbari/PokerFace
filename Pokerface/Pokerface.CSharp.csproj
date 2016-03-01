@@ -223,6 +223,7 @@
     <Compile Include="Assets\Scripts\Cards\CompareHighestCard.cs" />
     <Compile Include="Assets\Scripts\Cards\ComparePaires.cs" />
     <Compile Include="Assets\Scripts\Cards\ICardCompare.cs" />
+    <Compile Include="Assets\Scripts\Controls\Controller.cs" />
     <Compile Include="Assets\Scripts\Controls\CrosshairTimerDisplay.cs" />
     <Compile Include="Assets\Scripts\Controls\GazeInputModule.cs" />
     <Compile Include="Assets\Scripts\Controls\GazeInputModuleCrosshair.cs" />

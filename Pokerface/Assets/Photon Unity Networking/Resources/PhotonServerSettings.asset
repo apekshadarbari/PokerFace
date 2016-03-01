@@ -70,4 +70,5 @@ MonoBehaviour:
   - Check
   - HandEnd
   - PotToPlayer
+  - EndHandBehaviour
   DisableAutoOpenWizard: 1

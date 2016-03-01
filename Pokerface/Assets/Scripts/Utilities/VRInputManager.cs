@@ -12,10 +12,19 @@ public class VRInputManager : PhotonManager<VRInputManager>
 
     private GameObject playerRig;
 
+    private TestRaycast gazeEye;
+
+    private TestRaycast gazeHead;
+    private MouseLook mouseLook;
+
     private string hmdString;
 
     private void Start()
     {
+        gazeEye = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<TestRaycast>();
+        gazeHead = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
+        mouseLook = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<MouseLook>();
+
         //null for rift
         vr = SteamVR.instance;
 
@@ -23,6 +32,11 @@ public class VRInputManager : PhotonManager<VRInputManager>
         {
             crosshair = GameObject.FindGameObjectWithTag("CrosshairVive");
             crosshair.GetComponent<MeshRenderer>().enabled = true;
+
+            // turn off the htc vive controller script unless the vive is plugged in
+            var controller = GameObject.FindGameObjectWithTag("ControllerVive");
+            controller.GetComponent<Controller>().enabled = true;
+
             //Debug.Log("Vive");
         }
         else
@@ -30,11 +44,19 @@ public class VRInputManager : PhotonManager<VRInputManager>
             /*RIFT CROSSHAIR*/
             //gaze on eye
             //raycast from eye?
+            gazeHead.enabled = true;
+            gazeEye.enabled = true;
 
             crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
             crosshair.GetComponent<MeshRenderer>().enabled = true;
+
             //Debug.Log("Not Vive");
             //playerRig.transform.position += Vector3.up * 1.2f;
+
+            /*TESTING*/
+            //enable mouselook for testting
+            //maybe move it to a hotkey
+            mouseLook.enabled = true;
         }
     }
 

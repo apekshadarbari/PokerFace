@@ -16,6 +16,8 @@ TagManager:
   - CrosshairVive
   - CrosshairGear
   - TurnManager
+  - ControllerVive
+  - New Tag
   layers:
   - Default
   - TransparentFX
@@ -25,8 +27,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Interactable
+  - Controller
   - 
   - 
   - 
