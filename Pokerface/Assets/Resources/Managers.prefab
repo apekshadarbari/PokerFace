@@ -227,10 +227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9074344cace3f474a8da54972f161d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1pot: 0
-  player2pot: 0
+  player1pot: 5
+  player2pot: 15
   roundMan: {fileID: 164330}
-  potValue: 20
+  potValue: 0
 --- !u!114 &11425532
 MonoBehaviour:
   m_ObjectHideFlags: 1

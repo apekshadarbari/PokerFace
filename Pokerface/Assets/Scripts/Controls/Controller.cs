@@ -122,12 +122,13 @@ public class Controller : MonoBehaviour
             if (rb != null)
             {
                 rb.transform.SetParent(null);
-                rb.isKinematic = false;
+                //rb.isKinematic = false;
                 heldJoint = touchedObject.AddComponent<FixedJoint>() as Joint;
                 heldJoint.connectedBody = rigidbody;
             }
-            //if we want to interact on the press action
             //HeldObject.GetComponent<BetMore>().EndTurn();
+
+            //if we want to interact on the press action
         }
     }
 
@@ -138,6 +139,8 @@ public class Controller : MonoBehaviour
 
         HeldObject.SendMessage("OnReleased", this, SendMessageOptions.DontRequireReceiver);
 
+        HeldObject.GetComponent<BetMore>().EndTurn();
+
         if (heldJoint != null)
             Destroy(heldJoint);
 
@@ -145,11 +148,10 @@ public class Controller : MonoBehaviour
 
         if (rb != null)
             rb.velocity = Velocity;
-
         HeldObject = null;
 
         //if we want to interact on the press action
-        HeldObject.GetComponent<BetMore>().EndTurn();
+      
     }
 
     public void OnTeleport()
