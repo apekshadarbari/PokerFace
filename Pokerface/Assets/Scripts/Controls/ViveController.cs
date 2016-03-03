@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Valve.VR;
 
-public class Controller : MonoBehaviour
+public class ViveController : MonoBehaviour
 {
     public bool debug = false;
     public Vector3 Velocity { get; internal set; }
