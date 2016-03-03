@@ -41,15 +41,26 @@ public class BetManager : PhotonManager<BetManager>
 
     public int ChipsToRaise
     {
-        get
-        {
-            return betValue;
-        }
+        get { return betValue; }
+        set { betValue = value; }
+    }
 
-        set
-        {
-            betValue = value;
-        }
+    private int p1BetVal;
+    private int p2BetVal;
+
+    public int P1BetVal
+    {
+        get { return p1BetVal; }
+    }
+
+    public int P2BetVal
+    {
+        get { return p2BetVal; }
+    }
+
+    public int BetValue
+    {
+        get { return betValue; }
     }
 
     private void Start()
