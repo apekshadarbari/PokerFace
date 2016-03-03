@@ -151,7 +151,7 @@ public class BetManager : PhotonManager<BetManager>
 
     public void OnTurnStart()
     {
-        callValue = PotManager.Instance.GetCallValue(player);
+        //callValue = PotManager.Instance.GetCallValue(player);
         ResetBet();
         //SetBetToCallValue();
     }

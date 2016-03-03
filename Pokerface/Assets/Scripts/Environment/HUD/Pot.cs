@@ -35,13 +35,15 @@ public class Pot : Photon.MonoBehaviour
 
         if (PhotonNetwork.player.ID == 1)
         {
-            callValue = PotManager.Instance.Player2pot;
-            betValue = PotManager.Instance.Player1pot;
+            callValue = PotManager.Instance.GetCallValue(1);
+            //callValue = PotManager.Instance.Player2pot;
+            //betValue = PotManager.Instance.Player1pot;
         }
         else if (PhotonNetwork.player.ID == 2)
         {
-            callValue = PotManager.Instance.Player1pot;
-            betValue = PotManager.Instance.Player2pot;
+            callValue = PotManager.Instance.GetCallValue(2);
+            //callValue = PotManager.Instance.Player1pot;
+            //betValue = PotManager.Instance.Player2pot;
         }
 
         this.call.GetComponent<Text>().text = "Their Bet: " + callValue.ToString();
