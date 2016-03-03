@@ -72,7 +72,7 @@ public class TurnManager : PhotonManager<TurnManager>
     /// </summary>
     public void OnTurnEnd(int player, bool wantsNextRound)
     {
-        BetManager.Instance.ResetBet();
+        //BetManager.Instance.ResetBet();
         //if it was player one´s turn
         if (player == 1)
         {

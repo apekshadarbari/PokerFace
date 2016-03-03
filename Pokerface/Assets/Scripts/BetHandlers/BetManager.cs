@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BetManager : PhotonManager<BetManager>
 {
+    //[SerializeField]
+    private Wallet walletText;
+
     [SerializeField]
     private int chipsToIncrement = 5;
 
@@ -66,7 +69,7 @@ public class BetManager : PhotonManager<BetManager>
     private void Start()
     {
         player = PhotonNetwork.player.ID;
-        //turnMan = GameObject.FindGameObjectWithTag("TurnManager").GetComponent<TurnManager>();
+        walletText = GameObject.FindGameObjectWithTag("HUDWallet").GetComponent<Wallet>();
 
         //infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
@@ -129,8 +132,12 @@ public class BetManager : PhotonManager<BetManager>
     {
         betValue = betValue + chipsToIncrement;
         Debug.Log("add chips detected : " + betValue);
+        BetvalueUpdate();
     }
-
+    public void BetvalueUpdate()//might wanna give it player
+    {
+        walletText.BetUpdate(betValue, this.player);
+    }
     /// <summary>
     /// remove chips - (minus button)
     /// </summary>
@@ -145,6 +152,7 @@ public class BetManager : PhotonManager<BetManager>
         {
             ResetBet();
         }
+        BetvalueUpdate();
         //else betValue = betValue - chipsToIncrement;
     }
 
@@ -158,6 +166,7 @@ public class BetManager : PhotonManager<BetManager>
     {
         //callValue = PotManager.Instance.GetCallValue(player);
         ResetBet();
+        BetvalueUpdate();
         //SetBetToCallValue();
     }
 

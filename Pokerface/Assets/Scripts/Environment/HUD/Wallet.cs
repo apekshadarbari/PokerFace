@@ -29,23 +29,30 @@ public class Wallet : Photon.MonoBehaviour
         //transform.LookAt(Camera.main.transform.position);
         transform.forward = (Camera.main.transform.position - transform.position).normalized;
         transform.Rotate(0, 180, 0);
-
-        if (PhotonNetwork.player.ID == 1)
-        {
-            var betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
-            betValue = betMan.ChipsToRaise;
-            this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
-        }
-        else if (PhotonNetwork.player.ID == 2)
+        if (PhotonNetwork.player.ID == 2)
         {
             GameObject.FindGameObjectWithTag("HUDWallet").transform.position = new Vector3(-0.33f, 1.361f, 1.665f);
-            var betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
-            betValue = betMan.ChipsToRaise;
-            this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
         }
 
         this.wallet.GetComponent<Text>().text = walletValue.ToString();
     }
+
+    public void BetUpdate(int betValue, int player)
+    {
+        if (player == 1)
+        {
+            var betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
+            this.betValue = betValue;
+            this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
+        }
+        else if (player == 2)
+        {
+            var betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
+            this.betValue = betValue;
+            this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
+        }
+    }
+
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
     }
