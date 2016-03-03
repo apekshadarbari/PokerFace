@@ -79,7 +79,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         {
             Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
             //create a betcontroller for each player
-            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(0621f, 0.95f, 078f), Quaternion.identity, 0);
+            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(0.621f, 0.95f, 0.78f), Quaternion.Euler(0, 180, 0), 0);
             betControl.tag = "Player2BetController";
 
             foreach (Transform t in betControl.transform)

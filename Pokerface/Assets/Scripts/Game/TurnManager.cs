@@ -21,7 +21,7 @@ public class TurnManager : PhotonManager<TurnManager>
         BetManager.Instance.OnTurnStart();
         btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
         btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
-        BetManager.Instance.ChipsToRaise = 0;
+
         //set players buttons to active..
         //other players buttons should be inactive
         switch (player)
