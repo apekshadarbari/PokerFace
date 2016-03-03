@@ -74,11 +74,11 @@ public class RoundManager : Photon.MonoBehaviour
         }
         if (player == 1)
         {
-            turnIndicater.transform.position = new Vector3(2.8f, 1.35f, 0f);
+            turnIndicater.transform.position = new Vector3(.78f, 1.18f, -.42f);
         }
         else if (player == 2)
         {
-            turnIndicater.transform.position = new Vector3(-2.75f, 1.35f, 0f);
+            turnIndicater.transform.position = new Vector3(-.175f, 1.179f, 1.29f);
         }
         TurnManager.Instance.OnTurnStart(player);
     }
@@ -158,6 +158,7 @@ public class RoundManager : Photon.MonoBehaviour
             //next round
             cardMan.CompareCards();
             RoundStart(0);
+            gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
             //need the current enum so we can send on the next enum
         }
         else if (fold)
