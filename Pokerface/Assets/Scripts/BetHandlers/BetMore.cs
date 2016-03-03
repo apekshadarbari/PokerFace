@@ -8,6 +8,7 @@ internal enum BetAction
     DecreaseBet,
     CommitBet,
     CallOrCheck,
+	Card,
 
     Fold
 }
@@ -86,6 +87,12 @@ public class BetMore : Photon.MonoBehaviour, IClicker
                 //betMan.SetBetToCallValue();
                 betMan.Bet();
                 break;
+
+		case BetAction.Card:
+			//Calling the last value
+			//betMan.SetBetToCallValue();
+			return;
+			break;
 
             case BetAction.Fold:
                 //Folding cards

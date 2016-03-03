@@ -18,6 +18,8 @@ TagManager:
   - TurnManager
   - ControllerVive
   - HUDWallet
+  - Card
+  - Buttons
   layers:
   - Default
   - TransparentFX
