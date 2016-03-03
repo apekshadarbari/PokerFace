@@ -40,16 +40,16 @@ public class Wallet : Photon.MonoBehaviour
         {
             var betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
             this.betValue = betValue;
-            this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
+            this.bet.GetComponent<Text>().text = "Bet: $" + betValue.ToString();
         }
         else if (player == 2)
         {
             var betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
             this.betValue = betValue;
-            this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
+            this.bet.GetComponent<Text>().text = "Bet: $" + betValue.ToString();
         }
         walletValue = WalletManager.Instance.Credits;
-        this.wallet.GetComponent<Text>().text = walletValue.ToString();
+        this.wallet.GetComponent<Text>().text = "Wallet: $" + walletValue.ToString();
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

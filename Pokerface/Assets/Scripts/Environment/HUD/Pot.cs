@@ -31,7 +31,7 @@ public class Pot : Photon.MonoBehaviour
         transform.forward = (Camera.main.transform.position - transform.position).normalized;
         transform.Rotate(0, 180, 0);
 
-        this.pot.GetComponent<Text>().text = "Pot: " + potValue.ToString();
+        this.pot.GetComponent<Text>().text = "Pot: $" + potValue.ToString();
 
         if (PhotonNetwork.player.ID == 1)
         {
@@ -46,8 +46,8 @@ public class Pot : Photon.MonoBehaviour
             //betValue = PotManager.Instance.Player2pot;
         }
 
-        this.call.GetComponent<Text>().text = "Their Bet: " + callValue.ToString();
-        this.bet.GetComponent<Text>().text = "Your Bet: " + betValue.ToString();
+        this.call.GetComponent<Text>().text = "Call: $" + callValue.ToString();
+        //this.bet.GetComponent<Text>().text = "Your Bet: " + betValue.ToString();
     }
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
