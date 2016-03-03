@@ -44,15 +44,20 @@ public class StartButton : Photon.MonoBehaviour, IClicker
             //set the start button to inactive
             gameObject.SetActive(false);
         }
+        if (Input.GetKeyDown("s"))
+        {
+            EndTurn();
+        }
     }
 
     public void EndTurn()
     {
         //if we are player one I.E. master
-        if (PhotonNetwork.isMasterClient && photonView.isMine)
+        if (PhotonNetwork.isMasterClient && photonView.isMine)// s to start
         {
-            //Debug.Log("Clicked");
-            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.roundStarted);
+
+                //Debug.Log("Clicked");
+                audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.roundStarted);
 
             //start game through the networked player //TODO: make start button better
             playerCtrl.StartGame();
