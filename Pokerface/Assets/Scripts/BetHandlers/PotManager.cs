@@ -38,6 +38,16 @@ public class PotManager : PhotonManager<PotManager>
         get { return potValue + player1pot + player2pot; }
     }
 
+    public int Player1pot
+    {
+        get { return player1pot; }
+    }
+
+    public int Player2pot
+    {
+        get { return player2pot; }
+    }
+
     // Use this for initialization
     private void Start()
     {
