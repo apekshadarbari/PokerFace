@@ -144,11 +144,16 @@ public class BetManager : PhotonManager<BetManager>
         else betValue = betValue - chipsToIncrement;
     }
 
+    public void ResetBet()
+    {
+        betValue = 0;
+    }
+
     public void OnTurnStart()
     {
         callValue = PotManager.Instance.GetCallValue(player);
-        betValue = 0;
-        SetBetToCallValue();
+        ResetBet();
+        //SetBetToCallValue();
     }
 
     public void Bet()

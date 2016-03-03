@@ -47,4 +47,7 @@ public class Pot : Photon.MonoBehaviour
         this.call.GetComponent<Text>().text = "Their Bet: " + callValue.ToString();
         this.bet.GetComponent<Text>().text = "Your Bet: " + betValue.ToString();
     }
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
 }
