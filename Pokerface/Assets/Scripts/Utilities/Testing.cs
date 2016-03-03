@@ -79,13 +79,13 @@ public class Testing : MonoBehaviour
             }
             VRInputManager.Instance.DeviceSpecificSeating();
         }
-        if (Input.GetKeyDown("i"))
-        {
-            Debug.ClearDeveloperConsole();
-            var assembly = Assembly.GetAssembly(typeof(UnityEditor.ActiveEditorTracker));
-            var type = assembly.GetType("UnityEditorInternal.LogEntries");
-            var method = type.GetMethod("Clear");
-            method.Invoke(new object(), null);
-        }
+        //if (Input.GetKeyDown("i"))
+        //{
+        //    Debug.ClearDeveloperConsole();
+        //    var assembly = Assembly.GetAssembly(typeof(UnityEditor.ActiveEditorTracker));
+        //    var type = assembly.GetType("UnityEditorInternal.LogEntries");
+        //    var method = type.GetMethod("Clear");
+        //    method.Invoke(new object(), null);
+        //}
     }
 }

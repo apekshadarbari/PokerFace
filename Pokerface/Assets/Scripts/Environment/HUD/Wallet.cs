@@ -21,7 +21,6 @@ public class Wallet : Photon.MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        walletValue = WalletManager.Instance.Credits;
         //betValue = BetManager.Instance.BetValue;
         if (betValue >= 0) // turn off the bet text
         {
@@ -31,10 +30,8 @@ public class Wallet : Photon.MonoBehaviour
         transform.Rotate(0, 180, 0);
         if (PhotonNetwork.player.ID == 2)
         {
-            GameObject.FindGameObjectWithTag("HUDWallet").transform.position = new Vector3(-0.33f, 1.361f, 1.665f);
+            GameObject.FindGameObjectWithTag("HUDWallet").transform.position = new Vector3(1.8f, 1.35f, .4f);
         }
-
-        this.wallet.GetComponent<Text>().text = walletValue.ToString();
     }
 
     public void BetUpdate(int betValue, int player)
@@ -51,6 +48,8 @@ public class Wallet : Photon.MonoBehaviour
             this.betValue = betValue;
             this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
         }
+        walletValue = WalletManager.Instance.Credits;
+        this.wallet.GetComponent<Text>().text = walletValue.ToString();
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
