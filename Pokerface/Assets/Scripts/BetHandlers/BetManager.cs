@@ -57,7 +57,7 @@ public class BetManager : PhotonManager<BetManager>
         player = PhotonNetwork.player.ID;
         //turnMan = GameObject.FindGameObjectWithTag("TurnManager").GetComponent<TurnManager>();
 
-        infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
+        //infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
         //reset of the values (starting values)
         betValue = 0;

@@ -51,29 +51,13 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             avatar.SetActive(false);
         }
 
-        //player 2
-        if (photonView.isMine && PhotonNetwork.player.ID == 2)
-        {
-            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
-            //create a betcontroller for each player
-            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
-            betControl.tag = "Player2BetController";
-
-            foreach (Transform t in betControl.transform)
-            {
-                t.gameObject.tag = "PlayerTwoButton";
-                t.GetComponent<MeshRenderer>().enabled = false;
-                t.GetComponent<SphereCollider>().enabled = false;
-            }
-        }
-
         //player 1
         if (photonView.isMine && PhotonNetwork.player.ID == 1)
         {
             //Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
 
             //create a betcontroller for each player
-            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(-0.2f, 1, -0.060f), Quaternion.Euler(0, 180, 0), 0);
+            betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
 
             /*TESTING*/
             //test position - when no oculus
@@ -85,7 +69,25 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             {
                 t.gameObject.tag = "PlayerOneButton";
                 t.GetComponent<MeshRenderer>().enabled = false;
-                t.GetComponent<SphereCollider>().enabled = false;
+                t.GetComponent<MeshCollider>().enabled = false;
+                //t.GetComponent<SphereCollider>().enabled = false;
+            }
+        }
+
+        //player 2
+        if (photonView.isMine && PhotonNetwork.player.ID == 2)
+        {
+            Debug.Log("betcontroller " + this.photonView.ownerId.ToString());
+            //create a betcontroller for each player
+            betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(0621f, 0.95f, 078f), Quaternion.identity, 0);
+            betControl.tag = "Player2BetController";
+
+            foreach (Transform t in betControl.transform)
+            {
+                t.gameObject.tag = "PlayerTwoButton";
+                t.GetComponent<MeshRenderer>().enabled = false;
+                t.GetComponent<MeshCollider>().enabled = false;
+                //t.GetComponent<SphereCollider>().enabled = false;
             }
         }
 

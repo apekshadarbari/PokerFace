@@ -230,6 +230,7 @@
     <Compile Include="Assets\Scripts\Controls\IClicker.cs" />
     <Compile Include="Assets\Scripts\Controls\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Controls\TestRaycast.cs" />
+    <Compile Include="Assets\Scripts\Controls\ViveController.cs" />
     <Compile Include="Assets\Scripts\Environment\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Environment\HUD\Pot.cs" />
     <Compile Include="Assets\Scripts\Environment\HUD\Wallet.cs" />

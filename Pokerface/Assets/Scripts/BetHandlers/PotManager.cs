@@ -53,7 +53,7 @@ public class PotManager : PhotonManager<PotManager>
     {
         //potValue = 0; //reset to 0
         //player1pot = 0;
-        infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
+        //infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
         /*TESTING*/
         //player2pot = 15;

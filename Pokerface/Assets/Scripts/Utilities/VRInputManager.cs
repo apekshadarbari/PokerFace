@@ -71,7 +71,7 @@ public class VRInputManager : PhotonManager<VRInputManager>
         var vrSpace = GameObject.Find("[SteamVR]").transform.position;
         //Debug.Log("Started Seating");
         //the hieght of the player + the room offset
-        var seatY = playerHeight + .95f;
+        var seatY = playerHeight;
         if (vr == null)
         {
             //Debug.Log("Seated as non vr");

@@ -83,7 +83,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
             case BetAction.CallOrCheck:
                 //Calling the last value
-                betMan.SetBetToCallValue();
+                //betMan.SetBetToCallValue();
                 betMan.Bet();
                 break;
 
@@ -99,7 +99,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
 	public void OnHover()
     {
-        GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.3f);
+        GetComponent<Renderer>().material.color = new Color(.5f, 0f, 0f, 0.3f);
         CrosshairTimerDisplay.Instance.Show();
         audioSrc.clip = hoverSound;
         audioSrc.Play();
@@ -110,7 +110,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
 	public void OnExitHover()
     {
-        GetComponent<Renderer>().material.color = Color.clear;
+        GetComponent<Renderer>().material.color = new Color(0f, .5f, 0f, 0.3f);
         CrosshairTimerDisplay.Instance.Show();
     }
 

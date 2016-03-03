@@ -23,7 +23,9 @@ public class Wallet : MonoBehaviour
     {
         walletValue = WalletManager.Instance.Credits;
         betValue = BetManager.Instance.ChipsToRaise;
-
+        if (betValue >= 0) // turn off the bet text
+        {
+        }
         //transform.LookAt(Camera.main.transform.position);
         transform.forward = (Camera.main.transform.position - transform.position).normalized;
         transform.Rotate(0, 180, 0);
@@ -31,5 +33,9 @@ public class Wallet : MonoBehaviour
         this.wallet.GetComponent<Text>().text = walletValue.ToString();
 
         this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
+        if (PhotonNetwork.player.ID == 2)
+        {
+            GameObject.FindGameObjectWithTag("HUDWallet").transform.position = new Vector3(-0.33f, 1.361f, 1.665f);
+        }
     }
 }
