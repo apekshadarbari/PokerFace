@@ -141,12 +141,17 @@ public class BetManager : PhotonManager<BetManager>
         {
             betValue = 0;
         }
-        else betValue = betValue - chipsToIncrement;
+        else
+        {
+            ResetBet();
+        }
+        //else betValue = betValue - chipsToIncrement;
     }
 
     public void ResetBet()
     {
         betValue = 0;
+        ChipsToRaise = 0;
     }
 
     public void OnTurnStart()
