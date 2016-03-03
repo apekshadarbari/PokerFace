@@ -34,17 +34,17 @@ public class Wallet : Photon.MonoBehaviour
         {
             var betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
             betValue = betMan.ChipsToRaise;
+            this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
         }
         else if (PhotonNetwork.player.ID == 2)
         {
             GameObject.FindGameObjectWithTag("HUDWallet").transform.position = new Vector3(-0.33f, 1.361f, 1.665f);
             var betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
             betValue = betMan.ChipsToRaise;
+            this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
         }
 
         this.wallet.GetComponent<Text>().text = walletValue.ToString();
-
-        this.bet.GetComponent<Text>().text = "Bet: " + betValue.ToString();
     }
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
