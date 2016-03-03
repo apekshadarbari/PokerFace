@@ -223,7 +223,7 @@
     <Compile Include="Assets\Scripts\Cards\CompareHighestCard.cs" />
     <Compile Include="Assets\Scripts\Cards\ComparePaires.cs" />
     <Compile Include="Assets\Scripts\Cards\ICardCompare.cs" />
-    <Compile Include="Assets\Scripts\Controls\Controller.cs" />
+    <Compile Include="Assets\Scripts\ChipMove.cs" />
     <Compile Include="Assets\Scripts\Controls\CrosshairTimerDisplay.cs" />
     <Compile Include="Assets\Scripts\Controls\GazeInputModule.cs" />
     <Compile Include="Assets\Scripts\Controls\GazeInputModuleCrosshair.cs" />
@@ -239,7 +239,10 @@
     <Compile Include="Assets\Scripts\Environment\WordManager.cs" />
     <Compile Include="Assets\Scripts\Game\RoundManager.cs" />
     <Compile Include="Assets\Scripts\Game\TurnManager.cs" />
+    <Compile Include="Assets\Scripts\HUDFloating.cs" />
     <Compile Include="Assets\Scripts\NetworkedPlayer.cs" />
+    <Compile Include="Assets\Scripts\PawActions.cs" />
+    <Compile Include="Assets\Scripts\PawClick.cs" />
     <Compile Include="Assets\Scripts\Utilities\Manager.cs" />
     <Compile Include="Assets\Scripts\Utilities\NetworkController.cs" />
     <Compile Include="Assets\Scripts\Utilities\PhotonManager.cs" />
