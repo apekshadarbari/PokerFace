@@ -86,7 +86,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
                 case BetAction.CallOrCheck:
                     //Calling the last value
-                    betMan.SetBetToCallValue();//setss the bet to what it needs to be to call;
+                    //betMan.SetBetToCallValue();//setss the bet to what it needs to be to call;
                     betMan.Bet();
                     break;
 
@@ -101,6 +101,10 @@ public class BetMore : Photon.MonoBehaviour, IClicker
                     betMan.Fold();
                     break;
             }
+        }
+        else if (!this.photonView.isMine)
+        {
+            throw new NotImplementedException("not yours");
         }
     }
 
@@ -117,18 +121,26 @@ public class BetMore : Photon.MonoBehaviour, IClicker
             audioSrc.clip = hoverSound;
             audioSrc.Play();
         }
+        else if (!this.photonView.isMine)
+        {
+            throw new NotImplementedException("not yours");
+        }
     }
 
     /// <summary>
     /// change the color back
     /// </summary>
-	public void OnExitHover()
+    public void OnExitHover()
     {
         if (this.photonView.isMine)
         {
-            //   GetComponent<Renderer>().material.color = new Color(0f, .5f, 0f, 0.3f);
+            // GetComponent<Renderer>().material.color = new Color(0f, .5f, 0f, 0.3f);
             GetComponent<Renderer>().material.color = Color.grey;
             CrosshairTimerDisplay.Instance.Show();
+        }
+        else if (!this.photonView.isMine)
+        {
+            throw new NotImplementedException("not yours");
         }
     }
 

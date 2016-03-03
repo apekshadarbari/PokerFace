@@ -248,13 +248,13 @@ public class TurnSwitch : PhotonManager<TurnSwitch>, IClicker
 
     public void OnHover()
     {
-        GetComponent<Renderer>().material.color = Color.red;
-        CrosshairTimerDisplay.Instance.Show();
+        //GetComponent<Renderer>().material.color = Color.red;
+        //CrosshairTimerDisplay.Instance.Show();
     }
 
     public void OnExitHover()
     {
-        GetComponent<Renderer>().material.color = Color.white;
-        CrosshairTimerDisplay.Instance.Hide();
+        //GetComponent<Renderer>().material.color = Color.white;
+        //CrosshairTimerDisplay.Instance.Hide();
     }
 }

@@ -12,8 +12,8 @@ GameObject:
   - 23: {fileID: 2336304}
   - 65: {fileID: 6500300}
   - 54: {fileID: 5450296}
-  - 114: {fileID: 11488160}
   - 82: {fileID: 8229682}
+  - 114: {fileID: 11486856}
   m_Layer: 8
   m_Name: Card_QHeart
   m_TagString: Card
@@ -168,7 +168,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &11488160
+--- !u!114 &11486856
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -176,12 +176,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 114438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dc685871edb8e04191fa97e7fcd0ddc, type: 3}
+  m_Script: {fileID: 11500000, guid: 883bf0ba556cf06439461a8bd010d18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 4
-  hoverSound: {fileID: 8300000, guid: 99403d84bdc9fc94497385557093493e, type: 3}
-  buttonPressed: {fileID: 8300000, guid: 8f2be3c031e93f64998ffaf90ca491e9, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

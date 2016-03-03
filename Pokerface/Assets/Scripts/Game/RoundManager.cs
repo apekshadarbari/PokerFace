@@ -41,7 +41,7 @@ public class RoundManager : Photon.MonoBehaviour
     [PunRPC]
     private void TurnChange(int player, bool wantsNextRound, int receivingPlayer)
     {
-        turnIndicater.GetComponent<PhotonView>().TransferOwnership(receivingPlayer);
+        CurrentPlayerTurn(player);
         GetComponent<PhotonView>().RPC("CurrentPlayerTurn", PhotonTargets.All, receivingPlayer);
 
         if (player == 1 && wantsNextRound)
@@ -81,6 +81,7 @@ public class RoundManager : Photon.MonoBehaviour
             turnIndicater.transform.position = new Vector3(-.175f, 1.179f, 1.29f);
         }
         TurnManager.Instance.OnTurnStart(player);
+        //turnIndicater.GetComponent<PhotonView>().TransferOwnership(player);
     }
 
     /// <summary>
@@ -180,7 +181,10 @@ public class RoundManager : Photon.MonoBehaviour
     {
         //if this is the first round
         //TurnIndicater - TennisBall - created
-        PhotonNetwork.Instantiate(turnIndicater.name, turnIndicater.transform.position, Quaternion.identity, 0);
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.Instantiate(turnIndicater.name, turnIndicater.transform.position, Quaternion.identity, 0);
+        }
 
         //we shuffle and deal to starting cards
 

@@ -33,6 +33,7 @@ public class VRInputManager : PhotonManager<VRInputManager>
         {
             crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
             crosshair.GetComponent<MeshRenderer>().enabled = false;
+            gazeEye.enabled = false;
 
             // turn off the htc vive controller script unless the vive is plugged in
             //controller.GetComponent<Controller>().enabled = true;
