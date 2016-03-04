@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190192}
   m_LocalRotation: {x: -0.00000005615954, y: 0.7231929, z: -0.6906462, w: -0.00000015034388}
-  m_LocalPosition: {x: 0.197, y: 2.16, z: -0.53}
+  m_LocalPosition: {x: 0.304, y: 2.16, z: -0.53}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 0}
@@ -142,8 +142,8 @@ MonoBehaviour:
   - {fileID: 431092}
   - {fileID: 11462476}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 9
+  instantiationId: 9
   isRuntimeInstantiated: 0
 --- !u!1001 &100100000
 Prefab:

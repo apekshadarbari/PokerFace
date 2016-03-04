@@ -126,7 +126,7 @@ public class ViveController : MonoBehaviour
 
             if (!touchedObject.CompareTag("PlayerOneButton") && !touchedObject.CompareTag("PlayerTwoButton"))
             {
-                rb.transform.SetParent(null);
+                //rb.transform.SetParent(null);
                 rb.isKinematic = false;
                 heldJoint = touchedObject.AddComponent<FixedJoint>() as Joint;
                 heldJoint.connectedBody = rigidbody;
