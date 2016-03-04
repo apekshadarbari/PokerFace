@@ -1,0 +1,50 @@
+﻿using UnityEngine;
+
+public class WalletManager : Manager<WalletManager>
+{
+    [SerializeField]
+    private int credits = 100;
+
+    public int Credits
+    {
+        get { return credits; }
+    }
+
+    public void Deposit(int value)
+    {
+        credits += value;
+    }
+
+    public bool Withdraw(int value)
+    {
+        if (credits >= value)
+        {
+            credits -= value;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void ReceivePot(int player)
+    {
+        Debug.Log(PhotonNetwork.player.ID);
+        if (player == PhotonNetwork.player.ID)
+        {
+            GetPot(player);
+        }
+    }
+
+    public void GetPot(int player)
+    {
+        var myMoney = PotManager.Instance.TotalPotValue;
+        Deposit(myMoney);
+        Debug.Log(myMoney + "added to my wallet");
+        PotManager.Instance.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
+        PotManager.Instance.GetComponent<PhotonView>().RPC("EndHandBehaviour", PhotonTargets.All);
+
+        ///måske skal den bare hente ligemeget hvad og så hvis den er = med min spiller så får den den rent faktisk
+    }
+}

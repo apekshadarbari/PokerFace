@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - TurnTrigger
+  - Player1BetController
+  - Player2BetController
+  - PlayerOneButton
+  - PlayerTwoButton
+  - CardSlot
+  - CardHolder
+  - InfoBoard
+  - CrosshairRift
+  - CrosshairVive
+  - CrosshairGear
+  - TurnManager
+  - ControllerVive
+  - HUDWallet
+  - Card
+  - Buttons
+  - StartButton
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Interactable
+  - Controller
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
