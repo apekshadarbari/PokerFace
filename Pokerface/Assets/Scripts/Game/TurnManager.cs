@@ -18,10 +18,10 @@ public class TurnManager : PhotonManager<TurnManager>
     /// </summary>
     public void OnTurnStart(int player)
     {
+        BetManager.Instance.ResetBet();
         BetManager.Instance.OnTurnStart();
         btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
         btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
-        BetManager.Instance.ResetBet();
         //set players buttons to active..
         //other players buttons should be inactive
         switch (player)
@@ -72,7 +72,6 @@ public class TurnManager : PhotonManager<TurnManager>
     /// </summary>
     public void OnTurnEnd(int player, bool wantsNextRound)
     {
-        BetManager.Instance.ResetBet();
         //if it was player one´s turn
         if (player == 1)
         {

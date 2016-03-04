@@ -118,7 +118,7 @@ public class BetManager : PhotonManager<BetManager>
     {
         // TODO: Call OnTurnStart from TurnSwitch instead!
         callValue = PotManager.Instance.GetCallValue(player);
-        betValue = callValue;
+        //betValue = callValue;
     }
 
     private void Update()
@@ -136,9 +136,14 @@ public class BetManager : PhotonManager<BetManager>
     }
     public void BetvalueUpdate()//might wanna give it player
     {
-        walletText.BetUpdate(betValue, this.player);
+        if (player == 0)
+        {
+            player = 1;
+        }
+
         ConfirmHUD.Instance.CurrentValueToCall(PotManager.Instance.GetCallValue(player));
         ConfirmHUD.Instance.CurrentBetValue(betValue);
+        walletText.BetUpdate(betValue, this.player);
     }
     /// <summary>
     /// remove chips - (minus button)
@@ -160,8 +165,8 @@ public class BetManager : PhotonManager<BetManager>
 
     public void ResetBet()
     {
-        betValue = 0;
-        ChipsToRaise = 0;
+        this.betValue = 0;
+        //ChipsToRaise = 0;
     }
 
     public void OnTurnStart()
@@ -266,7 +271,10 @@ public class BetManager : PhotonManager<BetManager>
             }
         roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
     }
-
+    //void Update()
+    //{
+    //    betValue;
+    //}
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
     }

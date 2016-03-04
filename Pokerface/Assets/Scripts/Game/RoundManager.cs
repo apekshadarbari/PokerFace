@@ -76,11 +76,11 @@ public class RoundManager : Photon.MonoBehaviour
         }
         if (player == 1)
         {
-            turnIndicater.transform.position = new Vector3(.78f, 1.18f, -.42f);
+            turnIndicater.transform.position = new Vector3(.78f, 1.86f, -.33f);
         }
         else if (player == 2)
         {
-            turnIndicater.transform.position = new Vector3(-.175f, 1.179f, 1.29f);
+            turnIndicater.transform.position = new Vector3(-.151f, 1.86f, 1.127f);
         }
         ConfirmHUD.Instance.HudToggle(player);
         TurnManager.Instance.OnTurnStart(player);
