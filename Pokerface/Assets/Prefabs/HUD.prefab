@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11489796}
   m_Layer: 0
   m_Name: Canvas
-  m_TagString: HUDWallet
+  m_TagString: Wallet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ GameObject:
   - 4: {fileID: 402108}
   m_Layer: 0
   m_Name: Wallet
-  m_TagString: Untagged
+  m_TagString: HUDWallet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +213,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.177, y: 1.361, z: 0.163}
+  m_LocalPosition: {x: -0.177, y: 1.3, z: 0.163}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22485114}
@@ -550,8 +550,8 @@ MonoBehaviour:
   - {fileID: 11413636}
   - {fileID: 22411774}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 7
+  instantiationId: 7
   isRuntimeInstantiated: 0
 --- !u!114 &11474540
 MonoBehaviour:
@@ -609,8 +609,8 @@ MonoBehaviour:
   - {fileID: 11489796}
   - {fileID: 22485114}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 8
+  instantiationId: 8
   isRuntimeInstantiated: 0
 --- !u!114 &11475956
 MonoBehaviour:

@@ -36,6 +36,11 @@ public class ConfirmHUD : Manager<ConfirmHUD>
     private int player;
     private int playerInCtrl;
 
+    private Transform callTran;
+    private Transform checkTran;
+    private Transform raiseTran;
+    private Transform foldTran;
+
     private void Start()
     {
         hud = GameObject.FindGameObjectWithTag("HUD");
@@ -43,6 +48,12 @@ public class ConfirmHUD : Manager<ConfirmHUD>
         checkMesh = GameObject.FindGameObjectWithTag("HUDCheck").GetComponent<MeshRenderer>();
         raiseMesh = GameObject.FindGameObjectWithTag("HUDRaise").GetComponent<MeshRenderer>();
         foldMesh = GameObject.FindGameObjectWithTag("HUDFold").GetComponent<MeshRenderer>();
+
+        callTran = GameObject.FindGameObjectWithTag("HUDCall").GetComponent<Transform>();
+        checkTran = GameObject.FindGameObjectWithTag("HUDCheck").GetComponent<Transform>();
+        raiseTran = GameObject.FindGameObjectWithTag("HUDRaise").GetComponent<Transform>();
+        foldTran = GameObject.FindGameObjectWithTag("HUDFold").GetComponent<Transform>();
+
         callMesh.enabled = false;
         checkMesh.enabled = true;
         raiseMesh.enabled = false;
@@ -50,6 +61,14 @@ public class ConfirmHUD : Manager<ConfirmHUD>
     }
     private void Update()
     {
+        if (PhotonNetwork.player.ID == 2)
+        {
+            callTran.localPosition = new Vector3(995f, -135f, 886f);
+            checkTran.localPosition = new Vector3(995f, -135f, 886f);
+            raiseTran.localPosition = new Vector3(995f, -135f, 886f);
+            foldTran.localPosition = new Vector3(-868f, -161f, 913f);
+        }
+
         this.player = PhotonNetwork.player.ID;
         HudController(player);
 
