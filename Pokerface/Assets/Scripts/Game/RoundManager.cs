@@ -41,7 +41,7 @@ public class RoundManager : Photon.MonoBehaviour
     [PunRPC]
     private void TurnChange(int player, bool wantsNextRound, int receivingPlayer)
     {
-        CurrentPlayerTurn(player);
+        //CurrentPlayerTurn(player);
         GetComponent<PhotonView>().RPC("CurrentPlayerTurn", PhotonTargets.All, receivingPlayer);
 
         if (player == 1 && wantsNextRound)
@@ -160,7 +160,7 @@ public class RoundManager : Photon.MonoBehaviour
     {
         if (!fold)
         {
-            cardMan.CompareCards();
+            //cardMan.CompareCards();
             //next round
             RoundStart(0);
             gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
@@ -203,7 +203,7 @@ public class RoundManager : Photon.MonoBehaviour
 
         playerTurn = turnIndicater.GetComponent<PhotonView>().ownerId;
         //Debug.Log(playerTurn);
-        CurrentPlayerTurn(playerTurn);
+        //CurrentPlayerTurn(playerTurn);
         RoundStart(0);
     }
 

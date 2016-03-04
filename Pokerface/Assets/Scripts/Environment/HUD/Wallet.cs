@@ -35,6 +35,7 @@ public class Wallet : Photon.MonoBehaviour
         walletValue = WalletManager.Instance.Credits;
 
         this.wallet.GetComponent<Text>().text = "Wallet: $" + walletValue.ToString();
+        this.bet.GetComponent<Text>().text = "Bet: $" + betValue.ToString();
     }
 
     public void BetUpdate(int betValue, int player)
