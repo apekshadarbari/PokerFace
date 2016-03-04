@@ -134,8 +134,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162900}
   m_LocalRotation: {x: 0.7055349, y: 0.00000019603219, z: 0.00000019690476, w: 0.70867527}
-  m_LocalPosition: {x: 0.638, y: 1.028, z: -0.775}
-  m_LocalScale: {x: 0.0005, y: 0.0005, z: 0.005}
+  m_LocalPosition: {x: 0.638, y: 1.008, z: -0.775}
+  m_LocalScale: {x: 0.0005, y: 0.0005, z: 0.0005}
   m_Children: []
   m_Father: {fileID: 418832}
   m_RootOrder: 2
@@ -146,7 +146,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.95, z: 0}
+  m_LocalPosition: {x: 0, y: 0.814, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435990}
@@ -361,7 +361,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103884}
-  m_Mesh: {fileID: 4300066, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
+  m_Mesh: {fileID: 4300038, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
 --- !u!33 &3399126
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -454,7 +454,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300020, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
 --- !u!64 &6402994
 MeshCollider:
@@ -466,8 +466,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300066, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
+  m_Convex: 1
+  m_Mesh: {fileID: 4300038, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
 --- !u!64 &6409866
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -478,7 +478,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300018, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
 --- !u!64 &6450554
 MeshCollider:
@@ -490,7 +490,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &6463590
 MeshCollider:
@@ -502,7 +502,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300010, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
 --- !u!82 &8213120
 AudioSource:
@@ -1172,7 +1172,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300010, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
+      objectReference: {fileID: 4300038, guid: 0e8a7ae1163e5e4488875a59313ca2a5, type: 3}
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 8
@@ -1204,6 +1204,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.w
       value: 0.0010445017
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

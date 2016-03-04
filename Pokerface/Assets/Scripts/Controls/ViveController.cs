@@ -143,7 +143,12 @@ public class ViveController : MonoBehaviour
             return;
 
         HeldObject.SendMessage("OnReleased", this, SendMessageOptions.DontRequireReceiver);
+        if (HeldObject.CompareTag("StartButton"))
+        {
+            Debug.Log("Start button tag compare works");
+            HeldObject.GetComponent<StartButton>().EndTurn();
 
+        }
         if (HeldObject.CompareTag("PlayerOneButton") || HeldObject.CompareTag("PlayerTwoButton"))
         {
             Debug.Log("Compare tag worked");
