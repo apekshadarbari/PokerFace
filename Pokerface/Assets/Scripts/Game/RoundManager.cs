@@ -160,7 +160,7 @@ public class RoundManager : Photon.MonoBehaviour
     {
         if (!fold)
         {
-            //cardMan.CompareCards();
+            cardMan.CompareCards();
             //next round
             gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
             //need the current enum so we can send on the next enum
