@@ -89,9 +89,13 @@ public class ConfirmHUD : Manager<ConfirmHUD>
             {
                 HudChange(ConfirmAction.raise);
             }
-            else if (callValue == betValue)
+            else if (callValue == betValue && betValue == 0)
             {
                 HudChange(ConfirmAction.check);
+            }
+            else if (callValue == betValue && betValue > 0)
+            {
+                HudChange(ConfirmAction.call);
             }
             else
             {

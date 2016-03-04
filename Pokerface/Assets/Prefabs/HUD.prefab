@@ -550,8 +550,8 @@ MonoBehaviour:
   - {fileID: 11413636}
   - {fileID: 22411774}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 7
-  instantiationId: 7
+  viewIdField: 0
+  instantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!114 &11474540
 MonoBehaviour:
@@ -609,8 +609,8 @@ MonoBehaviour:
   - {fileID: 11489796}
   - {fileID: 22485114}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 8
-  instantiationId: 8
+  viewIdField: 0
+  instantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!114 &11475956
 MonoBehaviour:

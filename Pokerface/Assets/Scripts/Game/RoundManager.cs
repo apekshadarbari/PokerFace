@@ -158,18 +158,27 @@ public class RoundManager : Photon.MonoBehaviour
     {
         if (!fold)
         {
-            //next round
             cardMan.CompareCards();
+            //next round
             RoundStart(0);
             gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
             //need the current enum so we can send on the next enum
         }
         else if (fold)
         {
+            if (player == 1)
+            {
+                WalletManager.Instance.ReceivePot(2);
+            }
+            else if (player == 2)
+            {
+                WalletManager.Instance.ReceivePot(1);
+            }
             //cardMan.CompareCards();//compares the cards
 
             //give whoever didnt fold the pot and remove all cards in the game
             gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
+            RoundStart(0);
         }
         //PotManager.Instance
         round = 0;

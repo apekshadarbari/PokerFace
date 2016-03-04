@@ -30,8 +30,11 @@ public class Wallet : Photon.MonoBehaviour
         transform.Rotate(0, 180, 0);
         if (PhotonNetwork.player.ID == 2)
         {
-            GameObject.FindGameObjectWithTag("HUDWallet").transform.position = new Vector3(-.177f, 2.0f, 1.7f);
+            GameObject.FindGameObjectWithTag("HUDWallet").transform.localPosition = new Vector3(-.177f, 1.3f, 1.7f);
         }
+        walletValue = WalletManager.Instance.Credits;
+
+        this.wallet.GetComponent<Text>().text = "Wallet: $" + walletValue.ToString();
     }
 
     public void BetUpdate(int betValue, int player)
@@ -48,8 +51,6 @@ public class Wallet : Photon.MonoBehaviour
             this.betValue = betValue;
             this.bet.GetComponent<Text>().text = "Bet: $" + betValue.ToString();
         }
-        walletValue = WalletManager.Instance.Credits;
-        this.wallet.GetComponent<Text>().text = "Wallet: $" + walletValue.ToString();
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
