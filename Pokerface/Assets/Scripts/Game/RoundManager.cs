@@ -63,6 +63,7 @@ public class RoundManager : Photon.MonoBehaviour
             PotManager.Instance.DumpIfEqual();
             RoundEnd(1);
         }
+        BetManager.Instance.ResetBet();
         //ConfirmHUD.Instance.HudToggle(player);
     }
 
@@ -109,6 +110,7 @@ public class RoundManager : Photon.MonoBehaviour
         PotManager.Instance.DumpIfEqual();
         playerOneWantsNextRound = false;
         playerTwoWantsNextRound = false;
+        BetManager.Instance.ResetBet();
 
         if (PhotonNetwork.isMasterClient)
         {
