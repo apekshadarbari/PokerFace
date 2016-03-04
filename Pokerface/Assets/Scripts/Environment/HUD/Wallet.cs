@@ -30,7 +30,7 @@ public class Wallet : Photon.MonoBehaviour
         transform.Rotate(0, 180, 0);
         if (PhotonNetwork.player.ID == 2)
         {
-            GameObject.FindGameObjectWithTag("HUDWallet").transform.position = new Vector3(1.8f, 1.35f, .4f);
+            GameObject.FindGameObjectWithTag("HUDWallet").transform.position = new Vector3(-.177f, 1.36f, 1.7f);
         }
     }
 

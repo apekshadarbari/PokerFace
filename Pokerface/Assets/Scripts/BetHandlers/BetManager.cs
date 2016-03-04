@@ -69,7 +69,7 @@ public class BetManager : PhotonManager<BetManager>
     private void Start()
     {
         player = PhotonNetwork.player.ID;
-        walletText = GameObject.FindGameObjectWithTag("HUDWallet").GetComponent<Wallet>();
+        walletText = GameObject.FindGameObjectWithTag("Wallet").GetComponent<Wallet>();
 
         //infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
