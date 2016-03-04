@@ -63,6 +63,7 @@ public class RoundManager : Photon.MonoBehaviour
             PotManager.Instance.DumpIfEqual();
             RoundEnd(1);
         }
+        //ConfirmHUD.Instance.HudToggle(player);
     }
 
     [PunRPC]
@@ -80,6 +81,7 @@ public class RoundManager : Photon.MonoBehaviour
         {
             turnIndicater.transform.position = new Vector3(-.175f, 1.179f, 1.29f);
         }
+        ConfirmHUD.Instance.HudToggle(player);
         TurnManager.Instance.OnTurnStart(player);
         //turnIndicater.GetComponent<PhotonView>().TransferOwnership(player);
     }

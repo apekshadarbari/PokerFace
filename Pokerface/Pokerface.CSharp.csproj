@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CardListener.cs" />
+    <Compile Include="Assets\ConfirmHUD.cs" />
     <Compile Include="Assets\NewtonVR\Example\NVRExampleColorLever.cs" />
     <Compile Include="Assets\NewtonVR\Example\NVRExampleColorSlider.cs" />
     <Compile Include="Assets\NewtonVR\Example\NVRExampleDegreeResult.cs" />

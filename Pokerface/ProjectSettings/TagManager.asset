@@ -20,6 +20,11 @@ TagManager:
   - HUDWallet
   - Card
   - Buttons
+  - HUDCall
+  - HUDCheck
+  - HUDRaise
+  - HUDFold
+  - HUD
   layers:
   - Default
   - TransparentFX

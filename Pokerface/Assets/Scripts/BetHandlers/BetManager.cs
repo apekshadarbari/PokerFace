@@ -137,6 +137,8 @@ public class BetManager : PhotonManager<BetManager>
     public void BetvalueUpdate()//might wanna give it player
     {
         walletText.BetUpdate(betValue, this.player);
+        ConfirmHUD.Instance.CurrentValueToCall(PotManager.Instance.GetCallValue(player));
+        ConfirmHUD.Instance.CurrentBetValue(betValue);
     }
     /// <summary>
     /// remove chips - (minus button)

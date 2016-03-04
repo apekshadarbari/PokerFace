@@ -21,7 +21,7 @@ public class TurnManager : PhotonManager<TurnManager>
         BetManager.Instance.OnTurnStart();
         btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
         btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
-
+        BetManager.Instance.ResetBet();
         //set players buttons to active..
         //other players buttons should be inactive
         switch (player)
@@ -78,7 +78,6 @@ public class TurnManager : PhotonManager<TurnManager>
         {
             Debug.Log("player 1 transferring control to 2");
 
-            //transfor ownership to the other player
             roundMan.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, player, wantsNextRound, 2);
         }
         //if it was player two´s turn

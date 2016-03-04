@@ -8,8 +8,6 @@ internal enum BetAction
     DecreaseBet,
     CommitBet,
     CallOrCheck,
-    Card,
-
     Fold
 }
 
@@ -64,7 +62,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         }
 
         //TODO: move all of these into another script called betcontroller
-        //Debug.Log("this button belongs to player: " + this.photonView.ownerId);
+        //Debug.Log("this button belongs to player: " + this.photonView.ownerId);s
         if (this.photonView.isMine)
         {
             switch (action)
@@ -88,12 +86,6 @@ public class BetMore : Photon.MonoBehaviour, IClicker
                     //Calling the last value
                     //betMan.SetBetToCallValue();//setss the bet to what it needs to be to call;
                     betMan.Bet();
-                    break;
-
-                case BetAction.Card:
-                    //Calling the last value
-                    //betMan.SetBetToCallValue();
-                    //return;
                     break;
 
                 case BetAction.Fold:
