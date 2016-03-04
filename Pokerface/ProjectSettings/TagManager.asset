@@ -20,7 +20,15 @@ TagManager:
   - HUDWallet
   - Card
   - Buttons
+<<<<<<< HEAD
   - StartButton
+=======
+  - HUDCall
+  - HUDCheck
+  - HUDRaise
+  - HUDFold
+  - HUD
+>>>>>>> abd15d7005224b58f8969471132cad22a9a1063d
   layers:
   - Default
   - TransparentFX
