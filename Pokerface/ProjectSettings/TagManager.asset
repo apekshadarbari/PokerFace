@@ -3,32 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - TurnTrigger
-  - Player1BetController
-  - Player2BetController
-  - PlayerOneButton
-  - PlayerTwoButton
-  - CardSlot
-  - CardHolder
-  - InfoBoard
-  - CrosshairRift
-  - CrosshairVive
-  - CrosshairGear
-  - TurnManager
-  - ControllerVive
-  - HUDWallet
-  - Card
-  - Buttons
-<<<<<<< HEAD
-  - StartButton
-=======
-  - HUDCall
-  - HUDCheck
-  - HUDRaise
-  - HUDFold
-  - HUD
->>>>>>> abd15d7005224b58f8969471132cad22a9a1063d
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -38,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - Interactable
-  - Controller
+  - 
+  - 
   - 
   - 
   - 
