@@ -18,7 +18,7 @@ public class TurnManager : PhotonManager<TurnManager>
     /// </summary>
     public void OnTurnStart(int player)
     {
-        BetManager.Instance.ResetBet();
+        //BetManager.Instance.ResetBet();
         BetManager.Instance.OnTurnStart();
         btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
         btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
