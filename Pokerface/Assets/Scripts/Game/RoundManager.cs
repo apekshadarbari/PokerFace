@@ -203,7 +203,7 @@ public class RoundManager : Photon.MonoBehaviour
 
         playerTurn = turnIndicater.GetComponent<PhotonView>().ownerId;
         //Debug.Log(playerTurn);
-        //CurrentPlayerTurn(playerTurn);
+        CurrentPlayerTurn(playerTurn);
         RoundStart(0);
     }
 
