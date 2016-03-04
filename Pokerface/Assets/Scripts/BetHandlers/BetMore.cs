@@ -63,7 +63,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
         //TODO: move all of these into another script called betcontroller
         //Debug.Log("this button belongs to player: " + this.photonView.ownerId);s
-        if (this.photonView.isMine)
+        if (PhotonNetwork.player.ID == this.photonView.ownerId)
         {
             switch (action)
             {
@@ -94,10 +94,10 @@ public class BetMore : Photon.MonoBehaviour, IClicker
                     break;
             }
         }
-        else if (!this.photonView.isMine)
-        {
-            throw new NotImplementedException("not yours");
-        }
+        //else if (!this.photonView.isMine)
+        //{
+        //    throw new NotImplementedException("not yours");
+        //}
     }
 
     /// <summary>
@@ -105,7 +105,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
 	public void OnHover()
     {
-        if (this.photonView.isMine)
+        if (PhotonNetwork.player.ID == this.photonView.ownerId)
         {
             // GetComponent<Renderer>().material.color = new Color(.5f, 0f, 0f, 0.3f);
             GetComponent<Renderer>().material.color = Color.white;
@@ -113,10 +113,10 @@ public class BetMore : Photon.MonoBehaviour, IClicker
             audioSrc.clip = hoverSound;
             audioSrc.Play();
         }
-        else if (!this.photonView.isMine)
-        {
-            throw new NotImplementedException("not yours");
-        }
+        //else if (!this.photonView.isMine)
+        //{
+        //    throw new NotImplementedException("not yours");
+        //}
     }
 
     /// <summary>
@@ -124,16 +124,16 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
     public void OnExitHover()
     {
-        if (this.photonView.isMine)
+        if (PhotonNetwork.player.ID == this.photonView.ownerId)
         {
             // GetComponent<Renderer>().material.color = new Color(0f, .5f, 0f, 0.3f);
             GetComponent<Renderer>().material.color = Color.grey;
             CrosshairTimerDisplay.Instance.Show();
         }
-        else if (!this.photonView.isMine)
-        {
-            throw new NotImplementedException("not yours");
-        }
+        //else if (!this.photonView.isMine)
+        //{
+        //    throw new NotImplementedException("not yours");
+        //}
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
