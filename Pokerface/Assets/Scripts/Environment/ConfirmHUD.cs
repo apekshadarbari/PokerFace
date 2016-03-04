@@ -134,11 +134,11 @@ public class ConfirmHUD : Manager<ConfirmHUD>
     {
         if (player == 1)
         {
-            hud.transform.position = new Vector3(0.3757066f, 1.3664f, -0.5743086f);
+            hud.transform.position = new Vector3(0.376f, 1.366f, -0.6f);
         }
         else if (player == 2)
         {
-            hud.transform.position = new Vector3(0.376f, 1.3664f, 1.613f);
+            hud.transform.position = new Vector3(0.376f, 2.234f, 1.549f);
             transform.Rotate(0, 180, 0);
         }
     }

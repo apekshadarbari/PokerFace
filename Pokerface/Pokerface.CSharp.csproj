@@ -74,8 +74,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CardListener.cs" />
-    <Compile Include="Assets\ConfirmHUD.cs" />
     <Compile Include="Assets\NewtonVR\Example\NVRExampleColorLever.cs" />
     <Compile Include="Assets\NewtonVR\Example\NVRExampleColorSlider.cs" />
     <Compile Include="Assets\NewtonVR\Example\NVRExampleDegreeResult.cs" />
@@ -220,6 +218,7 @@
     <Compile Include="Assets\Scripts\Cards\Card.cs" />
     <Compile Include="Assets\Scripts\Cards\CardBehaviour.cs" />
     <Compile Include="Assets\Scripts\Cards\CardHolder.cs" />
+    <Compile Include="Assets\Scripts\Cards\CardListener.cs" />
     <Compile Include="Assets\Scripts\Cards\CardManager.cs" />
     <Compile Include="Assets\Scripts\Cards\CardMatch.cs" />
     <Compile Include="Assets\Scripts\Cards\CompareHighestCard.cs" />
@@ -235,6 +234,7 @@
     <Compile Include="Assets\Scripts\Controls\TestRaycast.cs" />
     <Compile Include="Assets\Scripts\Controls\ViveController.cs" />
     <Compile Include="Assets\Scripts\Environment\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Environment\ConfirmHUD.cs" />
     <Compile Include="Assets\Scripts\Environment\HUD\Pot.cs" />
     <Compile Include="Assets\Scripts\Environment\HUD\Wallet.cs" />
     <Compile Include="Assets\Scripts\Environment\StartButton.cs" />
