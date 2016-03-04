@@ -138,7 +138,7 @@ public class ConfirmHUD : Manager<ConfirmHUD>
         }
         else if (player == 2)
         {
-            hud.transform.position = new Vector3(0.376f, 2.234f, 1.549f);
+            hud.transform.position = new Vector3(0.376f, 1.336f, 1.549f);
             transform.Rotate(0, 180, 0);
         }
     }
