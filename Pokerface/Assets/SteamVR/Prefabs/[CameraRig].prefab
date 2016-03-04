@@ -382,7 +382,7 @@ AudioSource:
   m_Volume: 0.227
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   Priority: 27
   DopplerLevel: 1
@@ -841,7 +841,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0.25}
 --- !u!135 &13576218
 SphereCollider:
@@ -853,7 +853,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0.25}
 --- !u!1001 &100100000
 Prefab:

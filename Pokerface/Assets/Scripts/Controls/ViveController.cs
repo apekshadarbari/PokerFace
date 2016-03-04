@@ -124,7 +124,7 @@ public class ViveController : MonoBehaviour
 
             Rigidbody rb = HeldObject.GetComponent<Rigidbody>();
 
-            if (!touchedObject.CompareTag("PlayerOneButton") || !touchedObject.CompareTag("PlayerTwoButton"))
+            if (!touchedObject.CompareTag("PlayerOneButton") && !touchedObject.CompareTag("PlayerTwoButton"))
             {
                 rb.transform.SetParent(null);
                 rb.isKinematic = false;
