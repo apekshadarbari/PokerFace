@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 495750}
   m_Layer: 0
   m_Name: CardSlot_PlayerOne_Left
-  m_TagString: Untagged
+  m_TagString: CardSlot
   m_Icon: {fileID: -1089502233064743932, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ GameObject:
   - 114: {fileID: 11412328}
   m_Layer: 0
   m_Name: PlayerOneHand
-  m_TagString: Untagged
+  m_TagString: CardHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - 4: {fileID: 491660}
   m_Layer: 0
   m_Name: CardSlot_PlayerOne_Right
-  m_TagString: Untagged
+  m_TagString: CardSlot
   m_Icon: {fileID: -1089502233064743932, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,8 +53,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152060}
-  m_LocalRotation: {x: 0, y: 0.4866959, z: 0, w: 0.8735716}
-  m_LocalPosition: {x: -0.026, y: 2.736, z: -1.594}
+  m_LocalRotation: {x: 0.0026777266, y: 0.53178704, z: 0.019979121, w: 0.8466382}
+  m_LocalPosition: {x: -0.729, y: 3.17, z: -0.718}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 491660}

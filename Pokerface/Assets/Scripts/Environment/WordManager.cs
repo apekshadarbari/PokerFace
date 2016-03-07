@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class WordManager : Photon.MonoBehaviour
@@ -25,21 +24,11 @@ public class WordManager : Photon.MonoBehaviour
     //int betMoney01;
     //int betMoney02;
 
-    // Use this for initialization
-    private void Start()
-    {
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
     [PunRPC]
     private void TextPot(int pot)
     {
-        this.pot.GetComponent<Text>().text = "Current PotManager.Instance: " + pot.ToString();
     }
+
     [PunRPC]
     private void TextAmountToCall(int player, int amountToCall)
     {

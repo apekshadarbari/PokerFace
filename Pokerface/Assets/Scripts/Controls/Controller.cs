@@ -84,16 +84,22 @@ public class Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("i am inside another collider");
+
         if (touchedObject != null && touchedObject != other.gameObject)
             touchedObject.SendMessage("OffTouch", this, SendMessageOptions.DontRequireReceiver);
         //added onhoverExit from betmore
-        other.GetComponent<BetMore>().OnExitHover();
+        if (other.CompareTag("PlayerOneButton") || other.CompareTag("PlayerTwoButton"))
+            other.GetComponent<BetMore>().OnExitHover();
 
         touchedObject = other.gameObject;
         touchedObject.SendMessage("OnTouch", this, SendMessageOptions.DontRequireReceiver);
 
+
+
         //added onhover from betmore
-        other.GetComponent<BetMore>().OnHover();
+        if (touchedObject.CompareTag("PlayerOneButton") || touchedObject.CompareTag("PlayerTwoButton"))
+            other.GetComponent<BetMore>().OnHover();
     }
 
     private void OnTriggerExit(Collider other)
@@ -102,7 +108,8 @@ public class Controller : MonoBehaviour
         {
             touchedObject.SendMessage("OffTouch", this, SendMessageOptions.DontRequireReceiver);
             //added onhoverExit from betmore
-            other.GetComponent<BetMore>().OnExitHover();
+            if (touchedObject.CompareTag("PlayerOneButton") || touchedObject.CompareTag("PlayerTwoButton"))
+                other.GetComponent<BetMore>().OnExitHover();
             touchedObject = null;
         }
     }
@@ -122,7 +129,7 @@ public class Controller : MonoBehaviour
             if (rb != null)
             {
                 rb.transform.SetParent(null);
-                //rb.isKinematic = false;
+                rb.isKinematic = false;
                 heldJoint = touchedObject.AddComponent<FixedJoint>() as Joint;
                 heldJoint.connectedBody = rigidbody;
             }
@@ -139,7 +146,11 @@ public class Controller : MonoBehaviour
 
         HeldObject.SendMessage("OnReleased", this, SendMessageOptions.DontRequireReceiver);
 
-        HeldObject.GetComponent<BetMore>().EndTurn();
+        if (HeldObject.CompareTag("PlayerOneButton") || HeldObject.CompareTag("PlayerTwoButton"))
+        {
+            Debug.Log("Compare tag worked");
+            HeldObject.GetComponent<BetMore>().EndTurn();
+        }
 
         if (heldJoint != null)
             Destroy(heldJoint);

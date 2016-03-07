@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9074344cace3f474a8da54972f161d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1pot: 5
-  player2pot: 15
+  player1pot: 0
+  player2pot: 0
   roundMan: {fileID: 164330}
   potValue: 0
 --- !u!114 &11425532
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c364eee331bbb9240b3401b6fc2b0de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHeight: 1.5
+  playerHeight: 1.2
 --- !u!114 &11438230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seats:
-  - {fileID: 135804, guid: db8e4539ced7090469dad84b9b65d4f1, type: 2}
+  - {fileID: 103014, guid: db8e4539ced7090469dad84b9b65d4f1, type: 2}
   - {fileID: 168148, guid: 9ed84e411742c644ebdb5790ad72385e, type: 2}
 --- !u!114 &11495990
 MonoBehaviour:

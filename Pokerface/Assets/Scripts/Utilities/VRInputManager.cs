@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VRInputManager : PhotonManager<VRInputManager>
 {
@@ -12,6 +11,7 @@ public class VRInputManager : PhotonManager<VRInputManager>
 
     private GameObject playerRig;
 
+    private GameObject controller;
     private TestRaycast gazeEye;
 
     private TestRaycast gazeHead;
@@ -21,21 +21,22 @@ public class VRInputManager : PhotonManager<VRInputManager>
 
     private void Start()
     {
-         //gazeHead= GameObject.Find("[CameraRig]/Camera (head)").GetComponent<TestRaycast>();
         gazeEye = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
         mouseLook = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<MouseLook>();
+
+        //controller = GameObject.FindGameObjectWithTag("ControllerVive");
 
         //null for rift
         vr = SteamVR.instance;
 
         if (vr != null)
         {
-            crosshair = GameObject.FindGameObjectWithTag("CrosshairVive");
-            crosshair.GetComponent<MeshRenderer>().enabled = true;
+            crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
+            crosshair.GetComponent<MeshRenderer>().enabled = false;
+            gazeEye.enabled = false;
 
             // turn off the htc vive controller script unless the vive is plugged in
-            var controller = GameObject.FindGameObjectWithTag("ControllerVive");
-            controller.GetComponent<Controller>().enabled = true;
+            //controller.GetComponent<Controller>().enabled = true;
 
             //Debug.Log("Vive");
         }
@@ -50,13 +51,15 @@ public class VRInputManager : PhotonManager<VRInputManager>
             crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
             crosshair.GetComponent<MeshRenderer>().enabled = true;
 
+            //controller.GetComponent<Controller>().enabled = false;
+
             Debug.Log("Not Vive");
             //playerRig.transform.position += Vector3.up * 1.2f;
 
             /*TESTING*/
             //enable mouselook for testting
             //maybe move it to a hotkey
-            //mouseLook.enabled = true;
+            mouseLook.enabled = true;
         }
     }
 
@@ -69,7 +72,7 @@ public class VRInputManager : PhotonManager<VRInputManager>
         var vrSpace = GameObject.Find("[SteamVR]").transform.position;
         //Debug.Log("Started Seating");
         //the hieght of the player + the room offset
-        var seatY = playerHeight + .95f;
+        var seatY = playerHeight;
         if (vr == null)
         {
             //Debug.Log("Seated as non vr");

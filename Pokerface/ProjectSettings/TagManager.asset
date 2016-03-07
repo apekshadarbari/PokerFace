@@ -13,11 +13,20 @@ TagManager:
   - CardHolder
   - InfoBoard
   - CrosshairRift
-  - CrosshairVive
   - CrosshairGear
+  - CrosshairVive
   - TurnManager
   - ControllerVive
-  - New Tag
+  - HUDWallet
+  - Card
+  - Buttons
+  - StartButton
+  - HUD
+  - HUDCall
+  - HUDCheck
+  - HUDRaise
+  - HUDFold
+  - Wallet
   layers:
   - Default
   - TransparentFX

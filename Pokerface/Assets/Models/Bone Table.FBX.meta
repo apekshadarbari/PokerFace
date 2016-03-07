@@ -1,0 +1,285 @@
+fileFormatVersion: 2
+guid: 0e8a7ae1163e5e4488875a59313ca2a5
+timeCreated: 1456892560
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 100-dollar Chip
+    100002: 100-dollar Chip001
+    100004: 3-in-1 Paw
+    100006: 3-in-1 Paw001
+    100008: 5-dollar Chip
+    100010: 5-dollar Chip001
+    100012: 500-dollar Chip
+    100014: 500-dollar Chip001
+    100016: //RootNode
+    100018: Bone Table
+    100020: Bone Table_01
+    100022: Bone Table_02
+    100024: Bone Table_03
+    100026: Bone Table_04
+    100028: Bone Table_05
+    100030: Fold Paw
+    100032: Fold Paw001
+    100034: Opponent Items
+    100036: Player Items
+    100038: Reset Button
+    100040: Reset Button001
+    100042: 100-dollar Chip002
+    100044: 100-dollar Chip003
+    100046: 100-dollar Chip004
+    100048: 5-dollar Chip002
+    100050: 5-dollar Chip003
+    100052: 5-dollar Chip004
+    100054: 500-dollar Chip002
+    100056: 500-dollar Chip003
+    100058: 500-dollar Chip004
+    100060: HUD
+    100062: HUD_Call
+    100064: HUD_Check
+    100066: HUD_Fold
+    100068: HUD_Raise
+    100070: 3-in-1 Paw004
+    100072: 5-dollar Chip005
+    100074: 5-dollar Chip006
+    100076: 5-dollar Chip007
+    100078: 5-dollar Chip008
+    400000: 100-dollar Chip
+    400002: 100-dollar Chip001
+    400004: 3-in-1 Paw
+    400006: 3-in-1 Paw001
+    400008: 5-dollar Chip
+    400010: 5-dollar Chip001
+    400012: 500-dollar Chip
+    400014: 500-dollar Chip001
+    400016: //RootNode
+    400018: Bone Table
+    400020: Bone Table_01
+    400022: Bone Table_02
+    400024: Bone Table_03
+    400026: Bone Table_04
+    400028: Bone Table_05
+    400030: Fold Paw
+    400032: Fold Paw001
+    400034: Opponent Items
+    400036: Player Items
+    400038: Reset Button
+    400040: Reset Button001
+    400042: 100-dollar Chip002
+    400044: 100-dollar Chip003
+    400046: 100-dollar Chip004
+    400048: 5-dollar Chip002
+    400050: 5-dollar Chip003
+    400052: 5-dollar Chip004
+    400054: 500-dollar Chip002
+    400056: 500-dollar Chip003
+    400058: 500-dollar Chip004
+    400060: HUD
+    400062: HUD_Call
+    400064: HUD_Check
+    400066: HUD_Fold
+    400068: HUD_Raise
+    400070: 3-in-1 Paw004
+    400072: 5-dollar Chip005
+    400074: 5-dollar Chip006
+    400076: 5-dollar Chip007
+    400078: 5-dollar Chip008
+    2300000: 100-dollar Chip
+    2300002: 100-dollar Chip001
+    2300004: 3-in-1 Paw
+    2300006: 3-in-1 Paw001
+    2300008: 5-dollar Chip
+    2300010: 5-dollar Chip001
+    2300012: 500-dollar Chip
+    2300014: 500-dollar Chip001
+    2300016: Bone Table_01
+    2300018: Bone Table_02
+    2300020: Bone Table_03
+    2300022: Bone Table_04
+    2300024: Bone Table_05
+    2300026: Fold Paw
+    2300028: Fold Paw001
+    2300030: Reset Button
+    2300032: Reset Button001
+    2300034: 100-dollar Chip002
+    2300036: 100-dollar Chip003
+    2300038: 100-dollar Chip004
+    2300040: 5-dollar Chip002
+    2300042: 5-dollar Chip003
+    2300044: 5-dollar Chip004
+    2300046: 500-dollar Chip002
+    2300048: 500-dollar Chip003
+    2300050: 500-dollar Chip004
+    2300052: HUD_Call
+    2300054: HUD_Check
+    2300056: HUD_Fold
+    2300058: HUD_Raise
+    2300060: 3-in-1 Paw004
+    2300062: 5-dollar Chip005
+    2300064: 5-dollar Chip006
+    2300066: 5-dollar Chip007
+    2300068: 5-dollar Chip008
+    3300000: 100-dollar Chip
+    3300002: 100-dollar Chip001
+    3300004: 3-in-1 Paw
+    3300006: 3-in-1 Paw001
+    3300008: 5-dollar Chip
+    3300010: 5-dollar Chip001
+    3300012: 500-dollar Chip
+    3300014: 500-dollar Chip001
+    3300016: Bone Table_01
+    3300018: Bone Table_02
+    3300020: Bone Table_03
+    3300022: Bone Table_04
+    3300024: Bone Table_05
+    3300026: Fold Paw
+    3300028: Fold Paw001
+    3300030: Reset Button
+    3300032: Reset Button001
+    3300034: 100-dollar Chip002
+    3300036: 100-dollar Chip003
+    3300038: 100-dollar Chip004
+    3300040: 5-dollar Chip002
+    3300042: 5-dollar Chip003
+    3300044: 5-dollar Chip004
+    3300046: 500-dollar Chip002
+    3300048: 500-dollar Chip003
+    3300050: 500-dollar Chip004
+    3300052: HUD_Call
+    3300054: HUD_Check
+    3300056: HUD_Fold
+    3300058: HUD_Raise
+    3300060: 3-in-1 Paw004
+    3300062: 5-dollar Chip005
+    3300064: 5-dollar Chip006
+    3300066: 5-dollar Chip007
+    3300068: 5-dollar Chip008
+    4300000: Bone Table_01
+    4300002: Bone Table_02
+    4300004: Bone Table_03
+    4300006: Bone Table_04
+    4300008: Bone Table_05
+    4300010: Fold Paw
+    4300012: 5-dollar Chip
+    4300014: 100-dollar Chip
+    4300016: 500-dollar Chip
+    4300018: Reset Button
+    4300020: 3-in-1 Paw
+    4300022: Fold Paw001
+    4300024: 5-dollar Chip001
+    4300026: 100-dollar Chip001
+    4300028: 500-dollar Chip001
+    4300030: Reset Button001
+    4300032: 3-in-1 Paw001
+    4300034: 5-dollar Chip002
+    4300036: 5-dollar Chip003
+    4300038: 5-dollar Chip004
+    4300040: 100-dollar Chip002
+    4300042: 100-dollar Chip003
+    4300044: 100-dollar Chip004
+    4300046: 500-dollar Chip002
+    4300048: 500-dollar Chip003
+    4300050: 500-dollar Chip004
+    4300052: HUD_Fold
+    4300054: HUD_Check
+    4300056: HUD_Raise
+    4300058: HUD_Call
+    4300060: 3-in-1 Paw004
+    4300062: 5-dollar Chip005
+    4300064: 5-dollar Chip006
+    4300066: 5-dollar Chip007
+    4300068: 5-dollar Chip008
+    6400000: 100-dollar Chip
+    6400002: 100-dollar Chip002
+    6400004: 100-dollar Chip003
+    6400006: 100-dollar Chip004
+    6400008: 3-in-1 Paw
+    6400010: 3-in-1 Paw004
+    6400012: 5-dollar Chip
+    6400014: 5-dollar Chip002
+    6400016: 5-dollar Chip003
+    6400018: 5-dollar Chip004
+    6400020: 5-dollar Chip005
+    6400022: 5-dollar Chip006
+    6400024: 5-dollar Chip007
+    6400026: 5-dollar Chip008
+    6400028: 500-dollar Chip
+    6400030: 500-dollar Chip001
+    6400032: Bone Table_01
+    6400034: Bone Table_02
+    6400036: Bone Table_03
+    6400038: Bone Table_04
+    6400040: Bone Table_05
+    6400042: Fold Paw
+    6400044: Fold Paw001
+    6400046: HUD_Call
+    6400048: HUD_Check
+    6400050: HUD_Fold
+    6400052: HUD_Raise
+    6400054: Reset Button
+    6400056: Reset Button001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -55,9 +55,8 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         //if we are player one I.E. master
         if (PhotonNetwork.isMasterClient && photonView.isMine)// s to start
         {
-
-                //Debug.Log("Clicked");
-                audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.roundStarted);
+            //Debug.Log("Clicked");
+            audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.roundStarted);
 
             //start game through the networked player //TODO: make start button better
             playerCtrl.StartGame();
@@ -76,7 +75,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         {
             //Debug.Log("stopped hovering");
 
-            GetComponent<Renderer>().material.color = Color.blue;
+            GetComponent<Renderer>().material.color = Color.grey;
 
             return;
         }
@@ -87,7 +86,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         if (PhotonNetwork.isMasterClient && photonView.isMine)
         {
             //Debug.Log("hovering");
-            GetComponent<Renderer>().material.color = Color.clear;
+            GetComponent<Renderer>().material.color = Color.white;
             return;
         }
     }

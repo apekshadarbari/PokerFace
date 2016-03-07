@@ -8,7 +8,6 @@ internal enum BetAction
     DecreaseBet,
     CommitBet,
     CallOrCheck,
-
     Fold
 }
 
@@ -63,35 +62,42 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         }
 
         //TODO: move all of these into another script called betcontroller
-        //Debug.Log("this button belongs to player: " + this.photonView.ownerId);
-        switch (action)
+        //Debug.Log("this button belongs to player: " + this.photonView.ownerId);s
+        if (PhotonNetwork.player.ID == this.photonView.ownerId)
         {
-            case BetAction.IncreaseBet:
-                //Adding chips to raise
-                betMan.IncreaseBet();
-                break;
+            switch (action)
+            {
+                case BetAction.IncreaseBet:
+                    //Adding chips to raise
+                    betMan.IncreaseBet();
+                    break;
 
-            case BetAction.DecreaseBet:
-                //Reducing chips to raises
-                betMan.DecreaseBet();
-                break;
+                case BetAction.DecreaseBet:
+                    //Reducing chips to raises
+                    betMan.DecreaseBet();
+                    break;
 
-            case BetAction.CommitBet:
-                //accepting the bet size and commiting it
-                betMan.Bet();
-                break;
+                case BetAction.CommitBet:
+                    //accepting the bet size and commiting it
+                    betMan.Bet();
+                    break;
 
-            case BetAction.CallOrCheck:
-                //Calling the last value
-                betMan.SetBetToCallValue();
-                betMan.Bet();
-                break;
+                case BetAction.CallOrCheck:
+                    //Calling the last value
+                    //betMan.SetBetToCallValue();//setss the bet to what it needs to be to call;
+                    betMan.Bet();
+                    break;
 
-            case BetAction.Fold:
-                //Folding cards
-                betMan.Fold();
-                break;
+                case BetAction.Fold:
+                    //Folding cards
+                    betMan.Fold();
+                    break;
+            }
         }
+        //else if (!this.photonView.isMine)
+        //{
+        //    throw new NotImplementedException("not yours");
+        //}
     }
 
     /// <summary>
@@ -99,19 +105,35 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
 	public void OnHover()
     {
-        GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.3f);
-        CrosshairTimerDisplay.Instance.Show();
-        audioSrc.clip = hoverSound;
-        audioSrc.Play();
+        if (PhotonNetwork.player.ID == this.photonView.ownerId)
+        {
+            // GetComponent<Renderer>().material.color = new Color(.5f, 0f, 0f, 0.3f);
+            GetComponent<Renderer>().material.color = Color.white;
+            CrosshairTimerDisplay.Instance.Show();
+            audioSrc.clip = hoverSound;
+            audioSrc.Play();
+        }
+        //else if (!this.photonView.isMine)
+        //{
+        //    throw new NotImplementedException("not yours");
+        //}
     }
 
     /// <summary>
     /// change the color back
     /// </summary>
-	public void OnExitHover()
+    public void OnExitHover()
     {
-        GetComponent<Renderer>().material.color = Color.clear;
-        CrosshairTimerDisplay.Instance.Show();
+        if (PhotonNetwork.player.ID == this.photonView.ownerId)
+        {
+            // GetComponent<Renderer>().material.color = new Color(0f, .5f, 0f, 0.3f);
+            GetComponent<Renderer>().material.color = Color.grey;
+            CrosshairTimerDisplay.Instance.Show();
+        }
+        //else if (!this.photonView.isMine)
+        //{
+        //    throw new NotImplementedException("not yours");
+        //}
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

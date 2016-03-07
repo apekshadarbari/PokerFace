@@ -41,7 +41,7 @@ public class RoundManager : Photon.MonoBehaviour
     [PunRPC]
     private void TurnChange(int player, bool wantsNextRound, int receivingPlayer)
     {
-        turnIndicater.GetComponent<PhotonView>().TransferOwnership(receivingPlayer);
+        //CurrentPlayerTurn(player);
         GetComponent<PhotonView>().RPC("CurrentPlayerTurn", PhotonTargets.All, receivingPlayer);
 
         if (player == 1 && wantsNextRound)
@@ -63,6 +63,8 @@ public class RoundManager : Photon.MonoBehaviour
             PotManager.Instance.DumpIfEqual();
             RoundEnd(1);
         }
+        BetManager.Instance.ResetBet();
+        //ConfirmHUD.Instance.HudToggle(player);
     }
 
     [PunRPC]
@@ -74,13 +76,15 @@ public class RoundManager : Photon.MonoBehaviour
         }
         if (player == 1)
         {
-            turnIndicater.transform.position = new Vector3(2.8f, 1.35f, 0f);
+            turnIndicater.transform.position = new Vector3(.78f, 1.86f, -.33f);
         }
         else if (player == 2)
         {
-            turnIndicater.transform.position = new Vector3(-2.75f, 1.35f, 0f);
+            turnIndicater.transform.position = new Vector3(-.151f, 1.86f, 1.127f);
         }
+        ConfirmHUD.Instance.HudToggle(player);
         TurnManager.Instance.OnTurnStart(player);
+        //turnIndicater.GetComponent<PhotonView>().TransferOwnership(player);
     }
 
     /// <summary>
@@ -106,6 +110,7 @@ public class RoundManager : Photon.MonoBehaviour
         PotManager.Instance.DumpIfEqual();
         playerOneWantsNextRound = false;
         playerTwoWantsNextRound = false;
+        BetManager.Instance.ResetBet();
 
         if (PhotonNetwork.isMasterClient)
         {
@@ -155,20 +160,30 @@ public class RoundManager : Photon.MonoBehaviour
     {
         if (!fold)
         {
-            //next round
             cardMan.CompareCards();
-            RoundStart(0);
+            //next round
+            gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
             //need the current enum so we can send on the next enum
         }
         else if (fold)
         {
-            cardMan.CompareCards();//compares the cards
+            if (player == 1)
+            {
+                WalletManager.Instance.ReceivePot(2);
+            }
+            else if (player == 2)
+            {
+                WalletManager.Instance.ReceivePot(1);
+            }
+            //cardMan.CompareCards();//compares the cards
 
             //give whoever didnt fold the pot and remove all cards in the game
             gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
         }
+        HandStart();
+
         //PotManager.Instance
-        round = 0;
+        //round = 0;
     }
 
     /// <summary>
@@ -179,7 +194,10 @@ public class RoundManager : Photon.MonoBehaviour
     {
         //if this is the first round
         //TurnIndicater - TennisBall - created
-        PhotonNetwork.Instantiate(turnIndicater.name, turnIndicater.transform.position, Quaternion.identity, 0);
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.Instantiate(turnIndicater.name, turnIndicater.transform.position, Quaternion.identity, 0);
+        }
 
         //we shuffle and deal to starting cards
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BetManager : PhotonManager<BetManager>
 {
+    //[SerializeField]
+    private Wallet walletText;
+
     [SerializeField]
     private int chipsToIncrement = 5;
 
@@ -41,23 +44,34 @@ public class BetManager : PhotonManager<BetManager>
 
     public int ChipsToRaise
     {
-        get
-        {
-            return betValue;
-        }
+        get { return betValue; }
+        set { betValue = value; }
+    }
 
-        set
-        {
-            betValue = value;
-        }
+    private int p1BetVal;
+    private int p2BetVal;
+
+    public int P1BetVal
+    {
+        get { return p1BetVal; }
+    }
+
+    public int P2BetVal
+    {
+        get { return p2BetVal; }
+    }
+
+    public int BetValue
+    {
+        get { return betValue; }
     }
 
     private void Start()
     {
         player = PhotonNetwork.player.ID;
-        //turnMan = GameObject.FindGameObjectWithTag("TurnManager").GetComponent<TurnManager>();
+        walletText = GameObject.FindGameObjectWithTag("Wallet").GetComponent<Wallet>();
 
-        infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
+        //infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
 
         //reset of the values (starting values)
         betValue = 0;
@@ -104,7 +118,7 @@ public class BetManager : PhotonManager<BetManager>
     {
         // TODO: Call OnTurnStart from TurnSwitch instead!
         callValue = PotManager.Instance.GetCallValue(player);
-        betValue = callValue;
+        //betValue = callValue;
     }
 
     private void Update()
@@ -118,8 +132,19 @@ public class BetManager : PhotonManager<BetManager>
     {
         betValue = betValue + chipsToIncrement;
         Debug.Log("add chips detected : " + betValue);
+        BetvalueUpdate();
     }
+    public void BetvalueUpdate()//might wanna give it player
+    {
+        if (player == 0)
+        {
+            player = 1;
+        }
 
+        walletText.BetUpdate(betValue, this.player);
+        ConfirmHUD.Instance.CurrentValueToCall(PotManager.Instance.GetCallValue(player));
+        ConfirmHUD.Instance.CurrentBetValue(betValue);
+    }
     /// <summary>
     /// remove chips - (minus button)
     /// </summary>
@@ -130,13 +155,26 @@ public class BetManager : PhotonManager<BetManager>
         {
             betValue = 0;
         }
-        else betValue = betValue - chipsToIncrement;
+        else
+        {
+            ResetBet();
+        }
+        BetvalueUpdate();
+        //else betValue = betValue - chipsToIncrement;
+    }
+
+    public void ResetBet()
+    {
+        this.betValue = 0;
+        //ChipsToRaise = 0;
     }
 
     public void OnTurnStart()
     {
-        callValue = PotManager.Instance.GetCallValue(player);
-        SetBetToCallValue();
+        //callValue = PotManager.Instance.GetCallValue(player);
+        ResetBet();
+        BetvalueUpdate();
+        //SetBetToCallValue();
     }
 
     public void Bet()
@@ -233,7 +271,10 @@ public class BetManager : PhotonManager<BetManager>
             }
         roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
     }
-
+    //void Update()
+    //{
+    //    betValue;
+    //}
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
     }
