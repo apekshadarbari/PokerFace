@@ -30,18 +30,19 @@ public class WalletManager : Manager<WalletManager>
 
     public void ReceivePot(int player)
     {
-        Debug.Log(PhotonNetwork.player.ID);
-        if (player == PhotonNetwork.player.ID)
-        {
-            GetPot(player);
-        }
+        //Debug.Log(PhotonNetwork.player.ID);
+        Debug.Log("player " + player + " receiving pot");
+        //if (player == PhotonNetwork.player.ID)
+        //{
+        GetPot(player);
+        //}
     }
 
     public void GetPot(int player)
     {
         var myMoney = PotManager.Instance.TotalPotValue;
         Deposit(myMoney);
-        Debug.Log(myMoney + "added to my wallet");
+        Debug.Log(myMoney + " added to my wallet");
         PotManager.Instance.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
         PotManager.Instance.GetComponent<PhotonView>().RPC("EndHandBehaviour", PhotonTargets.All);
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 public class BetManager : PhotonManager<BetManager>
@@ -131,7 +130,7 @@ public class BetManager : PhotonManager<BetManager>
     public void IncreaseBet()
     {
         betValue = betValue + chipsToIncrement;
-        Debug.Log("add chips detected : " + betValue);
+        //Debug.Log("add chips detected : " + betValue);
         BetvalueUpdate();
     }
     public void BetvalueUpdate()//might wanna give it player
@@ -169,12 +168,19 @@ public class BetManager : PhotonManager<BetManager>
         //ChipsToRaise = 0;
     }
 
+    /// <summary>
+    /// start the turn by updating the values
+    /// </summary>
     public void OnTurnStart()
     {
-        //callValue = PotManager.Instance.GetCallValue(player);
-        ResetBet();
-        BetvalueUpdate();
-        //SetBetToCallValue();
+        Debug.Log("BETMANAGER OnTurnStart");
+
+        callValue = PotManager.Instance.GetCallValue(player); // get callvalue
+
+        ResetBet(); // reset the betvalue to 0
+        BetvalueUpdate(); // update the values for the hud
+
+        SetBetToCallValue(); // setting the betvalue to the callvalue we got before
     }
 
     public void Bet()
@@ -204,6 +210,7 @@ public class BetManager : PhotonManager<BetManager>
                 Call(betValue);
             }
             // End turn
+            Debug.Log("Calling TURNMANAGER OnTurnEnd");
             TurnManager.Instance.OnTurnEnd(this.photonView.ownerId, wantsNextRound);
         }
         else

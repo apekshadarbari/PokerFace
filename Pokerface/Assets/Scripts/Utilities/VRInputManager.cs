@@ -53,7 +53,7 @@ public class VRInputManager : PhotonManager<VRInputManager>
 
             //controller.GetComponent<Controller>().enabled = false;
 
-            Debug.Log("Not Vive");
+            //Debug.Log("Not Vive");
             //playerRig.transform.position += Vector3.up * 1.2f;
 
             /*TESTING*/

@@ -1,7 +1,4 @@
-﻿using ExitGames.Client.Photon;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NetworkController : Photon.MonoBehaviour
 {
@@ -40,7 +37,7 @@ public class NetworkController : Photon.MonoBehaviour
     {
         //the current version of the game, change at milestones
         PhotonNetwork.ConnectUsingSettings(version);
-        Debug.Log("Started version: " + version);
+        //Debug.Log("Started version: " + version);
     }
 
     private void Update()
@@ -97,7 +94,7 @@ public class NetworkController : Photon.MonoBehaviour
     //step before joinging the rooom, changed if acutal lobby implemented
     private void OnJoinedLobby()
     {
-        Debug.Log("Joined Lobby!");
+        //Debug.Log("Joined Lobby!");
 
         //set room options as needed
         RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 2 };
@@ -108,7 +105,7 @@ public class NetworkController : Photon.MonoBehaviour
     private void OnJoinedRoom()
     {
         //when a room is joined
-        Debug.Log("Connected to Room");
+        //Debug.Log("Connected to Room");
         //run startgame
         StartGame();
     }

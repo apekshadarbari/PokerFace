@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum Round
 {
@@ -43,6 +42,7 @@ public class RoundManager : Photon.MonoBehaviour
     {
         //CurrentPlayerTurn(player);
         GetComponent<PhotonView>().RPC("CurrentPlayerTurn", PhotonTargets.All, receivingPlayer);
+        Debug.Log("CALLED CurrentPlayerTurn");
 
         if (player == 1 && wantsNextRound)
         {
@@ -63,7 +63,8 @@ public class RoundManager : Photon.MonoBehaviour
             PotManager.Instance.DumpIfEqual();
             RoundEnd(1);
         }
-        BetManager.Instance.ResetBet();
+        Debug.Log("TurnChange DONE");
+        //BetManager.Instance.ResetBet();
         //ConfirmHUD.Instance.HudToggle(player);
     }
 
@@ -85,6 +86,7 @@ public class RoundManager : Photon.MonoBehaviour
         ConfirmHUD.Instance.HudToggle(player);
         TurnManager.Instance.OnTurnStart(player);
         //turnIndicater.GetComponent<PhotonView>().TransferOwnership(player);
+        Debug.Log("CurrentPlayerTurn: " + player);
     }
 
     /// <summary>
@@ -120,7 +122,7 @@ public class RoundManager : Photon.MonoBehaviour
                 case 0: // handStarted
                     cardMan.Shuffle();
                     cardMan.Deal();
-                    Debug.Log("Cards shuffled and dealt");
+                    //Debug.Log("Cards shuffled and dealt");
                     break;
 
                 case 1: // The Flop
@@ -175,6 +177,8 @@ public class RoundManager : Photon.MonoBehaviour
             {
                 WalletManager.Instance.ReceivePot(1);
             }
+
+            Debug.Log(player + " Folded");
             //cardMan.CompareCards();//compares the cards
 
             //give whoever didnt fold the pot and remove all cards in the game
@@ -204,6 +208,7 @@ public class RoundManager : Photon.MonoBehaviour
         playerTurn = turnIndicater.GetComponent<PhotonView>().ownerId;
         //Debug.Log(playerTurn);
         CurrentPlayerTurn(playerTurn);
+        this.round = 0;//set the round back to 0
         RoundStart(0);
     }
 
