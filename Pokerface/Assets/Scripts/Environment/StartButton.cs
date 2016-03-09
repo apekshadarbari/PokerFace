@@ -59,7 +59,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.roundStarted);
 
             //start game through the networked player //TODO: make start button better
-            playerCtrl.StartGame();
+            //playerCtrl.StartGame();
             //deal the cards
 
             //cardMan.Deal();

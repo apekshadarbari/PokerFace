@@ -104,46 +104,12 @@ public class NetworkedPlayer : Photon.MonoBehaviour
 
     private void Update()
     {
-        //if (gameIsStarted) //TODO: check for redundancy
-        //{
-        //    turnTrigger.SetActive(true);
-        //}
         if (photonView.isMine) //TODO: check how much can be moved to start - making seats the Parents might make it easier to deal with but will require some restructuring
         {
-            //Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
-
-            //Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
-
-            //playerGlobal = GameObject.Find("[CameraRig]").transform;
-
             //TODO; might need another var for a player head for the pos tracking
             this.transform.position = (playerGlobal).transform.position;
             this.transform.rotation = (playerLocal).transform.rotation;
         }
-    }
-
-    public void StartGame()
-    {
-        //if (PhotonNetwork.isMasterClient && photonView.isMine)
-        //{
-        //    //start game button clicked
-        //    //Debug.Log("Starting Game");
-
-        //    //next turn button created
-        //    PhotonNetwork.Instantiate(turnTrigger.name, turnTrigger.transform.position, Quaternion.identity, 0);
-        //}
-
-        //TODO: Enable things when game is started, should be RPC
-
-        //GameObject[] enablerArr;
-        //enablerArr.
-
-        //    GameObject.FindGameObjectsWithTag("PlayerOneButton");
-        //enabler.a
-        //    PlayerTwoButton
-        //    Player2BetController
-        //    Player1BetController
-        //    TurnTrigger
     }
 
     // Update is called once per frame
@@ -167,25 +133,3 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         }
     }
 }
-
-////Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
-
-//playerGlobal = GameObject.Find("[CameraRig]").transform;
-//playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
-
-//GameObject.Find("[SteamVR]").transform.position = seatTrans.position;
-
-//playerGlobal.position = seatTrans.position;
-//this.transform.position = (playerGlobal).transform.position;
-//this.transform.rotation = (playerLocal).transform.rotation;
-
-////seat tranform = desired transform for player
-//playerGlobal = GameObject.Find("[CameraRig]").transform;
-//playerLocal = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").transform;
-//Transform vrSpace = GameObject.Find("[SteamVR]").transform;
-
-//playerGlobal.transform.SetParent(seatTrans);
-
-//playerLocal.transform.SetParent(seatTrans);
-//vrSpace.transform.SetParent(seatTrans);
-//playerGlobal.position = seatTrans.position;

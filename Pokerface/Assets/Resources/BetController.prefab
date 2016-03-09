@@ -31,7 +31,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 418832}
   - 114: {fileID: 11490728}
-  - 114: {fileID: 11483676}
+  - 114: {fileID: 11484112}
   m_Layer: 0
   m_Name: BetController
   m_TagString: Untagged
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!114 &11483676
+--- !u!114 &11484112
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1030,12 +1030,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 128914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5b97977aa3a7547ae2528292706f93, type: 3}
+  m_Script: {fileID: 11500000, guid: 54242fabc69e5c34cb99551bb4823d91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipsToIncrement: 5
-  audMan: {fileID: 0}
-  betValue: 0
 --- !u!114 &11486748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1109,7 +1106,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 418832}
-  - {fileID: 11483676}
+  - {fileID: 11484112}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -1209,6 +1206,10 @@ Prefab:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.data[1]
+      value: 
+      objectReference: {fileID: 11484112}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128914}

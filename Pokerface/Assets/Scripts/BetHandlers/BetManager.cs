@@ -4,7 +4,7 @@ using UnityEngine;
 public class BetManager : PhotonManager<BetManager>
 {
     //[SerializeField]
-    private Wallet walletText;
+    //private Wallet walletText;
 
     [SerializeField]
     private int chipsToIncrement = 5;
@@ -15,62 +15,18 @@ public class BetManager : PhotonManager<BetManager>
     [SerializeField]
     private int betValue;
 
-    private int player;//int we get from PotManager.Instanceman
+    private int player;
 
-    //[SerializeField]
-    //private bool playerOneChecks;
+    //private RoundManager roundMan;
 
-    //[SerializeField]
-    //private bool playerTwoChecks;
-
-    //how many chips are added each time the + button is used
-
-    //how many chips are we betting
-
-    //the value the player wants to raise
-    //[SerializeField]
-    //private int chipsToRaise;
-
-    private RoundManager roundMan;
-
-    //the players wallet I.E. chipvalue
-    //[SerializeField]
     private bool wantsNextRound;
-
-    private Canvas infoBoard;
 
     private int callValue;
 
-    public int ChipsToRaise
-    {
-        get { return betValue; }
-        set { betValue = value; }
-    }
-
-    private int p1BetVal;
-    private int p2BetVal;
-
-    public int P1BetVal
-    {
-        get { return p1BetVal; }
-    }
-
-    public int P2BetVal
-    {
-        get { return p2BetVal; }
-    }
-
-    public int BetValue
-    {
-        get { return betValue; }
-    }
-
     private void Start()
     {
-        player = PhotonNetwork.player.ID;
-        walletText = GameObject.FindGameObjectWithTag("Wallet").GetComponent<Wallet>();
-
-        //infoBoard = GameObject.FindGameObjectWithTag("InfoBoard").GetComponent<Canvas>();
+        //player = PhotonNetwork.player.ID;
+        //Debug.Log(player);
 
         //reset of the values (starting values)
         betValue = 0;
@@ -78,26 +34,7 @@ public class BetManager : PhotonManager<BetManager>
         //find the PotManager.Instance
 
         audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
-        roundMan = GameObject.Find("Round").GetComponent<RoundManager>();
-
-        if (this.photonView.ownerId == 2)
-        {
-            this.tag = "Player2BetController";
-
-            foreach (Transform t in this.transform)
-            {
-                t.gameObject.tag = "PlayerTwoButton";
-            }
-        }
-        else if (this.photonView.ownerId == 1)
-        {
-            this.tag = "Player1BetController";
-
-            foreach (Transform t in this.transform)
-            {
-                t.gameObject.tag = "PlayerOneButton";
-            }
-        }
+        //roundMan = GameObject.Find("Round").GetComponent<RoundManager>();
 
         //PotManager.Instance.PotManager.InstanceComparison(this.photonView.ownerId, 0);
         //ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
@@ -120,10 +57,6 @@ public class BetManager : PhotonManager<BetManager>
         betValue = callValue;
     }
 
-    private void Update()
-    {
-        //infoBoard.GetComponent<PhotonView>().RPC("TextAmountToCall", PhotonTargets.AllBuffered, this.photonView.ownerId, amountToCall);
-    }
     /// <summary>
     /// add chips (plus button)
     /// </summary>
@@ -133,6 +66,7 @@ public class BetManager : PhotonManager<BetManager>
         //Debug.Log("add chips detected : " + betValue);
         BetvalueUpdate();
     }
+
     public void BetvalueUpdate()//might wanna give it player
     {
         if (player == 0)
@@ -144,6 +78,7 @@ public class BetManager : PhotonManager<BetManager>
         ConfirmHUD.Instance.CurrentValueToCall(PotManager.Instance.GetCallValue(player));
         ConfirmHUD.Instance.CurrentBetValue(betValue);
     }
+
     /// <summary>
     /// remove chips - (minus button)
     /// </summary>
@@ -177,13 +112,14 @@ public class BetManager : PhotonManager<BetManager>
     /// <summary>
     /// start the turn by updating the values
     /// </summary>
-    public void OnTurnStart()
+    public void OnTurnStart(int player)
     {
-        //Debug.Log("- OnTurnStart - Betmanager ");
+        this.player = player;
+        Debug.LogFormat("- OnTurnStart {0} - Betmanager ", player);
 
         callValue = PotManager.Instance.GetCallValue(player); // get callvalue
 
-        //ResetBet(); // reset the betvalue to 0
+        ResetBet(); // reset the betvalue to 0
         BetvalueUpdate(); // update the values for the hud
 
         //SetBetToCallValue(); // setting the betvalue to the callvalue we got before
@@ -225,7 +161,7 @@ public class BetManager : PhotonManager<BetManager>
             }
             // End turn
             //Debug.Log("Calling TURNMANAGER OnTurnEnd");
-            TurnManager.Instance.OnTurnEnd(this.photonView.ownerId, wantsNextRound);
+            TurnManager.Instance.OnTurnEnd(player, wantsNextRound);
             BetvalueUpdate();
         }
         else

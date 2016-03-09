@@ -19,7 +19,7 @@ public class TurnManager : PhotonManager<TurnManager>
     public void OnTurnStart(int player)
     {
         //BetManager.Instance.ResetBet();
-        BetManager.Instance.OnTurnStart();
+        BetManager.Instance.OnTurnStart(player);
         Pot.Instance.HUDCallValue(); // update the HUD
 
         Debug.Log("- OnTurnStart - TurnManager");

@@ -45,13 +45,13 @@ public class Wallet : Manager<Wallet>
     {
         if (player == 1)
         {
-            var betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
+            //var betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
             this.betValue = betValue;
             this.bet.GetComponent<Text>().text = "Bet: $" + betValue.ToString();
         }
         else if (player == 2)
         {
-            var betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
+            //var betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
             this.betValue = betValue;
             this.bet.GetComponent<Text>().text = "Bet: $" + betValue.ToString();
         }

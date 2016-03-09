@@ -50,15 +50,15 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         audioSrc.clip = buttonPressed;
         audioSrc.Play();
 
-        if (this.photonView.ownerId == 1)
-        {
-            betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
-        }
-        if (this.photonView.ownerId == 2)
-        {
-            betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
-        }
-
+        //if (this.photonView.ownerId == 1)
+        //{
+        //    betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
+        //}
+        //if (this.photonView.ownerId == 2)
+        //{
+        //    betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
+        //}
+        betMan = BetManager.Instance;
         //TODO: move all of these into another script called betcontroller
         //Debug.Log("this button belongs to player: " + this.photonView.ownerId);s
         if (PhotonNetwork.player.ID == this.photonView.ownerId)
