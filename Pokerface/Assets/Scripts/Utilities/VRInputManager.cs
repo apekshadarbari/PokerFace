@@ -21,8 +21,8 @@ public class VRInputManager : PhotonManager<VRInputManager>
 
     private void Start()
     {
-        gazeEye = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
         mouseLook = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<MouseLook>();
+        gazeEye = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
 
         //controller = GameObject.FindGameObjectWithTag("ControllerVive");
 
