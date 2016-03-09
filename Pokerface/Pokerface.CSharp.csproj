@@ -264,6 +264,8 @@
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_CameraMask.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Controller.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_ControllerManager.cs" />
+    <Compile Include="Assets\SteamVR\Scripts\SteamVR_Ears.cs" />
+    <Compile Include="Assets\SteamVR\Scripts\SteamVR_ExternalCamera.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Fade.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Frustum.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_GameView.cs" />
@@ -280,6 +282,7 @@
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_StatusText.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TestController.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
+    <Compile Include="Assets\SteamVR\Scripts\SteamVR_UpdatePoses.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
     <Compile Include="Assets\VRTransform.cs" />
   </ItemGroup>
@@ -368,8 +371,11 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
+    <None Include="Assets\SteamVR\Resources\SteamVR_AlphaOut.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_Blit.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_BlitFlip.shader" />
+    <None Include="Assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
+    <None Include="Assets\SteamVR\Resources\SteamVR_ColorOut.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_HiddenArea.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_Overlay.shader" />
