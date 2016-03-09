@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Wallet : Photon.MonoBehaviour
+public class Wallet : Manager<Wallet>
 {
     [SerializeField]
     private Text wallet;
@@ -15,6 +15,7 @@ public class Wallet : Photon.MonoBehaviour
     private void Start()
     {
         walletValue = WalletManager.Instance.Credits;
+        //betValue = BetManager.Instance.ChipsToRaise;
     }
 
     // Update is called once per frame
@@ -34,7 +35,10 @@ public class Wallet : Photon.MonoBehaviour
         walletValue = WalletManager.Instance.Credits;
 
         this.wallet.GetComponent<Text>().text = "Wallet: $" + walletValue.ToString();
-        this.bet.GetComponent<Text>().text = "Bet: $" + betValue.ToString();
+        //    if (BetManager.Instance != null)
+        //    {
+        //        this.bet.GetComponent<Text>().text = "Bet: $" + BetManager.Instance.ChipsToRaise.ToString();
+        //    }
     }
 
     public void BetUpdate(int betValue, int player)

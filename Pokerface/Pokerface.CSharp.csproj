@@ -241,6 +241,7 @@
     <Compile Include="Assets\Scripts\Environment\HUD\Pot.cs" />
     <Compile Include="Assets\Scripts\Environment\HUD\Wallet.cs" />
     <Compile Include="Assets\Scripts\Environment\StartButton.cs" />
+    <Compile Include="Assets\Scripts\Environment\TurnIndicator.cs" />
     <Compile Include="Assets\Scripts\Environment\TurnSwitch.cs" />
     <Compile Include="Assets\Scripts\Environment\WalletTextManager.cs" />
     <Compile Include="Assets\Scripts\Environment\WordManager.cs" />

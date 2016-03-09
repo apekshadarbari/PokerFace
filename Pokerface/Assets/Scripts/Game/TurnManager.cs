@@ -20,8 +20,9 @@ public class TurnManager : PhotonManager<TurnManager>
     {
         //BetManager.Instance.ResetBet();
         BetManager.Instance.OnTurnStart();
+        Pot.Instance.HUDCallValue(); // update the HUD
 
-        Debug.Log("TURNMANAGER OnTurnStart");
+        Debug.Log("- OnTurnStart - TurnManager");
 
         btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
         btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
@@ -78,14 +79,15 @@ public class TurnManager : PhotonManager<TurnManager>
         //if it was player one´s turn
         if (player == 1)
         {
-            Debug.Log("CALLING TURNCHANGE");
+            //Debug.Log("CALLING TURNCHANGE");
             roundMan.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, player, wantsNextRound, 2);
         }
         //if it was player two´s turn
         else if (player == 2)
         {
-            Debug.Log("player 2 transferring control to 1");
+            //Debug.Log("player 2 transferring control to 1");
             roundMan.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, player, wantsNextRound, 1);
         }
+        //BetManager.Instance.ResetBet();
     }
 }

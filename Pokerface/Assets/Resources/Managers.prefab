@@ -169,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.60473585, y: -4.319387, z: 6.721713}
+  m_LocalPosition: {x: -0.60473585, y: -3.62, z: 6.721713}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 487586}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dac06e9a621f1746bf174d004f6cb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credits: 100
+  credits: 500
 --- !u!114 &11419484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 11472432}
-  - {fileID: 11483200, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85073be71f2c3334bbc2e66a3ef49b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnIndicater: {fileID: 179448, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
   turnMan: {fileID: 11455716}
   cardMan: {fileID: 11495990}
   playerOneWantsNextRound: 0

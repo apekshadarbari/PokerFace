@@ -9,10 +9,10 @@ public class PotManager : PhotonManager<PotManager>
     private bool winnerFound;
 
     //TODO: Get rid og redundancy
-    [SerializeField, Header("Player one has put in")]
+    [SerializeField, Header("Player One´s Pot Value")]
     private int player1pot;
 
-    [SerializeField, Header("Player two has put in")]
+    [SerializeField, Header("Player Two´s Pot Value")]
     private int player2pot;
 
     //[SerializeField, Header("The amount needed to call")]

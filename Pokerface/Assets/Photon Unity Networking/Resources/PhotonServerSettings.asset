@@ -71,4 +71,5 @@ MonoBehaviour:
   - HandEnd
   - PotToPlayer
   - EndHandBehaviour
+  - ResetBestTask
   DisableAutoOpenWizard: 1

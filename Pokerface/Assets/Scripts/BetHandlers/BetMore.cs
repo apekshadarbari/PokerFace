@@ -77,12 +77,13 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
                 case BetAction.CommitBet:
                     //accepting the bet size and commiting it
-                    betMan.Bet();
+                    //betMan.Bet();
                     break;
 
                 case BetAction.CallOrCheck:
                     //Calling the last value
-                    //betMan.SetBetToCallValue();//setss the bet to what it needs to be to call;
+                    //Debug.Log("hej");
+                    /*  betMan.SetBetToCallValue();*///setss the bet to what it needs to be to call;
                     betMan.Bet();
                     break;
 

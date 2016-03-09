@@ -40,7 +40,7 @@ public class CardBehaviour : MonoBehaviour
 #endif
     }
 
-    public void FacePlayer()
+    public void FacePlayer() // currently only for
     {
         transform.forward = (Camera.main.transform.position - transform.position).normalized;
     }

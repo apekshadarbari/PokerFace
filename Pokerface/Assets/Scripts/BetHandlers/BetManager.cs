@@ -117,7 +117,7 @@ public class BetManager : PhotonManager<BetManager>
     {
         // TODO: Call OnTurnStart from TurnSwitch instead!
         callValue = PotManager.Instance.GetCallValue(player);
-        //betValue = callValue;
+        betValue = callValue;
     }
 
     private void Update()
@@ -140,7 +140,7 @@ public class BetManager : PhotonManager<BetManager>
             player = 1;
         }
 
-        walletText.BetUpdate(betValue, this.player);
+        Wallet.Instance.BetUpdate(betValue, this.player);
         ConfirmHUD.Instance.CurrentValueToCall(PotManager.Instance.GetCallValue(player));
         ConfirmHUD.Instance.CurrentBetValue(betValue);
     }
@@ -161,11 +161,17 @@ public class BetManager : PhotonManager<BetManager>
         BetvalueUpdate();
         //else betValue = betValue - chipsToIncrement;
     }
-
     public void ResetBet()
     {
         this.betValue = 0;
+        //gameObject.GetComponent<PhotonView>().RPC("ResetBestTask", PhotonTargets.All);
         //ChipsToRaise = 0;
+    }
+
+    [PunRPC]
+    private void ResetBestTask()
+    {
+        this.betValue = 0;
     }
 
     /// <summary>
@@ -173,28 +179,35 @@ public class BetManager : PhotonManager<BetManager>
     /// </summary>
     public void OnTurnStart()
     {
-        Debug.Log("BETMANAGER OnTurnStart");
+        //Debug.Log("- OnTurnStart - Betmanager ");
 
         callValue = PotManager.Instance.GetCallValue(player); // get callvalue
 
-        ResetBet(); // reset the betvalue to 0
+        //ResetBet(); // reset the betvalue to 0
         BetvalueUpdate(); // update the values for the hud
 
-        SetBetToCallValue(); // setting the betvalue to the callvalue we got before
+        //SetBetToCallValue(); // setting the betvalue to the callvalue we got before
     }
 
     public void Bet()
     {
         // TODO: Call OnTurnStart from TurnSwitch instead!
         callValue = PotManager.Instance.GetCallValue(player);
+        if (betValue < callValue)
+        {
+            SetBetToCallValue();
+        }
 
         if (WalletManager.Instance.Withdraw(betValue))
         {
-            if (betValue < callValue)
-            {
-                throw new NotImplementedException("You have to at least match the other players bet...");
-            }
-            else if (betValue > callValue)
+            //if (betValue < callValue)
+            //{
+            //    //throw new NotImplementedException("You have to at least match the other players bet...");
+            //    wantsNextRound = true;
+
+            //    Call(betValue);
+            //}
+            if (betValue > callValue)
             {
                 wantsNextRound = false;
                 Raise(betValue);
@@ -207,11 +220,13 @@ public class BetManager : PhotonManager<BetManager>
             else
             {
                 wantsNextRound = true;
+                //SetBetToCallValue();
                 Call(betValue);
             }
             // End turn
-            Debug.Log("Calling TURNMANAGER OnTurnEnd");
+            //Debug.Log("Calling TURNMANAGER OnTurnEnd");
             TurnManager.Instance.OnTurnEnd(this.photonView.ownerId, wantsNextRound);
+            BetvalueUpdate();
         }
         else
         {
@@ -244,7 +259,9 @@ public class BetManager : PhotonManager<BetManager>
         {
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Call);
         }
+
         PotManager.Instance.Bet(player, betValue);
+
         // ANNOUNCE CALL
     }
 
@@ -268,6 +285,7 @@ public class BetManager : PhotonManager<BetManager>
     public void Fold()
     {
         if (WalletManager.Instance.Withdraw(betValue))
+        {
             if (player == 1)
             {
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
@@ -276,7 +294,9 @@ public class BetManager : PhotonManager<BetManager>
             {
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
             }
-        roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
+        }
+        RoundManager.Instance.HandEnd(player, true);
+        //roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
     }
     //void Update()
     //{

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Pot : Photon.MonoBehaviour
+public class Pot : Manager<Pot>
 {
     [SerializeField]
     private Text pot;
@@ -32,6 +32,12 @@ public class Pot : Photon.MonoBehaviour
 
         this.pot.GetComponent<Text>().text = "Pot: $" + potValue.ToString();
 
+        this.call.GetComponent<Text>().text = "Call: $" + callValue.ToString();
+        //this.bet.GetComponent<Text>().text = "Your Bet: " + betValue.ToString();
+    }
+
+    public void HUDCallValue()
+    {
         if (PhotonNetwork.player.ID == 1)
         {
             callValue = PotManager.Instance.GetCallValue(1);
@@ -44,9 +50,6 @@ public class Pot : Photon.MonoBehaviour
             //callValue = PotManager.Instance.Player1pot;
             //betValue = PotManager.Instance.Player2pot;
         }
-
-        this.call.GetComponent<Text>().text = "Call: $" + callValue.ToString();
-        //this.bet.GetComponent<Text>().text = "Your Bet: " + betValue.ToString();
     }
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {

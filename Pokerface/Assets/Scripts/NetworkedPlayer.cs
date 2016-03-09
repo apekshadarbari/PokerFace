@@ -17,8 +17,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     public Transform playerGlobal;
 
     //the turnswitch trigger
-    [SerializeField]
-    public GameObject turnTrigger;
+    //[SerializeField]
+    //public GameObject turnTrigger;
 
     //players betcontrol for buttons
     [SerializeField]

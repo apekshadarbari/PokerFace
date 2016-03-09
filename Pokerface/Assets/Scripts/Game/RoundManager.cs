@@ -9,11 +9,11 @@ public enum Round
     HandEnd,
 }
 
-public class RoundManager : Photon.MonoBehaviour
+public class RoundManager : PhotonManager<RoundManager>
 {
     //turnindicator has cardmanager in it
-    [SerializeField]
-    private GameObject turnIndicater;
+    //[SerializeField]
+    //private GameObject turnIndicater;
 
     [SerializeField]
     private TurnManager turnMan;
@@ -42,7 +42,7 @@ public class RoundManager : Photon.MonoBehaviour
     {
         //CurrentPlayerTurn(player);
         GetComponent<PhotonView>().RPC("CurrentPlayerTurn", PhotonTargets.All, receivingPlayer);
-        Debug.Log("CALLED CurrentPlayerTurn");
+        //Debug.Log("CALLED CurrentPlayerTurn");
 
         if (player == 1 && wantsNextRound)
         {
@@ -61,9 +61,10 @@ public class RoundManager : Photon.MonoBehaviour
         if (playerOneWantsNextRound && playerTwoWantsNextRound)
         {
             PotManager.Instance.DumpIfEqual();
+            //gameObject.GetComponent<PhotonView>().RPC("RoundEnd", PhotonTargets.AllBuffered, 1);
             RoundEnd(1);
         }
-        Debug.Log("TurnChange DONE");
+        //Debug.Log("TurnChange DONE");
         //BetManager.Instance.ResetBet();
         //ConfirmHUD.Instance.HudToggle(player);
     }
@@ -71,18 +72,17 @@ public class RoundManager : Photon.MonoBehaviour
     [PunRPC]
     private void CurrentPlayerTurn(int player)
     {
-        if (player == 0)
-        {
-            player = 1;
-        }
-        if (player == 1)
-        {
-            turnIndicater.transform.position = new Vector3(.78f, 1.86f, -.33f);
-        }
-        else if (player == 2)
-        {
-            turnIndicater.transform.position = new Vector3(-.151f, 1.86f, 1.127f);
-        }
+        //if (player == 0) // shouldnt be necessary
+        //{
+        //    player = 1;
+        //}
+        //Wallet.Instance.BetUpdate(0, player);
+
+        //BetManager.Instance.BetvalueUpdate();// update the betvalue - reset it
+        this.playerTurn = player;
+
+        TurnIndicator.Instance.TurnIndication(player); // send the turntrigger to current  player
+
         ConfirmHUD.Instance.HudToggle(player);
         TurnManager.Instance.OnTurnStart(player);
         //turnIndicater.GetComponent<PhotonView>().TransferOwnership(player);
@@ -99,6 +99,7 @@ public class RoundManager : Photon.MonoBehaviour
         this.round += round;
         Debug.Log("Round Number: " + this.round);
         //next round
+        //gameObject.GetComponent<PhotonView>().RPC("RoundStart", PhotonTargets.AllBuffered, this.round);
         RoundStart(this.round);
     }
 
@@ -112,9 +113,11 @@ public class RoundManager : Photon.MonoBehaviour
         PotManager.Instance.DumpIfEqual();
         playerOneWantsNextRound = false;
         playerTwoWantsNextRound = false;
-        BetManager.Instance.ResetBet();
 
-        if (PhotonNetwork.isMasterClient)
+        /* BetManager.Instance.ResetBet(); */// reset the betvalues
+
+        //if (PhotonNetwork.isMasterClient)
+        if (PhotonNetwork.player.ID == playerTurn)
         {
             // call flop etc
             switch (round)
@@ -142,6 +145,7 @@ public class RoundManager : Photon.MonoBehaviour
 
                 case 4: // the End Comparison - who wins
                     Debug.Log("Hand over finding winner...");
+                    //gameObject.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.AllBuffered, 0, false);
                     HandEnd(0, false);
                     break;
 
@@ -158,7 +162,7 @@ public class RoundManager : Photon.MonoBehaviour
     /// Potten gives til vinderen
     /// </summary>
     [PunRPC]
-    private void HandEnd(int player, bool fold)
+    public void HandEnd(int player, bool fold)
     {
         if (!fold)
         {
@@ -184,7 +188,8 @@ public class RoundManager : Photon.MonoBehaviour
             //give whoever didnt fold the pot and remove all cards in the game
             gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
         }
-        HandStart();
+        gameObject.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBuffered);
+        //HandStart();
 
         //PotManager.Instance
         //round = 0;
@@ -197,18 +202,11 @@ public class RoundManager : Photon.MonoBehaviour
     private void HandStart()
     {
         //if this is the first round
-        //TurnIndicater - TennisBall - created
-        if (PhotonNetwork.isMasterClient)
-        {
-            PhotonNetwork.Instantiate(turnIndicater.name, turnIndicater.transform.position, Quaternion.identity, 0);
-        }
-
-        //we shuffle and deal to starting cards
-
-        playerTurn = turnIndicater.GetComponent<PhotonView>().ownerId;
         //Debug.Log(playerTurn);
-        CurrentPlayerTurn(playerTurn);
+        gameObject.GetComponent<PhotonView>().RPC("CurrentPlayerTurn", PhotonTargets.AllBuffered, 1);//TODO MAKE THIS DYNAMIC (hand 2 player two is the dealer and should start the game etc.)
+        //CurrentPlayerTurn(1);
         this.round = 0;//set the round back to 0
+        //gameObject.GetComponent<PhotonView>().RPC("RoundStart", PhotonTargets.AllBuffered, 0);
         RoundStart(0);
     }
 
