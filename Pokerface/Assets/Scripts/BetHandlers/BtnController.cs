@@ -30,4 +30,16 @@ public class BtnController : PhotonManager<BtnController>
     private void Update()
     {
     }
+
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            //stream.SendNext(gameIsStarted);
+        }
+        else
+        {
+            //gameIsStarted  = (bool)stream.ReceiveNext();
+        }
+    }
 }
