@@ -191,8 +191,8 @@ public class RoundManager : PhotonManager<RoundManager>
             //give whoever didnt fold the pot and remove all cards in the game
             //gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
         }
-        RemoveCard();
-        //gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
+        //RemoveCard();
+        gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
         gameObject.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBufferedViaServer);
         //HandStart();
 
@@ -212,7 +212,7 @@ public class RoundManager : PhotonManager<RoundManager>
         //CurrentPlayerTurn(1);
         this.round = 0;//set the round back to 0
         //gameObject.GetComponent<PhotonView>().RPC("RoundStart", PhotonTargets.AllBufferedViaServer, 0);
-        RoundStart(0);
+        RoundStart(round);
     }
 
     [PunRPC]
