@@ -97,7 +97,7 @@ public class RoundManager : PhotonManager<RoundManager>
     private void RoundEnd(int round)
     {
         this.round += round;
-        Debug.Log("Round Number: " + this.round);
+        //Debug.Log("Round Number: " + this.round);
         //next round
         //gameObject.GetComponent<PhotonView>().RPC("RoundStart", PhotonTargets.AllBuffered, this.round);
         RoundStart(this.round);

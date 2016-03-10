@@ -259,7 +259,7 @@ MonoBehaviour:
   player1pot: 0
   player2pot: 0
   roundMan: {fileID: 164330}
-  potValue: 50
+  potValue: 0
 --- !u!114 &11425532
 MonoBehaviour:
   m_ObjectHideFlags: 1
