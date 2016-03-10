@@ -191,8 +191,8 @@ public class RoundManager : PhotonManager<RoundManager>
             //give whoever didnt fold the pot and remove all cards in the game
             //gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
         }
-        //RemoveCard();
-        gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
+        RemoveCard();
+        //gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
         gameObject.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBufferedViaServer);
         //HandStart();
 
@@ -218,21 +218,21 @@ public class RoundManager : PhotonManager<RoundManager>
     [PunRPC]
     private void RemoveCard()
     {
-        if (PhotonNetwork.isMasterClient)
+        //if (PhotonNetwork.isMasterClient)
+        //{
+        var holders = GameObject.FindGameObjectsWithTag("CardHolder");
+
+        foreach (var slot in holders)
         {
-            var holders = GameObject.FindGameObjectsWithTag("CardHolder");
+            slot.GetComponent<CardHolder>().RemoveAllCards();
 
-            foreach (var slot in holders)
-            {
-                slot.GetComponent<CardHolder>().RemoveAllCards();
-
-                //foreach (Transform c in s.transform)
-                //{
-                //    GameObject.Destroy(c.gameObject);
-                //}
-            }
-            //var fold = GameObject.FindGameObjectsWithTag("CardSlot");
+            //foreach (Transform c in s.transform)
+            //{
+            //    GameObject.Destroy(c.gameObject);
+            //}
         }
+        //var fold = GameObject.FindGameObjectsWithTag("CardSlot");
+        //}
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

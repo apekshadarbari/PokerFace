@@ -231,8 +231,8 @@ public class BetManager : PhotonManager<BetManager>
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
             }
         }
-        //RoundManager.Instance.HandEnd(player, true);
-        roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
+        RoundManager.Instance.HandEnd(player, true);
+        //roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
     }
     //void Update()
     //{
