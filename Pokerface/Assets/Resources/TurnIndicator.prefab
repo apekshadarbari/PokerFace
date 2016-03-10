@@ -13,7 +13,6 @@ GameObject:
   - 23: {fileID: 2304820}
   - 114: {fileID: 11459912}
   - 114: {fileID: 11420364}
-  - 114: {fileID: 11455500}
   m_Layer: 0
   m_Name: TurnIndicator
   m_TagString: TurnTrigger
@@ -79,19 +78,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   degreesPerUpdate: 180
---- !u!114 &11455500
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6897818d03c3c6f4dbb332f85e466007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  degreesPerUpdate: 180
 --- !u!114 &11459912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +99,7 @@ MonoBehaviour:
   ownershipTransfer: 1
   ObservedComponents:
   - {fileID: 478358}
-  - {fileID: 11455500}
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
