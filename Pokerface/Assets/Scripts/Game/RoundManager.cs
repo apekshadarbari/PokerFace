@@ -114,6 +114,8 @@ public class RoundManager : PhotonManager<RoundManager>
         playerOneWantsNextRound = false;
         playerTwoWantsNextRound = false;
 
+        Debug.Log("Round Number: " + this.round);
+
         /* BetManager.Instance.ResetBet(); */// reset the betvalues
 
         if (PhotonNetwork.isMasterClient)
@@ -190,7 +192,7 @@ public class RoundManager : PhotonManager<RoundManager>
             //gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
             RemoveCard();
         }
-        gameObject.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBuffered);
+        gameObject.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBufferedViaServer);
         //HandStart();
 
         //PotManager.Instance

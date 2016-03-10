@@ -65,7 +65,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
             //cardMan.Deal();
             gameIsStarted = true;
 
-            roundMan.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBuffered);
+            roundMan.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBufferedViaServer);
         }
     }
 
