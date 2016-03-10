@@ -171,7 +171,7 @@ public class RoundManager : PhotonManager<RoundManager>
         {
             cardMan.CompareCards();
             //next round
-            gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
+
             //need the current enum so we can send on the next enum
         }
         else if (fold)
@@ -190,8 +190,9 @@ public class RoundManager : PhotonManager<RoundManager>
 
             //give whoever didnt fold the pot and remove all cards in the game
             //gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
-            RemoveCard();
         }
+        //RemoveCard();
+        gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
         gameObject.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBufferedViaServer);
         //HandStart();
 
@@ -210,7 +211,7 @@ public class RoundManager : PhotonManager<RoundManager>
         gameObject.GetComponent<PhotonView>().RPC("CurrentPlayerTurn", PhotonTargets.AllBuffered, 1);//TODO MAKE THIS DYNAMIC (hand 2 player two is the dealer and should start the game etc.)
         //CurrentPlayerTurn(1);
         this.round = 0;//set the round back to 0
-        //gameObject.GetComponent<PhotonView>().RPC("RoundStart", PhotonTargets.AllBuffered, 0);
+        //gameObject.GetComponent<PhotonView>().RPC("RoundStart", PhotonTargets.AllBufferedViaServer, 0);
         RoundStart(0);
     }
 
