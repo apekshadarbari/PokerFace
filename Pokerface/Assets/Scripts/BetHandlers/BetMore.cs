@@ -58,11 +58,12 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         //{
         //    betMan = GameObject.FindGameObjectWithTag("Player2BetController").GetComponent<BetManager>();
         //}
-        betMan = BetManager.Instance;
+
         //TODO: move all of these into another script called betcontroller
         //Debug.Log("this button belongs to player: " + this.photonView.ownerId);s
         if (PhotonNetwork.player.ID == this.photonView.ownerId)
         {
+            betMan = BetManager.Instance;
             switch (action)
             {
                 case BetAction.IncreaseBet:
