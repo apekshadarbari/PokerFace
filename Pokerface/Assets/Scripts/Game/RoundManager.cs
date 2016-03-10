@@ -218,17 +218,20 @@ public class RoundManager : PhotonManager<RoundManager>
     [PunRPC]
     private void RemoveCard()
     {
-        //var fold = GameObject.FindGameObjectsWithTag("CardSlot");
-        var holders = GameObject.FindGameObjectsWithTag("CardHolder");
-
-        foreach (var slot in holders)
+        if (PhotonNetwork.isMasterClient)
         {
-            slot.GetComponent<CardHolder>().RemoveAllCards();
+            var holders = GameObject.FindGameObjectsWithTag("CardHolder");
 
-            //foreach (Transform c in s.transform)
-            //{
-            //    GameObject.Destroy(c.gameObject);
-            //}
+            foreach (var slot in holders)
+            {
+                slot.GetComponent<CardHolder>().RemoveAllCards();
+
+                //foreach (Transform c in s.transform)
+                //{
+                //    GameObject.Destroy(c.gameObject);
+                //}
+            }
+            //var fold = GameObject.FindGameObjectsWithTag("CardSlot");
         }
     }
 
