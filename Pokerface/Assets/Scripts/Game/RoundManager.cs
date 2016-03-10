@@ -177,7 +177,7 @@ public class RoundManager : PhotonManager<RoundManager>
             Debug.Log("player " + player + " Folded");
             if (player == 1)
             {
-                WalletManager.Instance.ReceivePot(1);
+                WalletManager.Instance.ReceivePot(2);
             }
             else if (player == 2)
             {
@@ -187,7 +187,8 @@ public class RoundManager : PhotonManager<RoundManager>
             //cardMan.CompareCards();//compares the cards
 
             //give whoever didnt fold the pot and remove all cards in the game
-            gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
+            //gameObject.GetComponent<PhotonView>().RPC("RemoveCard", PhotonTargets.AllBuffered);
+            RemoveCard();
         }
         gameObject.GetComponent<PhotonView>().RPC("HandStart", PhotonTargets.AllBuffered);
         //HandStart();
