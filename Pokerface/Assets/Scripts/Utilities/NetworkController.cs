@@ -24,7 +24,7 @@ public class NetworkController : Photon.MonoBehaviour
     [SerializeField]
     private string version = "0.1";
 
-    private string roomName = "New_room";
+    //private string roomName = "New_room";
     private TypedLobby lobbyName = new TypedLobby("New_Lobby", LobbyType.Default);
 
     //the player TODO: FIX THIS CLASS , FIND OUT WHAT A GROUP CAN BE USED FOR WHEN INSTANTIATING OBJECTS HERE.
@@ -99,7 +99,10 @@ public class NetworkController : Photon.MonoBehaviour
         //set room options as needed
         RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 2 };
         //If there is no room, create one, otherwise join
-        PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
+        //PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
+        //PhotonNetwork.JoinOrCreateRoom("", roomOptions, TypedLobby.Default);
+
+        //PhotonNetwork.JoinRandomRoom();
     }
 
     private void OnJoinedRoom()
@@ -121,7 +124,7 @@ public class NetworkController : Photon.MonoBehaviour
         {
             //if (PhotonNetwork.isMasterClient)
             //{
-            PhotonNetwork.Instantiate(startgameButton.name, startgameButton.transform.position, startgameButton.transform.rotation, 0);
+            PhotonNetwork.InstantiateSceneObject(startgameButton.name, startgameButton.transform.position, startgameButton.transform.rotation, 0, null);
             //}
         }
 
