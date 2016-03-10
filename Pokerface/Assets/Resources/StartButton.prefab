@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad161ff32245fb94abf0aa0165dfa95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardMan: {fileID: 11478920, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
+  cardMan: {fileID: 0}
   playerCtrl: {fileID: 11428668, guid: 7a2ae810c57b745d1bf90cab83b05bad, type: 2}
 --- !u!114 &11492108
 MonoBehaviour:
@@ -195,6 +195,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

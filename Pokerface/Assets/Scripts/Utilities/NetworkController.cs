@@ -116,13 +116,18 @@ public class NetworkController : Photon.MonoBehaviour
         //Debug.Log(PhotonNetwork.player.ID.ToString());
 
         //instantiates the player at the corresponding seat
+        //Debug.Log(PhotonNetwork.playerList.Length);
+        if (PhotonNetwork.playerList.Length >= 2)
+        {
+            //if (PhotonNetwork.isMasterClient)
+            //{
+            PhotonNetwork.Instantiate(startgameButton.name, startgameButton.transform.position, startgameButton.transform.rotation, 0);
+            //}
+        }
+
         PhotonNetwork.Instantiate(player.name, Seats[PhotonNetwork.player.ID - 1].position, Quaternion.identity, 0);
 
         //TODO: make sure that this makes it instantiate the button only the one time
-        if (PhotonNetwork.isMasterClient)
-        {
-            PhotonNetwork.Instantiate(startgameButton.name, startgameButton.transform.position, startgameButton.transform.rotation, 0);
-        }
     }
 
     private void OnLeftRoom()
