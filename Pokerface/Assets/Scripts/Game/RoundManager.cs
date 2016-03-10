@@ -116,10 +116,10 @@ public class RoundManager : PhotonManager<RoundManager>
 
         /* BetManager.Instance.ResetBet(); */// reset the betvalues
 
-        //if (PhotonNetwork.isMasterClient)
-        if (PhotonNetwork.player.ID == playerTurn)
+        if (PhotonNetwork.isMasterClient)
+        //if (PhotonNetwork.player.ID == playerTurn)
         {
-            Debug.Log(PhotonNetwork.player.ID + " " + playerTurn);
+            //Debug.Log(PhotonNetwork.player.ID + " " + playerTurn);
             // call flop etc
             switch (round)
             {
