@@ -30,7 +30,7 @@ public class WalletManager : Manager<WalletManager>
 
     public void ReceivePot(int player)
     {
-        Debug.Log("player " + PhotonNetwork.player.ID + " should receive pot");
+        //Debug.Log("player " + PhotonNetwork.player.ID + " should receive pot");
         Debug.Log("player " + player + " should receive the pot");
         if (player == PhotonNetwork.player.ID)
         {

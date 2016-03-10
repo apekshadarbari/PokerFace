@@ -86,7 +86,7 @@ public class RoundManager : PhotonManager<RoundManager>
         ConfirmHUD.Instance.HudToggle(player);
         TurnManager.Instance.OnTurnStart(player);
         //turnIndicater.GetComponent<PhotonView>().TransferOwnership(player);
-        Debug.Log("CurrentPlayerTurn: " + player);
+        //Debug.Log("CurrentPlayerTurn: " + player);
     }
 
     /// <summary>
@@ -146,8 +146,8 @@ public class RoundManager : PhotonManager<RoundManager>
 
                 case 4: // the End Comparison - who wins
                     Debug.Log("Hand over finding winner...");
-                    //gameObject.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.AllBuffered, 0, false);
-                    HandEnd(0, false);
+                    gameObject.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.AllBuffered, 0, false);
+                    //HandEnd(0, false);
                     break;
 
                 default:
@@ -174,16 +174,16 @@ public class RoundManager : PhotonManager<RoundManager>
         }
         else if (fold)
         {
+            Debug.Log("player " + player + " Folded");
             if (player == 1)
             {
-                WalletManager.Instance.ReceivePot(2);
+                WalletManager.Instance.ReceivePot(1);
             }
             else if (player == 2)
             {
                 WalletManager.Instance.ReceivePot(1);
             }
 
-            Debug.Log(player + " Folded");
             //cardMan.CompareCards();//compares the cards
 
             //give whoever didnt fold the pot and remove all cards in the game

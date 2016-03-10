@@ -259,7 +259,7 @@ MonoBehaviour:
   player1pot: 0
   player2pot: 0
   roundMan: {fileID: 164330}
-  potValue: 0
+  potValue: 50
 --- !u!114 &11425532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,8 +295,8 @@ MonoBehaviour:
   - {fileID: 11472432}
   - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 6
+  instantiationId: 6
   isRuntimeInstantiated: 0
 --- !u!114 &11455716
 MonoBehaviour:
@@ -332,8 +332,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 11419484}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 3
+  instantiationId: 3
   isRuntimeInstantiated: 0
 --- !u!114 &11460624
 MonoBehaviour:

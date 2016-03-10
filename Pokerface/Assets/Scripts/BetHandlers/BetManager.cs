@@ -17,7 +17,7 @@ public class BetManager : PhotonManager<BetManager>
 
     private int player;
 
-    //private RoundManager roundMan;
+    private RoundManager roundMan;
 
     private bool wantsNextRound;
 
@@ -34,7 +34,7 @@ public class BetManager : PhotonManager<BetManager>
         //find the PotManager.Instance
 
         audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
-        //roundMan = GameObject.Find("Round").GetComponent<RoundManager>();
+        roundMan = GameObject.Find("Round").GetComponent<RoundManager>();
 
         //PotManager.Instance.PotManager.InstanceComparison(this.photonView.ownerId, 0);
         //ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
@@ -115,7 +115,7 @@ public class BetManager : PhotonManager<BetManager>
     public void OnTurnStart(int player)
     {
         this.player = player;
-        Debug.LogFormat("- OnTurnStart {0} - Betmanager ", player);
+        //Debug.LogFormat("- OnTurnStart {0} - Betmanager ", player);
 
         callValue = PotManager.Instance.GetCallValue(player); // get callvalue
 
@@ -231,8 +231,8 @@ public class BetManager : PhotonManager<BetManager>
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
             }
         }
-        RoundManager.Instance.HandEnd(player, true);
-        //roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
+        //RoundManager.Instance.HandEnd(player, true);
+        roundMan.GetComponent<PhotonView>().RPC("HandEnd", PhotonTargets.All, player, true);
     }
     //void Update()
     //{

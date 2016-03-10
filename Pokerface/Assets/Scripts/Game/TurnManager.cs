@@ -22,7 +22,7 @@ public class TurnManager : PhotonManager<TurnManager>
         BetManager.Instance.OnTurnStart(player);
         Pot.Instance.HUDCallValue(); // update the HUD
 
-        Debug.Log("- OnTurnStart - TurnManager");
+        //Debug.Log("- OnTurnStart - TurnManager");
 
         btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
         btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
