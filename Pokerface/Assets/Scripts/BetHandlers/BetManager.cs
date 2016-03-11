@@ -166,7 +166,8 @@ public class BetManager : PhotonManager<BetManager>
         }
         else
         {
-            throw new InvalidOperationException("Not enough credits in wallet for bet!");
+            return;
+            //throw new InvalidOperationException("Not enough credits in wallet for bet!");
         }
     }
 

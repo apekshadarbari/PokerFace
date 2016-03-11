@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5b97977aa3a7547ae2528292706f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipsToIncrement: 5
+  chipsToIncrement: 25
   audMan: {fileID: 0}
   betValue: 0
 --- !u!114 &11472432
