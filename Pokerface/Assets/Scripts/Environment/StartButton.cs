@@ -48,6 +48,9 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         {
             EndTurn();
         }
+        if (PhotonNetwork.playerList.Length >= 2)
+        {
+        }
     }
 
     public void EndTurn()
