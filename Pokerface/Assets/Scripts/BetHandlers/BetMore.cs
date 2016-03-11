@@ -53,7 +53,9 @@ public class BetMore : Photon.MonoBehaviour, IClicker
         //Debug.Log(RoundManager.Instance.PlayerTurn);
         //if (this.photonView.ownerId == 1)
         //{
-        //    betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
+        //    var btns = GameObject.FindGameObjectWithTag("Player1BetController");
+
+        //    //betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
         //}
         //if (this.photonView.ownerId == 2)
         //{
@@ -94,6 +96,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
                     betMan.Fold();
                     break;
             }
+            OnExitHover();
         }
         //else if (!this.photonView.isMine)
         //{
