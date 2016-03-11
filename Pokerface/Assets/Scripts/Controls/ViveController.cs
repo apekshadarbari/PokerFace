@@ -162,6 +162,7 @@ public class ViveController : MonoBehaviour
         if (rb != null)
             rb.velocity = Velocity;
         HeldObject = null;
+        touchedObject = null;
 
         //if we want to interact on the press action
     }
