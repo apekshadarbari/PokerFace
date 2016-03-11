@@ -24,7 +24,9 @@ public class NetworkController : Photon.MonoBehaviour
     [SerializeField]
     private string version = "0.1";
 
-    //private string roomName = "New_room";
+    [SerializeField]
+    private string roomName = "New_room";
+
     private TypedLobby lobbyName = new TypedLobby("New_Lobby", LobbyType.Default);
 
     //the player TODO: FIX THIS CLASS , FIND OUT WHAT A GROUP CAN BE USED FOR WHEN INSTANTIATING OBJECTS HERE.
@@ -99,7 +101,7 @@ public class NetworkController : Photon.MonoBehaviour
         //set room options as needed
         RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 2 };
         //If there is no room, create one, otherwise join
-        //PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
         //PhotonNetwork.JoinOrCreateRoom("", roomOptions, TypedLobby.Default);
 
         //PhotonNetwork.JoinRandomRoom();
@@ -120,13 +122,13 @@ public class NetworkController : Photon.MonoBehaviour
 
         //instantiates the player at the corresponding seat
         //Debug.Log(PhotonNetwork.playerList.Length);
-        if (PhotonNetwork.playerList.Length >= 2)
-        {
-            //if (PhotonNetwork.isMasterClient)
-            //{
-            PhotonNetwork.InstantiateSceneObject(startgameButton.name, startgameButton.transform.position, startgameButton.transform.rotation, 0, null);
-            //}
-        }
+        //if (PhotonNetwork.playerList.Length >= 2)
+        //{
+        //    //if (PhotonNetwork.isMasterClient)
+        //    //{
+        //PhotonNetwork.InstantiateSceneObject(startgameButton.name, startgameButton.transform.position, startgameButton.transform.rotation, 0, null);
+        //}
+        //}
 
         PhotonNetwork.Instantiate(player.name, Seats[PhotonNetwork.player.ID - 1].position, Quaternion.identity, 0);
 

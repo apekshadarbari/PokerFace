@@ -23,6 +23,7 @@ public class StartButton : Photon.MonoBehaviour, IClicker
     {
         audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
         roundMan = GameObject.Find("Round");
+        Debug.Log(PhotonNetwork.playerList.Length);
 
         //TODO: changed so that masterclient is whoever makes the room
         if (PhotonNetwork.isMasterClient)
@@ -48,8 +49,11 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         {
             EndTurn();
         }
-        if (PhotonNetwork.playerList.Length >= 2)
+
+        if (!gameIsStarted && PhotonNetwork.playerList.Length >= 2)
         {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
 
