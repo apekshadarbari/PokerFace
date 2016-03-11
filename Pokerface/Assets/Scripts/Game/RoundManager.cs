@@ -32,6 +32,11 @@ public class RoundManager : PhotonManager<RoundManager>
     [SerializeField]
     private bool playerTwoWantsNextRound;
 
+    public int PlayerTurn
+    {
+        get { return playerTurn; }
+    }
+
     // den der har turnswitchen har turen..
     /// <summary>
     /// who has the action?
