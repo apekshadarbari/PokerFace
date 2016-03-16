@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3343438}
   - 23: {fileID: 2355610}
   - 114: {fileID: 11487410}
+  - 114: {fileID: 11496900}
   m_Layer: 0
   m_Name: CrosshairRift
   m_TagString: CrosshairRift
@@ -140,7 +141,7 @@ GameObject:
   - 124: {fileID: 12409152}
   - 114: {fileID: 11400712}
   - 114: {fileID: 11421148}
-  - 114: {fileID: 11472488}
+  - 114: {fileID: 11409900}
   m_Layer: 0
   m_Name: Camera (eye)
   m_TagString: MainCamera
@@ -276,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 115216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.4394209}
-  m_LocalScale: {x: 0.07197105, y: 0.07197105, z: 0.07197105}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 413432}
   m_RootOrder: 0
@@ -469,6 +470,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5be45115742b07478e21c85fcc233ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11409900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _head: {fileID: 408470}
+  _ears: {fileID: 439042}
+  wireframe: 0
+  flip: {fileID: 11400712}
 --- !u!114 &11411726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -620,21 +636,6 @@ MonoBehaviour:
   index: 0
   origin: {fileID: 0}
   isValid: 0
---- !u!114 &11472488
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 189822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _head: {fileID: 408470}
-  _ears: {fileID: 439042}
-  wireframe: 0
-  flip: {fileID: 11400712}
 --- !u!114 &11473726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -684,6 +685,18 @@ MonoBehaviour:
   - {x: 1.65, y: 0.01, z: -1.275}
   - {x: -1.65, y: 0.01, z: -1.275}
   - {x: -1.65, y: 0.01, z: 1.275}
+--- !u!114 &11496900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49290290598da4658941f4235d61cfa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraFacing: {fileID: 2082592}
 --- !u!124 &12409152
 Behaviour:
   m_ObjectHideFlags: 1
