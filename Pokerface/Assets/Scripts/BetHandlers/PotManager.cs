@@ -119,8 +119,10 @@ public class PotManager : PhotonManager<PotManager>
         potValue += player1pot + player2pot;
         player1pot = 0;
         player2pot = 0;
+
         potchipDisplay.Value = potValue;
         potchipDisplay.UpdateStacks();
+
         p1PotchipDisplay.Value = player1pot;
         p1PotchipDisplay.UpdateStacks();
         p2PotchipDisplay.Value = player2pot;
@@ -131,6 +133,9 @@ public class PotManager : PhotonManager<PotManager>
     private void EndHandBehaviour()
     {
         potValue = 0;
+
+        potchipDisplay.Value = potValue;
+        potchipDisplay.UpdateStacks();
     }
 
     public int GetCallValue(int player)
