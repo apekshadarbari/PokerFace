@@ -42,11 +42,11 @@ public class TurnIndicator : PhotonManager<TurnIndicator>
         this.player = player;
         if (this.player == 1)
         {
-            targetPos = new Vector3(.78f, 1.86f, -.33f);
+            targetPos = new Vector3(.78f, 1.87f, -.33f);
         }
         else if (this.player == 2)
         {
-            targetPos = new Vector3(.78f, 1.86f, 1.127f);
+            targetPos = new Vector3(.78f, 1.87f, 1.127f);
         }
         //Debug.Log("TURNINDICATION COMMENSING");
     }
