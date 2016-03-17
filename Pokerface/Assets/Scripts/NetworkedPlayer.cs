@@ -24,9 +24,16 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     [SerializeField]
     private GameObject betControl;
 
+    [SerializeField]
+    private GameObject chipCtrl;
+
     //control of the cards
     [SerializeField]
     private GameObject cardControl;
+
+    private Transform chip10Transform;
+    private Transform chip50Transform;
+    private Transform chip100Transform;
 
     private void Start()
     {
@@ -56,10 +63,6 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             //create a betcontroller for each player
             betControl = PhotonNetwork.Instantiate(betControl.name, betControl.transform.position, Quaternion.identity, 0);
 
-            /*TESTING*/
-            //test position - when no oculus
-            //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
-
             betControl.tag = "Player1BetController";
 
             foreach (Transform t in betControl.transform)
@@ -69,6 +72,22 @@ public class NetworkedPlayer : Photon.MonoBehaviour
                 t.GetComponent<MeshCollider>().enabled = false;
                 //t.GetComponent<SphereCollider>().enabled = false;
             }
+
+            //chip10Transform = GameObject.FindGameObjectWithTag("P1Chip10").transform;
+            //chip50Transform = GameObject.FindGameObjectWithTag("P1Chip50").transform;
+            //chip100Transform = GameObject.FindGameObjectWithTag("P1Chip100").transform;
+
+            //chipCtrl.transform.GetChild(0).transform.position = chip10Transform.position;
+            //chipCtrl.transform.GetChild(1).transform.position = chip50Transform.position;
+            //chipCtrl.transform.GetChild(2).transform.position = chip100Transform.position;
+
+            //chipCtrl = PhotonNetwork.Instantiate(chipCtrl.name, chipCtrl.transform.position, Quaternion.identity, 0);
+
+            //chipCtrl.tag = "PlayerOneChipCtrl";
+
+            /*TESTING*/
+            //test position - when no oculus
+            //betControl = PhotonNetwork.Instantiate(betControl.name, new Vector3(3f, 0, 1), Quaternion.Euler(0, 208, 0), 0);
         }
 
         //player 2
@@ -86,6 +105,9 @@ public class NetworkedPlayer : Photon.MonoBehaviour
                 t.GetComponent<MeshCollider>().enabled = false;
                 //t.GetComponent<SphereCollider>().enabled = false;
             }
+
+            //chipCtrl = PhotonNetwork.Instantiate(chipCtrl.name, chipCtrl.transform.position, Quaternion.identity, 0);
+            //chipCtrl.tag = "PlayerTwoChipCtrl";
         }
 
         // Ensure the player is facing the table
@@ -110,6 +132,12 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             this.transform.position = (playerGlobal).transform.position;
             this.transform.rotation = (playerLocal).transform.rotation;
         }
+        //if (photonView.isMine && PhotonNetwork.player.ID == 1)
+        //{
+        //    chipCtrl.transform.GetChild(0).transform.position = chip10Transform.position + Vector3.up * 0.02f;
+        //    chipCtrl.transform.GetChild(1).transform.position = chip50Transform.position + Vector3.up * 0.02f;
+        //    chipCtrl.transform.GetChild(2).transform.position = chip100Transform.position + Vector3.up * 0.02f;
+        //}
     }
 
     // Update is called once per frame

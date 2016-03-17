@@ -15,6 +15,15 @@ public class PotManager : PhotonManager<PotManager>
     [SerializeField, Header("Player Two´s Pot Value")]
     private int player2pot;
 
+    [SerializeField]
+    private ChipsDisplay potchipDisplay;
+
+    [SerializeField]
+    private ChipsDisplay p1PotchipDisplay;
+
+    [SerializeField]
+    private ChipsDisplay p2PotchipDisplay;
+
     //[SerializeField, Header("The amount needed to call")]
     //private int amountToCall;
 
@@ -82,10 +91,14 @@ public class PotManager : PhotonManager<PotManager>
         {
             case 1:
                 player1pot += betValue;
+                p1PotchipDisplay.Value = player1pot;
+                p1PotchipDisplay.UpdateStacks();
                 break;
 
             case 2:
                 player2pot += betValue;
+                p2PotchipDisplay.Value = player2pot;
+                p2PotchipDisplay.UpdateStacks();
                 break;
         }
 
@@ -106,6 +119,12 @@ public class PotManager : PhotonManager<PotManager>
         potValue += player1pot + player2pot;
         player1pot = 0;
         player2pot = 0;
+        potchipDisplay.Value = potValue;
+        potchipDisplay.UpdateStacks();
+        p1PotchipDisplay.Value = player1pot;
+        p1PotchipDisplay.UpdateStacks();
+        p2PotchipDisplay.Value = player2pot;
+        p2PotchipDisplay.UpdateStacks();
     }
 
     [PunRPC]
@@ -116,9 +135,15 @@ public class PotManager : PhotonManager<PotManager>
 
     public int GetCallValue(int player)
     {
+        p1PotchipDisplay.Value = player1pot;
+        p1PotchipDisplay.UpdateStacks();
+        p2PotchipDisplay.Value = player2pot;
+        p2PotchipDisplay.UpdateStacks();
+
         switch (player)
         {
             case 1:
+
                 return Mathf.Max(player2pot - player1pot, 0);
 
             case 2:

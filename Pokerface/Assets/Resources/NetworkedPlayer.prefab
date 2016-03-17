@@ -428,8 +428,8 @@ MonoBehaviour:
   playerRig: {fileID: 0}
   playerLocal: {fileID: 0}
   playerGlobal: {fileID: 0}
-  turnTrigger: {fileID: 179448, guid: 6b13260ce2d941548a1ed9f4f1158d65, type: 2}
   betControl: {fileID: 128914, guid: fbfdcca88dad2554e8b4387be3d2c6b6, type: 2}
+  chipCtrl: {fileID: 127584, guid: 1670293ed03e8e741b91a432c87f1811, type: 2}
   cardControl: {fileID: 131856, guid: 916617909cd2d4e41886f96f06242931, type: 2}
 --- !u!114 &11472502
 MonoBehaviour:
@@ -528,6 +528,10 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[1]
       value: 
       objectReference: {fileID: 11428668}
+    - target: {fileID: 0}
+      propertyPath: chipCtrl
+      value: 
+      objectReference: {fileID: 127584, guid: 1670293ed03e8e741b91a432c87f1811, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 109782}

@@ -7,6 +7,9 @@ public class Wallet : Manager<Wallet>
     private Text wallet;
 
     [SerializeField]
+    private ChipsDisplay chipDisplay;
+
+    [SerializeField]
     private Text bet;
 
     private int walletValue;
@@ -48,6 +51,7 @@ public class Wallet : Manager<Wallet>
             //var betMan = GameObject.FindGameObjectWithTag("Player1BetController").GetComponent<BetManager>();
             this.betValue = betValue;
             this.bet.GetComponent<Text>().text = "Bet: $" + betValue.ToString();
+            //chipDisplay.UpdateStacks();
         }
         else if (player == 2)
         {

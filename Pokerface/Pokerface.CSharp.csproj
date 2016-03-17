@@ -229,6 +229,7 @@
     <Compile Include="Assets\Scripts\Cards\CompareHighestCard.cs" />
     <Compile Include="Assets\Scripts\Cards\ComparePaires.cs" />
     <Compile Include="Assets\Scripts\Cards\ICardCompare.cs" />
+    <Compile Include="Assets\Scripts\ChipsDisplay.cs" />
     <Compile Include="Assets\Scripts\Controls\Controller.cs" />
     <Compile Include="Assets\Scripts\Controls\CrosshairTimerDisplay.cs" />
     <Compile Include="Assets\Scripts\Controls\GazeInputModule.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Assets\Scripts\Environment\WordManager.cs" />
     <Compile Include="Assets\Scripts\Game\RoundManager.cs" />
     <Compile Include="Assets\Scripts\Game\TurnManager.cs" />
+    <Compile Include="Assets\Scripts\MoveChips.cs" />
     <Compile Include="Assets\Scripts\NetworkedPlayer.cs" />
     <Compile Include="Assets\Scripts\Utilities\Manager.cs" />
     <Compile Include="Assets\Scripts\Utilities\NetworkController.cs" />

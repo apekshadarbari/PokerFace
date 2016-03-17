@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   credits: 500
+  chipDisplay: {fileID: 0}
 --- !u!114 &11419484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,6 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1pot: 0
   player2pot: 0
+  p1PotchipDisplay: {fileID: 0}
+  potchipDisplay: {fileID: 0}
   roundMan: {fileID: 164330}
   potValue: 0
 --- !u!114 &11425532
@@ -346,7 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5b97977aa3a7547ae2528292706f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipsToIncrement: 25
+  chipDisplay: {fileID: 0}
+  chipsToIncrement: 10
   audMan: {fileID: 0}
   betValue: 0
 --- !u!114 &11472432

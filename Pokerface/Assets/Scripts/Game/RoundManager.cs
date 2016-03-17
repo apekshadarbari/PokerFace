@@ -90,6 +90,9 @@ public class RoundManager : PhotonManager<RoundManager>
 
         ConfirmHUD.Instance.HudToggle(player);
         TurnManager.Instance.OnTurnStart(player);
+
+        BetManager.Instance.GetPlayerTurn(playerTurn);
+
         //turnIndicater.GetComponent<PhotonView>().TransferOwnership(player);
         //Debug.Log("CurrentPlayerTurn: " + player);
     }

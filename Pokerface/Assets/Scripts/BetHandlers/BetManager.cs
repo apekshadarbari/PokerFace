@@ -5,6 +5,11 @@ public class BetManager : PhotonManager<BetManager>
 {
     //[SerializeField]
     //private Wallet walletText;
+    [SerializeField]
+    private ChipsDisplay p1ChipDisplay;
+
+    [SerializeField]
+    private ChipsDisplay p2ChipDisplay;
 
     [SerializeField]
     private int chipsToIncrement = 5;
@@ -22,6 +27,8 @@ public class BetManager : PhotonManager<BetManager>
     private bool wantsNextRound;
 
     private int callValue;
+
+    private int playerTurn;
 
     private void Start()
     {
@@ -50,6 +57,31 @@ public class BetManager : PhotonManager<BetManager>
         //}
     }
 
+    public void GetPlayerTurn(int playerTurn)
+    {
+        this.playerTurn = playerTurn;
+    }
+
+    private void Update()
+    {
+        if (player == 0)
+        {
+            player = 1;
+        }
+
+        if (playerTurn == 1) // TODO: make this more effecient
+        {
+            p1ChipDisplay.Value = betValue;
+            p2ChipDisplay.Value = 0;
+        }
+        else if (playerTurn == 2)
+        {
+            p1ChipDisplay.Value = 0;
+            p2ChipDisplay.Value = betValue;
+        }
+        p1ChipDisplay.UpdateStacks();
+        p2ChipDisplay.UpdateStacks();
+    }
     public void SetBetToCallValue()
     {
         // TODO: Call OnTurnStart from TurnSwitch instead!
@@ -60,8 +92,9 @@ public class BetManager : PhotonManager<BetManager>
     /// <summary>
     /// add chips (plus button)
     /// </summary>
-    public void IncreaseBet()
+    public void IncreaseBet(int increment)
     {
+        this.chipsToIncrement = increment;
         betValue = betValue + chipsToIncrement;
         //Debug.Log("add chips detected : " + betValue);
         BetvalueUpdate();
@@ -77,6 +110,17 @@ public class BetManager : PhotonManager<BetManager>
         Wallet.Instance.BetUpdate(betValue, this.player);
         ConfirmHUD.Instance.CurrentValueToCall(PotManager.Instance.GetCallValue(player));
         ConfirmHUD.Instance.CurrentBetValue(betValue);
+
+        if (player == 1)
+        {
+            p1ChipDisplay.Value = betValue;
+            p1ChipDisplay.UpdateStacks();
+        }
+        else if (player == 2)
+        {
+            p2ChipDisplay.Value = betValue;
+            p2ChipDisplay.UpdateStacks();
+        }
     }
 
     /// <summary>
@@ -84,7 +128,7 @@ public class BetManager : PhotonManager<BetManager>
     /// </summary>
     public void DecreaseBet()
     {
-        Debug.Log("remove chips detected ");
+        // Debug.Log("remove chips detected ");
         if (betValue <= 0)
         {
             betValue = 0;
@@ -161,8 +205,8 @@ public class BetManager : PhotonManager<BetManager>
             }
             // End turn
             //Debug.Log("Calling TURNMANAGER OnTurnEnd");
-            TurnManager.Instance.OnTurnEnd(player, wantsNextRound);
             BetvalueUpdate();
+            TurnManager.Instance.OnTurnEnd(player, wantsNextRound);
         }
         else
         {

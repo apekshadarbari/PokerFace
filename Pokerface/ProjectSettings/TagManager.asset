@@ -27,6 +27,17 @@ TagManager:
   - HUDRaise
   - HUDFold
   - Wallet
+  - Chip10
+  - Chip50
+  - Chip100
+  - PlayerOneChipCtrl
+  - PlayerTwoChipCtrl
+  - P1Chip10
+  - P1Chip50
+  - P1Chip100
+  - P2Chip10
+  - P2Chip50
+  - P2Chip100
   layers:
   - Default
   - TransparentFX

@@ -2,10 +2,10 @@
 
 internal enum BetAction
 {
-    IncreaseBet,
-    DecreaseBet,
-    CommitBet,
-    CallOrCheck,
+    IncreaseAllInn,
+    Increase10, Increase50, Increase100,
+    ResetBet,
+    Commit,
     Fold
 }
 
@@ -64,27 +64,38 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
         //TODO: move all of these into another script called betcontroller
         //Debug.Log("this button belongs to player: " + this.photonView.ownerId);s
-        if (PhotonNetwork.player.ID == this.photonView.ownerId && RoundManager.Instance.PlayerTurn == PhotonNetwork.player.ID)
+        if (PhotonNetwork.player.ID == this.photonView.ownerId && RoundManager.Instance.PlayerTurn == PhotonNetwork.player.ID || PhotonNetwork.player.ID == RoundManager.Instance.PlayerTurn)
         {
             betMan = BetManager.Instance;
+            BetManager.Instance.BetvalueUpdate();
             switch (action)
             {
-                case BetAction.IncreaseBet:
+                case BetAction.IncreaseAllInn:
                     //Adding chips to raise
-                    betMan.IncreaseBet();
+                    betMan.IncreaseBet(500);
                     break;
 
-                case BetAction.DecreaseBet:
+                case BetAction.Increase10:
+                    //Adding chips to raise
+                    betMan.IncreaseBet(10);
+                    break;
+
+                case BetAction.Increase50:
+                    //Adding chips to raise
+                    betMan.IncreaseBet(50);
+                    break;
+
+                case BetAction.Increase100:
+                    //Adding chips to raise
+                    betMan.IncreaseBet(100);
+                    break;
+
+                case BetAction.ResetBet:
                     //Reducing chips to raises
                     betMan.DecreaseBet();
                     break;
 
-                case BetAction.CommitBet:
-                    //accepting the bet size and commiting it
-                    //betMan.Bet();
-                    break;
-
-                case BetAction.CallOrCheck:
+                case BetAction.Commit:
                     //Calling the last value
                     //Debug.Log("hej");
                     /*  betMan.SetBetToCallValue();*///setss the bet to what it needs to be to call;
@@ -96,7 +107,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
                     betMan.Fold();
                     break;
             }
-            OnExitHover();
+            //OnExitHover();
         }
         //else if (!this.photonView.isMine)
         //{
@@ -109,7 +120,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
 	public void OnHover()
     {
-        if (PhotonNetwork.player.ID == this.photonView.ownerId)
+        if (PhotonNetwork.player.ID == this.photonView.ownerId || PhotonNetwork.player.ID == RoundManager.Instance.PlayerTurn)
         {
             // GetComponent<Renderer>().material.color = new Color(.5f, 0f, 0f, 0.3f);
             GetComponent<Renderer>().material.color = Color.white;
@@ -128,7 +139,7 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     /// </summary>
     public void OnExitHover()
     {
-        if (PhotonNetwork.player.ID == this.photonView.ownerId)
+        if (PhotonNetwork.player.ID == this.photonView.ownerId || PhotonNetwork.player.ID == RoundManager.Instance.PlayerTurn)
         {
             // GetComponent<Renderer>().material.color = new Color(0f, .5f, 0f, 0.3f);
             GetComponent<Renderer>().material.color = Color.grey;
