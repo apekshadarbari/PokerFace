@@ -67,9 +67,9 @@ public class ChipsDisplay : MonoBehaviour
         }
 
         //debugging
-        for (int i = 0; i < chips.Length; i++)
-        {
-            Debug.LogFormat("{0} x {1}", chips[i], chipSizes[i]);
-        }
+        //for (int i = 0; i < chips.Length; i++)
+        //{
+        //    Debug.LogFormat("{0} x {1}", chips[i], chipSizes[i]);
+        //}
     }
 }

@@ -236,6 +236,7 @@
     <Compile Include="Assets\Scripts\Controls\GazeInputModuleCrosshair.cs" />
     <Compile Include="Assets\Scripts\Controls\IClicker.cs" />
     <Compile Include="Assets\Scripts\Controls\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\Controls\Reticle.cs" />
     <Compile Include="Assets\Scripts\Controls\TestRaycast.cs" />
     <Compile Include="Assets\Scripts\Controls\ViveController.cs" />
     <Compile Include="Assets\Scripts\Environment\Audio\AudioManager.cs" />
@@ -290,6 +291,7 @@
     <Compile Include="Assets\VRTransform.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Materials\Reticle_Shader_1.shader" />
     <None Include="Assets\Photon Unity Networking\Demos\DemoBoxes\Resources\eurof_tt.txt" />
     <None Include="Assets\Photon Unity Networking\Demos\DemoPickup\Assets\3dFont\3dText.shader" />
     <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
