@@ -79,6 +79,11 @@ public class Testing : MonoBehaviour
             }
             VRInputManager.Instance.DeviceSpecificSeating();
         }
+
+        if (Input.GetKeyDown("w"))
+        {
+            WalletManager.Instance.BuyIn(PhotonNetwork.player.ID, 500);
+        }
         //if (Input.GetKeyDown("i"))
         //{
         //    Debug.ClearDeveloperConsole();

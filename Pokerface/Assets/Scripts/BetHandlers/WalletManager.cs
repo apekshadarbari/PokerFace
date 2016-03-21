@@ -113,4 +113,18 @@ public class WalletManager : Manager<WalletManager>
             p2ChipDisplay.UpdateStacks();
         }
     }
+
+    public void BuyIn(int player, int buyIn)
+    {
+        if (player == PhotonNetwork.player.ID)
+        {
+            Debug.Log("player " + player + " buying back in");
+            if (credits <= 0)
+            {
+                this.credits += buyIn;
+                this.tmpCredits += buyIn;
+            }
+            //GetPot(player);
+        }
+    }
 }
