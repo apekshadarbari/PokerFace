@@ -91,9 +91,8 @@ public class ViveController : MonoBehaviour
         //added onhoverExit from betmore
         if (other.CompareTag("PlayerOneButton") || other.CompareTag("PlayerTwoButton"))
             other.GetComponent<BetMore>().OnExitHover();
-        if (other.CompareTag("P1Chip10") || other.CompareTag("P1Chip50") || other.CompareTag("P1Chip100"))
+        if (other.CompareTag("P1Chip10") || other.CompareTag("P1Chip50") || other.CompareTag("P1Chip100") || other.CompareTag("P2Chip10") || other.CompareTag("P2Chip50") || other.CompareTag("P2Chip100"))
         {
-
             other.GetComponent<BetMore>().OnExitHover();
         }
 
@@ -102,7 +101,7 @@ public class ViveController : MonoBehaviour
 
         //added onhover from betmore
         //if (touchedObject.CompareTag("PlayerOneButton") || touchedObject.CompareTag("PlayerTwoButton"))
-            other.GetComponent<BetMore>().OnHover();
+        other.GetComponent<BetMore>().OnHover();
     }
 
     private void OnTriggerExit(Collider other)
@@ -160,12 +159,11 @@ public class ViveController : MonoBehaviour
 
             touchedObject = null;
         }
-        if (HeldObject.CompareTag("P1Chip10") || HeldObject.CompareTag("P1Chip50") || HeldObject.CompareTag("P1Chip100"))
+        if (HeldObject.CompareTag("P1Chip10") || HeldObject.CompareTag("P1Chip50") || HeldObject.CompareTag("P1Chip100") || HeldObject.CompareTag("P2Chip10") || HeldObject.CompareTag("P2Chip50") || HeldObject.CompareTag("P2Chip100"))
         {
             //Debug.Log("Compare tag worked");
             HeldObject.GetComponent<BetMore>().EndTurn();
         }
-
 
         if (heldJoint != null)
             Destroy(heldJoint);
@@ -177,7 +175,7 @@ public class ViveController : MonoBehaviour
         HeldObject = null;
         //if (touchedObject.CompareTag("PlayerOneButton") && touchedObject.CompareTag("PlayerTwoButton"))
         //{
-    // make sure to kill hover
+        // make sure to kill hover
         //}
         //else
         //{

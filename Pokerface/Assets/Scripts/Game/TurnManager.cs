@@ -40,7 +40,7 @@ public class TurnManager : PhotonManager<TurnManager>
                 }
                 foreach (var btn in btnTwo)
                 {
-                    btn.GetComponent<MeshRenderer>().enabled = false;
+                    //btn.GetComponent<MeshRenderer>().enabled = false;
                     btn.GetComponent<MeshCollider>().enabled = false;
 
                     //btn.GetComponent<SphereCollider>().enabled = false;
@@ -50,7 +50,7 @@ public class TurnManager : PhotonManager<TurnManager>
             case 2:
                 foreach (var btn in btnOne)
                 {
-                    btn.GetComponent<MeshRenderer>().enabled = false;
+                    //btn.GetComponent<MeshRenderer>().enabled = false;
                     btn.GetComponent<MeshCollider>().enabled = false;
 
                     //btn.GetComponent<SphereCollider>().enabled = false;
