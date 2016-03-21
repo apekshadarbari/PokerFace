@@ -35,8 +35,8 @@ public class Wallet : Manager<Wallet>
         {
             GameObject.FindGameObjectWithTag("HUDWallet").transform.localPosition = new Vector3(-.177f, 1.3f, 1.7f);
         }
-        walletValue = WalletManager.Instance.Credits;
-
+        //walletValue = WalletManager.Instance.Credits;
+        walletValue = WalletManager.Instance.TmpCredits;
         this.wallet.GetComponent<Text>().text = "Wallet: $" + walletValue.ToString();
         //    if (BetManager.Instance != null)
         //    {

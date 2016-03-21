@@ -6,6 +6,9 @@ public class WalletManager : Manager<WalletManager>
     private int credits = 100;
 
     [SerializeField]
+    private int tmpCredits;
+
+    [SerializeField]
     private ChipsDisplay p1ChipDisplay;
 
     [SerializeField]
@@ -16,6 +19,12 @@ public class WalletManager : Manager<WalletManager>
         get { return credits; }
     }
 
+    public int TmpCredits
+    {
+        get { return tmpCredits; }
+        set { tmpCredits = value; }
+    }
+
     [SerializeField]
     private int owningPlayer;
 
@@ -24,6 +33,7 @@ public class WalletManager : Manager<WalletManager>
     private void Start()
     {
         owningPlayer = PhotonNetwork.player.ID;
+        this.tmpCredits = credits; // TODO : make more effeicints
     }
 
     private void Update()
@@ -42,6 +52,21 @@ public class WalletManager : Manager<WalletManager>
         if (credits >= value)
         {
             credits -= value;
+            OwnerCheck();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool TemporaryWithdraw(int value)
+    {
+        if (tmpCredits >= value)
+        {
+            tmpCredits -= value;
             OwnerCheck();
 
             return true;
@@ -79,12 +104,12 @@ public class WalletManager : Manager<WalletManager>
     {
         if (owningPlayer == 1)
         {
-            p1ChipDisplay.Value = credits;
+            p1ChipDisplay.Value = tmpCredits;
             p1ChipDisplay.UpdateStacks();
         }
         else if (owningPlayer == 2)
         {
-            p2ChipDisplay.Value = credits;
+            p2ChipDisplay.Value = tmpCredits;
             p2ChipDisplay.UpdateStacks();
         }
     }

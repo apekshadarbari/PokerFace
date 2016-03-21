@@ -96,6 +96,9 @@ public class BetManager : PhotonManager<BetManager>
     {
         this.chipsToIncrement = increment;
         betValue = betValue + chipsToIncrement;
+
+        WalletManager.Instance.TemporaryWithdraw(chipsToIncrement);
+
         //Debug.Log("add chips detected : " + betValue);
         BetvalueUpdate();
     }
@@ -142,6 +145,7 @@ public class BetManager : PhotonManager<BetManager>
     }
     public void ResetBet()
     {
+        WalletManager.Instance.TmpCredits = WalletManager.Instance.Credits;
         this.betValue = 0;
         //gameObject.GetComponent<PhotonView>().RPC("ResetBestTask", PhotonTargets.All);
         //ChipsToRaise = 0;
