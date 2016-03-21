@@ -127,9 +127,9 @@ public class ViveController : MonoBehaviour
             if (!touchedObject.CompareTag("PlayerOneButton") && !touchedObject.CompareTag("PlayerTwoButton"))
             {
                 //rb.transform.SetParent(null);
-                rb.isKinematic = false;
-                heldJoint = touchedObject.AddComponent<FixedJoint>() as Joint;
-                heldJoint.connectedBody = rigidbody;
+                //rb.isKinematic = false;
+                //heldJoint = touchedObject.AddComponent<FixedJoint>() as Joint;
+                //heldJoint.connectedBody = rigidbody;
             }
             //HeldObject.GetComponent<BetMore>().EndTurn();
 
@@ -162,7 +162,13 @@ public class ViveController : MonoBehaviour
         if (rb != null)
             rb.velocity = Velocity;
         HeldObject = null;
-        touchedObject = null;
+        if (touchedObject.CompareTag("PlayerOneButton") && touchedObject.CompareTag("PlayerTwoButton"))
+        {
+            touchedObject = null; // make sure to kill hover
+        }
+        //else
+        //{
+        //}
 
         //if we want to interact on the press action
     }
