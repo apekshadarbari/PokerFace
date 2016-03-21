@@ -269,7 +269,7 @@ public class BetManager : PhotonManager<BetManager>
 
     public void Fold()
     {
-        if (WalletManager.Instance.Withdraw(betValue))
+        //if (WalletManager.Instance.Withdraw(betValue))
         {
             if (player == 1)
             {

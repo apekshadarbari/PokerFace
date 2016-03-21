@@ -163,6 +163,10 @@ public class RoundManager : PhotonManager<RoundManager>
                 default:
                     break;
             }
+            if (round >= 5) // should never happen but it did once and this should make sure it doesnt again
+            {
+                round = 4;
+            }
         }
     }
 
