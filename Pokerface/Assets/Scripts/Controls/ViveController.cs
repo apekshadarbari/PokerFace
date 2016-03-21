@@ -91,12 +91,17 @@ public class ViveController : MonoBehaviour
         //added onhoverExit from betmore
         if (other.CompareTag("PlayerOneButton") || other.CompareTag("PlayerTwoButton"))
             other.GetComponent<BetMore>().OnExitHover();
+        if (other.CompareTag("P1Chip10") || other.CompareTag("P1Chip50") || other.CompareTag("P1Chip100"))
+        {
+
+            other.GetComponent<BetMore>().OnExitHover();
+        }
 
         touchedObject = other.gameObject;
         touchedObject.SendMessage("OnTouch", this, SendMessageOptions.DontRequireReceiver);
 
         //added onhover from betmore
-        if (touchedObject.CompareTag("PlayerOneButton") || touchedObject.CompareTag("PlayerTwoButton"))
+        //if (touchedObject.CompareTag("PlayerOneButton") || touchedObject.CompareTag("PlayerTwoButton"))
             other.GetComponent<BetMore>().OnHover();
     }
 
@@ -106,8 +111,8 @@ public class ViveController : MonoBehaviour
         {
             touchedObject.SendMessage("OffTouch", this, SendMessageOptions.DontRequireReceiver);
             //added onhoverExit from betmore
-            if (touchedObject.CompareTag("PlayerOneButton") || touchedObject.CompareTag("PlayerTwoButton"))
-                other.GetComponent<BetMore>().OnExitHover();
+            //if (touchedObject.CompareTag("PlayerOneButton") || touchedObject.CompareTag("PlayerTwoButton"))
+            other.GetComponent<BetMore>().OnExitHover();
             touchedObject = null;
         }
     }
@@ -152,7 +157,15 @@ public class ViveController : MonoBehaviour
         {
             Debug.Log("Compare tag worked");
             HeldObject.GetComponent<BetMore>().EndTurn();
+
+            touchedObject = null;
         }
+        if (HeldObject.CompareTag("P1Chip10") || HeldObject.CompareTag("P1Chip50") || HeldObject.CompareTag("P1Chip100"))
+        {
+            //Debug.Log("Compare tag worked");
+            HeldObject.GetComponent<BetMore>().EndTurn();
+        }
+
 
         if (heldJoint != null)
             Destroy(heldJoint);
@@ -162,10 +175,10 @@ public class ViveController : MonoBehaviour
         if (rb != null)
             rb.velocity = Velocity;
         HeldObject = null;
-        if (touchedObject.CompareTag("PlayerOneButton") && touchedObject.CompareTag("PlayerTwoButton"))
-        {
-            touchedObject = null; // make sure to kill hover
-        }
+        //if (touchedObject.CompareTag("PlayerOneButton") && touchedObject.CompareTag("PlayerTwoButton"))
+        //{
+    // make sure to kill hover
+        //}
         //else
         //{
         //}
