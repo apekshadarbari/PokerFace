@@ -17,20 +17,20 @@ public class CardBehaviour : MonoBehaviour
     private float rotateSpeedOffset;
 #endif
 
+    private bool facePlayer;
+
     private Card card;
 
     public Card Card
     {
         get { return card; }
-        set
-        {
-            card = value;
-            cardName = card.ToString();
-        }
+        set { card = value; cardName = card.ToString(); }
     }
 
     private void Start()
     {
+        transform.position = new Vector3(2f, 1.895f, 0.3f);
+        transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
 #if MIKKEL
         //card bob variables
         timeOffest = UnityEngine.Random.Range(-50f, 50f);
@@ -42,17 +42,27 @@ public class CardBehaviour : MonoBehaviour
 
     public void FacePlayer() // currently only for
     {
-        transform.forward = (Camera.main.transform.position - transform.position).normalized;
+        facePlayer = true;
     }
 
+    public void MakeInvis() // currently only for
+    {
+        gameObject.GetComponentInChildren<MeshRenderer>().material = null;
+    }
     private void Update()
     {
         //transform.position = Vector3.zero;
         //transform.rotation = Quaternion.identity;
-#if MIKKEL
         //card movement
         transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.smoothDeltaTime);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.smoothDeltaTime);
+
+        if (facePlayer)
+        {
+            transform.forward = (Camera.main.transform.position - transform.position).normalized;
+        }
+
+#if MIKKEL
 
         //card bob
         transform.localPosition = transform.parent.up * Mathf.Sin((Time.time + timeOffest) * (3f + speedOffset)) * 0.2f;

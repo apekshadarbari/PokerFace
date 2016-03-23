@@ -21,6 +21,16 @@ public class Wallet : Manager<Wallet>
         //betValue = BetManager.Instance.ChipsToRaise;
     }
 
+    /// <summary>
+    /// Make the gameobject this script is attached to face the camera.
+    /// call this method in update to make it follow the camera
+    /// </summary>
+    private void FaceCamera()
+    {   // sets the Camera´s forward positioning towards the Camera.Main (main camera is tagged as such)
+        transform.forward = (Camera.main.transform.position - transform.position).normalized;
+        // in my case i had to rotate it the other way to make it work
+        transform.Rotate(0, 180, 0); // delete if redundant - most likely
+    }
     // Update is called once per frame
     private void Update()
     {
@@ -29,8 +39,9 @@ public class Wallet : Manager<Wallet>
         {
         }
         //transform.LookAt(Camera.main.transform.position);
-        transform.forward = (Camera.main.transform.position - transform.position).normalized;
-        transform.Rotate(0, 180, 0);
+
+        FaceCamera();
+
         if (PhotonNetwork.player.ID == 2)
         {
             GameObject.FindGameObjectWithTag("HUDWallet").transform.localPosition = new Vector3(-.177f, 1.3f, 1.7f);

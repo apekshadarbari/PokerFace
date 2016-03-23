@@ -13,6 +13,9 @@ public class CardHolder : Photon.MonoBehaviour
     [SerializeField]
     private bool isCommunity;
 
+    [SerializeField]
+    private bool isNotMine;
+
     /// <summary>
     /// takes a card
     /// </summary>
@@ -34,6 +37,19 @@ public class CardHolder : Photon.MonoBehaviour
 
         if (isCommunity)
             behaviour.FacePlayer();
+
+        if (PhotonNetwork.player.ID == 1 && gameObject.name == "PlayerTwoHand")
+        {
+            isNotMine = true;
+        }
+        else if (PhotonNetwork.player.ID == 2 && gameObject.name == "PlayerOneHand")
+        {
+            isNotMine = true;
+        }
+
+        if (isNotMine)
+            behaviour.MakeInvis();
+
         //reset transform ( bug avoidance)
         //behaviour.transform.localPosition = Vector3.zero;
         //behaviour.transform.localRotation = Quaternion.identity;

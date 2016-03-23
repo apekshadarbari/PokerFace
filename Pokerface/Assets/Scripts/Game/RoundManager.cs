@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public enum Round
 {
@@ -35,6 +36,11 @@ public class RoundManager : PhotonManager<RoundManager>
     public int PlayerTurn
     {
         get { return playerTurn; }
+    }
+
+    public int Round
+    {
+        get { return round; }
     }
 
     // den der har turnswitchen har turen..
@@ -118,6 +124,7 @@ public class RoundManager : PhotonManager<RoundManager>
     [PunRPC]
     private void RoundStart(int round)
     {
+        //SpotLight.Instance.LightRoundCount(round);
         PotManager.Instance.DumpIfEqual();
         playerOneWantsNextRound = false;
         playerTwoWantsNextRound = false;
@@ -136,6 +143,7 @@ public class RoundManager : PhotonManager<RoundManager>
                 case 0: // handStarted
                     cardMan.Shuffle();
                     cardMan.Deal();
+
                     //Debug.Log("Cards shuffled and dealt");
                     break;
 

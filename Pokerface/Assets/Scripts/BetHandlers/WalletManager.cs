@@ -39,6 +39,7 @@ public class WalletManager : Manager<WalletManager>
     private void Update()
     {
         owningPlayer = PhotonNetwork.player.ID;
+        ChipCheck();
         OwnerCheck(); //TODO: make this more efficient
     }
     public void Deposit(int value)
@@ -125,6 +126,52 @@ public class WalletManager : Manager<WalletManager>
                 this.tmpCredits += buyIn;
             }
             //GetPot(player);
+        }
+    }
+
+    private void ChipCheck()
+    {
+        if (owningPlayer == 1)
+        {
+            if (tmpCredits <= 10)
+            {
+                GameObject.FindGameObjectWithTag("P1Chip10").GetComponent<MeshCollider>().enabled = false;
+            }
+            if (tmpCredits <= 50)
+            {
+                GameObject.FindGameObjectWithTag("P1Chip50").GetComponent<MeshCollider>().enabled = false;
+            }
+            if (tmpCredits <= 100)
+            {
+                GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<MeshCollider>().enabled = false;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("P1Chip10").GetComponent<MeshCollider>().enabled = true;
+                GameObject.FindGameObjectWithTag("P1Chip50").GetComponent<MeshCollider>().enabled = true;
+                GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<MeshCollider>().enabled = true;
+            }
+        }
+        if (owningPlayer == 2)
+        {
+            if (tmpCredits <= 10)
+            {
+                GameObject.FindGameObjectWithTag("P2Chip10").GetComponent<MeshCollider>().enabled = false;
+            }
+            if (tmpCredits <= 50)
+            {
+                GameObject.FindGameObjectWithTag("P2Chip50").GetComponent<MeshCollider>().enabled = false;
+            }
+            if (tmpCredits <= 100)
+            {
+                GameObject.FindGameObjectWithTag("P2Chip100").GetComponent<MeshCollider>().enabled = false;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("P2Chip10").GetComponent<MeshCollider>().enabled = true;
+                GameObject.FindGameObjectWithTag("P2Chip50").GetComponent<MeshCollider>().enabled = true;
+                GameObject.FindGameObjectWithTag("P2Chip100").GetComponent<MeshCollider>().enabled = true;
+            }
         }
     }
 }
