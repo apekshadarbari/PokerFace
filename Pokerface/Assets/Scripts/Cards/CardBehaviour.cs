@@ -29,7 +29,9 @@ public class CardBehaviour : MonoBehaviour
 
     private void Start()
     {
-        transform.position = new Vector3(2f, 1.895f, 0.3f);
+        //transform.position = new Vector3(2f, 1.895f, 0.3f); // other end than pot
+        transform.position = new Vector3(-1.93f, 1.895f, 0.3f); // same end as the pot
+
         transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
 #if MIKKEL
         //card bob variables
