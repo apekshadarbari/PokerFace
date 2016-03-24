@@ -18,6 +18,12 @@ public class BetManager : PhotonManager<BetManager>
     private AudioManager audMan;
 
     [SerializeField]
+    private Action actionHUDMan;
+
+    [SerializeField]
+    private HandOver handOverHUDMan;
+
+    [SerializeField]
     private int betValue;
 
     private int player;
@@ -40,8 +46,10 @@ public class BetManager : PhotonManager<BetManager>
         //amountToCall = 0;
         //find the PotManager.Instance
 
-        audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
         roundMan = GameObject.Find("Round").GetComponent<RoundManager>();
+        audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
+        actionHUDMan = GameObject.Find("TXTHUD/Action/Canvas").GetComponent<Action>();
+        handOverHUDMan = GameObject.Find("TXTHUD/HandOver/Canvas").GetComponent<HandOver>();
 
         //PotManager.Instance.PotManager.InstanceComparison(this.photonView.ownerId, 0);
         //ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
@@ -226,11 +234,13 @@ public class BetManager : PhotonManager<BetManager>
         {
             //Debug.Log("Player One Checks");
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Check);
+            actionHUDMan.GetComponent<PhotonView>().RPC("ReceiveAction", PhotonTargets.All, false, ActionSound.p1Check);
         }
         if (player == 2)
         {
             //Debug.Log("Player Two Checks");
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Check);
+            actionHUDMan.GetComponent<PhotonView>().RPC("ReceiveAction", PhotonTargets.All, false, ActionSound.p2Check);
         }
     }
 
@@ -239,10 +249,12 @@ public class BetManager : PhotonManager<BetManager>
         if (player == 1)
         {
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Call);
+            actionHUDMan.GetComponent<PhotonView>().RPC("ReceiveAction", PhotonTargets.All, false, ActionSound.p1Call);
         }
         else if (player == 2)
         {
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Call);
+            actionHUDMan.GetComponent<PhotonView>().RPC("ReceiveAction", PhotonTargets.All, false, ActionSound.p2Call);
         }
 
         PotManager.Instance.Bet(player, betValue);
@@ -259,10 +271,16 @@ public class BetManager : PhotonManager<BetManager>
         if (player == 1)
         {
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Raise);
+            actionHUDMan.GetComponent<PhotonView>().RPC("ReceiveRaiseValue", PhotonTargets.All, 1, betValue);
+
+            actionHUDMan.GetComponent<PhotonView>().RPC("ReceiveAction", PhotonTargets.All, false, ActionSound.p1Raise);
         }
         else if (player == 2)
         {
             audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p2Raise);
+            actionHUDMan.GetComponent<PhotonView>().RPC("ReceiveRaiseValue", PhotonTargets.All, 2, betValue);
+
+            actionHUDMan.GetComponent<PhotonView>().RPC("ReceiveAction", PhotonTargets.All, false, ActionSound.p2Raise);
         }
         PotManager.Instance.Bet(player, betValue);
     }
@@ -274,10 +292,12 @@ public class BetManager : PhotonManager<BetManager>
             if (player == 1)
             {
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
+                handOverHUDMan.GetComponent<PhotonView>().RPC("ReceiveHandOver", PhotonTargets.All, false, ActionSound.p1Fold);
             }
             else if (player == 2)
             {
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
+                handOverHUDMan.GetComponent<PhotonView>().RPC("ReceiveHandOver", PhotonTargets.All, false, ActionSound.p2Fold);
             }
         }
         //RoundManager.Instance.HandEnd(player, true);

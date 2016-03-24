@@ -72,4 +72,9 @@ MonoBehaviour:
   - PotToPlayer
   - EndHandBehaviour
   - ResetBestTask
+  - GetAction
+  - ReceiveAction
+  - ReceiveRaiseValue
+  - ReceiveWin
+  - ReceiveHandOver
   DisableAutoOpenWizard: 1

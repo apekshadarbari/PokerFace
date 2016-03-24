@@ -16,7 +16,14 @@ public class TurnIndicator : PhotonManager<TurnIndicator>
 
     private Vector3 targetPos;
 
-    // Use this for initialization
+    private bool inPosition;
+
+    public bool InPosition
+    { get { return inPosition; } }
+
+    public Vector3 TargetPos
+    { get { return targetPos; } }
+
     private void Start()
     {
         TurnIndication(1);
@@ -24,7 +31,6 @@ public class TurnIndicator : PhotonManager<TurnIndicator>
         //indicatorTrans = this.gameObject.transform;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (transform.position != targetPos)
@@ -33,6 +39,12 @@ public class TurnIndicator : PhotonManager<TurnIndicator>
             transform.rotation *= Quaternion.AngleAxis((degreesPerUpdate * speed) * Time.smoothDeltaTime, Vector3.Cross(Vector3.up, dir)); // change degrees up for faster roll
             transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.smoothDeltaTime);
             //transform.Rotate(1, 0, 1);
+            inPosition = false;
+
+            if (transform.position == targetPos)
+            {
+                inPosition = true;
+            }
         }
     }
 

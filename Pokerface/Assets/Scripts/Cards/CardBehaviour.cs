@@ -18,6 +18,7 @@ public class CardBehaviour : MonoBehaviour
 #endif
 
     private bool facePlayer;
+    private bool cardHeld;
 
     private Card card;
 
@@ -47,6 +48,11 @@ public class CardBehaviour : MonoBehaviour
         facePlayer = true;
     }
 
+    public void MoveToHolder() // currently only for
+    {
+        cardHeld = true;
+    }
+
     public void MakeInvis() // currently only for
     {
         gameObject.GetComponentInChildren<MeshRenderer>().material = null;
@@ -55,9 +61,13 @@ public class CardBehaviour : MonoBehaviour
     {
         //transform.position = Vector3.zero;
         //transform.rotation = Quaternion.identity;
-        //card movement
-        transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.smoothDeltaTime);
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.smoothDeltaTime);
+        if (transform.root.name == "CommunityCards" || transform.root.name == "PlayerTwoHand" || transform.root.name == "PlayerOneHand")
+        //if (cardHeld)
+        {
+            //card movement
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.smoothDeltaTime);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.smoothDeltaTime);
+        }
 
         if (facePlayer)
         {

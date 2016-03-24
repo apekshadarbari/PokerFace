@@ -23,13 +23,15 @@ public class VRInputManager : PhotonManager<VRInputManager>
     {
         mouseLook = GameObject.Find("[CameraRig]/Camera (head)").GetComponent<MouseLook>();
         gazeEye = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)").GetComponent<TestRaycast>();
+        //var head = GameObject.Find("[CameraRig]/Camera (head)");
+        //var eye = GameObject.Find("[CameraRig]/Camera (head)/Camera (eye)");
 
         //controller = GameObject.FindGameObjectWithTag("ControllerVive");
 
         //null for rift
         vr = SteamVR.instance;
 
-        if (vr != null)
+        if (vr != null) // vive is running
         {
             crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
             crosshair.GetComponent<MeshRenderer>().enabled = false;

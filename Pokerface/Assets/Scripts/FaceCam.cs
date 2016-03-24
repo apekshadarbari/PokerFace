@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class FaceCam : MonoBehaviour
+public class FaceCam : Manager<FaceCam>
 {
     // Update is called once per frame
     private void Update()
@@ -13,7 +13,7 @@ public class FaceCam : MonoBehaviour
     /// Make the gameobject this script is attached to face the camera.
     /// call this method in update to make it follow the camera
     /// </summary>
-    private void FaceCamera()
+    public void FaceCamera()
     {   // sets the Camera´s forward positioning towards the Camera.Main (main camera is tagged as such)
         transform.forward = (Camera.main.transform.position - transform.position).normalized;
         // in my case i had to rotate it the other way to make it work

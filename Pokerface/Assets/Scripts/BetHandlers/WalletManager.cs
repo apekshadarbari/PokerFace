@@ -28,10 +28,15 @@ public class WalletManager : Manager<WalletManager>
     [SerializeField]
     private int owningPlayer;
 
+    [SerializeField]
+    private HandOver handOverHUDMan;
+
     // tilføje en måde at se hvis wallet vi har med at gøre ud fra pllayer.
 
     private void Start()
     {
+        handOverHUDMan = GameObject.Find("TXTHUD/HandOver/Canvas").GetComponent<HandOver>();
+
         owningPlayer = PhotonNetwork.player.ID;
         this.tmpCredits = credits; // TODO : make more effeicints
     }
@@ -95,6 +100,15 @@ public class WalletManager : Manager<WalletManager>
         var myMoney = PotManager.Instance.TotalPotValue;
         Deposit(myMoney);
         Debug.Log(myMoney + " added to player " + player + "´s wallet");
+        if (player == 1)
+        {
+            handOverHUDMan.GetComponent<PhotonView>().RPC("ReceiveHandOver", PhotonTargets.All, false, ActionSound.p1Win);
+        }
+        else if (player == 2)
+        {
+            handOverHUDMan.GetComponent<PhotonView>().RPC("ReceiveHandOver", PhotonTargets.All, false, ActionSound.p2Win);
+        }
+
         PotManager.Instance.GetComponent<PhotonView>().RPC("EndRoundBehaviour", PhotonTargets.All);
         PotManager.Instance.GetComponent<PhotonView>().RPC("EndHandBehaviour", PhotonTargets.All);
 
@@ -133,15 +147,15 @@ public class WalletManager : Manager<WalletManager>
     {
         if (owningPlayer == 1)
         {
-            if (tmpCredits <= 10)
+            if (tmpCredits < 10)
             {
                 GameObject.FindGameObjectWithTag("P1Chip10").GetComponent<MeshCollider>().enabled = false;
             }
-            if (tmpCredits <= 50)
+            if (tmpCredits < 50)
             {
                 GameObject.FindGameObjectWithTag("P1Chip50").GetComponent<MeshCollider>().enabled = false;
             }
-            if (tmpCredits <= 100)
+            if (tmpCredits < 100)
             {
                 GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<MeshCollider>().enabled = false;
             }
@@ -154,15 +168,15 @@ public class WalletManager : Manager<WalletManager>
         }
         if (owningPlayer == 2)
         {
-            if (tmpCredits <= 10)
+            if (tmpCredits < 10)
             {
                 GameObject.FindGameObjectWithTag("P2Chip10").GetComponent<MeshCollider>().enabled = false;
             }
-            if (tmpCredits <= 50)
+            if (tmpCredits < 50)
             {
                 GameObject.FindGameObjectWithTag("P2Chip50").GetComponent<MeshCollider>().enabled = false;
             }
-            if (tmpCredits <= 100)
+            if (tmpCredits < 100)
             {
                 GameObject.FindGameObjectWithTag("P2Chip100").GetComponent<MeshCollider>().enabled = false;
             }

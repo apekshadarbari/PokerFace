@@ -1,6 +1,6 @@
-﻿Shader "UI/Unlit/Transparent"
+﻿Shader "uGUI/Unlit/Transparent"
 {
-Properties
+	Properties
 	{
 		_MainTex ("Base (RGB), Alpha (A)", 2D) = "white" {}
 
@@ -16,9 +16,11 @@ Properties
 
 		Tags
 		{
-			"Queue" = "Transparent"
+			//"Queue" = "Transparent"
+			"Queue" = "Geometry+1"
 			"IgnoreProjector" = "True"
 			"RenderType" = "Transparent"
+
 		}
 
 		Stencil
@@ -79,5 +81,4 @@ Properties
 			ENDCG
 		}
 	}
-	FallBack "UI/Default"
 }

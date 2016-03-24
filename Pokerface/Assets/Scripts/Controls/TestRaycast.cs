@@ -6,6 +6,8 @@ public class TestRaycast : MonoBehaviour
     //use iclicker
     private IClicker current;
 
+    public IClicker Current { get { return current; } set { current = value; } }
+
     private float timer;
 
     [Header("The time in seconds it takes to activate onclick with gaze")]
@@ -14,28 +16,38 @@ public class TestRaycast : MonoBehaviour
 
     public float Timer
     {
-        get
-        {
-            return timer;
-        }
+        get { return timer; }
     }
 
-    public float Delay
+    private float gazeFraction;
+
+    public float GazeFraction
     {
         get
         {
-            return delay;
+            return gazeFraction;
         }
+        set
+        {
+            gazeFraction = value;
+        }
+    }
+
+    private float currentLookAtHandlerClickTime;
+
+    public float Delay
+    {
+        get { return delay; }
     }
 
     private void Start()
     {
         timer = delay;
+        gazeFraction = 0;
     }
 
     private void Update()
     {
-
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height, 0f) / 2f);
 
         /*TESTING*/
@@ -64,26 +76,35 @@ public class TestRaycast : MonoBehaviour
                     current = c;
                     //call hover of what we are hovering
                     current.OnHover();
+                    gazeFraction = 1;
+                    currentLookAtHandlerClickTime = Time.realtimeSinceStartup + delay;
                     //start the timer
                     timer = delay;
+                    //gazeFraction = Mathf.Clamp01 (1 - (currentLookAtHandlerClickTime - Time.realtimeSinceStartup) / delay);   // added for progressCursor
+                    //Debug.Log("gazefraction : " + gazeFraction);
                 }
                 //if we are no longer hovering an object but start hovering something else right away
                 else if (current != c)
                 {
                     //call onexithover of what we hovered
                     current.OnExitHover();
+                    gazeFraction = 0;
                     //change what we are hovering
                     current = c;
                     //call onhover
                     current.OnHover();
+                    gazeFraction = 1;
                     //reset the timer to 0 as to not mess up the gaze
                     timer = delay;
+
+                    currentLookAtHandlerClickTime = Time.realtimeSinceStartup + delay;
                 }
                 //use fire1 to click
                 if (Input.GetButtonDown("Fire1"))
                 {
                     c.EndTurn();
                     timer = 0f;
+                    GazeFraction = 0;
                 }
                 //wait for the gaze timer to reach 2 seconds and click for you
                 else if (Timer > 0f)
@@ -93,6 +114,7 @@ public class TestRaycast : MonoBehaviour
                     if (Timer <= 0f)
                     {
                         c.EndTurn();
+                        gazeFraction = 0;
                     }
                 }
             }
@@ -101,6 +123,7 @@ public class TestRaycast : MonoBehaviour
             {
                 current.OnExitHover();
                 current = null;
+                gazeFraction = 0;
             }
         }
         else

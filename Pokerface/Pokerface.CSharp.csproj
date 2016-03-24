@@ -241,6 +241,8 @@
     <Compile Include="Assets\Scripts\Controls\ViveController.cs" />
     <Compile Include="Assets\Scripts\Environment\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Environment\ConfirmHUD.cs" />
+    <Compile Include="Assets\Scripts\Environment\HUD\Action.cs" />
+    <Compile Include="Assets\Scripts\Environment\HUD\HandOver.cs" />
     <Compile Include="Assets\Scripts\Environment\HUD\Pot.cs" />
     <Compile Include="Assets\Scripts\Environment\HUD\Wallet.cs" />
     <Compile Include="Assets\Scripts\Environment\SpotLight.cs" />
@@ -252,6 +254,7 @@
     <Compile Include="Assets\Scripts\FaceCam.cs" />
     <Compile Include="Assets\Scripts\Game\RoundManager.cs" />
     <Compile Include="Assets\Scripts\Game\TurnManager.cs" />
+    <Compile Include="Assets\Scripts\Gaze.cs" />
     <Compile Include="Assets\Scripts\MoveChips.cs" />
     <Compile Include="Assets\Scripts\NetworkedPlayer.cs" />
     <Compile Include="Assets\Scripts\Utilities\Manager.cs" />

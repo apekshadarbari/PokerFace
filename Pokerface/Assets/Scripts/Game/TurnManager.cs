@@ -88,6 +88,7 @@ public class TurnManager : PhotonManager<TurnManager>
             //Debug.Log("player 2 transferring control to 1");
             roundMan.GetComponent<PhotonView>().RPC("TurnChange", PhotonTargets.AllBuffered, player, wantsNextRound, 1);
         }
+
         //BetManager.Instance.ResetBet();
     }
 }

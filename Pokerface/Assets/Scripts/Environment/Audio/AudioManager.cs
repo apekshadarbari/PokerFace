@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-enum ActionSound
+﻿using System.Collections;
+using UnityEngine;
+
+internal enum ActionSound
 {
     roundStarted,
 
@@ -13,83 +14,97 @@ enum ActionSound
     p2Check,
     p2Raise,
     p2Fold,
+
+    p1Win,
+    p2Win,
 }
+
 public class AudioManager : MonoBehaviour
 {
-    
-    AudioSource src;
+    private AudioSource src;
 
     [SerializeField]
-    AudioClip roundStarted; //can probably be moved..
+    private AudioClip roundStarted; //can probably be moved..
 
     [Header("Player One Sounds")]
+    [SerializeField]
+    private AudioClip playerOneCalled;
 
     [SerializeField]
-    AudioClip playerOneCalled;
+    private AudioClip playerOneChecked;
+
     [SerializeField]
-    AudioClip playerOneChecked;
+    private AudioClip playerOneRaised;
+
     [SerializeField]
-    AudioClip playerOneRaised;
-    [SerializeField]
-    AudioClip playerOneFolded;
+    private AudioClip playerOneFolded;
 
     [Header("Player Two Sounds)")]
     [SerializeField]
-    AudioClip playerTwoCalled;
+    private AudioClip playerTwoCalled;
+
     [SerializeField]
-    AudioClip playerTwoChecked;
+    private AudioClip playerTwoChecked;
+
     [SerializeField]
-    AudioClip playerTwoRaised;
+    private AudioClip playerTwoRaised;
+
     [SerializeField]
-    AudioClip playerTwoFolded;
+    private AudioClip playerTwoFolded;
 
     public void Start()
     {
         src = this.GetComponent<AudioSource>();
-
     }
 
     [PunRPC]
-    void ButtonPressedAudio(ActionSound soundToPlay)
+    private void ButtonPressedAudio(ActionSound soundToPlay)
     {
         switch (soundToPlay)
         {
             case ActionSound.roundStarted:
                 src.clip = roundStarted;
                 break;
+
             case ActionSound.p1Call:
                 src.clip = playerOneCalled;
                 break;
+
             case ActionSound.p1Check:
                 src.clip = playerOneChecked;
                 break;
+
             case ActionSound.p1Raise:
                 src.clip = playerOneRaised;
                 break;
+
             case ActionSound.p1Fold:
                 src.clip = playerOneFolded;
                 break;
+
             case ActionSound.p2Call:
                 src.clip = playerTwoCalled;
                 break;
+
             case ActionSound.p2Check:
                 src.clip = playerTwoChecked;
                 break;
+
             case ActionSound.p2Raise:
                 src.clip = playerTwoRaised;
                 break;
+
             case ActionSound.p2Fold:
                 src.clip = playerTwoFolded;
                 break;
+
             default:
                 break;
         }
         src.Play();
-
     }
 
-
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
         {
@@ -98,5 +113,4 @@ public class AudioManager : MonoBehaviour
         {
         }
     }
-
 }

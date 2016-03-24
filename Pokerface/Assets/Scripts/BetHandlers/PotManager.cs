@@ -93,12 +93,14 @@ public class PotManager : PhotonManager<PotManager>
                 player1pot += betValue;
                 p1PotchipDisplay.Value = player1pot;
                 p1PotchipDisplay.UpdateStacks();
+
                 break;
 
             case 2:
                 player2pot += betValue;
                 p2PotchipDisplay.Value = player2pot;
                 p2PotchipDisplay.UpdateStacks();
+
                 break;
         }
 

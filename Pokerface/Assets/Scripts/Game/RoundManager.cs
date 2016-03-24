@@ -75,6 +75,7 @@ public class RoundManager : PhotonManager<RoundManager>
             //gameObject.GetComponent<PhotonView>().RPC("RoundEnd", PhotonTargets.AllBuffered, 1);
             RoundEnd(1);
         }
+
         //Debug.Log("TurnChange DONE");
         //BetManager.Instance.ResetBet();
         //ConfirmHUD.Instance.HudToggle(player);
