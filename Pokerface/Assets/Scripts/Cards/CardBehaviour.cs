@@ -30,8 +30,13 @@ public class CardBehaviour : MonoBehaviour
 
     private void Start()
     {
-        //transform.position = new Vector3(2f, 1.895f, 0.3f); // other end than pot
-        transform.position = new Vector3(-.8f, 1.895f, -.85f); // same end as the pot
+
+        if (transform.root.name == "CommunityCards" || transform.root.name == "PlayerTwoHand" || transform.root.name == "PlayerOneHand")
+        //if (cardHeld)
+        {
+            //transform.position = new Vector3(2f, 1.895f, 0.3f); // other end than pot
+            transform.position = new Vector3(-1.469f, 1.869f, .035f); // same end as the pot
+        }
 
         transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
 #if MIKKEL
