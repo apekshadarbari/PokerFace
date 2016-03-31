@@ -38,6 +38,7 @@ TagManager:
   - P2Chip10
   - P2Chip50
   - P2Chip100
+  - HUDBet
   layers:
   - Default
   - TransparentFX

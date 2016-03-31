@@ -118,7 +118,7 @@ public class BetManager : PhotonManager<BetManager>
             player = 1;
         }
 
-        Wallet.Instance.BetUpdate(betValue, this.player);
+        BetHUD.Instance.BetUpdate(betValue, this.player);
         ConfirmHUD.Instance.CurrentValueToCall(PotManager.Instance.GetCallValue(player));
         ConfirmHUD.Instance.CurrentBetValue(betValue);
 

@@ -42,11 +42,13 @@ public class Action : PhotonManager<Action>
             if (active && !hasBeenShown) // and the indicator is in its place
             {
                 gameObject.GetComponent<Canvas>().enabled = true; // show me the HUD
+                gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
                 StartCoroutine(Wait());
             }
             else
             {
                 gameObject.GetComponent<Canvas>().enabled = false; //dont show me the HUD
+                gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
             }
         }
     }
@@ -58,27 +60,27 @@ public class Action : PhotonManager<Action>
         switch (action)
         {
             case ActionSound.p1Call:
-                this.actionTxt.GetComponent<Text>().text = "Player 1 Called";
+                this.actionTxt.GetComponent<Text>().text = "Called";
                 break;
 
             case ActionSound.p1Check:
-                this.actionTxt.GetComponent<Text>().text = "Player 1 Checked";
+                this.actionTxt.GetComponent<Text>().text = "Checked";
                 break;
 
             case ActionSound.p1Raise:
-                this.actionTxt.GetComponent<Text>().text = "Player 1 Raised by $ " + raisedBy;
+                this.actionTxt.GetComponent<Text>().text = "Raised :$ " + raisedBy;
                 break;
 
             case ActionSound.p2Call:
-                this.actionTxt.GetComponent<Text>().text = "Player 2 Called";
+                this.actionTxt.GetComponent<Text>().text = "Called";
                 break;
 
             case ActionSound.p2Check:
-                this.actionTxt.GetComponent<Text>().text = "Player 2 Checked";
+                this.actionTxt.GetComponent<Text>().text = "Checked";
                 break;
 
             case ActionSound.p2Raise:
-                this.actionTxt.GetComponent<Text>().text = "Player 2 Raised by $ " + raisedBy;
+                this.actionTxt.GetComponent<Text>().text = "Raised :$ " + raisedBy;
                 break;
 
             default:
@@ -107,7 +109,6 @@ public class Action : PhotonManager<Action>
     {
         yield return new WaitForSeconds(stayDelay);
         hasBeenShown = true;
-        gameObject.GetComponent<Canvas>().enabled = false;
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
