@@ -4,33 +4,53 @@ using UnityEngine.UI;
 
 public class HandOver : PhotonManager<HandOver>
 {
-    [SerializeField]
-    private float stayDelay = 3f;
+    private int player;
 
     [SerializeField]
-    private Text handOverTxt;
+    private float stayDelay;
+
+    [SerializeField]
+    private float speed = 1f;
 
     private bool hasBeenShown;
+
+    private Vector3 targetPos;
+
+    public Vector3 TargetPos
+    { get { return targetPos; } }
+
+    private Vector3 playerOne = new Vector3(.34f, 1.817f, -.38f);
+    private Vector3 playerTwo = new Vector3(.34f, 1.817f, 1.2f);
+    private Vector3 startPos = new Vector3(0f, 1.817f, .4f);
 
     // Use this for initialization
     private void Start()
     {
+        WinIndication(1);
+        transform.position = targetPos;
+
         hasBeenShown = true;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        FaceCamera();
+        //FaceCamera();
 
         if (!hasBeenShown)
         {
-            gameObject.GetComponent<Canvas>().enabled = true;
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
             StartCoroutine(Wait());
+            if (transform.position != targetPos)
+            {
+                Vector3 dir = (targetPos - transform.position).normalized;
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.smoothDeltaTime);
+            }
         }
         else
         {
-            gameObject.GetComponent<Canvas>().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.transform.position = startPos;
         }
     }
 
@@ -45,20 +65,20 @@ public class HandOver : PhotonManager<HandOver>
                 //this.handOverTxt.GetComponent<Text>().text = "Game Started";
                 break;
 
-            case ActionSound.p1Fold:
-                this.handOverTxt.GetComponent<Text>().text = "Player 1 Folds";
+            case ActionSound.p1Fold: // p2 gets the steak
+                targetPos = playerTwo;
                 break;
 
-            case ActionSound.p2Fold:
-                this.handOverTxt.GetComponent<Text>().text = "Player 2 Folds";
+            case ActionSound.p2Fold:// p1 gets the steak
+                targetPos = playerOne;
                 break;
 
-            case ActionSound.p1Win:
-                this.handOverTxt.GetComponent<Text>().text = "Player 1 Wins!";
+            case ActionSound.p1Win:// p1 gets the steak
+                targetPos = playerOne;
                 break;
 
-            case ActionSound.p2Win:
-                this.handOverTxt.GetComponent<Text>().text = "Player 2 Wins!";
+            case ActionSound.p2Win:// p2 gets the steak
+                targetPos = playerTwo;
                 break;
 
             default:
@@ -77,10 +97,24 @@ public class HandOver : PhotonManager<HandOver>
         transform.Rotate(0, 180, 0); // delete if redundant - most likely
     }
 
+    //take current players turn and lerp toward the position
+    public void WinIndication(int player)
+    {
+        this.player = player;
+        if (this.player == 1)
+        {
+        }
+        else if (this.player == 2)
+        {
+            targetPos = new Vector3(.78f, 1.817f, 1.127f);
+        }
+        // start position new Vector3(0f,1.817f,.4f);
+    }
+
     private IEnumerator Wait()
     {
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(stayDelay);
-        gameObject.GetComponent<Canvas>().enabled = false;
         hasBeenShown = true;
     }
 
@@ -88,9 +122,11 @@ public class HandOver : PhotonManager<HandOver>
     {
         if (stream.isWriting)
         {
+            stream.SendNext(gameObject.transform.position);
         }
         else
         {
+            this.transform.position = (Vector3)stream.ReceiveNext();
         }
     }
 }

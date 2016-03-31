@@ -21,7 +21,7 @@ public class BetManager : PhotonManager<BetManager>
     private Action actionHUDMan;
 
     [SerializeField]
-    private HandOver handOverHUDMan;
+    private HandOver winIndicator;
 
     [SerializeField]
     private int betValue;
@@ -49,7 +49,7 @@ public class BetManager : PhotonManager<BetManager>
         roundMan = GameObject.Find("Round").GetComponent<RoundManager>();
         audMan = GameObject.Find("AudioSource").GetComponent<AudioManager>();
         actionHUDMan = GameObject.Find("TXTHUD/Action/Canvas").GetComponent<Action>();
-        handOverHUDMan = GameObject.Find("TXTHUD/HandOver/Canvas").GetComponent<HandOver>();
+        winIndicator = GameObject.Find("WinIndicator").GetComponent<HandOver>();
 
         //PotManager.Instance.PotManager.InstanceComparison(this.photonView.ownerId, 0);
         //ts = GameObject.FindGameObjectWithTag("TurnTrigger").GetComponent<TurnSwitch>();
@@ -292,12 +292,12 @@ public class BetManager : PhotonManager<BetManager>
             if (player == 1)
             {
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
-                handOverHUDMan.GetComponent<PhotonView>().RPC("ReceiveHandOver", PhotonTargets.All, false, ActionSound.p1Fold);
+                winIndicator.GetComponent<PhotonView>().RPC("ReceiveHandOver", PhotonTargets.All, false, ActionSound.p1Fold);
             }
             else if (player == 2)
             {
                 audMan.GetComponent<PhotonView>().RPC("ButtonPressedAudio", PhotonTargets.All, ActionSound.p1Fold);
-                handOverHUDMan.GetComponent<PhotonView>().RPC("ReceiveHandOver", PhotonTargets.All, false, ActionSound.p2Fold);
+                winIndicator.GetComponent<PhotonView>().RPC("ReceiveHandOver", PhotonTargets.All, false, ActionSound.p2Fold);
             }
         }
         //RoundManager.Instance.HandEnd(player, true);

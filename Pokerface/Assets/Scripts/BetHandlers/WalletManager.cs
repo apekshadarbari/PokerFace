@@ -35,7 +35,7 @@ public class WalletManager : Manager<WalletManager>
 
     private void Start()
     {
-        handOverHUDMan = GameObject.Find("TXTHUD/HandOver/Canvas").GetComponent<HandOver>();
+        handOverHUDMan = GameObject.Find("WinIndicator").GetComponent<HandOver>();
 
         owningPlayer = PhotonNetwork.player.ID;
         this.tmpCredits = credits; // TODO : make more effeicints
