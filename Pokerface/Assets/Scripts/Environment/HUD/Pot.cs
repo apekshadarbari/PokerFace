@@ -30,9 +30,22 @@ public class Pot : Manager<Pot>
         transform.forward = (Camera.main.transform.position - transform.position).normalized;
         transform.Rotate(0, 180, 0);
 
-        this.pot.GetComponent<Text>().text = "Pot: $" + potValue.ToString();
-
-        this.call.GetComponent<Text>().text = "Call: $" + callValue.ToString();
+        if (potValue == 0)
+        {
+            this.pot.GetComponent<Text>().text = "";
+        }
+        else
+        {
+            this.pot.GetComponent<Text>().text = "Pot: $" + potValue.ToString();
+        }
+        if (callValue == 0)
+        {
+            this.call.GetComponent<Text>().text = "";
+        }
+        else
+        {
+            this.call.GetComponent<Text>().text = "Call: $" + callValue.ToString();
+        }
         //this.bet.GetComponent<Text>().text = "Your Bet: " + betValue.ToString();
     }
 

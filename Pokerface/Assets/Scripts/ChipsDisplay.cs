@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ChipsDisplay : MonoBehaviour
+public class ChipsDisplay : Photon.MonoBehaviour
 {
     [SerializeField]
     private float chipHeight;
@@ -71,5 +71,17 @@ public class ChipsDisplay : MonoBehaviour
         //{
         //    Debug.LogFormat("{0} x {1}", chips[i], chipSizes[i]);
         //}
+    }
+
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(gameObject.transform.position);
+        }
+        else
+        {
+            this.transform.position = (Vector3)stream.ReceiveNext();
+        }
     }
 }
