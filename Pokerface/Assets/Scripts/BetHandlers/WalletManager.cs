@@ -175,6 +175,7 @@ public class WalletManager : Manager<WalletManager>
                 GameObject.FindGameObjectWithTag("P1Chip10").GetComponent<MeshCollider>().enabled = false;
                 GameObject.FindGameObjectWithTag("P1Chip50").GetComponent<MeshCollider>().enabled = false;
                 GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<MeshCollider>().enabled = false;
+
                 if (tmpCredits < 10)
                 {
                     GameObject.FindGameObjectWithTag("P2Chip10").GetComponent<MeshCollider>().enabled = false;
@@ -196,3 +197,4 @@ public class WalletManager : Manager<WalletManager>
             }
         }
     }
+}
