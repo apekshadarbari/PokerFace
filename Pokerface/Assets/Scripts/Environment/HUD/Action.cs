@@ -31,6 +31,7 @@ public class Action : PhotonManager<Action>
         currentPlayerTurn = RoundManager.Instance.PlayerTurn;
         Vector3 indicatorPos = TurnIndicator.Instance.TargetPos;
         gameObject.transform.position = new Vector3(indicatorPos.x, indicatorPos.y * 1.01f, indicatorPos.z);
+
         FaceCamera();
 
         if (currentPlayerTurn != PhotonNetwork.player.ID) // if it is not my turn
