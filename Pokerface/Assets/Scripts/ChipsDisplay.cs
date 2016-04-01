@@ -45,12 +45,19 @@ public class ChipsDisplay : Photon.MonoBehaviour
     /// </summary>
     public void UpdateStacks()
     {
-        try
+        if (PhotonNetwork.connected && !PhotonNetwork.insideLobby)
         {
-            gameObject.GetComponent<PhotonView>().RPC("SyncStacks", PhotonTargets.AllBufferedViaServer, Value);
+            try
+            {
+                gameObject.GetComponent<PhotonView>().RPC("SyncStacks", PhotonTargets.AllBufferedViaServer, Value);
+            }
+            catch
+            { }
         }
-        catch
-        { }
+        else
+        {
+            PositionStacks();
+        }
     }
     [PunRPC]
     private void SyncStacks(int newValue)
