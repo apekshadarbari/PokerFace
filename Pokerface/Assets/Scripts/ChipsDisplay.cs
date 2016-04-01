@@ -9,6 +9,8 @@ public class ChipsDisplay : Photon.MonoBehaviour
     [SerializeField]
     private int value; // værdien der skal flyttes
 
+    private int prevValue;
+
     public int Value
     {
         get { return value; }
@@ -47,12 +49,10 @@ public class ChipsDisplay : Photon.MonoBehaviour
     {
         if (PhotonNetwork.connected && !PhotonNetwork.insideLobby)
         {
-            try
+            if (value != prevValue)
             {
                 gameObject.GetComponent<PhotonView>().RPC("SyncStacks", PhotonTargets.AllBufferedViaServer, Value);
             }
-            catch
-            { }
         }
         else
         {
@@ -62,11 +62,14 @@ public class ChipsDisplay : Photon.MonoBehaviour
     [PunRPC]
     private void SyncStacks(int newValue)
     {
-        value = newValue;
-        PositionStacks();
+        if (newValue != prevValue)
+        {
+            value = newValue;
+            PositionStacks();
+        }
     }
 
-    private void PositionStacks()
+    public void PositionStacks()
     {
         int[] chips = new int[chipSizes.Length];
         int remaining = value;
@@ -111,6 +114,8 @@ public class ChipsDisplay : Photon.MonoBehaviour
         //{
         //    Debug.LogFormat("{0} x {1}", chips[i], chipSizes[i]);
         //}
+
+        prevValue = value;
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

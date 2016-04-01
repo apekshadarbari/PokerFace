@@ -87,6 +87,7 @@ public class BetManager : PhotonManager<BetManager>
             p1ChipDisplay.Value = 0;
             p2ChipDisplay.Value = betValue;
         }
+
         p1ChipDisplay.UpdateStacks();
         p2ChipDisplay.UpdateStacks();
     }
