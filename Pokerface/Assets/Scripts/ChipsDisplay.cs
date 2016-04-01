@@ -26,6 +26,7 @@ public class ChipsDisplay : Photon.MonoBehaviour
     /// <summary>
     /// køres når der trækkes value fra wallet eler pot.
     /// </summary>
+    [PunRPC]
     public void UpdateStacks()
     {
         int[] chips = new int[chipSizes.Length];
