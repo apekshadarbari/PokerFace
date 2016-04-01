@@ -94,30 +94,30 @@ public class ChipsDisplay : Photon.MonoBehaviour
         //else
         //{
         //}
-        if (stream.isWriting)
-        {
-            stream.SendNext(gameObject.transform.position);
+        //if (stream.isWriting)
+        //{
+        //    stream.SendNext(gameObject.transform.position);
 
-            if (PhotonNetwork.player.ID == 1)
-            {
-                this.p1Value = (int)stream.ReceiveNext();
-            }
-            else if (PhotonNetwork.player.ID == 2)
-            {
-                this.p2Value = (int)stream.ReceiveNext();
-            }
-        }
-        else
-        {
-            this.transform.position = (Vector3)stream.ReceiveNext();
-            if (PhotonNetwork.player.ID == 1)
-            {
-                this.p2Value = (int)stream.ReceiveNext();
-            }
-            else if (PhotonNetwork.player.ID == 2)
-            {
-                this.p1Value = (int)stream.ReceiveNext();
-            }
-        }
+        //    if (PhotonNetwork.player.ID == 1)
+        //    {
+        //        this.p1Value = (int)stream.ReceiveNext();
+        //    }
+        //    else if (PhotonNetwork.player.ID == 2)
+        //    {
+        //        this.p2Value = (int)stream.ReceiveNext();
+        //    }
+        //}
+        //else
+        //{
+        //    this.transform.position = (Vector3)stream.ReceiveNext();
+        //    if (PhotonNetwork.player.ID == 1)
+        //    {
+        //        this.p2Value = (int)stream.ReceiveNext();
+        //    }
+        //    else if (PhotonNetwork.player.ID == 2)
+        //    {
+        //        this.p1Value = (int)stream.ReceiveNext();
+        //    }
+        //}
     }
 }
