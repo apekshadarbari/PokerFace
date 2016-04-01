@@ -11,6 +11,7 @@ public class ChipsDisplay : Photon.MonoBehaviour
 
     public int Value
     {
+        get { return value; }
         set { this.value = value; }
     }
 
@@ -22,6 +23,9 @@ public class ChipsDisplay : Photon.MonoBehaviour
 
     public int P1Value
     { get { return p1Value; } }
+
+    public Vector3 P
+    { get { return p; } set { p = value; } }
 
     [SerializeField]
     private int p1Value;
@@ -95,30 +99,33 @@ public class ChipsDisplay : Photon.MonoBehaviour
         //else
         //{
         //}
-        if (stream.isWriting)
-        {
-            stream.SendNext(p);
+        //if (stream.isWriting)
+        //{
+        //    if (PhotonNetwork.player.ID == 2)
+        //    {
+        //        stream.SendNext(p);
+        //    }
 
-            //if (PhotonNetwork.player.ID == 1)
-            //{
-            //    this.p1Value = (int)stream.ReceiveNext();
-            //}
-            //else if (PhotonNetwork.player.ID == 2)
-            //{
-            //    this.p2Value = (int)stream.ReceiveNext();
-            //}
-        }
-        else
-        {
-            this.p = (Vector3)stream.ReceiveNext();
-            //if (PhotonNetwork.player.ID == 1)
-            //{
-            //    this.p2Value = (int)stream.ReceiveNext();
-            //}
-            //else if (PhotonNetwork.player.ID == 2)
-            //{
-            //    this.p1Value = (int)stream.ReceiveNext();
-            //}
-        }
+        //    //if (PhotonNetwork.player.ID == 1)
+        //    //{
+        //    //    this.p1Value = (int)stream.ReceiveNext();
+        //    //}
+        //    //else if (PhotonNetwork.player.ID == 2)
+        //    //{
+        //    //    this.p2Value = (int)stream.ReceiveNext();
+        //    //}
+        //}
+        //else
+        //{
+        //    this.p = (Vector3)stream.ReceiveNext();
+        //    //if (PhotonNetwork.player.ID == 1)
+        //    //{
+        //    //    this.p2Value = (int)stream.ReceiveNext();
+        //    //}
+        //    //else if (PhotonNetwork.player.ID == 2)
+        //    //{
+        //    //    this.p1Value = (int)stream.ReceiveNext();
+        //    //}
+        //}
     }
 }
