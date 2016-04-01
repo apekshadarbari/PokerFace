@@ -155,9 +155,11 @@ public class BetMore : Photon.MonoBehaviour, IClicker
     {
         if (stream.isWriting)
         {
+            stream.SendNext(gameObject.transform.position);
         }
         else
         {
+            this.transform.position = (Vector3)stream.ReceiveNext();
         }
     }
 }
