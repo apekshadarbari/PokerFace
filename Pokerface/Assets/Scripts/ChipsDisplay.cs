@@ -11,6 +11,7 @@ public class ChipsDisplay : Photon.MonoBehaviour
 
     public int Value
     {
+        get { return value; }
         set { this.value = value; }
     }
 
@@ -85,12 +86,12 @@ public class ChipsDisplay : Photon.MonoBehaviour
         if (stream.isWriting)
         {
             stream.SendNext(gameObject.transform.position);
-            stream.SendNext(value);
+            stream.SendNext(Value);
         }
         else
         {
             this.transform.position = (Vector3)stream.ReceiveNext();
-            this.value = (int)stream.ReceiveNext();
+            this.Value = (int)stream.ReceiveNext();
         }
     }
 }
