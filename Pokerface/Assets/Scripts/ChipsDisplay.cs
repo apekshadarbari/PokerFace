@@ -76,19 +76,21 @@ public class ChipsDisplay : Photon.MonoBehaviour
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isReading)
-        {
-            this.transform.position = (Vector3)stream.ReceiveNext();
-        }
-        else
-        {
-            stream.SendNext(gameObject.transform.position);
-        }
-        //if (stream.isWriting)
+        //if (stream.isReading)
         //{
         //}
         //else
         //{
         //}
+        if (stream.isWriting)
+        {
+            stream.SendNext(gameObject.transform.position);
+            stream.SendNext(value);
+        }
+        else
+        {
+            this.transform.position = (Vector3)stream.ReceiveNext();
+            this.value = (int)stream.ReceiveNext();
+        }
     }
 }
