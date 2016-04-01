@@ -20,7 +20,7 @@ public class BetHUD : Manager<BetHUD>
         //p1 pos -.127f,1.3f,0.163f
         if (PhotonNetwork.player.ID == 2)
         {
-            GameObject.FindGameObjectWithTag("HUDBet").transform.localPosition = new Vector3(-.12f, 1.45f, -0.27f);
+            GameObject.FindGameObjectWithTag("HUDBet").transform.localPosition = new Vector3(-0.3f, 1.3f, 1.554f); ;
         }
         if (betValue == 0)
         {

@@ -42,7 +42,8 @@ public class Wallet : Manager<Wallet>
 
         if (PhotonNetwork.player.ID == 2)
         {
-            GameObject.FindGameObjectWithTag("HUDWallet").transform.localPosition = new Vector3(-.177f, 1.3f, 1.7f);
+            GameObject.FindGameObjectWithTag("HUDWallet").transform.localPosition = new Vector3(0.625f, 1.43f, 1.083f);
+            GameObject.FindGameObjectWithTag("HUDWallet").transform.localRotation = Quaternion.Euler(90, 180, 0);
         }
         //walletValue = WalletManager.Instance.Credits;
         walletValue = WalletManager.Instance.TmpCredits;
