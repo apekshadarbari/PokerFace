@@ -120,13 +120,13 @@ public class WalletManager : Manager<WalletManager>
         if (owningPlayer == 1)
         {
             p1ChipDisplay.Value = tmpCredits;
+            p1ChipDisplay.UpdateStacks();
         }
         else if (owningPlayer == 2)
         {
             p2ChipDisplay.Value = tmpCredits;
+            p2ChipDisplay.UpdateStacks();
         }
-        p1ChipDisplay.UpdateStacks();
-        p2ChipDisplay.UpdateStacks();
     }
 
     public void BuyIn(int player, int buyIn)

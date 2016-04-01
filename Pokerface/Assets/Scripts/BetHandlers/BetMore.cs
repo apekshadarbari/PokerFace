@@ -153,13 +153,13 @@ public class BetMore : Photon.MonoBehaviour, IClicker
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting)
-        {
-            stream.SendNext(gameObject.transform.position);
-        }
-        else
-        {
-            this.transform.position = (Vector3)stream.ReceiveNext();
-        }
+        //if (stream.isWriting)
+        //{
+        //    stream.SendNext(gameObject.transform.position);
+        //}
+        //else
+        //{
+        //    this.transform.position = (Vector3)stream.ReceiveNext();
+        //}
     }
 }

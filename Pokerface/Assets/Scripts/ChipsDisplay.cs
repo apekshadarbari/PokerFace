@@ -35,6 +35,7 @@ public class ChipsDisplay : Photon.MonoBehaviour
     [SerializeField]
     private int[] chipSizes = new int[3] { 10, 50, 100 }; // størrelser af chips - i værdi
 
+    private Vector3 p;
     /// <summary>
     /// køres når der trækkes value fra wallet eler pot.
     /// </summary>
@@ -74,7 +75,7 @@ public class ChipsDisplay : Photon.MonoBehaviour
         for (int i = 0; i < transforms.Length; i++)
         {
             //y = størrelsen på chips
-            var p = transforms[i].localPosition;
+            p = transforms[i].localPosition;
             p.y = chips[i] * chipHeight;
             transforms[i].localPosition = p;
         }
@@ -94,30 +95,30 @@ public class ChipsDisplay : Photon.MonoBehaviour
         //else
         //{
         //}
-        //if (stream.isWriting)
-        //{
-        //    stream.SendNext(gameObject.transform.position);
+        if (stream.isWriting)
+        {
+            stream.SendNext(p);
 
-        //    if (PhotonNetwork.player.ID == 1)
-        //    {
-        //        this.p1Value = (int)stream.ReceiveNext();
-        //    }
-        //    else if (PhotonNetwork.player.ID == 2)
-        //    {
-        //        this.p2Value = (int)stream.ReceiveNext();
-        //    }
-        //}
-        //else
-        //{
-        //    this.transform.position = (Vector3)stream.ReceiveNext();
-        //    if (PhotonNetwork.player.ID == 1)
-        //    {
-        //        this.p2Value = (int)stream.ReceiveNext();
-        //    }
-        //    else if (PhotonNetwork.player.ID == 2)
-        //    {
-        //        this.p1Value = (int)stream.ReceiveNext();
-        //    }
-        //}
+            //if (PhotonNetwork.player.ID == 1)
+            //{
+            //    this.p1Value = (int)stream.ReceiveNext();
+            //}
+            //else if (PhotonNetwork.player.ID == 2)
+            //{
+            //    this.p2Value = (int)stream.ReceiveNext();
+            //}
+        }
+        else
+        {
+            this.p = (Vector3)stream.ReceiveNext();
+            //if (PhotonNetwork.player.ID == 1)
+            //{
+            //    this.p2Value = (int)stream.ReceiveNext();
+            //}
+            //else if (PhotonNetwork.player.ID == 2)
+            //{
+            //    this.p1Value = (int)stream.ReceiveNext();
+            //}
+        }
     }
 }
