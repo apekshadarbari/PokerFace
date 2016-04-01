@@ -78,4 +78,5 @@ MonoBehaviour:
   - ReceiveWin
   - ReceiveHandOver
   - UpdateStacks
+  - SyncStacks
   DisableAutoOpenWizard: 1

@@ -43,8 +43,18 @@ public class ChipsDisplay : Photon.MonoBehaviour
     /// <summary>
     /// køres når der trækkes value fra wallet eler pot.
     /// </summary>
-    [PunRPC]
     public void UpdateStacks()
+    {
+        gameObject.GetComponent<PhotonView>().RPC("SyncStacks", PhotonTargets.AllBufferedViaServer, Value);
+    }
+    [PunRPC]
+    private void SyncStacks(int newValue)
+    {
+        value = newValue;
+        PositionStacks();
+    }
+
+    private void PositionStacks()
     {
         int[] chips = new int[chipSizes.Length];
         int remaining = value;
