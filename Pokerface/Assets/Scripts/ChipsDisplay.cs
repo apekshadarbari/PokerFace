@@ -11,9 +11,20 @@ public class ChipsDisplay : Photon.MonoBehaviour
 
     public int Value
     {
-        get { return value; }
         set { this.value = value; }
     }
+
+    public int P2Value
+    { get { return p2Value; } }
+
+    [SerializeField]
+    private int p2Value;
+
+    public int P1Value
+    { get { return p1Value; } }
+
+    [SerializeField]
+    private int p1Value;
 
     [SerializeField]
     private int[] weight; // fordelingen af forskellige typer chips
@@ -86,12 +97,27 @@ public class ChipsDisplay : Photon.MonoBehaviour
         if (stream.isWriting)
         {
             stream.SendNext(gameObject.transform.position);
-            stream.SendNext(Value);
+
+            if (PhotonNetwork.player.ID == 1)
+            {
+                this.p1Value = (int)stream.ReceiveNext();
+            }
+            else if (PhotonNetwork.player.ID == 2)
+            {
+                this.p2Value = (int)stream.ReceiveNext();
+            }
         }
         else
         {
             this.transform.position = (Vector3)stream.ReceiveNext();
-            this.Value = (int)stream.ReceiveNext();
+            if (PhotonNetwork.player.ID == 1)
+            {
+                this.p2Value = (int)stream.ReceiveNext();
+            }
+            else if (PhotonNetwork.player.ID == 2)
+            {
+                this.p1Value = (int)stream.ReceiveNext();
+            }
         }
     }
 }
