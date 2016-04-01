@@ -9,6 +9,9 @@ public class ChipsDisplay : Photon.MonoBehaviour
     [SerializeField]
     private int value; // værdien der skal flyttes
 
+    [SerializeField]
+    private bool disableSync;
+
     private int prevValue;
 
     public int Value
@@ -47,7 +50,7 @@ public class ChipsDisplay : Photon.MonoBehaviour
     /// </summary>
     public void UpdateStacks()
     {
-        if (PhotonNetwork.connected && !PhotonNetwork.insideLobby)
+        if (PhotonNetwork.connected && !PhotonNetwork.insideLobby && !disableSync)
         {
             if (value != prevValue)
             {
