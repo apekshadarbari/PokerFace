@@ -64,13 +64,13 @@ public class TurnManager : PhotonManager<TurnManager>
 
             case 2:
 
-                foreach (var c in cColTwo)
-                {
-                    c.enabled = true;
-                }
                 foreach (var c in cColOne)
                 {
                     c.enabled = false;
+                }
+                foreach (var c in cColTwo)
+                {
+                    c.enabled = true;
                 }
 
                 foreach (var btn in btnOne)

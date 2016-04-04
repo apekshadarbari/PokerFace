@@ -174,16 +174,19 @@ public class WalletManager : Manager<WalletManager>
                     //GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<BetMore>().enabled = true;
                 }
             }
-            GameObject.FindGameObjectWithTag("P2Chip10").GetComponent<MeshCollider>().enabled = false;
-            GameObject.FindGameObjectWithTag("P2Chip50").GetComponent<MeshCollider>().enabled = false;
-            GameObject.FindGameObjectWithTag("P2Chip100").GetComponent<MeshCollider>().enabled = false;
-            //GameObject.FindGameObjectWithTag("P2Chip10").GetComponent<BetMore>().enabled = false;
-            //GameObject.FindGameObjectWithTag("P2Chip50").GetComponent<BetMore>().enabled = false;
-            //GameObject.FindGameObjectWithTag("P2Chip100").GetComponent<BetMore>().enabled = false;
+            else
+            {
+                GameObject.FindGameObjectWithTag("P2Chip10").GetComponent<MeshCollider>().enabled = false;
+                GameObject.FindGameObjectWithTag("P2Chip50").GetComponent<MeshCollider>().enabled = false;
+                GameObject.FindGameObjectWithTag("P2Chip100").GetComponent<MeshCollider>().enabled = false;
+                //GameObject.FindGameObjectWithTag("P2Chip10").GetComponent<BetMore>().enabled = false;
+                //GameObject.FindGameObjectWithTag("P2Chip50").GetComponent<BetMore>().enabled = false;
+                //GameObject.FindGameObjectWithTag("P2Chip100").GetComponent<BetMore>().enabled = false;
+            }
         }
         if (owningPlayer == 2)
         {
-            if (RoundManager.Instance.PlayerTurn == 1)
+            if (RoundManager.Instance.PlayerTurn == 2)
             {
                 if (tmpCredits < 10)
                 {
@@ -210,13 +213,15 @@ public class WalletManager : Manager<WalletManager>
                     //GameObject.FindGameObjectWithTag("P2Chip100").GetComponent<BetMore>().enabled = true;
                 }
             }
-
-            GameObject.FindGameObjectWithTag("P1Chip10").GetComponent<MeshCollider>().enabled = false;
-            GameObject.FindGameObjectWithTag("P1Chip50").GetComponent<MeshCollider>().enabled = false;
-            GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<MeshCollider>().enabled = false;
-            //GameObject.FindGameObjectWithTag("P1Chip10").GetComponent<BetMore>().enabled = false;
-            //GameObject.FindGameObjectWithTag("P1Chip50").GetComponent<BetMore>().enabled = false;
-            //GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<BetMore>().enabled = false;
+            else
+            {
+                GameObject.FindGameObjectWithTag("P1Chip10").GetComponent<MeshCollider>().enabled = false;
+                GameObject.FindGameObjectWithTag("P1Chip50").GetComponent<MeshCollider>().enabled = false;
+                GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<MeshCollider>().enabled = false;
+                //GameObject.FindGameObjectWithTag("P1Chip10").GetComponent<BetMore>().enabled = false;
+                //GameObject.FindGameObjectWithTag("P1Chip50").GetComponent<BetMore>().enabled = false;
+                //GameObject.FindGameObjectWithTag("P1Chip100").GetComponent<BetMore>().enabled = false;
+            }
         }
     }
 }
