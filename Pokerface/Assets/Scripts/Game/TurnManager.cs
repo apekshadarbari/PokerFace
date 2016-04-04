@@ -26,11 +26,26 @@ public class TurnManager : PhotonManager<TurnManager>
 
         btnOne = GameObject.FindGameObjectsWithTag("PlayerOneButton");
         btnTwo = GameObject.FindGameObjectsWithTag("PlayerTwoButton");
+        var chipsOne = GameObject.Find("PlayerOneWallet");
+        var chipsTwo = GameObject.Find("PlayerTwoWallet");
+        var cColOne = chipsOne.GetComponentsInChildren<MeshCollider>();
+        var cColTwo = chipsTwo.GetComponentsInChildren<MeshCollider>();
+
         //set players buttons to active..
         //other players buttons should be inactive
         switch (player)
         {
             case 1:
+
+                foreach (var c in cColOne)
+                {
+                    c.enabled = true;
+                }
+                foreach (var c in cColTwo)
+                {
+                    c.enabled = false;
+                }
+
                 foreach (var btn in btnOne) // meshcolliders skal nok af og de skal ha rigid bods
                 {
                     btn.GetComponent<MeshRenderer>().enabled = true;
@@ -48,6 +63,16 @@ public class TurnManager : PhotonManager<TurnManager>
                 break;
 
             case 2:
+
+                foreach (var c in cColTwo)
+                {
+                    c.enabled = true;
+                }
+                foreach (var c in cColOne)
+                {
+                    c.enabled = false;
+                }
+
                 foreach (var btn in btnOne)
                 {
                     //btn.GetComponent<MeshRenderer>().enabled = false;
