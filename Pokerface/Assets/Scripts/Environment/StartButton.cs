@@ -7,12 +7,12 @@ using UnityEngine;
 /// </summary>
 public class StartButton : Photon.MonoBehaviour, IClicker
 {
-    [SerializeField]
-    private CardManager cardMan;
+    //[SerializeField]
+    //private CardManager cardMan;
 
+    //[SerializeField]
+    //private NetworkedPlayer playerCtrl;
     [SerializeField]
-    private NetworkedPlayer playerCtrl;
-
     private bool gameIsStarted;
 
     private AudioManager audMan;
@@ -25,29 +25,48 @@ public class StartButton : Photon.MonoBehaviour, IClicker
         roundMan = GameObject.Find("Round");
 
         //TODO: changed so that masterclient is whoever makes the room
-        if (PhotonNetwork.isMasterClient)
-        {
-            gameIsStarted = false;
-        }
-        else if (!PhotonNetwork.isMasterClient)
-        {
-            //TODO: spawn a different message for player 2?
-            gameObject.SetActive(false);
-        }
+        //if (PhotonNetwork.isMasterClient)
+        //{
+        //    gameIsStarted = false;
+        //}
+        //else if (!PhotonNetwork.isMasterClient)
+        //{
+        //    //TODO: spawn a different message for player 2?
+        //    gameObject.SetActive(false);
+        //}
     }
 
     public void Update()
     {
+        if (!gameIsStarted)
+        {
+            if (PhotonNetwork.playerList.Length == 2)
+            {
+                //Debug.Log("hej");
+                gameObject.GetComponent<BoxCollider>().enabled = true;
+                gameObject.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+        else
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+        //if (PhotonNetwork.playerList.Length < 2)
+        //{
+        //Debug.Log("hej");
+        //}
+
         //TODO: might be more efficient in onclick...
-        if (gameIsStarted)
-        {
-            //set the start button to inactive
-            gameObject.SetActive(false);
-        }
-        if (Input.GetKeyDown("s"))
-        {
-            EndTurn();
-        }
+        //if (gameIsStarted)
+        //{
+        //    //set the start button to inactive
+        //    gameObject.SetActive(false);
+        //}
+        //if (Input.GetKeyDown("s"))
+        //{
+        //    EndTurn();
+        //}
     }
 
     public void EndTurn()

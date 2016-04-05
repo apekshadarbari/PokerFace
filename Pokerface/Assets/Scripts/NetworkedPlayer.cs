@@ -35,12 +35,26 @@ public class NetworkedPlayer : Photon.MonoBehaviour
     private Transform chip50Transform;
     private Transform chip100Transform;
 
-    private void Start()
-    {
-        if (photonView.isMine) //TODO: check how much can be moved to start - making seats the Parents might make it easier to deal with but will require some restructuring
-        {
-            Transform seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
+    private Transform seatTrans;
 
+    private void Start()
+
+    {
+        if (PhotonNetwork.player.ID <= 2) //TODO: check how much can be moved to start - making seats the Parents might make it easier to deal with but will require some restructuring
+        {
+            seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[PhotonNetwork.player.ID - 1];
+            GameObject.Find("GameFull").GetComponentInChildren<Canvas>().enabled = false;
+            GameObject.Find("GameOverBoard").GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
+        else if (photonView.isMine && PhotonNetwork.player.ID > 2)
+        {
+            seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[2];
+            GameObject.Find("GameFull").GetComponentInChildren<Canvas>().enabled = true;
+            GameObject.Find("GameOverBoard").GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
+
+        if (photonView.isMine)
+        {
             playerRig = GameObject.Find("[CameraRig]").transform;
             vrSpace = GameObject.Find("[SteamVR]").transform.position;
             vrSpace = seatTrans.position;
@@ -111,7 +125,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         }
 
         // Ensure the player is facing the table
-        FaceTable();
+        //FaceTable();
 
         //}
     }
