@@ -97,7 +97,7 @@ public class NetworkController : Photon.MonoBehaviour
         //Debug.Log("Joined Lobby!");
 
         //set room options as needed
-        RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 2 };
+        RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 3 };
         //If there is no room, create one, otherwise join
         PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
     }
