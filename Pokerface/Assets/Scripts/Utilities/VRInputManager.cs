@@ -89,4 +89,11 @@ public class VRInputManager : PhotonManager<VRInputManager>
             //Debug.Log("ViveSeating - nothing changed");
         }
     }
+
+    public void SpectatorMode()
+    {
+        crosshair = GameObject.FindGameObjectWithTag("CrosshairRift");
+        crosshair.GetComponent<MeshRenderer>().enabled = false;
+        gazeEye.enabled = false;
+    }
 }

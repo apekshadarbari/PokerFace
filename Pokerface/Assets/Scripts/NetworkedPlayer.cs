@@ -51,6 +51,8 @@ public class NetworkedPlayer : Photon.MonoBehaviour
             seatTrans = GameObject.Find("NetworkController").GetComponent<NetworkController>().Seats[2];
             GameObject.Find("GameFull").GetComponentInChildren<Canvas>().enabled = true;
             GameObject.Find("GameOverBoard").GetComponentInChildren<MeshRenderer>().enabled = true;
+
+            VRInputManager.Instance.SpectatorMode();
         }
 
         if (photonView.isMine)
@@ -125,7 +127,7 @@ public class NetworkedPlayer : Photon.MonoBehaviour
         }
 
         // Ensure the player is facing the table
-        //FaceTable();
+        FaceTable();
 
         //}
     }
